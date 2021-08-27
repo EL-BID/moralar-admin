@@ -26,4 +26,10 @@ export class HttpService {
       : this.httpClient.post(`${this.baseUrl}/api/v1/${route}`, value);
   }
 
+  download(route: string): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/api/v1/${route}`, {
+      responseType: 'blob',
+    });
+  }
+
 }

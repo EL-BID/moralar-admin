@@ -1,25 +1,17 @@
 <h1 class="h4">Informativo</h1>
 <div class="form-row my-3">
   <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-dark"
-      routerLink="adicionar">
+    <button type="button" class="btn btn-dark" routerLink="adicionar">
       Adicionar
     </button>
   </div>
+  <button (click)="exportToExcel()" class="btn btn-dark">
+    Exportar para Excel
+  </button>
 </div>
-<app-informative-list
-  [list]="list"
-  (listSearchChange)="handleListSearchChange($event)"
-  (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)"
->
+<app-informative-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)">
 </app-informative-list>
-<app-list-pagination
-  [page]="formDataModel.page"
-  [pageSize]="formDataModel.pageSize"
-  [listSize]="listSize"
-  [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
 </app-list-pagination>

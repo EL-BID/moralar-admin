@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
 import { HttpService } from 'src/app/utils/services/http/http.service';
-import {ModalConfirmData} from '../../../shared/components/modal-confirm/modal-confirm.interface';
-import {ModalConfirmComponent} from '../../../shared/components/modal-confirm/modal-confirm.component';
-import {takeUntil} from 'rxjs/operators';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {MegaleiosAlertService} from '../../../megaleios-alert/megaleios-alert.service';
+import { ModalConfirmData } from '../../../shared/components/modal-confirm/modal-confirm.interface';
+import { ModalConfirmComponent } from '../../../shared/components/modal-confirm/modal-confirm.component';
+import { takeUntil } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
 
 @Component({
   selector: 'app-informatives-list',
@@ -39,7 +39,7 @@ export class InformativesListComponent extends ListContainerClass {
   constructor(
     activatedRoute: ActivatedRoute,
     router: Router,
-    httpService: HttpService,
+    private httpService: HttpService,
     private ngbModal: NgbModal,
     private megaleiosAlertService: MegaleiosAlertService
   ) {
@@ -83,6 +83,25 @@ export class InformativesListComponent extends ListContainerClass {
         }
       })
       .catch(() => { });
+  }
+
+  exportToExcel() {
+    this.httpService
+      .download('Informative/Export')
+      .subscribe(
+        (response: any) => {
+          const blob = new Blob([response], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
+          });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'Lista de informativos.xls';
+          a.click();
+        },
+        ({ message }) => {
+          this.megaleiosAlertService.error(message);
+        }
+      );
   }
 
 }
