@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PublicRoutingModule } from './Public-routing.module';
+import { PublicRoutingModule } from 'src/app/modules/professional/modules/public/public-routing.module';
 
 // containers
 import { PublicComponent } from './public.component';
+
 
 @NgModule({
   declarations: [

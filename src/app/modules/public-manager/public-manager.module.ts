@@ -5,6 +5,7 @@ import { PublicManagerRoutingModule } from './public-manager-routing.module';
 // containers
 import { PublicManagerComponent } from './public-manager.component';
 
+
 @NgModule({
   declarations: [
     // containers
