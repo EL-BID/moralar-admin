@@ -15,12 +15,13 @@
       Exportar para Excel
     </button>
   </div>
-  <app-property-list-search [listSearchData]="formDataModel.search" (listSearchChange)="handleListSearchChange($event)">
-  </app-property-list-search>
-  <app-property-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
-    (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)"
-    (blockUnblock)="handleBlockUnblock($event)">
-  </app-property-list>
-  <app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
-    [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
-  </app-list-pagination>
+</div>
+<app-property-list-search [listSearchData]="formDataModel.search" (listSearchChange)="handleListSearchChange($event)">
+</app-property-list-search>
+<app-property-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)"
+  (blockUnblock)="handleBlockUnblock($event)">
+</app-property-list>
+<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
+</app-list-pagination>
