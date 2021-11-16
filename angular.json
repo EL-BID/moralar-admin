@@ -29,8 +29,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/web.config",
-              "src/_redirects"
+              "src/web.config"
             ],
             "styles": [
               "src/styles.sass"
