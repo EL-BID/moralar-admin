@@ -1,8 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
 
 import { PropertiesModule } from '../properties/properties.module';
@@ -34,16 +30,7 @@ import { FamiliesComponent } from './families.component';
     FamilyFormComponent,
     FamilyViewComponent,
   ],
-  imports: [
-    CommonModule,
-    FamiliesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-    FontAwesomeModule,
-    PropertiesModule,
-  ],
+  imports: [FamiliesRoutingModule, SharedModule, PropertiesModule],
   exports: [
     FamilyListSearchComponent,
     FamilyListComponent,

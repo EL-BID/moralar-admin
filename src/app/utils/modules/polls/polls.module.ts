@@ -1,24 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PollsRoutingModule } from './polls-routing.module';
-
-// modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
 
-// containers
-import { PollsComponent } from './polls.component';
-import { PollsListComponent } from './containers/polls-list/polls-list.component';
+import { PollFormComponent } from './components/poll-form/poll-form.component';
+import { PollListSearchComponent } from './components/poll-list-search/poll-list-search.component';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { PollViewComponent } from './components/poll-view/poll-view.component';
 import { PollsAddComponent } from './containers/polls-add/polls-add.component';
 import { PollsDetailsComponent } from './containers/polls-details/polls-details.component';
+import { PollsListComponent } from './containers/polls-list/polls-list.component';
+import { PollsRoutingModule } from './polls-routing.module';
+import { PollsComponent } from './polls.component';
 
+// modules
+// containers
 // components
-import { PollListComponent } from './components/poll-list/poll-list.component';
-import { PollListSearchComponent } from './components/poll-list-search/poll-list-search.component';
-import { PollFormComponent } from './components/poll-form/poll-form.component';
-import { PollViewComponent } from './components/poll-view/poll-view.component';
-
 @NgModule({
   declarations: [
     // containers
@@ -30,18 +25,9 @@ import { PollViewComponent } from './components/poll-view/poll-view.component';
     PollListComponent,
     PollListSearchComponent,
     PollFormComponent,
-    PollViewComponent
+    PollViewComponent,
   ],
-  exports: [
-    PollListComponent
-  ],
-  imports: [
-    CommonModule,
-    PollsRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule
-  ]
+  exports: [PollListComponent],
+  imports: [PollsRoutingModule, SharedModule],
 })
-export class PollsModule { }
+export class PollsModule {}

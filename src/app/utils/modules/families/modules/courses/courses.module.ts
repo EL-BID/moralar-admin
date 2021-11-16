@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
+import {
+  NgbAccordionModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
+
+import { PropertiesModule } from '../../../properties/properties.module';
+import { FamiliesModule } from '../../families.module';
+import { CourseListComponent } from './components/course-list/course-list.component';
+import { CoursesListComponent } from './containers/courses-list/courses-list.component';
 import { CoursesRoutingModule } from './courses-routing.module';
+import { CoursesComponent } from './courses.component';
 
 // containers
-import { CoursesComponent } from './courses.component';
-import {CoursesListComponent} from './containers/courses-list/courses-list.component';
 // components
-import {CourseListComponent} from './components/course-list/course-list.component';
-
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
-import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
-import { NgxMaskModule } from 'ngx-mask';
 import Timeline = gsap.core.Timeline;
-import {NgbAccordionModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
-import {FontAwesomeTestingModule} from '@fortawesome/angular-fontawesome/testing';
-import {FamiliesModule} from '../../families.module';
-import {PropertiesModule} from '../../../properties/properties.module';
-
 
 @NgModule({
   declarations: [
@@ -25,24 +23,18 @@ import {PropertiesModule} from '../../../properties/properties.module';
     CoursesComponent,
     CoursesListComponent,
     // components
-    CourseListComponent
+    CourseListComponent,
   ],
-  exports: [
-    CoursesListComponent
-  ],
+  exports: [CoursesListComponent],
   imports: [
-    CommonModule,
     CoursesRoutingModule,
     // modules
     NgbDropdownModule,
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
     SharedModule,
-    NgxMaskModule.forChild(),
     NgbAccordionModule,
     FontAwesomeTestingModule,
     FamiliesModule,
-    PropertiesModule
-  ]
+    PropertiesModule,
+  ],
 })
-export class CoursesModule { }
+export class CoursesModule {}

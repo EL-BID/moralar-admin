@@ -1,8 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { MegaleiosFormsModule } from '../megaleios-forms/megaleios-forms.module';
 import { SharedModule } from '../shared/shared.module';
 import { InformativeFormComponent } from './components/informative-form/informative-form.component';
 import { InformativeListSearchComponent } from './components/informative-list-search/informative-list-search.component';
@@ -28,13 +25,6 @@ import { InformativesComponent } from './informatives.component';
     InformativeFormComponent,
     InformativeViewComponent,
   ],
-  imports: [
-    CommonModule,
-    InformativesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-  ],
+  imports: [InformativesRoutingModule, SharedModule],
 })
 export class InformativesModule {}

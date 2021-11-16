@@ -1,21 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { SharedModule } from '../../../shared/shared.module';
+import { PollListComponent } from './components/poll-list/poll-list.component';
+import { PollsListComponent } from './containers/polls-list/polls-list.component';
+import { PollsRoutingModule } from './polls-routing.module';
+import { PollsComponent } from './polls.component';
 
 // modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
-
 // containers
-import {PollsComponent} from './polls.component';
-import {PollsListComponent} from './containers/polls-list/polls-list.component';
 // components
-import {PollListComponent} from './components/poll-list/poll-list.component';
-
-
-import {PollsRoutingModule} from './polls-routing.module';
-import {MegaleiosFormsModule} from '../../../megaleios-forms/megaleios-forms.module';
-import {SharedModule} from '../../../shared/shared.module';
-
 
 @NgModule({
   declarations: [
@@ -23,19 +16,9 @@ import {SharedModule} from '../../../shared/shared.module';
     PollsComponent,
     PollsListComponent,
     // components
-    PollListComponent
+    PollListComponent,
   ],
-  exports: [
-    PollsListComponent
-  ],
-  imports: [
-    CommonModule,
-    PollsRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-    NgxMaskModule.forChild()
-  ]
+  exports: [PollsListComponent],
+  imports: [PollsRoutingModule, SharedModule],
 })
-export class PollsModule { }
+export class PollsModule {}

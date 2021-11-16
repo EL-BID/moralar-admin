@@ -1,9 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { FamiliesModule } from '../../../../../../utils/modules/families/families.module';
-import { MegaleiosFormsModule } from '../../../../../../utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from '../../../../../../utils/modules/shared/shared.module';
 import { NotificationFormComponent } from './components/notification-form/notification-form.component';
 import { NotificationListSearchComponent } from './components/notification-list-search/notification-list-search.component';
@@ -31,11 +28,8 @@ import { NotificationsComponent } from './notifications.component';
     NotificationFormComponent,
   ],
   imports: [
-    CommonModule,
     NotificationsRoutingModule,
     // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
     SharedModule,
     FamiliesModule,
   ],
