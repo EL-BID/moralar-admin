@@ -76,7 +76,7 @@ export class FamilyFormComponent extends FormComponentClass implements OnInit {
       birthday: [null, Validators.required],
       genre: [null],
       email: [null, Validators.compose([trimWhiteSpace, Validators.email])],
-      phone: [null, trimWhiteSpace],
+      phone: [null],
       scholarity: [null],
     });
     this.spouseForm = this.formBuilder.group({

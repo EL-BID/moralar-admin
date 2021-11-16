@@ -73,14 +73,17 @@
           <label for="phone">Telefone</label>
           <input
             type="text"
-            mask="(00) 0 0000-0000"
+            mask="00 (00) 0 0000-0000"
             id="phone"
             formControlName="phone"
           />
-          <app-control-tip [control]="holderForm.controls.phone">
+          <app-control-error
+            [control]="holderForm.controls.phone"
+          ></app-control-error>
+          <!-- <app-control-tip [control]="holderForm.controls.phone">
             Informe o código do país, DDD e número de telefone. Exemplo:
             5511988294456
-          </app-control-tip>
+          </app-control-tip> -->
           <app-control-error
             [control]="holderForm.controls.phone"
           ></app-control-error>
