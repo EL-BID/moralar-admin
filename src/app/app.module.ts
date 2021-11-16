@@ -10,6 +10,7 @@ import { JsonWebTokenInterceptor } from 'src/app/utils/interceptors/json-web-tok
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MegaleiosAlertModule } from './utils/modules/megaleios-alert/megaleios-alert.module';
+import { SharedModule } from './utils/modules/shared/shared.module';
 
 // locale
 registerLocaleData(localePt, 'pt');
@@ -23,6 +24,7 @@ registerLocaleData(localePt, 'pt');
     AppComponent,
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     // modules

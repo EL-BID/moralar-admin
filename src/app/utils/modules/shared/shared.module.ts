@@ -48,7 +48,7 @@ const modules = [
   FormsModule,
   ReactiveFormsModule,
   CurrencyMaskModule,
-  NgxMaskModule.forChild(),
+  NgxMaskModule,
   NgbPaginationModule,
   ImageCropperModule,
   HttpClientModule,

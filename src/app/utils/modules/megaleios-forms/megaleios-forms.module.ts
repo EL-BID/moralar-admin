@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SharedModule } from '../shared/shared.module';
 import { ControlCheckboxComponent } from './components/control-checkbox/control-checkbox.component';
@@ -9,9 +11,6 @@ import { ControlRadioComponent } from './components/control-radio/control-radio.
 import { ControlTipComponent } from './components/control-tip/control-tip.component';
 import { MegaleiosFormsService } from './megaleios-forms.service';
 
-// modules
-// components
-// services
 const DECLARATIONS = [
   // components
   ControlFieldComponent,
@@ -24,7 +23,7 @@ const DECLARATIONS = [
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: [SharedModule],
+  imports: [CommonModule, FontAwesomeModule],
   exports: DECLARATIONS,
   providers: [MegaleiosFormsService],
 })
