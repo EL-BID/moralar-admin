@@ -1,26 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { SharedModule } from '../../../shared/shared.module';
 import { AvailablesRoutingModule } from './availables-routing.module';
+import { AvailablesComponent } from './availables.component';
+import { AvailableListSearchComponent } from './components/available-list-search/available-list-search.component';
+import { AvailableListComponent } from './components/available-list/available-list.component';
+import { ReleaseFamilyListSearchComponent } from './components/release-family-list-search/release-family-list-search.component';
+import { ReleaseFamilyListComponent } from './components/release-family-list/release-family-list.component';
+import { ReleaseFormComponent } from './components/release-form/release-form.component';
+import { ReleaseViewComponent } from './components/release-view/release-view.component';
+import { AvailablesDetailsComponent } from './containers/availables-details/availables-details.component';
+import { AvailablesListComponent } from './containers/availables-list/availables-list.component';
+import { ReleasesAddComponent } from './containers/releases-add/releases-add.component';
+import { ReleasesFamiliesListComponent } from './containers/releases-families-list/releases-families-list.component';
 
 // modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from '../../../megaleios-forms/megaleios-forms.module';
-import { SharedModule } from '../../../shared/shared.module';
-import { NgxMaskModule } from 'ngx-mask';
-
 // containers
-import { AvailablesComponent } from './availables.component';
-import { AvailablesListComponent } from './containers/availables-list/availables-list.component';
-import { AvailablesDetailsComponent } from './containers/availables-details/availables-details.component';
-import { AvailableListComponent } from './components/available-list/available-list.component';
-import { AvailableListSearchComponent } from './components/available-list-search/available-list-search.component';
-import {ReleasesAddComponent} from './containers/releases-add/releases-add.component';
-import {ReleasesFamiliesListComponent} from './containers/releases-families-list/releases-families-list.component';
-import {ReleaseFamilyListComponent} from './components/release-family-list/release-family-list.component';
-import {ReleaseFamilyListSearchComponent} from './components/release-family-list-search/release-family-list-search.component';
-import {ReleaseFormComponent} from './components/release-form/release-form.component';
-import {ReleaseViewComponent} from "./components/release-view/release-view.component";
-
 @NgModule({
   declarations: [
     // containers
@@ -34,19 +29,9 @@ import {ReleaseViewComponent} from "./components/release-view/release-view.compo
     ReleasesFamiliesListComponent,
     ReleaseFamilyListComponent,
     ReleaseFamilyListSearchComponent,
-    ReleaseViewComponent
+    ReleaseViewComponent,
   ],
-  exports: [
-    AvailableListComponent
-  ],
-  imports: [
-    CommonModule,
-    AvailablesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-    NgxMaskModule.forChild()
-  ]
+  exports: [AvailableListComponent],
+  imports: [AvailablesRoutingModule, SharedModule],
 })
-export class AvailablesModule { }
+export class AvailablesModule {}

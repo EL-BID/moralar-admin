@@ -1,27 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SchedulesRoutingModule } from './schedules-routing.module';
-
-// modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
-import { NgxMaskModule } from 'ngx-mask';
 
-// containers
-import { SchedulesComponent } from './schedules.component';
-import { SchedulesListComponent } from './containers/schedules-list/schedules-list.component';
+import { FamiliesModule } from '../../../../../../utils/modules/families/families.module';
+import { RescheduleFormComponent } from './components/reschedule-form/reschedule-form.component';
+import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
+import { ScheduleListSearchComponent } from './components/schedule-list-search/schedule-list-search.component';
+import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
+import { ScheduleViewComponent } from './components/schedule-view/schedule-view.component';
 import { SchedulesAddComponent } from './containers/schedules-add/schedules-add.component';
 import { SchedulesDetailsComponent } from './containers/schedules-details/schedules-details.component';
+import { SchedulesListComponent } from './containers/schedules-list/schedules-list.component';
+import { SchedulesRoutingModule } from './schedules-routing.module';
+import { SchedulesComponent } from './schedules.component';
 
+// modules
+// containers
 // components
-import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
-import { ScheduleListSearchComponent } from './components/schedule-list-search/schedule-list-search.component';
-import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
-import { ScheduleViewComponent } from './components/schedule-view/schedule-view.component';
-import { RescheduleFormComponent } from './components/reschedule-form/reschedule-form.component';
-import {FamiliesModule} from "../../../../../../utils/modules/families/families.module";
-
 @NgModule({
   declarations: [
     // containers
@@ -34,17 +28,8 @@ import {FamiliesModule} from "../../../../../../utils/modules/families/families.
     ScheduleFormComponent,
     SchedulesDetailsComponent,
     ScheduleViewComponent,
-    RescheduleFormComponent
+    RescheduleFormComponent,
   ],
-  imports: [
-    CommonModule,
-    SchedulesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-    NgxMaskModule.forChild(),
-    FamiliesModule
-  ]
+  imports: [SchedulesRoutingModule, SharedModule, FamiliesModule],
 })
-export class SchedulesModule { }
+export class SchedulesModule {}

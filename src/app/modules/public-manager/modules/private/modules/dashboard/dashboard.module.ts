@@ -1,29 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard-routing.module';
-
-// modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
-
-// containers
-import { DashboardComponent } from './dashboard.component';
-import { DashboardDetailsComponent } from './containers/dashboard-details/dashboard-details.component';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
 
+import { DashboardDetailsComponent } from './containers/dashboard-details/dashboard-details.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
+
+// modules
+// containers
 @NgModule({
   declarations: [
     // containers
     DashboardComponent,
-    DashboardDetailsComponent
+    DashboardDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule
-  ]
+  imports: [DashboardRoutingModule, SharedModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}

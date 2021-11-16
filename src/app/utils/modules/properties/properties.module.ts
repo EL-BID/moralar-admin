@@ -1,28 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PropertiesRoutingModule } from './properties-routing.module';
-
-// modules
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
-import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 
-// containers
-import { PropertiesComponent } from './properties.component';
-import { PropertiesListComponent } from './containers/properties-list/properties-list.component';
+import { PropertyFormComponent } from './components/property-form/property-form.component';
+import { PropertyListSearchComponent } from './components/property-list-search/property-list-search.component';
+import { PropertyListComponent } from './components/property-list/property-list.component';
+import { PropertyViewComponent } from './components/property-view/property-view.component';
 import { PropertiesAddComponent } from './containers/properties-add/properties-add.component';
 import { PropertiesDetailsComponent } from './containers/properties-details/properties-details.component';
+import { PropertiesListComponent } from './containers/properties-list/properties-list.component';
+import { PropertiesRoutingModule } from './properties-routing.module';
+import { PropertiesComponent } from './properties.component';
 
+// modules
+// containers
 // components
-import { PropertyListComponent } from './components/property-list/property-list.component';
-import { PropertyListSearchComponent } from './components/property-list-search/property-list-search.component';
-import { PropertyFormComponent } from './components/property-form/property-form.component';
-import { PropertyViewComponent } from './components/property-view/property-view.component';
-
-// consts
-import { CustomCurrencyMaskConfig } from 'src/app/app.module';
-
 @NgModule({
   declarations: [
     // containers
@@ -34,25 +25,9 @@ import { CustomCurrencyMaskConfig } from 'src/app/app.module';
     PropertyListComponent,
     PropertyListSearchComponent,
     PropertyFormComponent,
-    PropertyViewComponent
+    PropertyViewComponent,
   ],
-  imports: [
-    CommonModule,
-    PropertiesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-    CurrencyMaskModule
-  ],
-  exports: [
-    PropertyViewComponent
-  ],
-  providers: [
-    {
-      provide: CURRENCY_MASK_CONFIG,
-      useValue: CustomCurrencyMaskConfig
-    }
-  ]
+  imports: [PropertiesRoutingModule, SharedModule],
+  exports: [PropertyViewComponent],
 })
-export class PropertiesModule { }
+export class PropertiesModule {}

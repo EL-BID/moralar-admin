@@ -11,27 +11,34 @@ const routes: Routes = [
     children: [
       {
         path: 'configuracao',
-        loadChildren: () => import('./modules/configuration/configuration.module').then(m => m.ConfigurationModule)
+        loadChildren: () =>
+          import('./modules/configuration/configuration.module').then(
+            (m) => m.ConfigurationModule
+          ),
       },
       {
         path: 'redefinir-senha',
-        loadChildren: () => import('./modules/password-reset/password-reset.module').then(m => m.PasswordResetModule)
+        loadChildren: () =>
+          import('./modules/password-reset/password-reset.module').then(
+            (m) => m.PasswordResetModule
+          ),
       },
       {
         path: '',
-        loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
-      }
-    ]
+        loadChildren: () =>
+          import('./modules/login/login.module').then((m) => m.LoginModule),
+      },
+    ],
   },
   {
     path: '**',
     redirectTo: '',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PublicRoutingModule { }
+export class PublicRoutingModule {}
