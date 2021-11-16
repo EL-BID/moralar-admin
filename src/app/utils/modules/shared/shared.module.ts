@@ -8,6 +8,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CURRENCY_MASK_CONFIG, CurrencyMaskModule } from 'ng2-currency-mask';
 
 // components
 import { CardComponent } from './components/card/card.component';
@@ -22,7 +23,8 @@ import { ModalImageCropperComponent } from './components/modal-image-cropper/mod
 
 // directives
 import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/ngbd-sortable-header.directive';
-import {ImportFileComponent} from "./components/import-file/import-file.component";
+import { ImportFileComponent } from './components/import-file/import-file.component';
+import { CustomCurrencyMaskConfig } from 'src/app/core/conf/maskCurrency';
 
 const DECLARATIONS: any[] = [
   // components
@@ -36,14 +38,11 @@ const DECLARATIONS: any[] = [
   ImageUploadComponent,
   ModalImageCropperComponent,
   // directives
-  NgbdSortableHeaderDirective
+  NgbdSortableHeaderDirective,
 ];
 
 @NgModule({
-  declarations: [
-    DECLARATIONS,
-    ImportFileComponent
-  ],
+  declarations: [DECLARATIONS, ImportFileComponent],
   imports: [
     CommonModule,
     // modules
@@ -53,11 +52,11 @@ const DECLARATIONS: any[] = [
     NgxMaskModule.forChild(),
     FontAwesomeModule,
     NgbPaginationModule,
-    ImageCropperModule
+    ImageCropperModule,
   ],
-  exports: [
-    DECLARATIONS,
-    ImportFileComponent
-  ]
+  exports: [DECLARATIONS, ImportFileComponent, CurrencyMaskModule],
+  providers: [
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
