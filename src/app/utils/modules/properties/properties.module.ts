@@ -1,7 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MegaleiosFormsModule } from 'src/app/utils/modules/megaleios-forms/megaleios-forms.module';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
 
 import { PropertyFormComponent } from './components/property-form/property-form.component';
@@ -30,14 +27,7 @@ import { PropertiesComponent } from './properties.component';
     PropertyFormComponent,
     PropertyViewComponent,
   ],
-  imports: [
-    CommonModule,
-    PropertiesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-  ],
+  imports: [PropertiesRoutingModule, SharedModule],
   exports: [PropertyViewComponent],
 })
 export class PropertiesModule {}

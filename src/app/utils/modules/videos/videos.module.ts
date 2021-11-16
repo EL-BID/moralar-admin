@@ -1,8 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { MegaleiosFormsModule } from '../megaleios-forms/megaleios-forms.module';
 import { SharedModule } from '../shared/shared.module';
 import { VideoFormComponent } from './components/video-form/video-form.component';
 import { VideoListSearchComponent } from './components/video-list-search/video-list-search.component';
@@ -30,13 +27,6 @@ import { VideosComponent } from './videos.component';
     VideoFormComponent,
     VideoViewComponent,
   ],
-  imports: [
-    CommonModule,
-    VideosRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-  ],
+  imports: [VideosRoutingModule, SharedModule],
 })
 export class VideosModule {}

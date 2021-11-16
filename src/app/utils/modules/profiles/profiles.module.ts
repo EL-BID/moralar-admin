@@ -1,8 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { MegaleiosFormsModule } from '../megaleios-forms/megaleios-forms.module';
 import { SharedModule } from '../shared/shared.module';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
@@ -20,14 +17,7 @@ import { ProfilesComponent } from './profiles.component';
     ProfileFormComponent,
     ChangePasswordFormComponent,
   ],
-  imports: [
-    CommonModule,
-    ProfilesRoutingModule,
-    // modules
-    ReactiveFormsModule,
-    MegaleiosFormsModule,
-    SharedModule,
-  ],
+  imports: [ProfilesRoutingModule, SharedModule],
   exports: [],
 })
 export class ProfilesModule {}
