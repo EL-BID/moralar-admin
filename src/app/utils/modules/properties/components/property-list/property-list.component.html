@@ -6,7 +6,9 @@
         <th sortable="code" (sort)="handleSort($event)">Código do imóvel</th>
         <th sortable="type" (sort)="handleSort($event)">Tipo do imóvel</th>
         <th sortable="value" (sort)="handleSort($event)">Valor do imóvel</th>
-        <th sortable="neighborhood" (sort)="handleSort($event)">Bairro de localização</th>
+        <th sortable="neighborhood" (sort)="handleSort($event)">
+          Bairro de localização
+        </th>
         <th>Situação</th>
       </tr>
     </thead>
@@ -15,13 +17,21 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.code || '-' }}</td>
-        <td>{{ propertyTypeList[item.residencialPropertyFeatures.typeProperty].name  }}</td>
-        <td>{{ item.residencialPropertyFeatures.propertyValue || '-' | currency:'BRL':'symbol':'1.2-2' }}</td>
-        <td>{{ item.residencialPropertyAdress.neighborhood || '-' }}</td>
+        <td>{{ item.code || "-" }}</td>
+        <td>
+          {{ item.residencialPropertyFeatures.typeProperty | typeProperty }}
+        </td>
+        <td>
+          {{
+            item.residencialPropertyFeatures.propertyValue || "-"
+              | currency: "BRL":"symbol":"1.2-2"
+          }}
+        </td>
+        <td>{{ item.residencialPropertyAdress.neighborhood || "-" }}</td>
         <td>
           <div class="custom-control custom-switch">
             <input
@@ -30,10 +40,9 @@
               [id]="'blocked-' + item.id"
               [value]="item.id"
               [checked]="item.blocked === false"
-              (click)="handleBlockUnblock($event)">
-            <label
-              [for]="'blocked-' + item.id"
-              class="custom-control-label">
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
             </label>
           </div>
         </td>

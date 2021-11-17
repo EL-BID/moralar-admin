@@ -24,10 +24,11 @@ import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.
 import { ModalImageCropperComponent } from './components/modal-image-cropper/modal-image-cropper.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+//pipes
+import { TypePropertyPipe } from './pipes/TypeProperty.pipe';
 
 // components
 const components = [
-  // components
   CardComponent,
   ButtonComponent,
   ListPaginationComponent,
@@ -38,8 +39,6 @@ const components = [
   ImageUploadComponent,
   ModalImageCropperComponent,
   ImportFileComponent,
-  // directives
-  NgbdSortableHeaderDirective,
 ];
 
 // modules
@@ -61,7 +60,7 @@ const modules = [
 const directives = [NgbdSortableHeaderDirective];
 
 //pipes
-const pipes = [];
+const pipes = [TypePropertyPipe];
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],
