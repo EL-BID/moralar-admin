@@ -7,8 +7,10 @@
         <th sortable="startDate" (sort)="handleSort($event)">Data de início</th>
         <th sortable="endDate" (sort)="handleSort($event)">Data de término</th>
         <th sortable="numberOfVacancies" (sort)="handleSort($event)">Vagas</th>
-        <th sortable="place" (sort)="handleSort($event)">Inscritos</th>
-        <th sortable="workLoad" (sort)="handleSort($event)">Espera</th>
+        <th sortable="place" (sort)="handleSort($event)">Total de inscritos</th>
+        <th sortable="workLoad" (sort)="handleSort($event)">
+          Total de aguardando na lista de espera
+        </th>
         <!-- <th>Situação</th> -->
       </tr>
     </thead>
@@ -17,15 +19,16 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || '-' }}</td>
-        <td>{{ item.startDate || '-' | date:'dd/MM/yyyy'}}</td>
-        <td>{{ item.endDate || '-' | date:'dd/MM/yyyy'}}</td>
-        <td>{{ item.numberOfVacancies || '-' }}</td>
-        <td>{{ item.place || '-' }}</td>
-        <td>{{ item.workLoad || '-' }}</td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.startDate || "-" | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.endDate || "-" | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.numberOfVacancies || "-" }}</td>
+        <td>Aguardando API</td>
+        <td>Aguardando API</td>
         <!-- <td>
           <div class="custom-control custom-switch">
             <input
