@@ -6,8 +6,7 @@
     </p>
   </div>
 </div>
-<app-address-view
-  [address]="property.residencialPropertyAdress">
+<app-address-view [address]="property.residencialPropertyAdress">
 </app-address-view>
 <h2 class="h5">Fotos</h2>
 <ng-container [ngSwitch]="property.photo?.length === 0">
@@ -15,12 +14,12 @@
     Nenhuma foto adicionada.
   </app-card>
   <div *ngSwitchCase="false" class="row">
-    <div *ngFor="let photo of property.photo; let i = index;" class="col-lg-3 mb-3">
+    <div
+      *ngFor="let photo of property.photo; let i = index"
+      class="col-lg-3 mb-3"
+    >
       <app-card>
-        <img
-          [src]="photo"
-          alt="Foto {{ i + 1 }}"
-          title="Foto {{ i + 1 }}">
+        <img [src]="photo" alt="Foto {{ i + 1 }}" title="Foto {{ i + 1 }}" />
       </app-card>
     </div>
   </div>
@@ -28,10 +27,7 @@
 <h2 class="h5">Planta</h2>
 <div class="row">
   <div class="col-lg-6">
-    <img
-      [src]="property.project"
-      alt="Planta"
-      title="Planta">
+    <img [src]="property.project" alt="Planta" title="Planta" />
   </div>
 </div>
 <h2 class="h5">Características</h2>
@@ -39,13 +35,16 @@
   <div class="col-lg-6">
     <p>
       <span class="view-label">Valor do imóvel</span>
-      {{ property.residencialPropertyFeatures?.propertyValue | currency:'BRL':'symbol':'1.2-2' }}
+      {{
+        property.residencialPropertyFeatures?.propertyValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Tipo do imóvel</span>
-      {{ propertyTypeToString(property.residencialPropertyFeatures?.typeProperty) }}
+      {{ property?.residencialPropertyFeatures?.typeProperty | typeProperty }}
     </p>
   </div>
   <div class="col-lg-6">
@@ -57,13 +56,19 @@
   <div class="col-lg-6">
     <p>
       <span class="view-label">Valor do condomínio</span>
-      {{ property.residencialPropertyFeatures?.condominiumValue | currency:'BRL':'symbol':'1.2-2' }}
+      {{
+        property.residencialPropertyFeatures?.condominiumValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Valor do IPTU</span>
-      {{ property.residencialPropertyFeatures?.iptuValue | currency:'BRL':'symbol':'1.2-2' }}
+      {{
+        property.residencialPropertyFeatures?.iptuValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
@@ -87,7 +92,11 @@
   <div class="col-lg-6">
     <p>
       <span class="view-label">Elevador</span>
-      {{ property.residencialPropertyFeatures?.hasElavator == true ? 'Sim' : 'Não' }}
+      {{
+        property.residencialPropertyFeatures?.hasElavator == true
+          ? "Sim"
+          : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
@@ -105,61 +114,93 @@
   <div class="col-lg-6">
     <p>
       <span class="view-label">Área de serviço</span>
-      {{ property.residencialPropertyFeatures?.hasServiceArea == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasServiceArea == true
+          ? "Sim"
+          : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Garagem</span>
-      {{ property.residencialPropertyFeatures?.hasGarage == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasGarage == true ? "Sim" : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Quintal</span>
-      {{ property.residencialPropertyFeatures?.hasYard == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasYard == true ? "Sim" : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Cisterna</span>
-      {{ property.residencialPropertyFeatures?.hasCistern == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasCistern == true ? "Sim" : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Murada</span>
-      {{ property.residencialPropertyFeatures?.hasWall == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasWall == true ? "Sim" : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Escada de acesso</span>
-      {{ property.residencialPropertyFeatures?.hasAccessLadder == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasAccessLadder == true
+          ? "Sim"
+          : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Rampa de acesso</span>
-      {{ property.residencialPropertyFeatures?.hasAccessRamp == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasAccessRamp == true
+          ? "Sim"
+          : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Adaptada ou permite adaptação para PCD</span>
-      {{ property.residencialPropertyFeatures?.hasAdaptedToPcd == true ? 'Sim' : 'Não'}}
+      {{
+        property.residencialPropertyFeatures?.hasAdaptedToPcd == true
+          ? "Sim"
+          : "Não"
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Regularização do imóvel</span>
-      {{ propertyRegularizationToString(property.residencialPropertyFeatures?.propertyRegularization) }}
+      {{
+        propertyRegularizationToString(
+          property.residencialPropertyFeatures?.propertyRegularization
+        )
+      }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
       <span class="view-label">Tipo de instalação de gás</span>
-      {{ propertyGasInstallationToString(property.residencialPropertyFeatures?.typeGasInstallation) }}
+      {{
+        propertyGasInstallationToString(
+          property.residencialPropertyFeatures?.typeGasInstallation
+        )
+      }}
     </p>
   </div>
 </div>
