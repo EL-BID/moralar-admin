@@ -51,7 +51,7 @@ export class ReleaseFormComponent extends FormComponentClass implements OnInit {
     this.form = this.formBuilder.group({
       quizId: [null, Validators.required],
       allFamily: 'false',
-      familyId: [null],
+      familyId: [''],
     });
   }
 
