@@ -42,11 +42,7 @@
         <td>{{ item.holderName || "-" }}</td>
         <td>{{ item.holderCpf || "-" | mask: "000.000.000-99" }}</td>
         <td>
-          {{
-            item.typeStatus
-              ? (item.typeStatus | quizTypeStatus)
-              : "Status não informado"
-          }}
+          {{ item.typeStatus | quizTypeStatus }}
         </td>
       </tr>
     </tbody>
