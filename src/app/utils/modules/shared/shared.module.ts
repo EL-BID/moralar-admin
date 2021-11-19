@@ -25,7 +25,8 @@ import { ModalImageCropperComponent } from './components/modal-image-cropper/mod
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/ngbd-sortable-header.directive';
 //pipes
-import { TypePropertyPipe } from './pipes/TypeProperty.pipe';
+import { QuizTypeStatusPipe } from './pipes/QuizTypeStatus/QuizTypeStatus.pipe';
+import { TypePropertyPipe } from './pipes/TypeProperty/TypeProperty.pipe';
 
 // components
 const components = [
@@ -60,7 +61,7 @@ const modules = [
 const directives = [NgbdSortableHeaderDirective];
 
 //pipes
-const pipes = [TypePropertyPipe];
+const pipes = [TypePropertyPipe, QuizTypeStatusPipe];
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],

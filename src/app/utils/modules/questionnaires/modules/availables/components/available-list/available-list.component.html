@@ -3,11 +3,21 @@
     <thead>
       <tr>
         <th></th>
-        <th sortable="title" (sort)="handleSort($event)">Título do questionário</th>
-        <th sortable="created" (sort)="handleSort($event)">Data da disponibilização</th>
-        <th sortable="holderNumber" (sort)="handleSort($event)">Número do cadastro</th>
-        <th sortable="holderName" (sort)="handleSort($event)">Nome do morador titular</th>
-        <th sortable="holderCpf" (sort)="handleSort($event)">CPF do morador titular</th>
+        <th sortable="title" (sort)="handleSort($event)">
+          Título do questionário
+        </th>
+        <th sortable="created" (sort)="handleSort($event)">
+          Data da disponibilização
+        </th>
+        <th sortable="holderNumber" (sort)="handleSort($event)">
+          Número do cadastro
+        </th>
+        <th sortable="holderName" (sort)="handleSort($event)">
+          Nome do morador titular
+        </th>
+        <th sortable="holderCpf" (sort)="handleSort($event)">
+          CPF do morador titular
+        </th>
         <th sortable="status" (sort)="handleSort($event)">Status</th>
       </tr>
     </thead>
@@ -20,19 +30,24 @@
               class="custom-control-input"
               [id]="'select-' + item.id"
               [checked]="isChecked(item)"
-              (change)="listItemSelected.emit(item)">
-            <label
-              class="custom-control-label"
-              [for]="'select-' + item.id">
+              (change)="listItemSelected.emit(item)"
+            />
+            <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
         </td>
-        <td>{{ item.title || '-' }}</td>
-        <td>{{ item.created | date: 'dd/MM/yyyy' || '-' }}</td>
-        <td>{{ item.holderNumber || '-' }}</td>
-        <td>{{ item.holderName || '-' }}</td>
-        <td>{{ item.holderCpf || '-' | mask: '000.000.000-99'}}</td>
-        <td>{{ item.status || '-' }}</td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.created | date: "dd/MM/yyyy" || "-" }}</td>
+        <td>{{ item.holderNumber || "-" }}</td>
+        <td>{{ item.holderName || "-" }}</td>
+        <td>{{ item.holderCpf || "-" | mask: "000.000.000-99" }}</td>
+        <td>
+          {{
+            item.typeStatus
+              ? (item.typeStatus | quizTypeStatus)
+              : "Status não informado"
+          }}
+        </td>
       </tr>
     </tbody>
   </table>
