@@ -7,8 +7,10 @@
         <th sortable="startDate" (sort)="handleSort($event)">Data de início</th>
         <th sortable="endDate" (sort)="handleSort($event)">Data de término</th>
         <th sortable="numberOfVacancies" (sort)="handleSort($event)">Vagas</th>
-        <th sortable="place" (sort)="handleSort($event)">Total de inscritos</th>
-        <th sortable="workLoad" (sort)="handleSort($event)">
+        <th class="text-center" sortable="place" (sort)="handleSort($event)">
+          Total de inscritos
+        </th>
+        <th class="text-center" sortable="workLoad" (sort)="handleSort($event)">
           Total de aguardando na lista de espera
         </th>
         <!-- <th>Situação</th> -->
@@ -27,8 +29,8 @@
         <td>{{ item.startDate || "-" | date: "dd/MM/yyyy" }}</td>
         <td>{{ item.endDate || "-" | date: "dd/MM/yyyy" }}</td>
         <td>{{ item.numberOfVacancies || "-" }}</td>
-        <td>Aguardando API</td>
-        <td>Aguardando API</td>
+        <td class="text-center">{{ item?.totalInscriptions }}</td>
+        <td class="text-center">{{ item?.totalWaitingList }}</td>
         <!-- <td>
           <div class="custom-control custom-switch">
             <input
