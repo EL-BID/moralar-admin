@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FormComponentClass} from 'src/app/utils/classes/form-component.class';
-import {trimWhiteSpace} from 'src/app/utils/functions/validators.function';
-import {QUESTIONANSWER_TYPES_LIST} from 'src/app/utils/interfaces/questionnaires.interface';
-
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
+import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
+import { QUESTIONANSWER_TYPES_LIST } from 'src/app/utils/interfaces/questionnaires.interface';
 
 @Component({
   selector: 'app-questionnaire-form',
   templateUrl: './questionnaire-form.component.html',
-  styleUrls: ['./questionnaire-form.component.sass']
+  styleUrls: ['./questionnaire-form.component.sass'],
 })
-export class QuestionnaireFormComponent extends FormComponentClass implements OnInit {
+export class QuestionnaireFormComponent
+  extends FormComponentClass
+  implements OnInit
+{
   questionAnswerTypesList: any[] = QUESTIONANSWER_TYPES_LIST;
   questReg: FormGroup;
   desc: FormGroup;
@@ -26,21 +28,16 @@ export class QuestionnaireFormComponent extends FormComponentClass implements On
     return this.desc.controls.description as FormArray;
   }
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     super();
     this.form = this.formBuilder.group({
       title: [null, Validators.compose([trimWhiteSpace, Validators.required])],
       typeQuiz: [0],
-      questionRegister:
-        this.questReg = this.formBuilder.group({
-          question: this.formBuilder.array([])
-        }),
-
+      questionRegister: (this.questReg = this.formBuilder.group({
+        question: this.formBuilder.array([]),
+      })),
     });
   }
-
 
   ngOnInit(): void {
     if (this.formData) {
@@ -48,9 +45,15 @@ export class QuestionnaireFormComponent extends FormComponentClass implements On
         this.questionsForm.push(
           this.formBuilder.group({
             id: [this.formData.questionViewModel[i].id],
-            nameQuestion: [this.formData.questionViewModel[i].nameQuestion, Validators.compose([trimWhiteSpace, Validators.required])],
-            typeResponse: [this.formData.questionViewModel[i].typeResponse, Validators.required],
-            description: [this.formData.questionViewModel[i].description]
+            nameQuestion: [
+              this.formData.questionViewModel[i].nameQuestion,
+              Validators.compose([trimWhiteSpace, Validators.required]),
+            ],
+            typeResponse: [
+              this.formData.questionViewModel[i].typeResponse,
+              Validators.required,
+            ],
+            description: [this.formData.questionViewModel[i].description],
           })
         );
       }
@@ -59,16 +62,25 @@ export class QuestionnaireFormComponent extends FormComponentClass implements On
   }
 
   private createQuestionForm(): FormGroup {
+    const descriptonDefault = this.formBuilder.group({
+      description: ['Texto'],
+    });
     return this.formBuilder.group({
-      nameQuestion: [null, Validators.compose([trimWhiteSpace, Validators.required])],
+      nameQuestion: [
+        null,
+        Validators.compose([trimWhiteSpace, Validators.required]),
+      ],
       typeResponse: [0, Validators.required],
-      description: this.formBuilder.array([])
+      description: this.formBuilder.array([descriptonDefault]),
     });
   }
 
   private createDes(): FormGroup {
     return this.formBuilder.group({
-      description: [null, Validators.compose([trimWhiteSpace, Validators.required])]
+      description: [
+        null,
+        Validators.compose([trimWhiteSpace, Validators.required]),
+      ],
     });
   }
 
@@ -85,7 +97,7 @@ export class QuestionnaireFormComponent extends FormComponentClass implements On
   }
 
   addDescForm(i): void {
-    this.questionsForm.value[i].description.push({description: ''});
+    this.questionsForm.value[i].description.push({ description: '' });
     this.verifyQuestionsWithDescriptions();
   }
 
@@ -106,11 +118,10 @@ export class QuestionnaireFormComponent extends FormComponentClass implements On
               this.validador = false;
             }
           }
-        }else {
+        } else {
           this.validador = false;
         }
       }
     }
   }
-
 }
