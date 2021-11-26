@@ -6,7 +6,12 @@
     </button>
   </div>
   <div class="col-auto">
-    <button type="button" class="btn btn-outline-dark" [disabled]="listSelected.length !== 1" (click)="handleDetails()">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      [disabled]="listSelected.length !== 1"
+      (click)="handleDetails()"
+    >
       Detalhes
     </button>
   </div>
@@ -16,12 +21,24 @@
     </button>
   </div>
 </div>
-<app-property-list-search [listSearchData]="formDataModel.search" (listSearchChange)="handleListSearchChange($event)">
+<app-property-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-property-list-search>
-<app-property-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
-  (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)"
-  (blockUnblock)="handleBlockUnblock($event)">
+<app-property-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+  (blockUnblock)="handleBlockUnblock($event)"
+>
 </app-property-list>
-<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
-  [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

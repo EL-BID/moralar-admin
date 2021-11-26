@@ -1,4 +1,3 @@
-
 interface Column {
   data: string;
   name: string;
@@ -16,10 +15,10 @@ export interface FormDataModel {
   pageSize: number;
   search: any;
   order: Order;
+  id?: any;
 }
 
 export function generateFormData(formDataModel: FormDataModel): FormData {
-
   const formData = new FormData();
 
   // properties
@@ -32,7 +31,10 @@ export function generateFormData(formDataModel: FormDataModel): FormData {
   });
 
   // page and limit
-  formData.set('start', ((formDataModel.page - 1) * formDataModel.pageSize).toString());
+  formData.set(
+    'start',
+    ((formDataModel.page - 1) * formDataModel.pageSize).toString()
+  );
   formData.set('length', formDataModel.pageSize.toString());
 
   // order
@@ -54,10 +56,9 @@ export function generateFormData(formDataModel: FormDataModel): FormData {
         prop === 'search'
           ? formData.set('search[value]', formDataModel.search[prop])
           : formData.set(prop, formDataModel.search[prop]);
-        }
+      }
     }
   }
 
   return formData;
-
 }
