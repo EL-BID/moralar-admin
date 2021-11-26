@@ -1,26 +1,37 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
 import { sortBy } from 'lodash';
 import {
   PROPERTY_REGULARIZATION_LIST,
   PROPERTY_TYPE_GAS_INSTALLATION,
-  PROPERTY_TYPE_LIST
+  PROPERTY_TYPE_LIST,
 } from 'src/app/utils/interfaces/properties.interface';
 
 @Component({
   selector: 'app-property-form',
   templateUrl: './property-form.component.html',
-  styleUrls: ['./property-form.component.sass']
+  styleUrls: ['./property-form.component.sass'],
 })
 export class PropertyFormComponent extends FormComponentClass {
-
   propertyTypeList: any[] = sortBy(PROPERTY_TYPE_LIST, 'name');
   propertyNumberOfFloorsList: any[] = new Array(21);
   propertyLocationFloorList: any[] = new Array(21);
-  propertyRegularizationList: any[] = sortBy(PROPERTY_REGULARIZATION_LIST, 'name');
-  propertyGasInstallationList: any[] = sortBy(PROPERTY_TYPE_GAS_INSTALLATION, 'name');
+  propertyRegularizationList: any[] = sortBy(
+    PROPERTY_REGULARIZATION_LIST,
+    'name'
+  );
+  propertyGasInstallationList: any[] = sortBy(
+    PROPERTY_TYPE_GAS_INSTALLATION,
+    'name'
+  );
 
   residencialPropertyAdressForm: FormGroup;
   residencialPropertyFeaturesForm: FormGroup;
@@ -44,8 +55,10 @@ export class PropertyFormComponent extends FormComponentClass {
       stateId: [null, Validators.required],
       neighborhood: [null, Validators.required],
       complement: [null],
-      location: ['-'],
-      cep: [null, Validators.required]
+      location: [''],
+      latitude: [0],
+      longitude: [0],
+      cep: [null, Validators.required],
     });
     this.residencialPropertyFeaturesForm = this.formBuilder.group({
       propertyValue: [null, Validators.required],
@@ -75,7 +88,7 @@ export class PropertyFormComponent extends FormComponentClass {
       photo: this.formBuilder.array([]),
       project: [null, Validators.required],
       residencialPropertyAdress: this.residencialPropertyAdressForm,
-      residencialPropertyFeatures: this.residencialPropertyFeaturesForm
+      residencialPropertyFeatures: this.residencialPropertyFeaturesForm,
     });
   }
 
@@ -96,5 +109,4 @@ export class PropertyFormComponent extends FormComponentClass {
   removePhotoFormControl(index: number): void {
     this.photosForm.removeAt(index);
   }
-
 }
