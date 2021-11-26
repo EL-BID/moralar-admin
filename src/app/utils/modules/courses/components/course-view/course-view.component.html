@@ -1,71 +1,70 @@
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Título</span>
-    {{course.title}}</p>
+    <p><span class="view-label">Título</span> {{ course.title }}</p>
   </div>
 </div>
-<h2 class="h5">Imagem do Curso </h2>
+<h2 class="h5">Imagem do Curso</h2>
 <div class="row">
   <div class="col-lg-6 text-center">
-    <img
-      [src]="course.img"
-      alt="Imagem do Curso"
-      title="Imagem do Curso">
+    <img [src]="course?.img" alt="Imagem do Curso" title="Imagem do Curso" />
   </div>
 </div>
-<br>
+<br />
 <div class="row">
   <div class="col-lg-6">
-    <p><span class="view-label">Data de Início</span>
-    {{course.startDate | date:'dd/MM/yyyy'}}</p>
+    <p>
+      <span class="view-label">Data de Início</span>
+      {{ course?.startDate | date: "dd/MM/yyyy" }}
+    </p>
   </div>
   <div class="col-lg-6">
-    <p><span class="view-label">Data de Término</span>
-    {{course.endDate | date:'dd/MM/yyyy'}}</p>
+    <p>
+      <span class="view-label">Data de Término</span>
+      {{ course?.endDate | date: "dd/MM/yyyy" }}
+    </p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Hora de Início</span>
-    {{course.schedule}}</p>
+    <p><span class="view-label">Hora de Início</span> {{ course?.schedule }}</p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Carga Horária</span>
-    {{course.workLoad}}</p>
+    <p><span class="view-label">Carga Horária</span> {{ course?.workLoad }}</p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Local</span>
-    {{course.place}}</p>
+    <p><span class="view-label">Local</span> {{ course?.place }}</p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Descrição</span>
-    {{course.description}}</p>
+    <p><span class="view-label">Descrição</span> {{ course?.description }}</p>
   </div>
 </div>
 <h2 class="h5">Público Alvo (faixa de valores)</h2>
 <div class="row">
   <div class="col-lg-6">
-    <p><span class="view-label">De</span>
-    {{course.startTargetAudienceAge}}</p>
+    <p>
+      <span class="view-label">De</span> {{ course?.startTargetAudienceAge }}
+    </p>
   </div>
   <div class="col-lg-6">
-    <p><span class="view-label">Até</span>
-    {{course.endTargetAudienceAge}}</p>
+    <p>
+      <span class="view-label">Até</span> {{ course?.endTargetAudienceAge }}
+    </p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-6">
-    <p><span class="view-label">Gênero</span>
-    {{course.typeGenre}}</p>
+    <p><span class="view-label">Gênero</span> {{ course?.typeGenre }}</p>
   </div>
   <div class="col-lg-6">
-    <p><span class="view-label">Quantidade de</span>
-    {{course.numberOfVacancies}}</p>
+    <p>
+      <span class="view-label">Quantidade de vagas</span>
+      {{ course?.numberOfVacancies }}
+    </p>
   </div>
 </div>
