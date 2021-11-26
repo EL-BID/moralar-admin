@@ -21,7 +21,7 @@ import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.
 })
 export class FamilyFormComponent extends FormComponentClass implements OnInit {
   dayMax = DateTime.local().toFormat('yyyy-MM-dd');
-  checkDateValidator = false;
+  checkDateValidator = true;
   genderList: any[] = sortBy(GENDER_LIST, 'name');
   schoolingList: any[] = SCHOOLING_LIST;
   degreeOfKinshipList: any[] = DEGREE_OF_KINSHIP_LIST;

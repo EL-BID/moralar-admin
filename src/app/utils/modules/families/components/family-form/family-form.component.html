@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
   <form [formGroup]="holderForm">
+    <pre>{{ spouseForm.value | json }}</pre>
     <div class="row">
       <div class="col-lg-6">
         <app-control-field>
