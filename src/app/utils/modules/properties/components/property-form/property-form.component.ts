@@ -65,7 +65,7 @@ export class PropertyFormComponent extends FormComponentClass {
       typeProperty: ['', Validators.required],
       squareFootage: ['', Validators.required],
       condominiumValue: [''],
-      iptuValue: [''],
+      iptuValue: [0],
       neighborhood: ['', Validators.required],
       numberFloors: ['', Validators.required],
       floorLocation: ['', Validators.required],
