@@ -1,6 +1,5 @@
-
 export const GENDER_LIST = [
+  { id: 0, name: 'Feminino' },
   { id: 1, name: 'Masculino' },
-  { id: 2, name: 'Feminino' },
-  { id: 3, name: 'Outro' }
+  { id: 2, name: 'Outro' },
 ];
