@@ -339,7 +339,7 @@
       <p class="mb-0">
         <span class="view-label">Faixa de liberação do imóvel</span>
         {{
-          (financialForm.controls.propertyValueForDemolished.value || 0) +
+          (financialForm.controls.maximumPurchase.value || 0) +
             financialForm.controls.incrementValue.value || 0 | currency: "BRL"
         }}
       </p>
