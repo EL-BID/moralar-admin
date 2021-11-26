@@ -86,7 +86,7 @@ export class PropertyFormComponent extends FormComponentClass {
     this.form = this.formBuilder.group({
       code: ['', Validators.compose([trimWhiteSpace, Validators.required])],
       photo: this.formBuilder.array([]),
-      project: ['', Validators.required],
+      project: [null, Validators.required],
       residencialPropertyAdress: this.residencialPropertyAdressForm,
       residencialPropertyFeatures: this.residencialPropertyFeaturesForm,
     });
