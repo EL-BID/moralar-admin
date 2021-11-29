@@ -12,31 +12,35 @@ import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.sass']
+  styleUrls: ['./courses-list.component.sass'],
 })
 export class CoursesListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
       { data: 'title', name: 'Title', searchable: true },
       { data: 'startDate', name: 'StartDate', searchable: true },
       { data: 'endDate', name: 'EndDate', searchable: true },
-      { data: 'numberOfVacancies', name: 'NumberOfVacancies', searchable: true },
+      {
+        data: 'numberOfVacancies',
+        name: 'NumberOfVacancies',
+        searchable: true,
+      },
       { data: 'place', name: 'Place', searchable: true },
       { data: 'workLoad', name: 'WorkLoad', searchable: true },
     ],
     page: 1,
     pageSize: 10,
     search: {
-      search: ''
+      search: '',
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'Course';
+  listName = 'Cursos';
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -49,11 +53,12 @@ export class CoursesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute.parent });
+    this._router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute.parent,
+    });
   }
 
   handleBlockUnblock(value: any): void {
-
     let modalConfirmData: ModalConfirmData;
     if (value.block) {
       modalConfirmData = {
@@ -68,42 +73,30 @@ export class CoursesListComponent extends ListContainerClass {
         action: 'ativar',
       };
     }
-    const modalRef = this.ngbModal.open(ModalConfirmComponent, { centered: true });
+    const modalRef = this.ngbModal.open(ModalConfirmComponent, {
+      centered: true,
+    });
     modalRef.componentInstance.modalConfirmData = modalConfirmData;
     modalRef.result
       .then((result: any) => {
         if (result) {
-          this._httpService.post('Course/BlockUnblock', value)
+          this._httpService
+            .post('Course/BlockUnblock', value)
             .pipe(takeUntil(this.onDestroy))
-            .subscribe((response: any) => {
-              this.megaleiosAlertService.success(response.message);
-              const index = this.list.findIndex((item) => item.id === value.targetId);
-              this.list[index].blocked = value.block;
-            }, (response: any) => {
-              this.megaleiosAlertService.error(response.message);
-            });
+            .subscribe(
+              (response: any) => {
+                this.megaleiosAlertService.success(response.message);
+                const index = this.list.findIndex(
+                  (item) => item.id === value.targetId
+                );
+                this.list[index].blocked = value.block;
+              },
+              (response: any) => {
+                this.megaleiosAlertService.error(response.message);
+              }
+            );
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }
-
-  exportToExcel() {
-    this._httpService
-      .download('Course/Export')
-      .subscribe(
-        (response: any) => {
-          const blob = new Blob([response], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
-          });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'Lista de Cursos.xls';
-          a.click();
-        },
-        ({ message }) => {
-          this.megaleiosAlertService.error(message);
-        }
-      );
-  }
-
 }
