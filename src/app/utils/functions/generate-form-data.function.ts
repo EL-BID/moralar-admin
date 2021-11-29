@@ -21,8 +21,14 @@ export interface FormDataModel {
 export function generateFormData(formDataModel: FormDataModel): FormData {
   const formData = new FormData();
 
+  // ID's
+  if (formDataModel?.id)
+    formDataModel?.id.forEach((el: any, index: number) => {
+      formData.set(`id[${index}]`, el);
+    });
+
   // properties
-  formDataModel.columns.forEach((item, index) => {
+  formDataModel.columns.forEach((item: any, index) => {
     for (const prop in item) {
       if (item.hasOwnProperty(prop)) {
         formData.set(`columns[${index}][${prop}]`, item[prop]);

@@ -41,22 +41,6 @@ export abstract class ListContainerClass
   }
 
   ngOnInit(): void {
-    // this._activatedRoute.queryParams
-    //   .subscribe((params: Params) => {
-    //     this.formDataModel.search.search = params.search !== undefined ? params.search : this.formDataModel.search.search;
-    //     this.formDataModel.search.number = params.number !== undefined ? params.number : this.formDataModel.search.number;
-    //     this.formDataModel.search.holderName = params.holderName !== undefined ? params.holderName : this.formDataModel.search.holderName;
-    //     this.formDataModel.search.holderCpf = params.holderCpf !== undefined ? params.holderCpf : this.formDataModel.search.holderCpf;
-    //     this.formDataModel.search.status = params.status !== undefined ? params.status : this.formDataModel.search.status;
-    //     this.formDataModel.search.typeSubject = params.typeSubject !== undefined ? params.typeSubject : this.formDataModel.search.typeSubject;
-    //     this.formDataModel.order.column = params.column !== undefined ? params.column : this.formDataModel.order.column;
-    //     this.formDataModel.order.direction = params.direction !== undefined ? params.direction : this.formDataModel.order.direction;
-    //     this.formDataModel.page = params.page !== undefined ? parseFloat(params.page) : this.formDataModel.page;
-    //     this.formDataModel.pageSize = params.pageSize !== undefined ? parseFloat(params.pageSize) : this.formDataModel.pageSize;
-    //     this.getList();
-
-    //   });
-
     this._activatedRoute.queryParams.subscribe((params: Params) => {
       this.setQueryParams(params);
       this.getList();
@@ -173,6 +157,8 @@ export abstract class ListContainerClass
 
   exportToExcel() {
     this.exportingFile = true;
+    const id = this.listSelected.map((el: any) => el.id);
+
     this.formDataModel.id = this.listSelected.map((el: any) => el.id);
     this._httpService
       .export(`${this.uri}/Export`, generateFormData(this.formDataModel))
