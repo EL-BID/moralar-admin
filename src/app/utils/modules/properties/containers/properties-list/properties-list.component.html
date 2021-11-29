@@ -16,8 +16,12 @@
     </button>
   </div>
   <div class="col-auto">
-    <button (click)="exportToExcel()" class="btn btn-dark">
-      Exportar para Excel
+    <button
+      [disabled]="exportingFile"
+      (click)="exportToExcel()"
+      class="btn btn-dark"
+    >
+      Exportar para Excel {{ listSelected?.length ? listSelected?.length : "" }}
     </button>
   </div>
 </div>

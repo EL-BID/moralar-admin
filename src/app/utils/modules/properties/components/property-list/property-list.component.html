@@ -10,6 +10,7 @@
           Bairro de localização
         </th>
         <th>Situação</th>
+        <th>Disponível para venda</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +33,7 @@
           }}
         </td>
         <td>{{ item.residencialPropertyAdress.neighborhood || "-" }}</td>
-        <td>
+        <td class="text-center">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -45,6 +46,20 @@
             <label [for]="'blocked-' + item.id" class="custom-control-label">
             </label>
           </div>
+        </td>
+        <td class="text-center">
+          <span
+            class="badge badge-success"
+            [ngClass]="{
+              'badge-danger': !item.residencialPropertyAdress.availableForSale
+            }"
+          >
+            {{
+              item?.residencialPropertyFeatures?.availableForSale
+                ? "Sim"
+                : "Não"
+            }}
+          </span>
         </td>
       </tr>
     </tbody>
