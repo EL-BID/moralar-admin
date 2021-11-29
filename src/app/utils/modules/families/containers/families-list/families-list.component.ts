@@ -12,35 +12,30 @@ import { HttpService } from 'src/app/utils/services/http/http.service';
 @Component({
   selector: 'app-families-list',
   templateUrl: './families-list.component.html',
-  styleUrls: ['./families-list.component.sass']
+  styleUrls: ['./families-list.component.sass'],
 })
 export class FamiliesListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'number',    name: 'Number',    searchable: true },
+      { data: 'number', name: 'Number', searchable: true },
       { data: 'holderName', name: 'HolderName', searchable: true },
-      { data: 'holderCpf',     name: 'HolderCpf',     searchable: true },
-      { data: 'email',   name: 'Email',   searchable: true },
-      { data: 'phone',   name: 'Phone',   searchable: true }
+      { data: 'holderCpf', name: 'HolderCpf', searchable: true },
+      { data: 'email', name: 'Email', searchable: true },
+      { data: 'phone', name: 'Phone', searchable: true },
     ],
     page: 1,
     pageSize: 10,
     search: {
       search: '',
-      typeProfile: '0',
-      number: '',
-      holderName: '',
-      holderCpf: '',
-      status: ''
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'Family';
+  listName = 'família';
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -53,7 +48,9 @@ export class FamiliesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute.parent });
+    this._router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute.parent,
+    });
   }
 
   handleBlockUnblock(value: any): void {
@@ -71,23 +68,30 @@ export class FamiliesListComponent extends ListContainerClass {
         action: 'ativar',
       };
     }
-    const modalRef = this.ngbModal.open(ModalConfirmComponent, { centered: true });
+    const modalRef = this.ngbModal.open(ModalConfirmComponent, {
+      centered: true,
+    });
     modalRef.componentInstance.modalConfirmData = modalConfirmData;
     modalRef.result
       .then((result: any) => {
         if (result) {
-          this._httpService.post('Family/BlockUnblock', value)
+          this._httpService
+            .post('Family/BlockUnblock', value)
             .pipe(takeUntil(this.onDestroy))
-            .subscribe((response: any) => {
-              this.megaleiosAlertService.success(response.message);
-              const index = this.list.findIndex((item) => item.id === value.targetId);
-              this.list[index].blocked = value.block;
-            }, (response: any) => {
-              this.megaleiosAlertService.error(response.message);
-            });
+            .subscribe(
+              (response: any) => {
+                this.megaleiosAlertService.success(response.message);
+                const index = this.list.findIndex(
+                  (item) => item.id === value.targetId
+                );
+                this.list[index].blocked = value.block;
+              },
+              (response: any) => {
+                this.megaleiosAlertService.error(response.message);
+              }
+            );
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }
-
 }
