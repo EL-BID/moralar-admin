@@ -92,4 +92,16 @@ export class HttpService {
       })
       .pipe(take(1));
   }
+
+  download(route: string): Observable<any> {
+    return this.http
+      .post(
+        `${this.url}/api/v1/${route}`,
+        {},
+        {
+          responseType: 'blob',
+        }
+      )
+      .pipe(take(1));
+  }
 }
