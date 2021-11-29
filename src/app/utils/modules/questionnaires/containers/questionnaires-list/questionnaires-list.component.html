@@ -1,37 +1,37 @@
 <h1 class="h4">Questionários</h1>
-<div class="form-row my-3">
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-dark"
-      routerLink="adicionar">
-      Adicionar
-    </button>
-  </div>
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      [disabled]="listSelected.length !== 1"
-      (click)="handleDetails()">
-      Detalhes
-    </button>
-  </div>
+<div class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    [disabled]="listSelected.length !== 1"
+    (click)="handleDetails()"
+  >
+    Detalhes
+  </button>
+  <button type="button" class="btn btn-dark" routerLink="disponibilizar">
+    Disponibilizar
+  </button>
 </div>
 <app-questionnaire-list-search
   [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)">
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-questionnaire-list-search>
 <app-questionnaire-list
   [list]="list"
   (listSearchChange)="handleListSearchChange($event)"
   (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)">
+  (listItemSelected)="handleListItemSelected($event)"
+>
 </app-questionnaire-list>
 <app-list-pagination
   [page]="formDataModel.page"
   [pageSize]="formDataModel.pageSize"
   [listSize]="listSize"
   [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

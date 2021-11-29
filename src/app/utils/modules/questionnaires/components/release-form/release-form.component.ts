@@ -7,8 +7,8 @@ import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import {
   FormDataModel,
   generateFormData,
-} from '../../../../../../functions/generate-form-data.function';
-import { HttpService } from '../../../../../../services/http/http.service';
+} from '../../../../functions/generate-form-data.function';
+import { HttpService } from '../../../../services/http/http.service';
 
 @Component({
   selector: 'app-release-form',
