@@ -1,29 +1,38 @@
 <h1 class="h4">Linhas do tempo</h1>
-<div class="form-row my-3">
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      [disabled]="listSelected.length !== 1"
-      (click)="handleDetails()">
-      Detalhes
-    </button>
-  </div>
+<div class="options-container">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    [disabled]="listSelected.length !== 1"
+    (click)="handleDetails()"
+  >
+    Detalhes
+  </button>
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    Exportar para Excel {{ listSelected?.length ? listSelected?.length : "" }}
+  </button>
 </div>
 <app-timeline-list-search
   [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)">
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-timeline-list-search>
 <app-timeline-list
   [list]="list"
   (listSearchChange)="handleListSearchChange($event)"
   (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)">
+  (listItemSelected)="handleListItemSelected($event)"
+>
 </app-timeline-list>
 <app-list-pagination
   [page]="formDataModel.page"
   [pageSize]="formDataModel.pageSize"
   [listSize]="listSize"
   [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

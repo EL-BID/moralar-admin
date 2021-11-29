@@ -1,13 +1,14 @@
-import { OnInit, Directive, ViewChild, ElementRef } from '@angular/core';
+import { Directive, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { take, takeUntil } from 'rxjs/operators';
 import { HttpService } from 'src/app/utils/services/http/http.service';
+
+import { dateToString } from '../functions/date.function';
 import {
   FormDataModel,
   generateFormData,
 } from '../functions/generate-form-data.function';
 import { OnDestroyClass } from './on-destroy.class';
-import { dateToString } from '../functions/date.function';
 
 @Directive()
 export abstract class ListContainerClass
@@ -16,7 +17,7 @@ export abstract class ListContainerClass
 {
   formDataModel: FormDataModel;
   uri: string;
-  uriCustom: string;
+  uriCustom = '';
   method: string;
 
   list: any[] = [];
@@ -107,72 +108,70 @@ export abstract class ListContainerClass
   }
 
   getList(): void {
-    if (this.uriCustom?.length > 0 || this.uri?.length > 0) {
-      let uri;
-      uri = !this.uriCustom ? `${this.uri}/LoadData` : this.uriCustom;
+    const uri = !this.uriCustom ? `${this.uri}/LoadData` : this.uriCustom;
 
-      if (!this.method) {
-        this._httpService
-          .post(uri, generateFormData(this.formDataModel))
-          .pipe(takeUntil(this.onDestroy))
-          .subscribe((response: any) => {
-            let i;
-            for (i = 0; response.data.length > i; i++) {
-              if (response.data[i]?.date) {
-                response.data[i].date = dateToString(+response.data[i].date);
-              }
-              if (response.data[i]?.created) {
-                response.data[i].created = dateToString(
-                  +response.data[i].created
-                );
-              }
+    if (!this.method) {
+      this._httpService
+        .post(uri, generateFormData(this.formDataModel))
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe((response: any) => {
+          let i;
+          for (i = 0; response.data.length > i; i++) {
+            if (response.data[i]?.date) {
+              response.data[i].date = dateToString(+response.data[i].date);
             }
-            this.list = response.data;
-            this.listSize = response.recordsTotal;
-            this.listSizeFiltered = response.recordsFiltered;
-          });
-      } else {
-        this._httpService
-          .get(uri, generateFormData(this.formDataModel))
-          .pipe(takeUntil(this.onDestroy))
-          .subscribe((response: any) => {
-            let i;
-            for (i = 0; response.data.length > i; i++) {
-              if (response.data[i]?.date) {
-                response.data[i].date = dateToString(+response.data[i].date);
-              }
-              if (response.data[i]?.created) {
-                response.data[i].created = dateToString(
-                  +response.data[i].created
-                );
-              }
+            if (response.data[i]?.created) {
+              response.data[i].created = dateToString(
+                +response.data[i].created
+              );
             }
-            this.list = response.data;
-            this.listSize = response.recordsTotal;
-            this.listSizeFiltered = response.recordsFiltered;
-          });
-      }
+          }
+          this.list = response.data;
+          this.listSize = response.recordsTotal;
+          this.listSizeFiltered = response.recordsFiltered;
+        });
+    } else {
+      this._httpService
+        .get(uri, generateFormData(this.formDataModel))
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe((response: any) => {
+          let i;
+          for (i = 0; response.data.length > i; i++) {
+            if (response.data[i]?.date) {
+              response.data[i].date = dateToString(+response.data[i].date);
+            }
+            if (response.data[i]?.created) {
+              response.data[i].created = dateToString(
+                +response.data[i].created
+              );
+            }
+          }
+          this.list = response.data;
+          this.listSize = response.recordsTotal;
+          this.listSizeFiltered = response.recordsFiltered;
+        });
     }
   }
 
   exportToExcel() {
     this.exportingFile = true;
-    const id = this.listSelected.map((el: any) => el.id);
-
     this.formDataModel.id = this.listSelected.map((el: any) => el.id);
     this._httpService
       .export(`${this.uri}/Export`, generateFormData(this.formDataModel))
       .pipe(take(1))
-      .subscribe((response: any) => {
-        const blob = new Blob([response], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
-        });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `Lista de ${this.listName}.xls`;
-        a.click();
-        this.exportingFile = false;
-      });
+      .subscribe(
+        (response: any) => {
+          const blob = new Blob([response], {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
+          });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `Lista de ${this.listName}.xls`;
+          a.click();
+          this.exportingFile = false;
+        },
+        (_) => (this.exportingFile = false)
+      );
   }
 
   downloadRegistrationFile = () => {
