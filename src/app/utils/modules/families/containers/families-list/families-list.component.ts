@@ -35,7 +35,7 @@ export class FamiliesListComponent extends ListContainerClass {
   };
 
   uri = 'Family';
-  listName = 'família';
+  listName = 'famílias';
 
   constructor(
     activatedRoute: ActivatedRoute,
