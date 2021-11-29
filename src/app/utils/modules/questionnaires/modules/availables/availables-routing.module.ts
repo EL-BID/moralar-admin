@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AvailablesComponent } from './availables.component';
+import { AvailablesDetailsComponent } from './containers/availables-details/availables-details.component';
+import { AvailablesListComponent } from './containers/availables-list/availables-list.component';
 
 // containers
-import { AvailablesComponent } from './availables.component';
-import { AvailablesListComponent } from './containers/availables-list/availables-list.component';
-import { AvailablesDetailsComponent } from './containers/availables-details/availables-details.component';
-
 const routes: Routes = [
   {
     path: '',

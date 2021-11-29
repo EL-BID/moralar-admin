@@ -27,7 +27,7 @@ import { ReleasesFamiliesListComponent } from './containers/releases-families-li
     ReleaseFamilyListSearchComponent,
     ReleaseViewComponent,
   ],
-  exports: [AvailableListComponent],
+  exports: [AvailableListComponent, ReleaseFamilyListSearchComponent],
   imports: [AvailablesRoutingModule, SharedModule],
 })
 export class AvailablesModule {}

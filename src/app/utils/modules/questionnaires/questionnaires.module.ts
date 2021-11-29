@@ -10,6 +10,7 @@ import { QuestionnairesAddComponent } from './containers/questionnaires-add/ques
 import { QuestionnairesDetailsComponent } from './containers/questionnaires-details/questionnaires-details.component';
 import { QuestionnairesListComponent } from './containers/questionnaires-list/questionnaires-list.component';
 import { ReleasesAddComponent } from './containers/releases-add/releases-add.component';
+import { AvailablesModule } from './modules/availables/availables.module';
 import { QuestionnairesRoutingModule } from './questionnaires-routing.module';
 import { QuestionnairesComponent } from './questionnaires.component';
 
@@ -33,6 +34,6 @@ import { QuestionnairesComponent } from './questionnaires.component';
     ReleaseFormComponent,
   ],
   exports: [QuestionnaireListComponent],
-  imports: [QuestionnairesRoutingModule, SharedModule],
+  imports: [QuestionnairesRoutingModule, SharedModule, AvailablesModule],
 })
 export class QuestionnairesModule {}
