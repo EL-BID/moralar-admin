@@ -1,25 +1,23 @@
 <h1 class="h4">Imóveis</h1>
-<div class="form-row my-3">
-  <div class="col-auto">
-    <button type="button" class="btn btn-dark" routerLink="adicionar">
-      Adicionar
-    </button>
-  </div>
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      [disabled]="listSelected.length !== 1"
-      (click)="handleDetails()"
-    >
-      Detalhes
-    </button>
-  </div>
-  <div class="col-auto">
-    <button (click)="exportToExcel()" class="btn btn-dark">
-      Exportar para Excel
-    </button>
-  </div>
+<div class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    [disabled]="listSelected.length !== 1"
+    (click)="handleDetails()"
+  >
+    Detalhes
+  </button>
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    Exportar para Excel {{ listSelected?.length ? listSelected?.length : "" }}
+  </button>
 </div>
 <app-property-list-search
   [listSearchData]="formDataModel.search"

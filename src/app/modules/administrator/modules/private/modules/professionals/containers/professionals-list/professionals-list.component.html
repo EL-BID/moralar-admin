@@ -1,30 +1,54 @@
 <h1 class="h4">Profissionais de TTS</h1>
-<div class="form-row my-3">
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-dark"
-      routerLink="adicionar">
-      Adicionar
-    </button>
+
+<div class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+
+  <div>
+    <label for="fileRegistration">
+      {{ !sendingRegistrationFile ? "Cadastro em lote" : "Importanto..." }}
+    </label>
+    <input
+      (change)="sendRegistrationFile($event)"
+      hidden
+      [disabled]="sendingRegistrationFile"
+      type="file"
+      id="fileRegistration"
+      name="fileRegistration"
+      #fileRegistration
+      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    />
   </div>
-  <app-import-file [linkImport]="uri+'/ImportTTS'"></app-import-file>
+
+  <button
+    class="btn btn-info"
+    [disabled]="downloadingRegistrationFile"
+    (click)="downloadRegistrationFile()"
+  >
+    <i class="far fa-file-excel" (click)="downloadRegistrationFile()"></i>
+    {{ !downloadingRegistrationFile ? "Arquivo modelo" : "Baixando..." }}
+  </button>
 </div>
+
 <app-professional-list-search
   [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)">
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-professional-list-search>
 <app-professional-list
   [list]="list"
   (listSearchChange)="handleListSearchChange($event)"
   (listOrderChange)="handleListOrderChange($event)"
   (listItemSelected)="handleListItemSelected($event)"
-  (blockUnblock)="handleBlockUnblock($event)">
+  (blockUnblock)="handleBlockUnblock($event)"
+>
 </app-professional-list>
 <app-list-pagination
   [page]="formDataModel.page"
   [pageSize]="formDataModel.pageSize"
   [listSize]="listSize"
   [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

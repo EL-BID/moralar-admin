@@ -7,31 +7,26 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 @Component({
   selector: 'app-timelines-list',
   templateUrl: './timelines-list.component.html',
-  styleUrls: ['./timelines-list.component.sass']
+  styleUrls: ['./timelines-list.component.sass'],
 })
 export class TimelinesListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
       { data: 'number', name: 'Number', searchable: false },
       { data: 'holderName', name: 'HolderName', searchable: false },
       { data: 'holderCpf', name: 'HolderCpf', searchable: false },
-      { data: 'typeSubject', name: 'TypeSubject', searchable: false }
+      { data: 'typeSubject', name: 'TypeSubject', searchable: false },
     ],
     page: 1,
     pageSize: 10,
     search: {
       search: '',
-      number: '',
-      holderName: '',
-      holderCpf: '',
-      status: '',
-      typeSubject:  2
+      typeSubject: 2,
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uriCustom = 'Family/TimeLineLoadData';
@@ -45,7 +40,8 @@ export class TimelinesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this.router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute });
+    this.router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute,
+    });
   }
-
 }

@@ -12,31 +12,32 @@ import { HttpService } from 'src/app/utils/services/http/http.service';
 @Component({
   selector: 'app-professionals-list',
   templateUrl: './professionals-list.component.html',
-  styleUrls: ['./professionals-list.component.sass']
+  styleUrls: ['./professionals-list.component.sass'],
 })
 export class ProfessionalsListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'name',    name: 'Name',    searchable: true },
+      { data: 'name', name: 'Name', searchable: true },
       { data: 'jobPost', name: 'JobPost', searchable: true },
-      { data: 'cpf',     name: 'Cpf',     searchable: true },
-      { data: 'email',   name: 'Email',   searchable: true },
-      { data: 'phone',   name: 'Phone',   searchable: true }
+      { data: 'cpf', name: 'Cpf', searchable: true },
+      { data: 'email', name: 'Email', searchable: true },
+      { data: 'phone', name: 'Phone', searchable: true },
     ],
     page: 1,
     pageSize: 10,
     search: {
       search: '',
-      typeProfile: '1'
+      typeProfile: '1',
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'Profile';
+
+  listName = 'profissionais de TTS';
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -49,7 +50,10 @@ export class ProfessionalsListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this._router.navigate(['/administrador/app/profissionais-tts', this.listSelected[0].id]);
+    this._router.navigate([
+      '/administrador/app/profissionais-tts',
+      this.listSelected[0].id,
+    ]);
   }
 
   handleBlockUnblock(value: any): void {
@@ -67,23 +71,30 @@ export class ProfessionalsListComponent extends ListContainerClass {
         action: 'ativar',
       };
     }
-    const modalRef = this.ngbModal.open(ModalConfirmComponent, { centered: true });
+    const modalRef = this.ngbModal.open(ModalConfirmComponent, {
+      centered: true,
+    });
     modalRef.componentInstance.modalConfirmData = modalConfirmData;
     modalRef.result
       .then((result: any) => {
         if (result) {
-          this._httpService.post('Profile/BlockUnblock', value)
+          this._httpService
+            .post('Profile/BlockUnblock', value)
             .pipe(takeUntil(this.onDestroy))
-            .subscribe((response: any) => {
-              this.megaleiosAlertService.success(response.message);
-              const index = this.list.findIndex((item) => item.id === value.targetId);
-              this.list[index].blocked = value.block;
-            }, (response: any) => {
-              this.megaleiosAlertService.error(response.message);
-            });
+            .subscribe(
+              (response: any) => {
+                this.megaleiosAlertService.success(response.message);
+                const index = this.list.findIndex(
+                  (item) => item.id === value.targetId
+                );
+                this.list[index].blocked = value.block;
+              },
+              (response: any) => {
+                this.megaleiosAlertService.error(response.message);
+              }
+            );
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }
-
 }

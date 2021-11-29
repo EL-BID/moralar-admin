@@ -1,36 +1,51 @@
 <form [formGroup]="listSearchForm">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-2">
       <app-control-field>
         <label for="number">Número do cadastro</label>
-        <input type="tel" id="number" formControlName="number">
-        <app-control-error [control]="listSearchForm.controls.number"></app-control-error>
+        <input type="tel" id="number" formControlName="number" />
+        <app-control-error
+          [control]="listSearchForm.controls.number"
+        ></app-control-error>
       </app-control-field>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-3">
       <app-control-field>
         <label for="holderName">Nome do morador titular</label>
-        <input type="text" id="holderName" formControlName="holderName">
-        <app-control-error [control]="listSearchForm.controls.holderName"></app-control-error>
+        <input type="text" id="holderName" formControlName="holderName" />
+        <app-control-error
+          [control]="listSearchForm.controls.holderName"
+        ></app-control-error>
       </app-control-field>
     </div>
     <div class="col-lg-3">
       <app-control-field>
         <label for="holderCpf">CPF do morador titular</label>
-        <input type="tel" id="holderCpf" formControlName="holderCpf" mask="000.000.000-00">
-        <app-control-error [control]="listSearchForm.controls.holderCpf"></app-control-error>
+        <input
+          type="tel"
+          id="holderCpf"
+          formControlName="holderCpf"
+          mask="000.000.000-00"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.holderCpf"
+        ></app-control-error>
       </app-control-field>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
       <app-control-field>
         <label for="typeSubject">Status da linha do tempo</label>
         <select id="typeSubject" formControlName="typeSubject">
-          <option *ngFor="let timelineType of timelineTypeList"
-            [ngValue]="timelineType.id">
+          <option
+            *ngFor="let timelineType of timelineTypeList"
+            [value]="timelineType.id"
+          >
             {{ timelineType.name }}
           </option>
         </select>
-        <app-control-error [control]="listSearchForm.controls.typeSubject"></app-control-error>
+        <app-control-error
+          [control]="listSearchForm.controls.typeSubject"
+        ></app-control-error>
       </app-control-field>
     </div>
   </div>

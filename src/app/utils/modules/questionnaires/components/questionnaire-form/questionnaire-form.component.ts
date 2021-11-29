@@ -62,16 +62,13 @@ export class QuestionnaireFormComponent
   }
 
   private createQuestionForm(): FormGroup {
-    const descriptonDefault = this.formBuilder.group({
-      description: ['Texto'],
-    });
     return this.formBuilder.group({
       nameQuestion: [
         null,
         Validators.compose([trimWhiteSpace, Validators.required]),
       ],
       typeResponse: [0, Validators.required],
-      description: this.formBuilder.array([descriptonDefault]),
+      description: this.formBuilder.array([]),
     });
   }
 
