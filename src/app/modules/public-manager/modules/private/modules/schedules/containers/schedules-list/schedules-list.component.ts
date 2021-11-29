@@ -50,64 +50,6 @@ export class SchedulesListComponent
     super(activatedRoute, router, httpService);
   }
 
-  ngOnInit(): void {
-    this._activatedRoute.queryParams.subscribe((params: Params) => {
-      this.formDataModel.search.search =
-        params.search !== undefined
-          ? params.search
-          : this.formDataModel.search.search;
-      this.formDataModel.search.number =
-        params.number !== undefined
-          ? params.number
-          : this.formDataModel.search.number;
-      this.formDataModel.search.holderName =
-        params.holderName !== undefined
-          ? params.holderName
-          : this.formDataModel.search.holderName;
-      this.formDataModel.search.holderCpf =
-        params.holderCpf !== undefined
-          ? params.holderCpf
-          : this.formDataModel.search.holderCpf;
-      this.formDataModel.search.startDate =
-        params.startDate !== undefined
-          ? parseFloat(params.startDate)
-          : DateTime.local()
-              .set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-              .toSeconds();
-      this.formDataModel.search.endDate =
-        params.endDate !== undefined
-          ? parseFloat(params.endDate)
-          : DateTime.local()
-              .set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-              .toSeconds() + 86399;
-      this.formDataModel.search.status =
-        params.status !== undefined
-          ? params.status
-          : this.formDataModel.search.status;
-      this.formDataModel.search.type =
-        params.type !== undefined
-          ? params.type
-          : this.formDataModel.search.type;
-      this.formDataModel.order.column =
-        params.column !== undefined
-          ? params.column
-          : this.formDataModel.order.column;
-      this.formDataModel.order.direction =
-        params.direction !== undefined
-          ? params.direction
-          : this.formDataModel.order.direction;
-      this.formDataModel.page =
-        params.page !== undefined
-          ? parseFloat(params.page)
-          : this.formDataModel.page;
-      this.formDataModel.pageSize =
-        params.pageSize !== undefined
-          ? parseFloat(params.pageSize)
-          : this.formDataModel.pageSize;
-      this.getList();
-    });
-  }
-
   handleDetails(): void {
     this._router.navigate([this.listSelected[0].id], {
       relativeTo: this._activatedRoute.parent,
