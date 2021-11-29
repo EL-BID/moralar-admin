@@ -38,7 +38,7 @@
         <select id="typeSubject" formControlName="typeSubject">
           <option
             *ngFor="let timelineType of timelineTypeList"
-            [ngValue]="timelineType.id"
+            [value]="timelineType.id"
           >
             {{ timelineType.name }}
           </option>
