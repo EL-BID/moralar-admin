@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { sortBy } from 'lodash';
+import { DateTime } from 'luxon';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
-import {GENDER_LIST} from '../../../../interfaces/courses.interface';
-import {sortBy} from 'lodash';
-import {DateTime} from 'luxon';
+
+import { GENDER_LIST } from '../../../../interfaces/courses.interface';
+
 @Component({
   selector: 'app-informative-form',
   templateUrl: './informative-form.component.html',
-  styleUrls: ['./informative-form.component.sass']
+  styleUrls: ['./informative-form.component.sass'],
 })
 export class InformativeFormComponent extends FormComponentClass {
   genderList: any[] = sortBy(GENDER_LIST, 'name');
@@ -24,8 +26,10 @@ export class InformativeFormComponent extends FormComponentClass {
     this.form = this.formBuilder.group({
       image: [null, Validators.required],
       datePublish: [null, Validators.required],
-      description: [null, Validators.compose([trimWhiteSpace, Validators.required])],
+      description: [
+        null,
+        Validators.compose([trimWhiteSpace, Validators.required]),
+      ],
     });
   }
-
 }
