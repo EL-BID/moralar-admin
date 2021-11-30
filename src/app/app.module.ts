@@ -30,6 +30,9 @@ registerLocaleData(localePt, 'pt');
     // modules
     HttpClientModule,
     MegaleiosAlertModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
+    // }),
     NgxMaskModule.forRoot(),
   ],
   providers: [

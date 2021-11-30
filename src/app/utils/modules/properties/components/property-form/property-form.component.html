@@ -8,7 +8,8 @@
       </app-control-field>
     </div>
   </div>
-  <app-address-form [form]="residencialPropertyAdressForm"> </app-address-form>
+  <app-address-form [form]="residencialPropertyAdressForm" [showMap]="true">
+  </app-address-form>
   <h2 class="h5">Fotos</h2>
   <ng-container [ngSwitch]="photosForm.controls.length === 0">
     <app-card *ngSwitchCase="true" class="mb-3">
