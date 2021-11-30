@@ -2,7 +2,13 @@
   <div class="col-lg-6">
     <app-control-field>
       <label for="cep">CEP</label>
-      <input appControlInput type="tel" id="cep" [formControl]="form.controls.cep" mask="00000-000">
+      <input
+        appControlInput
+        type="tel"
+        id="cep"
+        [formControl]="form.controls.cep"
+        mask="00000-000"
+      />
       <app-control-error [control]="form.controls.cep"></app-control-error>
     </app-control-field>
   </div>
@@ -13,8 +19,7 @@
       <label for="stateId">Estado</label>
       <select id="stateId" [formControl]="form.controls.stateId">
         <option [ngValue]="null">Selecione uma opção</option>
-        <option *ngFor="let state of stateList"
-          [ngValue]="state.id">
+        <option *ngFor="let state of stateList" [ngValue]="state.id">
           {{ state.name }}
         </option>
       </select>
@@ -26,8 +31,7 @@
       <label for="cityId">Cidade</label>
       <select id="cityId" [formControl]="form.controls.cityId">
         <option [ngValue]="null">Selecione uma opção</option>
-        <option *ngFor="let city of cityList"
-          [ngValue]="city.id">
+        <option *ngFor="let city of cityList" [ngValue]="city.id">
           {{ city.name }}
         </option>
       </select>
@@ -37,29 +41,92 @@
   <div class="col-lg-6">
     <app-control-field>
       <label for="neighborhood">Bairro</label>
-      <input appControlInput type="text" id="neighborhood" [formControl]="form.controls.neighborhood">
-      <app-control-error [control]="form.controls.neighborhood"></app-control-error>
+      <input
+        appControlInput
+        type="text"
+        id="neighborhood"
+        [formControl]="form.controls.neighborhood"
+      />
+      <app-control-error
+        [control]="form.controls.neighborhood"
+      ></app-control-error>
     </app-control-field>
   </div>
   <div class="col-lg-6">
     <app-control-field>
       <label for="streetAddress">Endereço</label>
-      <input appControlInput type="text" id="streetAddress" [formControl]="form.controls.streetAddress">
-      <app-control-error [control]="form.controls.streetAddress"></app-control-error>
+      <input
+        appControlInput
+        type="text"
+        id="streetAddress"
+        [formControl]="form.controls.streetAddress"
+      />
+      <app-control-error
+        [control]="form.controls.streetAddress"
+      ></app-control-error>
     </app-control-field>
   </div>
   <div class="col-lg-6">
     <app-control-field>
       <label for="number">Número</label>
-      <input appControlInput type="tel" id="number" [formControl]="form.controls.number">
+      <input
+        appControlInput
+        type="tel"
+        id="number"
+        [formControl]="form.controls.number"
+      />
       <app-control-error [control]="form.controls.number"></app-control-error>
     </app-control-field>
   </div>
   <div class="col-lg-6">
     <app-control-field>
       <label for="complement">Complemento</label>
-      <input appControlInput type="text" id="complement" [formControl]="form.controls.complement">
-      <app-control-error [control]="form.controls.complement"></app-control-error>
+      <input
+        appControlInput
+        type="text"
+        id="complement"
+        [formControl]="form.controls.complement"
+      />
+      <app-control-error
+        [control]="form.controls.complement"
+      ></app-control-error>
     </app-control-field>
+  </div>
+  <div *ngIf="showMap" class="map">
+    <div>
+      <span class="badge badge-info mr-2"
+        >Latitide: {{ form.value.latitude }}
+      </span>
+      <span class="badge badge-success"
+        >Longitude: {{ form.value.longitude }}</span
+      >
+    </div>
+    <div class="form-group mt-2">
+      <input
+        type="text"
+        class="form-control"
+        (keydown.enter)="$event.preventDefault()"
+        placeholder="Pesquisar localidade"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="text"
+        #search
+      />
+    </div>
+    <agm-map
+      [latitude]="form.get('latitude').value"
+      [longitude]="form.get('longitude').value"
+      [mapDraggable]="true"
+      [zoom]="zoom"
+      #map
+      (mapClick)="onMapClicked(map)"
+    >
+      <agm-marker
+        [latitude]="form.get('latitude').value"
+        [longitude]="form.get('longitude').value"
+        [markerDraggable]="true"
+      ></agm-marker>
+    </agm-map>
   </div>
 </div>

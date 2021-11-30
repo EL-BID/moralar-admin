@@ -11,6 +11,7 @@ import { CURRENCY_MASK_CONFIG, CurrencyMaskModule } from 'ng2-currency-mask';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxMaskModule } from 'ngx-mask';
 import { CustomCurrencyMaskConfig } from 'src/app/core/conf/maskCurrency';
+import { AgmCoreModule } from '@agm/core';
 
 import { MegaleiosFormsModule } from '../megaleios-forms/megaleios-forms.module';
 import { AddressFormComponent } from './components/address-form/address-form.component';
@@ -65,7 +66,13 @@ const pipes = [TypePropertyPipe, QuizTypeStatusPipe];
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],
-  imports: [...modules],
+  imports: [
+    ...modules,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
+      libraries: ['places'],
+    }),
+  ],
   exports: [...modules, ...components, ...directives, ...pipes],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
