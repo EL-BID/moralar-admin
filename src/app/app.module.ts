@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MegaleiosAlertModule } from './utils/modules/megaleios-alert/megaleios-alert.module';
 import { SharedModule } from './utils/modules/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // locale
 registerLocaleData(localePt, 'pt');
@@ -34,6 +35,7 @@ registerLocaleData(localePt, 'pt');
     //   apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
     // }),
     NgxMaskModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     // locale

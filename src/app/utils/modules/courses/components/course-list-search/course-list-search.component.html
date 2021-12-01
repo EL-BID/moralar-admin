@@ -3,23 +3,14 @@
     <div class="col-lg-3">
       <app-control-field>
         <label for="search">Pesquisar</label>
-        <input type="text" id="search" formControlName="search">
-        <app-control-error [control]="listSearchForm.controls.search"></app-control-error>
+        <input type="text" id="search" formControlName="search" />
+        <app-control-error
+          [control]="listSearchForm.controls.search"
+        ></app-control-error>
       </app-control-field>
     </div>
     <div class="col-lg-3">
-      <app-control-field>
-        <label for="startDate">De</label>
-        <input type="date" id="startDate" formControlName="startDate">
-        <app-control-error [control]="listSearchForm.controls.startDate"></app-control-error>
-      </app-control-field>
-    </div>
-    <div class="col-lg-3">
-      <app-control-field>
-        <label for="endDate">Até</label>
-        <input type="date" id="endDate" formControlName="endDate">
-        <app-control-error [control]="listSearchForm.controls.endDate"></app-control-error>
-      </app-control-field>
+      <app-date-range [form]="listSearchForm"></app-date-range>
     </div>
   </div>
 </form>
