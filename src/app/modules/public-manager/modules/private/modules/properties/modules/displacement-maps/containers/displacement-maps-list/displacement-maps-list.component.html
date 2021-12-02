@@ -1,29 +1,33 @@
-<h1 class="h4">Mapa de deslocamento</h1>
+<h1 class="h4">Mapa de deslocamento - gestor</h1>
 <div class="form-row my-3">
   <div class="col-auto">
     <button
       type="button"
       class="btn btn-outline-dark"
       [disabled]="listSelected.length !== 1"
-      (click)="handleDetails()">
+      (click)="handleDetails()"
+    >
       Detalhes
     </button>
   </div>
 </div>
 <app-displacement-map-list-search
   [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)">
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-displacement-map-list-search>
 <app-displacement-map-list
   [list]="list"
   (listSearchChange)="handleListSearchChange($event)"
   (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)">
+  (listItemSelected)="handleListItemSelected($event)"
+>
 </app-displacement-map-list>
 <app-list-pagination
   [page]="formDataModel.page"
   [pageSize]="formDataModel.pageSize"
   [listSize]="listSize"
   [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

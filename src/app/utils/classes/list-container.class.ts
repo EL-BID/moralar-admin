@@ -166,7 +166,7 @@ export abstract class ListContainerClass
           });
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
-          a.download = `Lista de ${this.listName}.xls`;
+          a.download = `Lista de ${this.listName}.xlsx`;
           a.click();
           this.exportingFile = false;
         },
