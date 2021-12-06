@@ -23,11 +23,20 @@
 
     <div class="col-lg-3">
       <app-control-field>
-        <label for="availableForSale">Disponibilidade para venda</label>
-        <select id="availableForSale" formControlName="availableForSale">
+        <label for="TypeStatusResidencialProperty"
+          >Disponibilidade para venda</label
+        >
+        <select
+          id="TypeStatusResidencialProperty"
+          formControlName="typeStatusResidencialProperty"
+        >
           <option value="">Todos</option>
-          <option value="0">Disponível</option>
-          <option value="1">Indisponível</option>
+          <option
+            *ngFor="let status of typeStatusResidencialProperty; let i = index"
+            [value]="i"
+          >
+            {{ status }}
+          </option>
         </select>
       </app-control-field>
     </div>

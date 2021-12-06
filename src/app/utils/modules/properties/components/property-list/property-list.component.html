@@ -10,7 +10,7 @@
           Bairro de localização
         </th>
         <th>Situação</th>
-        <th>Disponível para venda</th>
+        <th class="text-center">Disponibilidade para venda</th>
       </tr>
     </thead>
     <tbody>
@@ -48,16 +48,10 @@
           </div>
         </td>
         <td class="text-center">
-          <span
-            class="badge badge-success"
-            [ngClass]="{
-              'badge-danger': !item.residencialPropertyAdress.availableForSale
-            }"
-          >
+          <span>
             {{
-              item?.residencialPropertyFeatures?.availableForSale
-                ? "Sim"
-                : "Não"
+              item?.typeStatusResidencialPropertyPipe
+                | typeStatusResidencialProperty
             }}
           </span>
         </td>

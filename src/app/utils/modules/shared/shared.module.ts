@@ -34,6 +34,7 @@ import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/n
 //pipes
 import { QuizTypeStatusPipe } from './pipes/QuizTypeStatus/QuizTypeStatus.pipe';
 import { TypePropertyPipe } from './pipes/TypeProperty/TypeProperty.pipe';
+import { TypeStatusResidencialPropertyPipe } from './pipes/TypeStatusResidencialProperty/TypeStatusResidencialProperty.pipe';
 
 // components
 const components = [
@@ -73,7 +74,11 @@ const modules = [
 const directives = [NgbdSortableHeaderDirective];
 
 //pipes
-const pipes = [TypePropertyPipe, QuizTypeStatusPipe];
+const pipes = [
+  TypePropertyPipe,
+  QuizTypeStatusPipe,
+  TypeStatusResidencialPropertyPipe,
+];
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],
