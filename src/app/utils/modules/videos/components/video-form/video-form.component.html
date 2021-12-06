@@ -3,7 +3,7 @@
     <div class="col-lg-6">
       <app-control-field>
         <label for="Title">Título do Vídeo</label>
-        <input type="text" id="Title" formControlName="Title">
+        <input type="text" id="Title" formControlName="Title" />
         <app-control-error [control]="form.controls.Title"></app-control-error>
       </app-control-field>
     </div>
@@ -14,27 +14,64 @@
       <app-control-field>
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
-          [imageUploadAbstractControl]="form.controls.Thumbnail">
+          [imageUploadAbstractControl]="form.controls.Thumbnail"
+        >
         </app-image-upload>
-        <app-control-error [control]="form.controls.Thumbnail"></app-control-error>
+        <app-control-error
+          [control]="form.controls.Thumbnail"
+        ></app-control-error>
       </app-control-field>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-6">
-      <app-control-field>
-        <label for="Title">Url</label>
-        <input type="text" id="url" formControlName="url">
-        <app-control-error [control]="form.controls.url"></app-control-error>
-      </app-control-field>
+  <div class="row mb-3">
+    <div class="form-check">
+      <input
+        formControlName="typeStore"
+        class="form-check-input"
+        type="radio"
+        id="inserirURL"
+        value="URL"
+      />
+      <label class="form-check-label" for="inserirURL">
+        Inserir URL do vídeo
+      </label>
+    </div>
+
+    <div class="ml-3 form-check">
+      <input
+        formControlName="typeStore"
+        class="form-check-input"
+        type="radio"
+        id="fazerUpload"
+        value="upload"
+      />
+      <label class="form-check-label" for="fazerUpload">
+        Fazer upload do vídeo
+      </label>
     </div>
   </div>
+  <ng-container *ngIf="form?.value?.typeStore == 'URL'; else uploadVideo">
+    <div class="row">
+      <div class="col-lg-6">
+        <app-control-field>
+          <label for="Title">Url</label>
+          <input type="text" id="url" formControlName="url" />
+          <app-control-error [control]="form.controls.url"></app-control-error>
+        </app-control-field>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #uploadVideo>
+    <div>Upload do vídeo</div>
+  </ng-template>
+
   <app-button
     buttonType="submit"
     buttonClass="btn-dark"
     [buttonDisabled]="form.valid === false || formLoading === true"
-    [buttonLoading]="formLoading">Salvar
+    [buttonLoading]="formLoading"
+    >Salvar
   </app-button>
 </form>
-
