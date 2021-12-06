@@ -27,7 +27,6 @@ export class VideoFormComponent extends FormComponentClass implements OnInit {
       Thumbnail: [null, Validators.required],
       url: [null, Validators.compose([trimWhiteSpace, Validators.required])],
       id: [],
-      typeStore: ['URL'],
     });
   }
 
