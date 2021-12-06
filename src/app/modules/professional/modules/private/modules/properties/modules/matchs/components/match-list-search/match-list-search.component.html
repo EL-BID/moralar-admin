@@ -1,17 +1,17 @@
 <form [formGroup]="listSearchForm">
-  <div class="row">
-    <div class="col-lg-3">
+  <div class="row mb-5">
+    <div class="col">
       <app-control-field>
-        <label for="number">Número do cadastro</label>
-        <input type="tel" id="number" formControlName="number">
-        <app-control-error [control]="listSearchForm.controls.number"></app-control-error>
-      </app-control-field>
-    </div>
-    <div class="col-lg-3">
-      <app-control-field>
-        <label for="holderName">Número do Imóvel</label>
-        <input type="text" id="holderName" formControlName="holderName">
-        <app-control-error [control]="listSearchForm.controls.holderName"></app-control-error>
+        <label for="search">Filtrar por</label>
+        <input
+          type="search"
+          id="search"
+          formControlName="search"
+          placeholder="N° do cadastro, nome ou CPF (apenas números) do titular da família ou código do imóvel"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.search"
+        ></app-control-error>
       </app-control-field>
     </div>
   </div>
