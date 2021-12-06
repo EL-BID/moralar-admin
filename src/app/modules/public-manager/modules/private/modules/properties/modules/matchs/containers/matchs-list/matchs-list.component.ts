@@ -7,16 +7,15 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 @Component({
   selector: 'app-matchs-list',
   templateUrl: './matchs-list.component.html',
-  styleUrls: ['./matchs-list.component.sass']
+  styleUrls: ['./matchs-list.component.sass'],
 })
 export class MatchsListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'holderNumber', name: 'HolderNumber', searchable: false },
-      { data: 'holderName', name: 'HolderName', searchable: false },
-      { data: 'holderCpf', name: 'HolderCpf', searchable: false },
-      { data: 'residencialCode', name: 'ResidencialCode', searchable: false },
+      { data: 'holderNumber', name: 'HolderNumber', searchable: true },
+      { data: 'holderName', name: 'HolderName', searchable: true },
+      { data: 'holderCpf', name: 'HolderCpf', searchable: true },
+      { data: 'residencialCode', name: 'ResidencialCode', searchable: true },
     ],
     page: 1,
     pageSize: 10,
@@ -29,8 +28,8 @@ export class MatchsListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'PropertiesInterest';
@@ -44,7 +43,8 @@ export class MatchsListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this.router.navigate([this.listSelected[0].residencialPropertyId], { relativeTo: this._activatedRoute });
+    this.router.navigate([this.listSelected[0].residencialPropertyId], {
+      relativeTo: this._activatedRoute,
+    });
   }
-
 }
