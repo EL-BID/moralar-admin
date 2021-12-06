@@ -5,7 +5,7 @@ import { TypeStatusResidencialProperty } from 'src/app/core/mocks/typeStatusResi
   name: 'typeStatusResidencialProperty',
 })
 export class TypeStatusResidencialPropertyPipe implements PipeTransform {
-  transform(value = 0, args?: any): any {
+  transform(value: number, args?: any): any {
     return value < TypeStatusResidencialProperty.length
       ? TypeStatusResidencialProperty[value]
       : 'Tipo não mapeado';

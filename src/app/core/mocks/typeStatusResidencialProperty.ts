@@ -1,5 +1,5 @@
 export const TypeStatusResidencialProperty = [
   'A escolher',
-  'Vedido',
+  'Vendido',
   'Bloqueado',
 ];
