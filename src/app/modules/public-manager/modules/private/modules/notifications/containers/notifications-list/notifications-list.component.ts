@@ -18,7 +18,7 @@ export class NotificationsListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
       { data: 'title', name: 'Title', searchable: true },
-      { data: 'date', name: 'Date', searchable: true },
+      { data: 'description', name: 'Description', searchable: true },
     ],
     page: 1,
     pageSize: 10,
