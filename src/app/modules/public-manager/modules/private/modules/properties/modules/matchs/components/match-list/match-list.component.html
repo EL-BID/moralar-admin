@@ -3,10 +3,14 @@
     <thead>
       <tr>
         <th></th>
-        <th sortable="holderNumber" (sort)="handleSort($event)">Número do cadastro</th>
+        <th sortable="holderNumber" (sort)="handleSort($event)">
+          Número do cadastro
+        </th>
         <th sortable="holderName" (sort)="handleSort($event)">Titular</th>
         <th sortable="holderCpf" (sort)="handleSort($event)">CPF</th>
-        <th sortable="residencialCode" (sort)="handleSort($event)">Imóvel</th>
+        <th sortable="residencialCode" (sort)="handleSort($event)">
+          Código do Imóvel
+        </th>
         <th sortable="address" (sort)="handleSort($event)">Endereço</th>
         <th sortable="interest" (sort)="handleSort($event)">Interessados</th>
       </tr>
@@ -20,24 +24,28 @@
               class="custom-control-input"
               [id]="'select-' + item.id"
               [checked]="isChecked(item)"
-              (change)="listItemSelected.emit(item)">
-            <label
-              class="custom-control-label"
-              [for]="'select-' + item.id">
+              (change)="listItemSelected.emit(item)"
+            />
+            <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
         </td>
-        <td>{{ item.holderNumber || '-' }}</td>
-        <td>{{ item.holderName || '-' }}</td>
-        <td>{{ item.holderCpf || '-'  | mask: '000.000.000-99'}}</td>
-        <td>{{ item.residencialCode || '-' }}</td>
-        <td>{{
-            item.residencialPropertyAdress.streetAddress+ ' '+
-            item.residencialPropertyAdress.number+ ', '+
-            item.residencialPropertyAdress.cityName+ ' '+
-            item.residencialPropertyAdress.stateUf
-          }}</td>
-        <td>{{ item.interest || '-'}}</td>
+        <td>{{ item.holderNumber || "-" }}</td>
+        <td>{{ item.holderName || "-" }}</td>
+        <td>{{ item.holderCpf || "-" | mask: "000.000.000-99" }}</td>
+        <td>{{ item.residencialCode || "-" }}</td>
+        <td>
+          {{
+            item.residencialPropertyAdress.streetAddress +
+              " " +
+              item.residencialPropertyAdress.number +
+              ", " +
+              item.residencialPropertyAdress.cityName +
+              " " +
+              item.residencialPropertyAdress.stateUf
+          }}
+        </td>
+        <td>{{ item.interest || "-" }}</td>
       </tr>
     </tbody>
   </table>
