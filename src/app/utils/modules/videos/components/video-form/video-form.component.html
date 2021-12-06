@@ -3,7 +3,7 @@
     <div class="col-lg-6">
       <app-control-field>
         <label for="Title">Título do Vídeo</label>
-        <input type="text" id="Title" formControlName="Title">
+        <input type="text" id="Title" formControlName="Title" />
         <app-control-error [control]="form.controls.Title"></app-control-error>
       </app-control-field>
     </div>
@@ -14,9 +14,12 @@
       <app-control-field>
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
-          [imageUploadAbstractControl]="form.controls.Thumbnail">
+          [imageUploadAbstractControl]="form.controls.Thumbnail"
+        >
         </app-image-upload>
-        <app-control-error [control]="form.controls.Thumbnail"></app-control-error>
+        <app-control-error
+          [control]="form.controls.Thumbnail"
+        ></app-control-error>
       </app-control-field>
     </div>
   </div>
@@ -25,16 +28,17 @@
     <div class="col-lg-6">
       <app-control-field>
         <label for="Title">Url</label>
-        <input type="text" id="url" formControlName="url">
+        <input type="text" id="url" formControlName="url" />
         <app-control-error [control]="form.controls.url"></app-control-error>
       </app-control-field>
     </div>
   </div>
+
   <app-button
     buttonType="submit"
     buttonClass="btn-dark"
     [buttonDisabled]="form.valid === false || formLoading === true"
-    [buttonLoading]="formLoading">Salvar
+    [buttonLoading]="formLoading"
+    >Salvar
   </app-button>
 </form>
-

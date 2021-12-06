@@ -1,19 +1,18 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormComponentClass} from 'src/app/utils/classes/form-component.class';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {trimWhiteSpace} from 'src/app/utils/functions/validators.function';
-import {sortBy} from 'lodash';
-import {takeUntil} from 'rxjs/operators';
-import {HttpService} from '../../../../services/http/http.service';
-import {ActivatedRoute} from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
+import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
+
+import { HttpService } from '../../../../services/http/http.service';
 
 @Component({
   selector: 'app-video-form',
   templateUrl: './video-form.component.html',
-  styleUrls: ['./video-form.component.sass']
+  styleUrls: ['./video-form.component.sass'],
 })
 export class VideoFormComponent extends FormComponentClass implements OnInit {
-
   numberOfVacanciesList: any[] = new Array(21);
 
   constructor(
@@ -27,13 +26,16 @@ export class VideoFormComponent extends FormComponentClass implements OnInit {
       Title: [null, Validators.compose([trimWhiteSpace, Validators.required])],
       Thumbnail: [null, Validators.required],
       url: [null, Validators.compose([trimWhiteSpace, Validators.required])],
-      id: []
+      id: [],
     });
   }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('videoId')) {
-      this.httpService.get(`Video/Detail/${this.activatedRoute.snapshot.paramMap.get('videoId')}`)
+      this.httpService
+        .get(
+          `Video/Detail/${this.activatedRoute.snapshot.paramMap.get('videoId')}`
+        )
         .pipe(takeUntil(this.onDestroy))
         .subscribe((response: any) => {
           this.form.controls.Title.setValue(response.data.title);
@@ -43,5 +45,4 @@ export class VideoFormComponent extends FormComponentClass implements OnInit {
         });
     }
   }
-
 }
