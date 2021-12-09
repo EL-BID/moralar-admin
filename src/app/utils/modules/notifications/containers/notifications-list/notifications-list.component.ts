@@ -33,7 +33,7 @@ export class NotificationsListComponent extends ListContainerClass {
     },
   };
 
-  uriCustom = 'Notification/LoadDataNotification';
+  uri = 'Notification';
 
   constructor(
     activatedRoute: ActivatedRoute,
