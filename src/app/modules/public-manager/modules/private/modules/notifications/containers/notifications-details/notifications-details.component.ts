@@ -26,7 +26,7 @@ export class NotificationsDetailsComponent
   ngOnInit(): void {
     this.httpService
       .get(
-        `Notification/DetailNotification/${this.activatedRoute.snapshot.paramMap.get(
+        `Notification/DetailNotificationSended/${this.activatedRoute.snapshot.paramMap.get(
           'notificationId'
         )}`
       )
