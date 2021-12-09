@@ -12,10 +12,9 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 export class TimelinesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'number', name: 'Number', searchable: false },
-      { data: 'holderName', name: 'HolderName', searchable: false },
-      { data: 'holderCpf', name: 'HolderCpf', searchable: false },
-      { data: 'typeSubject', name: 'TypeSubject', searchable: false },
+      { data: 'number', name: 'Number', searchable: true },
+      { data: 'name', name: 'Name', searchable: true },
+      { data: 'cpf', name: 'Cpf', searchable: true },
     ],
     page: 1,
     pageSize: 10,
@@ -29,7 +28,7 @@ export class TimelinesListComponent extends ListContainerClass {
     },
   };
 
-  uriCustom = 'Family/TimeLineLoadData';
+  uri = 'Family/TimeLine';
 
   constructor(
     activatedRoute: ActivatedRoute,
