@@ -19,5 +19,5 @@
 
 <ng-container>
   <h2 class="mt-2">Lista das famílias que receberam a notificação</h2>
-  <app-family-list></app-family-list>
+  <app-family-list [list]="notification?.family"></app-family-list>
 </ng-container>
