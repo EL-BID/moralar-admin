@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <!-- <pre>{{ form?.value | json }}</pre> -->
   <app-card>
     <div class="row">
       <div class="col-lg-12">
@@ -11,20 +12,16 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <app-control-field>
-          <label for="familyId">Morador</label>
-          <select id="familyId" formControlName="familyId">
-            <option [ngValue]="null">Selecione uma opção</option>
-            <option *ngFor="let item of list" [ngValue]="[item.id]">
-              Nº {{ item.number || "-" }} | {{ item.name || "-" }} |
-              {{ item.cpf || "-" | mask: "000.000.000-99" }} |
-              {{ item.blocked ? "Desativado" : "Ativo" }}
-            </option>
-          </select>
-          <app-control-error
-            [control]="form.controls.familyId"
-          ></app-control-error>
-        </app-control-field>
+        <mat-form-field class="mt-20" appearance="outline">
+          <mat-label>Selecionar as famílias</mat-label>
+          <mat-select [formControl]="familyId" multiple>
+            <mat-option *ngFor="let family of list" [value]="family.id">
+              Nº {{ family.number || "-" }} | {{ family.name || "-" }} |
+              {{ family.cpf || "-" | mask: "000.000.000-99" }} |
+              {{ family.blocked ? "Desativado" : "Ativo" }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <div class="row">
@@ -32,7 +29,7 @@
       <div class="col-auto">
         <app-control-radio
           formControlName="allFamily"
-          value="true"
+          [value]="true"
           id="allFamily-yes"
         ></app-control-radio>
       </div>
@@ -42,7 +39,7 @@
       <div class="col-auto">
         <app-control-radio
           formControlName="allFamily"
-          value="false"
+          [value]="false"
           id="allFamily-no"
         ></app-control-radio>
       </div>
