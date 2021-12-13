@@ -31,7 +31,7 @@ export class NotificationsListComponent extends ListContainerClass {
     },
   };
 
-  uriCustom = 'Notification/LoadDataNotification';
+  uri = 'Notification/InformativeSended';
 
   constructor(
     activatedRoute: ActivatedRoute,

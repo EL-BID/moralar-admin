@@ -15,11 +15,7 @@
       <tr *ngFor="let item of list">
         <td>{{ item?.title }}</td>
         <td class="text-center">
-          <span>{{
-            item?.created
-              ? (item.created * 1000 | date: "dd/MM/yyyy, h:mm:ss")
-              : "Não informada pela API"
-          }}</span>
+          <span>{{ item.created }}</span>
         </td>
         <td class="text-right">
           <button [routerLink]="[item.id]" class="btn btn-info">

@@ -36,6 +36,7 @@
       <app-control-field>
         <label for="typeSubject">Status da linha do tempo</label>
         <select id="typeSubject" formControlName="typeSubject">
+          <option value="">todos</option>
           <option
             *ngFor="let timelineType of timelineTypeList"
             [value]="timelineType.id"
