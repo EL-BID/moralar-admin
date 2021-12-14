@@ -3,7 +3,10 @@
     <thead>
       <tr>
         <th></th>
-        <th sortable="title" (sort)="handleSort($event)">Título do questionário</th>
+        <th sortable="title" (sort)="handleSort($event)">
+          Título do questionário
+        </th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -11,10 +14,25 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || '-' }}</td>
+        <td>{{ item.title || "-" }}</td>
+        <td>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
