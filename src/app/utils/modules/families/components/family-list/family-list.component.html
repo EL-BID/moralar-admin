@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <th *ngIf="!hideTableItems?.selectItem"></th>
         <th sortable="number" (sort)="handleSort($event)">
           Número do cadastro
         </th>
@@ -12,12 +12,12 @@
         <th sortable="holderCpf" (sort)="handleSort($event)">CPF do titular</th>
         <th sortable="email" (sort)="handleSort($event)">E-mail</th>
         <th sortable="phone" (sort)="handleSort($event)">Telefone</th>
-        <th>Situação</th>
+        <th *ngIf="!hideTableItems?.lockUnlock">Situação</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <td *ngIf="!hideTableItems?.selectItem">
           <app-control-checkbox
             [value]="isChecked(item)"
             (changed)="listItemSelected.emit(item)"
@@ -29,7 +29,7 @@
         <td>{{ item.cpf || "-" | mask: "000.000.000-99" }}</td>
         <td>{{ item.email || "-" }}</td>
         <td>{{ item.phone || "-" }}</td>
-        <td>
+        <td *ngIf="!hideTableItems?.lockUnlock">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"

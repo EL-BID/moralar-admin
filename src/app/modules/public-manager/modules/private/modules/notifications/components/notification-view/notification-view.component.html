@@ -19,5 +19,8 @@
 
 <ng-container>
   <h2 class="mt-2">Lista das famílias que receberam a notificação</h2>
-  <app-family-list [list]="notification?.family"></app-family-list>
+  <app-family-list
+    [list]="notification?.family"
+    [hideTableItems]="{ selectItem: true, lockUnlock: true }"
+  ></app-family-list>
 </ng-container>

@@ -1,9 +1,25 @@
 import { OnDestroyClass } from './on-destroy.class';
-import { Input, Output, EventEmitter, ViewChildren, QueryList, Directive } from '@angular/core';
-import { NgbdSortableHeaderDirective, SortEvent } from 'src/app/utils/modules/shared/directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+import {
+  Input,
+  Output,
+  EventEmitter,
+  ViewChildren,
+  QueryList,
+  Directive,
+} from '@angular/core';
+import {
+  NgbdSortableHeaderDirective,
+  SortEvent,
+} from 'src/app/utils/modules/shared/directives/ngbd-sortable-header/ngbd-sortable-header.directive';
+import { IHideTableItems } from '../interfaces/hideTableItems';
 
 @Directive()
 export abstract class ListComponentClass extends OnDestroyClass {
+  @Input() hideTableItems: IHideTableItems = {
+    selectItem: false,
+    details: false,
+    lockUnlock: false,
+  };
 
   @Input()
   list: any[] = [];
@@ -40,5 +56,4 @@ export abstract class ListComponentClass extends OnDestroyClass {
     }
     return isChecked;
   }
-
 }
