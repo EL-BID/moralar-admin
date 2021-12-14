@@ -14,12 +14,13 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || '-' }}</td>
-        <td>{{ item.created | date: 'dd/MM/yyy' }}</td>
-        <td>{{ item.amountViewed || '-' }}</td>
+        <td>{{ item?.title || "-" }}</td>
+        <td>{{ item?.created }}</td>
+        <td>{{ item?.amountViewed || "-" }}</td>
         <td>
           <div class="custom-control custom-switch">
             <input
@@ -28,10 +29,9 @@
               [id]="'blocked-' + item.id"
               [value]="item.id"
               [checked]="item.blocked === false"
-              (click)="handleBlockUnblock($event)">
-            <label
-              [for]="'blocked-' + item.id"
-              class="custom-control-label">
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
             </label>
           </div>
         </td>
