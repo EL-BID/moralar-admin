@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { take, takeUntil } from 'rxjs/operators';
 import { HttpService } from 'src/app/utils/services/http/http.service';
 
-import { dateToString } from '../functions/date.function';
+import { dateAndTimeToString, dateToString } from '../functions/date.function';
 import {
   FormDataModel,
   generateFormData,
@@ -121,7 +121,7 @@ export abstract class ListContainerClass
               response.data[i].date = dateToString(+response.data[i].date);
             }
             if (response.data[i]?.created) {
-              response.data[i].created = dateToString(
+              response.data[i].created = dateAndTimeToString(
                 +response.data[i].created
               );
             }
@@ -141,7 +141,7 @@ export abstract class ListContainerClass
               response.data[i].date = dateToString(+response.data[i].date);
             }
             if (response.data[i]?.created) {
-              response.data[i].created = dateToString(
+              response.data[i].created = dateAndTimeToString(
                 +response.data[i].created
               );
             }
