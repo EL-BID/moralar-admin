@@ -27,7 +27,7 @@
   <h2 class="h5">Agendamento</h2>
   <p>
     <span class="view-label">Data e horário</span>
-    <span class="d-block">{{ data }}</span>
+    <span class="d-block">{{ data | date: "dd/MM/yyyy H:m" }}</span>
   </p>
   <p>
     <span class="view-label">Assunto</span>
