@@ -4,54 +4,58 @@
     <div class="col-lg-2">
       <p>
         <span class="view-label">Cadastro</span>
-        <span class="d-block ">{{schedule.holderNumber || '-'}}</span>
+        <span class="d-block">{{ schedule.holderNumber || "-" }}</span>
       </p>
     </div>
     <div class="col-lg-4">
       <p>
         <span class="view-label">Titular</span>
-        <span class="d-block ">{{schedule.holderName || '-'}}</span>
+        <span class="d-block">{{ schedule.holderName || "-" }}</span>
       </p>
     </div>
     <div class="col-lg-2">
       <p>
         <span class="view-label">CPF</span>
-        <span class="d-block ">{{schedule.holderCpf || '-'  | mask: '000.000.000-99'}}</span>
+        <span class="d-block">{{
+          schedule.holderCpf || "-" | mask: "000.000.000-99"
+        }}</span>
       </p>
     </div>
-    <div class="col-lg-4">
-      <p>
-        <span class="view-label">Status</span>
-        <span class="d-block text-info">{{scheduleStatusList[schedule.typeScheduleStatus].name || '-'}}</span>
-      </p>
-    </div>
-  </div>
-</app-card><br>
+  </div> </app-card
+><br />
 <app-card>
   <h2 class="h5">Agendamento</h2>
   <p>
     <span class="view-label">Data e horário</span>
-    <span class="d-block ">{{data || '-' | date: 'dd/MM/yyyy HH:mm'}}</span>
+    <span class="d-block">{{ data }}</span>
   </p>
   <p>
     <span class="view-label">Assunto</span>
-    <span class="d-block ">{{scheduleTypeList[schedule.typeSubject].name || '-'}}</span>
+    <span class="d-block">{{
+      scheduleTypeList[schedule.typeSubject].name || "-"
+    }}</span>
   </p>
   <p>
     <span class="view-label">Local</span>
-    <span class="d-block ">{{schedule.place || '-'}}</span>
+    <span class="d-block">{{ schedule.place || "-" }}</span>
   </p>
   <p>
     <span class="view-label">Descrição</span>
-    <span class="d-block ">{{schedule.description || '-'}}</span>
+    <span class="d-block">{{ schedule.description || "-" }}</span>
   </p>
+
+  <div>
+    <p>
+      <span class="view-label">Status</span>
+      <span class="d-block text-info">{{
+        scheduleStatusList[schedule.typeScheduleStatus].name || "-"
+      }}</span>
+    </p>
+  </div>
 
   <div [ngSwitch]="schedule.typeScheduleStatus < 4">
     <div *ngSwitchCase="true">
-      <button
-        type="button"
-        class="btn btn-dark"
-        (click)="reschedule.emit()">
+      <button type="button" class="btn btn-dark" (click)="reschedule.emit()">
         Reagendar
       </button>
     </div>
@@ -62,21 +66,21 @@
           <button
             type="button"
             class="btn btn-dark"
-            (click)="reschedule.emit()">
+            (click)="reschedule.emit()"
+          >
             Agendar nova reunião
           </button>
         </div>
-        <div class="col-lg-4" >
+        <div class="col-lg-4">
           <button
             type="button"
             class="btn btn-dark"
-            (click)="chooseProperty(schedule)">
+            (click)="chooseProperty(schedule)"
+          >
             Liberar escolha de imóvel
           </button>
         </div>
       </div>
     </div>
   </div>
-
 </app-card>
-
