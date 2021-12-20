@@ -193,7 +193,7 @@ export abstract class ListContainerClass
           this.downloadingRegistrationFile = false;
           const elRef = document.createElement('a');
           elRef.href = URL.createObjectURL(blob);
-          elRef.download = `Modelo de arquivo para cadastro de ${this.listName}.xls`;
+          elRef.download = `Modelo de arquivo para cadastro de ${this.listName}.xlsx`;
           elRef.click();
         },
         (_) => (this.downloadingRegistrationFile = false)
