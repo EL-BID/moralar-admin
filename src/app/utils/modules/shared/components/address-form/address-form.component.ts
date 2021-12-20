@@ -55,7 +55,7 @@ export class AddressFormComponent implements OnChanges, OnInit {
   ngOnChanges({ form }: SimpleChanges): void {
     if (form.currentValue && form.isFirstChange()) {
       const stateId = form.currentValue.controls.stateId.value;
-      if (stateId !== null) {
+      if (stateId) {
         this.megaleiosService.get(`City/${stateId}`).subscribe(
           (response: any) => {
             this.cityList = response.data;
