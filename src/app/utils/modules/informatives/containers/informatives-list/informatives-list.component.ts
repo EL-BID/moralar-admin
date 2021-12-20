@@ -12,26 +12,25 @@ import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.
 @Component({
   selector: 'app-informatives-list',
   templateUrl: './informatives-list.component.html',
-  styleUrls: ['./informatives-list.component.sass']
+  styleUrls: ['./informatives-list.component.sass'],
 })
 export class InformativesListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
       { data: 'datePublish', name: 'DatePublish', searchable: true },
       { data: 'image', name: 'Image', searchable: true },
       { data: 'description', name: 'Description', searchable: true },
-      { data: 'date', name: 'Date', searchable: true }
+      { data: 'date', name: 'Date', searchable: true },
     ],
     page: 1,
     pageSize: 10,
     search: {
-      search: ''
+      search: '',
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'Informative';
@@ -47,11 +46,12 @@ export class InformativesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute.parent });
+    this._router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute.parent,
+    });
   }
 
   handleBlockUnblock(value: any): void {
-
     let modalConfirmData: ModalConfirmData;
     if (value.block) {
       modalConfirmData = {
@@ -61,48 +61,53 @@ export class InformativesListComponent extends ListContainerClass {
       };
     } else {
       modalConfirmData = {
-        title: 'Ativar curso',
+        title: 'Ativar informativo',
         content: 'Deseja realmente ativar esse informativo?',
         action: 'ativar',
       };
     }
-    const modalRef = this.ngbModal.open(ModalConfirmComponent, { centered: true });
+    const modalRef = this.ngbModal.open(ModalConfirmComponent, {
+      centered: true,
+    });
     modalRef.componentInstance.modalConfirmData = modalConfirmData;
     modalRef.result
       .then((result: any) => {
         if (result) {
-          this._httpService.post('Course/BlockUnblock', value)
+          this._httpService
+            .post('Informative/BlockUnblock', value)
             .pipe(takeUntil(this.onDestroy))
-            .subscribe((response: any) => {
-              this.megaleiosAlertService.success(response.message);
-              const index = this.list.findIndex((item) => item.id === value.targetId);
-              this.list[index].blocked = value.block;
-            }, (response: any) => {
-              this.megaleiosAlertService.error(response.message);
-            });
+            .subscribe(
+              (response: any) => {
+                this.megaleiosAlertService.success(response.message);
+                const index = this.list.findIndex(
+                  (item) => item.id === value.targetId
+                );
+                this.list[index].blocked = value.block;
+              },
+              (response: any) => {
+                this.megaleiosAlertService.error(response.message);
+              }
+            );
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }
 
   exportToExcel() {
-    this.httpService
-      .download('Informative/Export')
-      .subscribe(
-        (response: any) => {
-          const blob = new Blob([response], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
-          });
-          console.log("Blob:", blob);
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'Lista de informativos.xls';
-          a.click();
-        },
-        ({ message }) => {
-          this.megaleiosAlertService.error(message);
-        }
-      );
+    this.httpService.download('Informative/Export').subscribe(
+      (response: any) => {
+        const blob = new Blob([response], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
+        });
+        console.log('Blob:', blob);
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Lista de informativos.xls';
+        a.click();
+      },
+      ({ message }) => {
+        this.megaleiosAlertService.error(message);
+      }
+    );
   }
-
 }
