@@ -50,10 +50,10 @@ export class AdministratorFormComponent
   }
 
   ngOnInit(): void {
-    if (this.form.value.passwordCurrent === null && this.formData) {
-      this.megaleiosAlertService.error(
-        'Problema ao obter dados - /GetInfo(Current password)'
-      );
-    }
+    // if (this.form.value.passwordCurrent === null && this.formData) {
+    //   this.megaleiosAlertService.error(
+    //     'Problema ao obter dados - /GetInfo(Current password)'
+    //   );
+    // }
   }
 }
