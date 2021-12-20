@@ -35,6 +35,7 @@ import { NgbdSortableHeaderDirective } from './directives/ngbd-sortable-header/n
 import { QuizTypeStatusPipe } from './pipes/QuizTypeStatus/QuizTypeStatus.pipe';
 import { TypePropertyPipe } from './pipes/TypeProperty/TypeProperty.pipe';
 import { TypeStatusResidencialPropertyPipe } from './pipes/TypeStatusResidencialProperty/TypeStatusResidencialProperty.pipe';
+import { ImageComponent } from './components/image/image.component';
 
 // components
 const components = [
@@ -49,6 +50,7 @@ const components = [
   ModalImageCropperComponent,
   ImportFileComponent,
   DateRangeComponent,
+  ImageComponent,
 ];
 
 // modules

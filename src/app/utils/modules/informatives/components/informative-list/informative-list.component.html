@@ -2,18 +2,37 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th sortable="createdDate" (sort)="handleSort($event)">Data da Publicação</th>
+        <th sortable="createdDate" (sort)="handleSort($event)">
+          Data da Publicação
+        </th>
         <th sortable="image" (sort)="handleSort($event)">Imagem</th>
         <th sortable="description" (sort)="handleSort($event)">Descrição</th>
         <th sortable="date" (sort)="handleSort($event)">Data</th>
+        <th>Situação</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>{{ item.datePublish || '-' }}</td>
-        <td>{{ item.image || '-' }}</td>
-        <td>{{ item.description || '-' }}</td>
-        <td>{{ item.created | date: 'dd/MM/yyyy' || '-' }}</td>
+        <td>{{ item.datePublish || "-" }}</td>
+        <td>
+          <img [src]="item.image + '?w=100'" />
+        </td>
+        <td>{{ item.description || "-" }}</td>
+        <td>{{ item.created | date: "dd/MM/yyyy" || "-" }}</td>
+        <td *ngIf="!hideTableItems?.lockUnlock">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

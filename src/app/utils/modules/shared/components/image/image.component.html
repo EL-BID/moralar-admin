@@ -1,0 +1,13 @@
+<span class="view-label">{{ label }}</span>
+<img [src]="imagePath" (click)="openModal(imageModal)" width="100px" height="100px" />
+
+<ng-template #imageModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img [src]="imagePath || 'https://picsum.photos/200'" width="100%" />
+  </div>
+</ng-template>
