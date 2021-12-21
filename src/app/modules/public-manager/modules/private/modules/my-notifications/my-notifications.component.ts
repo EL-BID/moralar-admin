@@ -20,7 +20,7 @@ export class MyNotificationsComponent extends ListContainerClass {
     pageSize: 10,
     search: {
       search: '',
-      //forGestor: true,
+      forGestor: true,
     },
     order: {
       column: '0',
