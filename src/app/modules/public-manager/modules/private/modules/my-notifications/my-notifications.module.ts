@@ -14,5 +14,6 @@ import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
     NotificationsModule,
     SharedModule,
   ],
+  exports: [MyNotificationsComponent],
 })
 export class MyNotificationsModule {}

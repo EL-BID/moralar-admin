@@ -11,15 +11,16 @@ import { PrivateComponent } from './private.component';
 
 // directives
 import { NavDirective } from './directives/nav.directive';
-import {SharedModule} from "../../../../utils/modules/shared/shared.module";
-import {NotificationsModule} from "../../../../utils/modules/notifications/notifications.module";
+import { SharedModule } from '../../../../utils/modules/shared/shared.module';
+import { NotificationsModule } from '../../../../utils/modules/notifications/notifications.module';
+import { MyNotificationsModule } from './modules/my-notifications/my-notifications.module';
 
 @NgModule({
   declarations: [
     // containers
     PrivateComponent,
     // directives
-    NavDirective
+    NavDirective,
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,8 @@ import {NotificationsModule} from "../../../../utils/modules/notifications/notif
     NgbDropdownModule,
     FontAwesomeModule,
     SharedModule,
-    NotificationsModule
-  ]
+    NotificationsModule,
+    MyNotificationsModule,
+  ],
 })
-export class PrivateModule { }
+export class PrivateModule {}

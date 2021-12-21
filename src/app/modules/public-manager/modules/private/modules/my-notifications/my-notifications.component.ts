@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-notifications',
@@ -8,6 +9,7 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
   styleUrls: ['./my-notifications.component.sass'],
 })
 export class MyNotificationsComponent extends ListContainerClass {
+  @Input() abstract = false;
   formDataModel: FormDataModel = {
     columns: [
       { data: 'created', name: 'Created', searchable: false },
@@ -18,7 +20,7 @@ export class MyNotificationsComponent extends ListContainerClass {
     pageSize: 10,
     search: {
       search: '',
-      forGestor: true,
+      //forGestor: true,
     },
     order: {
       column: '0',
@@ -27,4 +29,8 @@ export class MyNotificationsComponent extends ListContainerClass {
   };
 
   uri = 'Notification';
+
+  urlImage(name: string): string {
+    return `${environment.baseUrl}/content/upload/${name}`;
+  }
 }

@@ -1,30 +1,61 @@
 <h1>Minhas notificações</h1>
 
-<app-notification-list-search
-  [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)"
->
-</app-notification-list-search>
-
-<ng-container *ngIf="!loading && !list.length; else items">
-  <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
+<ng-container *ngIf="abstract; else all">
+  <div class="notifications">
+    <div *ngFor="let notification of list">
+      <img [src]="urlImage(notification?.image)" />
+      <div class="body">
+        <div>
+          <div class="title">{{ notification?.title | slice: 0:25 }}...</div>
+          <div class="description">
+            {{ notification?.description | slice: 0:25 }}...
+          </div>
+        </div>
+        <div>
+          <small class="badge badge-secondary">
+            {{ notification.created | date: "dd/MM/yyyy hh:ss" }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button
+      routerLink="/gestor-publico/app/my-notifications"
+      class="btn btn-light"
+    >
+      Ver todas
+    </button>
+  </div>
 </ng-container>
 
-<ng-template #items>
-  <app-notification-list
-    [hideTableItems]="{ details: true }"
-    [list]="list"
+<ng-template #all>
+  <app-notification-list-search
+    [listSearchData]="formDataModel.search"
     (listSearchChange)="handleListSearchChange($event)"
-    (listOrderChange)="handleListOrderChange($event)"
-    (listItemSelected)="handleListItemSelected($event)"
   >
-  </app-notification-list>
-  <app-list-pagination
-    [page]="formDataModel.page"
-    [pageSize]="formDataModel.pageSize"
-    [listSize]="listSize"
-    [listSizeFiltered]="listSizeFiltered"
-    (pageChange)="handleListPageChange($event)"
-  >
-  </app-list-pagination>
+  </app-notification-list-search>
+
+  <ng-container *ngIf="!loading && !list.length; else items">
+    <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
+  </ng-container>
+
+  <ng-template #items>
+    <app-notification-list
+      [hideTableItems]="{ details: true }"
+      [list]="list"
+      (listSearchChange)="handleListSearchChange($event)"
+      (listOrderChange)="handleListOrderChange($event)"
+      (listItemSelected)="handleListItemSelected($event)"
+    >
+    </app-notification-list>
+    <app-list-pagination
+      [page]="formDataModel.page"
+      [pageSize]="formDataModel.pageSize"
+      [listSize]="listSize"
+      [listSizeFiltered]="listSizeFiltered"
+      (pageChange)="handleListPageChange($event)"
+    >
+    </app-list-pagination>
+  </ng-template>
 </ng-template>
