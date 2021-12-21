@@ -10,6 +10,7 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 export class MyNotificationsComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'title', name: 'Title', searchable: true },
       { data: 'description', name: 'Description', searchable: true },
     ],
