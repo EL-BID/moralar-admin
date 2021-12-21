@@ -7,7 +7,7 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 @Component({
   selector: 'app-availables-list',
   templateUrl: './availables-list.component.html',
-  styleUrls: ['./availables-list.component.sass']
+  styleUrls: ['./availables-list.component.sass'],
 })
 export class AvailablesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
@@ -26,12 +26,13 @@ export class AvailablesListComponent extends ListContainerClass {
       number: '',
       holderName: '',
       holderCpf: '',
-      status: ''
+      status: '',
+      typeQuiz: 0,
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uriCustom = 'QuizFamily/LoadDataQuizAvailable';
@@ -45,7 +46,8 @@ export class AvailablesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this.router.navigate([this.listSelected[0].id], { relativeTo: this.activatedRoute });
+    this.router.navigate([this.listSelected[0].id], {
+      relativeTo: this.activatedRoute,
+    });
   }
-
 }
