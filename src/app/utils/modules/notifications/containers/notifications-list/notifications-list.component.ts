@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
-import { HttpService } from 'src/app/utils/services/http/http.service';
-
-import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
 
 @Component({
   selector: 'app-notifications-list',
@@ -21,7 +16,7 @@ export class NotificationsListComponent extends ListContainerClass {
       { data: 'status', name: 'Status', searchable: true },
     ],
     page: 1,
-    pageSize: 2,
+    pageSize: 5,
     search: {
       search: '',
       forGestor: true,
@@ -33,14 +28,4 @@ export class NotificationsListComponent extends ListContainerClass {
   };
 
   uri = 'Notification';
-
-  constructor(
-    activatedRoute: ActivatedRoute,
-    router: Router,
-    httpService: HttpService,
-    private ngbModal: NgbModal,
-    private megaleiosAlertService: MegaleiosAlertService
-  ) {
-    super(activatedRoute, router, httpService);
-  }
 }

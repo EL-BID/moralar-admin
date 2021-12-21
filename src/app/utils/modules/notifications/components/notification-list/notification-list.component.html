@@ -1,13 +1,12 @@
-<div class="row" *ngIf="list.length == 0">
+<div class="row" *ngIf="!list.length">
   <div class="col-lg-12">
-    <p>Nenhum noticação encontrada</p>
+    <p>Nenhuma noticação encontrada</p>
   </div>
 </div>
 
 <div class="row" *ngFor="let item of list">
   <div class="col-lg-12">
     <app-card>
-      <!-- style="color: lightgray " -->
       <p>
         <span class="view-label"
           ><h6 class="h6">{{ item.title || "-" }}</h6></span
@@ -19,18 +18,7 @@
     <br />
   </div>
 </div>
-<!--
-<div class="row">
-  <div class="col-lg-12">
-    <app-card style="color: #999999 ">
-      <p>
-        <span class="view-label"><h6 class="h6">Teste</h6></span>
-        <span class="d-block ">Descrição</span>
 
-      </p>
-      Lida - 20/03/2021
-    </app-card>
-    <br>
-  </div>
-</div>
--->
+<button routerLink="/gestor-publico/app/my-notifications" class="btn btn-light">
+  Ver todas
+</button>
