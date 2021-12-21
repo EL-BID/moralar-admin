@@ -23,10 +23,10 @@ import { NotificationsComponent } from './notifications.component';
     // components
     NotificationListComponent,
     NotificationListSearchComponent,
-    NotificationListSearchComponent,
     NotificationViewComponent,
     NotificationFormComponent,
   ],
   imports: [NotificationsRoutingModule, SharedModule, FamiliesModule],
+  exports: [NotificationListComponent, NotificationListSearchComponent],
 })
 export class NotificationsModule {}

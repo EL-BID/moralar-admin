@@ -109,12 +109,13 @@ export abstract class ListContainerClass
 
   getList(): void {
     const uri = !this.uriCustom ? `${this.uri}/LoadData` : this.uriCustom;
-
+    this.loading = true;
     if (!this.method) {
       this._httpService
         .post(uri, generateFormData(this.formDataModel))
         .pipe(takeUntil(this.onDestroy))
         .subscribe((response: any) => {
+          this.loading = false;
           let i;
           for (i = 0; response.data.length > i; i++) {
             if (response.data[i]?.date) {
@@ -135,6 +136,7 @@ export abstract class ListContainerClass
         .get(uri, generateFormData(this.formDataModel))
         .pipe(takeUntil(this.onDestroy))
         .subscribe((response: any) => {
+          this.loading = false;
           let i;
           for (i = 0; response.data.length > i; i++) {
             if (response.data[i]?.date) {

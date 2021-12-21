@@ -5,19 +5,25 @@
         <th sortable="title" (sort)="handleSort($event)">
           Título da notificação
         </th>
+        <th>Descrição</th>
         <th class="text-center" sortable="date" (sort)="handleSort($event)">
           Data de envio
         </th>
-        <th class="text-right">Detalhes</th>
+        <th *ngIf="!hideTableItems.details" class="text-right">Detalhes</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
         <td>{{ item?.title }}</td>
+        <th>
+          <small>
+            <i>{{ item?.description | slice: 0:100 }}</i>
+          </small>
+        </th>
         <td class="text-center">
           <span>{{ item.created | date: "dd/MM/yyyy, h:mm:ss" }}</span>
         </td>
-        <td class="text-right">
+        <td *ngIf="!hideTableItems.details" class="text-right">
           <button [routerLink]="[item.id]" class="btn btn-info">
             Ver detalhes
           </button>

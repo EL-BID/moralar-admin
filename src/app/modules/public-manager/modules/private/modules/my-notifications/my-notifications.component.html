@@ -1,1 +1,30 @@
-<p>my-notifications works!</p>
+<h1>Minhas notificações</h1>
+
+<app-notification-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
+</app-notification-list-search>
+
+<ng-container *ngIf="!loading && !list.length; else items">
+  <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
+</ng-container>
+
+<ng-template #items>
+  <app-notification-list
+    [hideTableItems]="{ details: true }"
+    [list]="list"
+    (listSearchChange)="handleListSearchChange($event)"
+    (listOrderChange)="handleListOrderChange($event)"
+    (listItemSelected)="handleListItemSelected($event)"
+  >
+  </app-notification-list>
+  <app-list-pagination
+    [page]="formDataModel.page"
+    [pageSize]="formDataModel.pageSize"
+    [listSize]="listSize"
+    [listSizeFiltered]="listSizeFiltered"
+    (pageChange)="handleListPageChange($event)"
+  >
+  </app-list-pagination>
+</ng-template>
