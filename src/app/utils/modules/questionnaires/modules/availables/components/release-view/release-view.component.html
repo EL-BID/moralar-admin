@@ -28,21 +28,22 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="h4">{{ release.title }}</h2>
+    <h2 class="h4">{{ release[0]?.title }}</h2>
   </div>
 </div>
 <app-card class="mb-3">
-  <div class="row" *ngFor="let quest of release.questionViewModel">
+  <div class="row" *ngFor="let quest of release">
     <div class="col-lg-12">
-      <h2 class="h5">{{ quest.nameQuestion }}</h2>
+      <h2 class="h5">{{ quest.question }}</h2>
     </div>
     <div class="col-lg-12">
       <h2 class="h5 text-danger">R:</h2>
+      <div>{{ quest?.answers }}</div>
     </div>
-    <div class="col-lg-12" *ngFor="let options of quest.description">
+    <!-- <div class="col-lg-12" *ngFor="let options of quest.description">
       <p>
         <span class="view-label">{{ options.description }}</span>
       </p>
-    </div>
+    </div> -->
   </div>
 </app-card>
