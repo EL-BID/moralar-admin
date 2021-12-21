@@ -47,7 +47,7 @@ export class AvailablesListComponent extends ListContainerClass {
 
   handleDetails(): void {
     this.router.navigate(
-      [this.listSelected[0].id, this.listSelected[0].familyId],
+      [this.listSelected[0].quizId, this.listSelected[0].familyId],
       {
         relativeTo: this.activatedRoute,
       }
