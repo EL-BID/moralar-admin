@@ -22,7 +22,7 @@ export class MyNotificationsComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
