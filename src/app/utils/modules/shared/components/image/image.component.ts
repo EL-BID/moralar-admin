@@ -16,6 +16,10 @@ export class ImageComponent {
   ) {}
 
   openModal(content): void {
-    this.modalService.open(content, {centered: true, backdrop: 'static'})
+    this.modalService.open(content, {
+      centered: true,
+      backdrop: 'static',
+      windowClass: 'dark-modal',
+    });
   }
 }

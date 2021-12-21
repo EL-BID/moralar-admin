@@ -11,7 +11,7 @@ import {
   NgbdSortableHeaderDirective,
   SortEvent,
 } from 'src/app/utils/modules/shared/directives/ngbd-sortable-header/ngbd-sortable-header.directive';
-import { IHideTableItems } from '../interfaces/hideTableItems';
+import { IHideTableItems } from '../interfaces/HideTableItems';
 
 @Directive()
 export abstract class ListComponentClass extends OnDestroyClass {
