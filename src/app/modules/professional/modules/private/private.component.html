@@ -9,18 +9,21 @@
           title="Moralar"
         />
       </div>
-      <div class="col-auto">
-        <div ngbDropdown class="d-inline-block">
-          <fa-icon
-            ngbDropdownToggle
-            class="mr-2 text-light"
-            [icon]="faBell"
-          ></fa-icon>
-          <div ngbDropdownMenu id="notification" style="width: 100%">
-            <!-- <app-notifications-list></app-notifications-list> -->
+
+      <div class="col-1">
+        <div class="notifications">
+          <div class="icone">
+            <fa-icon [icon]="faBell"></fa-icon>
+          </div>
+          <div class="content">
+            <app-my-notifications
+              [forGestor]="false"
+              [abstract]="true"
+            ></app-my-notifications>
           </div>
         </div>
       </div>
+
       <div class="col-auto">
         <div ngbDropdown class="d-inline-block">
           <button
