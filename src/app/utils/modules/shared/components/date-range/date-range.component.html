@@ -16,24 +16,8 @@
       />
     </mat-date-range-input>
 
-    <!-- <mat-datepicker #datepicker>
-    <mat-datepicker-actions>
-      <button mat-button matDatepickerCancel>Cancelar</button>
-      <button mat-raised-button color="primary" matDatepickerApply>
-        Filtrar
-      </button>
-    </mat-datepicker-actions>
-  </mat-datepicker> -->
-
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
-
-    <mat-error *ngIf="form.controls.startDate.hasError('matStartDateInvalid')"
-      >Data inicial inválida</mat-error
-    >
-    <mat-error *ngIf="form.controls.endDate.hasError('matEndDateInvalid')"
-      >Data final inválida</mat-error
-    >
   </mat-form-field>
 
   <button
