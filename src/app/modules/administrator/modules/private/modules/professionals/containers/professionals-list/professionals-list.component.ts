@@ -36,7 +36,7 @@ export class ProfessionalsListComponent extends ListContainerClass {
   };
 
   uri = 'Profile/Gestor';
-  uriCustomExampleFile = 'Profile';
+  uriCustomExampleFile = 'Profile/ExampleFile';
   listName = 'profissionais de TTS';
 
   constructor(
