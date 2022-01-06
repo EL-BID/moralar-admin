@@ -35,7 +35,8 @@ export class AvailablesListComponent extends ListContainerClass {
     },
   };
 
-  uriCustom = 'QuizFamily/LoadDataQuizAvailable';
+  uri = 'QuizFamily/Available';
+  listName = 'questionários disponíveis';
 
   constructor(
     private activatedRoute: ActivatedRoute,
