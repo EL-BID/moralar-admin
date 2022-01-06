@@ -181,7 +181,7 @@ export abstract class ListContainerClass
     this.downloadingRegistrationFile = true;
     this._httpService
       .post(
-        `${this.uriCustomExampleFile || this.uri + '/FileImport'}`,
+        `${this.uriCustomExampleFile || this.uri + '/ExampleFileImport'}`,
         {},
         {
           responseType: 'blob',
