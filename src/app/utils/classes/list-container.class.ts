@@ -32,6 +32,7 @@ export abstract class ListContainerClass
   downloadingRegistrationFile = false;
   sendingRegistrationFile = false;
   listName = 'Relatório';
+  uriCustomExampleFile!: string;
 
   constructor(
     protected _activatedRoute: ActivatedRoute,
@@ -180,7 +181,7 @@ export abstract class ListContainerClass
     this.downloadingRegistrationFile = true;
     this._httpService
       .post(
-        `${this.uri}/ExampleFileImport`,
+        `${this.uriCustomExampleFile || this.uri}/ExampleFileImport`,
         {},
         {
           responseType: 'blob',
@@ -209,7 +210,11 @@ export abstract class ListContainerClass
       const formData = new FormData();
       formData.append('file', files[0]);
       this._httpService
-        .post(`${this.uri}/FileImport`, formData, true)
+        .post(
+          `${this.uriCustomExampleFile || this.uri}/FileImport`,
+          formData,
+          true
+        )
         .subscribe(
           (_) => {
             this.sendingRegistrationFile = false;
