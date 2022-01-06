@@ -11,4 +11,9 @@ export class DateRangeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  reset(): void {
+    this.form.controls.startDate.setValue('');
+    this.form.controls.endDate.setValue('');
+  }
 }

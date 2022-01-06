@@ -1,36 +1,30 @@
-<mat-form-field appearance="outline">
-  <mat-label>Escolha o intervalo de data</mat-label>
-  <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-    <input
-      disabled
-      matStartDate
-      formControlName="startDate"
-      placeholder="Data inicial"
-    />
-    <input
-      disabled
-      matEndDate
-      formControlName="endDate"
-      placeholder="Data final"
-    />
-  </mat-date-range-input>
+<div class="filter">
+  <mat-form-field appearance="outline">
+    <mat-label>Escolha o intervalo de data</mat-label>
+    <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+      <input
+        disabled
+        matStartDate
+        formControlName="startDate"
+        placeholder="Data inicial"
+      />
+      <input
+        disabled
+        matEndDate
+        formControlName="endDate"
+        placeholder="Data final"
+      />
+    </mat-date-range-input>
 
-  <!-- <mat-datepicker #datepicker>
-    <mat-datepicker-actions>
-      <button mat-button matDatepickerCancel>Cancelar</button>
-      <button mat-raised-button color="primary" matDatepickerApply>
-        Filtrar
-      </button>
-    </mat-datepicker-actions>
-  </mat-datepicker> -->
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+  </mat-form-field>
 
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
-
-  <mat-error *ngIf="form.controls.startDate.hasError('matStartDateInvalid')"
-    >Data inicial inválida</mat-error
+  <button
+    [disabled]="!(form?.value?.startDate || form?.value?.endDate)"
+    class="btn btn-secondary"
+    (click)="reset()"
   >
-  <mat-error *ngIf="form.controls.endDate.hasError('matEndDateInvalid')"
-    >Data final inválida</mat-error
-  >
-</mat-form-field>
+    Limpar filtro por data
+  </button>
+</div>

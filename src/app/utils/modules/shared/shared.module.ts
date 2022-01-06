@@ -36,6 +36,7 @@ import { QuizTypeStatusPipe } from './pipes/QuizTypeStatus/QuizTypeStatus.pipe';
 import { TypePropertyPipe } from './pipes/TypeProperty/TypeProperty.pipe';
 import { TypeStatusResidencialPropertyPipe } from './pipes/TypeStatusResidencialProperty/TypeStatusResidencialProperty.pipe';
 import { ImageComponent } from './components/image/image.component';
+import { ScheduleListSearchComponent } from './components/schedule-list-search/schedule-list-search.component';
 
 // components
 const components = [
@@ -51,6 +52,7 @@ const components = [
   ImportFileComponent,
   DateRangeComponent,
   ImageComponent,
+  ScheduleListSearchComponent,
 ];
 
 // modules
