@@ -3,31 +3,34 @@
     <h2 class="h5">Morador</h2>
     <app-family-list-search
       [listSearchData]="formDataModel.search"
-      (listSearchChange)="getFamily($event)">
+      (listSearchChange)="getFamily($event)"
+    >
     </app-family-list-search>
 
     <app-control-field>
       <label for="familyId">Morador</label>
       <select id="familyId" formControlName="familyId">
         <option [ngValue]="null">Selecione uma opção</option>
-        <option *ngFor="let item of list"
-                [ngValue]="item.id">
-          Nº {{ item.number || '-' }} | {{item.name || '-'}} | {{  item.cpf || '-' | mask: '000.000.000-99'}}
+        <option *ngFor="let item of list" [ngValue]="item.id">
+          Nº {{ item.number || "-" }} | {{ item.name || "-" }} |
+          {{ item.cpf || "-" | mask: "000.000.000-00" }}
         </option>
       </select>
       <app-control-error [control]="form.controls.familyId"></app-control-error>
     </app-control-field>
   </app-card>
-  <br>
+  <br />
   <app-card>
     <h2 class="h5">Agendamento</h2>
     <div class="row">
       <div class="col-lg-6">
         <app-control-field>
           <label for="date">Data</label>
-          <app-control-date-picker id="date"
-                                   [dayMin]="dayMin"
-                                   formControlName="date">
+          <app-control-date-picker
+            id="date"
+            [dayMin]="dayMin"
+            formControlName="date"
+          >
           </app-control-date-picker>
 
           <app-control-error [control]="form.controls.date"></app-control-error>
@@ -38,7 +41,7 @@
       <div class="col-lg-6">
         <app-control-field>
           <label for="time">Horário</label>
-          <input type="time" id="time" formControlName="time" >
+          <input type="time" id="time" formControlName="time" />
           <app-control-error [control]="form.controls.time"></app-control-error>
         </app-control-field>
       </div>
@@ -49,26 +52,34 @@
           <label for="typeSubject">Assunto</label>
           <select id="typeSubject" formControlName="typeSubject">
             <option [ngValue]="null">Selecione uma opção</option>
-            <option *ngFor="let scheduleType of scheduleTypeList"
-                    [ngValue]="scheduleType.id">
+            <option
+              *ngFor="let scheduleType of scheduleTypeList"
+              [ngValue]="scheduleType.id"
+            >
               {{ scheduleType.name }}
             </option>
           </select>
-          <app-control-error [control]="form.controls.typeSubject"></app-control-error>
+          <app-control-error
+            [control]="form.controls.typeSubject"
+          ></app-control-error>
         </app-control-field>
       </div>
       <div class="col-lg-6">
         <app-control-field>
           <label for="place">Local</label>
-          <input type="text" id="place" formControlName="place">
-          <app-control-error [control]="form.controls.place"></app-control-error>
+          <input type="text" id="place" formControlName="place" />
+          <app-control-error
+            [control]="form.controls.place"
+          ></app-control-error>
         </app-control-field>
       </div>
       <div class="col-lg-12">
         <app-control-field>
           <label for="description">Descrição</label>
           <textarea id="description" formControlName="description"></textarea>
-          <app-control-error [control]="form.controls.description"></app-control-error>
+          <app-control-error
+            [control]="form.controls.description"
+          ></app-control-error>
         </app-control-field>
       </div>
     </div>
@@ -76,7 +87,8 @@
       buttonType="submit"
       buttonClass="btn-dark"
       [buttonDisabled]="form.valid === false || formLoading === true"
-      [buttonLoading]="formLoading">
+      [buttonLoading]="formLoading"
+    >
       Adicionar
     </app-button>
   </app-card>

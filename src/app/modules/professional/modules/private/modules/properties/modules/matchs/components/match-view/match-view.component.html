@@ -2,49 +2,48 @@
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
-      <tr>
-        <th>Priorização</th>
-        <th>Número do cadastro</th>
-        <th>Titular</th>
-        <th>CPF</th>
-        <th></th>
-      </tr>
+        <tr>
+          <th>Priorização</th>
+          <th>Número do cadastro</th>
+          <th>Titular</th>
+          <th>CPF</th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
-       <tr *ngFor="let item of lista; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{ item.holder.number || '-' }}</td>
-        <td>{{ item.holder.name || '-' }}</td>
-        <td>{{ item.holder.cpf || '-'  | mask: '000.000.000-99'}}</td>
-        <td>
-          <div class="form-row">
-            <div class="col-auto">
-              <button
-                type="button"
-                class="btn btn-dark"
-                (click)="handleDatailsFamily(item)">
-                Detalhes
-              </button>
+        <tr *ngFor="let item of lista; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.holder.number || "-" }}</td>
+          <td>{{ item.holder.name || "-" }}</td>
+          <td>{{ item.holder.cpf || "-" | mask: "000.000.000-00" }}</td>
+          <td>
+            <div class="form-row">
+              <div class="col-auto">
+                <button
+                  type="button"
+                  class="btn btn-dark"
+                  (click)="handleDatailsFamily(item)"
+                >
+                  Detalhes
+                </button>
+              </div>
+              <div class="col-auto">
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="sellProperty(item.id)"
+                >
+                  Vender
+                </button>
+              </div>
             </div>
-            <div class="col-auto">
-              <button
-                type="button"
-                class="btn btn-outline-success"
-                (click)="sellProperty(item.id)"
-              > Vender
-              </button>
-            </div>
-          </div>
-
-        </td>
-      </tr>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </app-card>
 
 <ng-template #detailsFamily>
-<app-family-view
-[family]="family"
-></app-family-view>
+  <app-family-view [family]="family"></app-family-view>
 </ng-template>

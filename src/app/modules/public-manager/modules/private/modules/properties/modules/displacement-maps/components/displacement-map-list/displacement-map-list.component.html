@@ -3,7 +3,9 @@
     <thead>
       <tr>
         <th></th>
-        <th sortable="number" (sort)="handleSort($event)">Número do cadastro</th>
+        <th sortable="number" (sort)="handleSort($event)">
+          Número do cadastro
+        </th>
         <th sortable="holderName" (sort)="handleSort($event)">Titular</th>
         <th sortable="holderCpf" (sort)="handleSort($event)">CPF</th>
         <th sortable="number" (sort)="handleSort($event)">Origem</th>
@@ -19,18 +21,17 @@
               class="custom-control-input"
               [id]="'select-' + item.id"
               [checked]="isChecked(item)"
-              (change)="listItemSelected.emit(item)">
-            <label
-              class="custom-control-label"
-              [for]="'select-' + item.id">
+              (change)="listItemSelected.emit(item)"
+            />
+            <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
         </td>
-        <td>{{ item.number || '-' }}</td>
-        <td>{{ item.name || '-' }}</td>
-        <td>{{ item.cpf || '-'  | mask: '000.000.000-99'}}</td>
-        <td>{{ item.number || '-' }}</td>
-        <td>{{ item.name || '-' }}</td>
+        <td>{{ item.number || "-" }}</td>
+        <td>{{ item.name || "-" }}</td>
+        <td>{{ item.cpf || "-" | mask: "000.000.000-00" }}</td>
+        <td>{{ item.number || "-" }}</td>
+        <td>{{ item.name || "-" }}</td>
       </tr>
     </tbody>
   </table>

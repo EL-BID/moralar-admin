@@ -16,14 +16,20 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.name || '-' }}</td>
-        <td>{{ item.role || '-' }}</td>
-        <td>{{ item.cpf || '-' }}</td>
-        <td>{{ item.email || '-' }}</td>
-        <td>{{ item.phone || '-' }}</td>
+        <td>{{ item.name || "-" }}</td>
+        <td>{{ item.role || "-" }}</td>
+        <td>{{ item.cpf || "-" }}</td>
+        <td>{{ item.email || "-" }}</td>
+        <td>
+          <span *ngIf="item.phone; else noPhone">
+            {{ item.phone | mask: "+00 (00) 0 0000-0000" }}</span
+          >
+          <ng-template #noPhone>-</ng-template>
+        </td>
         <td>
           <div class="custom-control custom-switch">
             <input
@@ -32,10 +38,9 @@
               [id]="'blocked-' + item.id"
               [value]="item.id"
               [checked]="item.blocked === false"
-              (click)="handleBlockUnblock($event)">
-            <label
-              [for]="'blocked-' + item.id"
-              class="custom-control-label">
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
             </label>
           </div>
         </td>

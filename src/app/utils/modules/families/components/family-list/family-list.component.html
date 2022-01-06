@@ -28,7 +28,12 @@
         <td>{{ item.name || "-" }}</td>
         <td>{{ item.cpf || "-" | mask: "000.000.000-99" }}</td>
         <td>{{ item.email || "-" }}</td>
-        <td>{{ item.phone || "-" }}</td>
+        <td>
+          <span *ngIf="item.phone; else noPhone">
+            {{ item.phone | mask: "+00 (00) 0 0000-0000" }}</span
+          >
+          <ng-template #noPhone>-</ng-template>
+        </td>
         <td *ngIf="!hideTableItems?.lockUnlock">
           <div class="custom-control custom-switch">
             <input
