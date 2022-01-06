@@ -7,13 +7,13 @@ import { HttpService } from 'src/app/utils/services/http/http.service';
 @Component({
   selector: 'app-polls-list',
   templateUrl: './polls-list.component.html',
-  styleUrls: ['./polls-list.component.sass']
+  styleUrls: ['./polls-list.component.sass'],
 })
 export class PollsListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'title', name: 'Title', searchable: true }
+      { data: 'created', name: 'Created', searchable: false },
+      { data: 'title', name: 'Title', searchable: true },
     ],
     page: 1,
     pageSize: 10,
@@ -23,12 +23,12 @@ export class PollsListComponent extends ListContainerClass {
       holderName: '',
       holderCpf: '',
       status: '',
-      typeQuiz: 1
+      typeQuiz: 1,
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'desc',
+    },
   };
 
   uri = 'Quiz';
@@ -42,7 +42,8 @@ export class PollsListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this.router.navigate([this.listSelected[0].id], { relativeTo: this.activatedRoute });
+    this.router.navigate([this.listSelected[0].id], {
+      relativeTo: this.activatedRoute,
+    });
   }
-
 }

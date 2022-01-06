@@ -12,7 +12,7 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 export class AvailablesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'created', name: 'Created', searchable: true },
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'holderCpf', name: 'HolderCpf', searchable: true },
       { data: 'holderName', name: 'HolderName', searchable: true },
       { data: 'holderNumber', name: 'HolderNumber', searchable: true },
@@ -31,7 +31,7 @@ export class AvailablesListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 

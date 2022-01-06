@@ -16,7 +16,10 @@ import { ModalConfirmData } from '../../../shared/components/modal-confirm/modal
 })
 export class QuestionnairesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
-    columns: [{ data: 'title', name: 'Title', searchable: true }],
+    columns: [
+      { data: 'created', name: 'Created', searchable: false },
+      { data: 'title', name: 'Title', searchable: true },
+    ],
     page: 1,
     pageSize: 10,
     search: {
@@ -29,7 +32,7 @@ export class QuestionnairesListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
