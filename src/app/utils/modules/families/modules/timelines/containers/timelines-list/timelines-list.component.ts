@@ -20,7 +20,7 @@ export class TimelinesListComponent extends ListContainerClass {
     pageSize: 10,
     search: {
       search: '',
-      typeSubject: 2,
+      typeSubject: '',
     },
     order: {
       column: '0',
