@@ -5,18 +5,16 @@ import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/meg
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PrivateGuard implements CanActivate {
-
   constructor(
     private authenticationService: AuthenticationService,
     private megaleiosAlertService: MegaleiosAlertService,
     private router: Router
-  ) { }
+  ) {}
 
   canActivate(): boolean {
-    console.log();
     return true;
     if (this.authenticationService.isLoggedIn()) {
       return true;
@@ -26,5 +24,4 @@ export class PrivateGuard implements CanActivate {
       return false;
     }
   }
-
 }

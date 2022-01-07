@@ -99,7 +99,6 @@ export class InformativesListComponent extends ListContainerClass {
         const blob = new Blob([response], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
         });
-        console.log('Blob:', blob);
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'Lista de informativos.xls';

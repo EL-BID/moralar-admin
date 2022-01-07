@@ -16,7 +16,6 @@ export class PrivateGuard implements CanActivate {
   ) { }
 
   canActivate(): boolean {
-    console.log();
     return true;
     if (this.authenticationService.isLoggedIn()) {
       return true;

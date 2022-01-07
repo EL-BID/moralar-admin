@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntil } from 'rxjs/operators';
@@ -12,20 +12,19 @@ import { HttpService } from 'src/app/utils/services/http/http.service';
 @Component({
   selector: 'app-releases-families-list',
   templateUrl: './releases-families-list.component.html',
-  styleUrls: ['./releases-families-list.component.sass']
+  styleUrls: ['./releases-families-list.component.sass'],
 })
 export class ReleasesFamiliesListComponent extends ListContainerClass {
-
   @Output()
   listFamiliesSelected: EventEmitter<any> = new EventEmitter();
 
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'number',    name: 'Number',    searchable: true },
+      { data: 'number', name: 'Number', searchable: true },
       { data: 'holderName', name: 'HolderName', searchable: true },
-      { data: 'holderCpf',     name: 'HolderCpf',     searchable: true },
-      { data: 'email',   name: 'Email',   searchable: true },
-      { data: 'phone',   name: 'Phone',   searchable: true }
+      { data: 'holderCpf', name: 'HolderCpf', searchable: true },
+      { data: 'email', name: 'Email', searchable: true },
+      { data: 'phone', name: 'Phone', searchable: true },
     ],
     page: 1,
     pageSize: 10,
@@ -34,12 +33,12 @@ export class ReleasesFamiliesListComponent extends ListContainerClass {
       number: '',
       holderName: '',
       holderCpf: '',
-      status: ''
+      status: '',
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
   uri = 'Family';
@@ -55,29 +54,25 @@ export class ReleasesFamiliesListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute.parent });
+    this._router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute.parent,
+    });
   }
 
   onChangeListSelected(e) {
-    // console.log(e);
     if (this.listSelected.length > 0) {
       this.listSelected.forEach((item: any, index: number) => {
         if (item === e.id) {
-           this.listSelected.splice(index, 1);
-           this.listFamiliesSelected.emit(this.listSelected);
-           // console.log(this.listSelected);
+          this.listSelected.splice(index, 1);
+          this.listFamiliesSelected.emit(this.listSelected);
         } else {
           this.listSelected.push(e.id);
           this.listFamiliesSelected.emit(this.listSelected);
-          // console.log(this.listSelected);
         }
       });
-    }else {
+    } else {
       this.listSelected.push(e.id);
       this.listFamiliesSelected.emit(this.listSelected);
-     // console.log(this.listSelected);
     }
-
   }
-
 }
