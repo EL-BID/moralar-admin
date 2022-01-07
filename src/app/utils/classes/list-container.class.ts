@@ -33,6 +33,7 @@ export abstract class ListContainerClass
   sendingRegistrationFile = false;
   listName = 'Relatório';
   uriCustomExampleFile!: string;
+  uriCustomFileImport!: string;
 
   constructor(
     protected _activatedRoute: ActivatedRoute,
@@ -211,7 +212,7 @@ export abstract class ListContainerClass
       formData.append('file', files[0]);
       this._httpService
         .post(
-          `${this.uriCustomExampleFile || this.uri + '/FileImport'}`,
+          `${this.uriCustomFileImport || this.uri + '/FileImport'}`,
           formData,
           true
         )
@@ -219,6 +220,7 @@ export abstract class ListContainerClass
           (_) => {
             this.sendingRegistrationFile = false;
             this.fileRegistration.nativeElement.value = '';
+
             this.getList();
           },
           (_) => {

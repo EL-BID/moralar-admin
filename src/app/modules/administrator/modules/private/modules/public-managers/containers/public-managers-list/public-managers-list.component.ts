@@ -37,6 +37,7 @@ export class PublicManagersListComponent extends ListContainerClass {
 
   uri = 'Profile/TTS';
   uriCustomExampleFile = 'Profile/ExampleFile';
+  uriCustomFileImport = 'Profile/Gestor/FileImport';
   listName = 'gestores';
 
   constructor(
