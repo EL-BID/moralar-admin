@@ -12,9 +12,8 @@
         <th sortable="holderCpf" (sort)="handleSort($event)">
           CPF do morador titular
         </th>
-        <th sortable="typeSubject" (sort)="handleSort($event)">
-          Status da linha do tempo
-        </th>
+        <th>Status</th>
+        <th sortable="typeSubject" (sort)="handleSort($event)">Assunto</th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +28,8 @@
         <td>{{ item.number || "-" }}</td>
         <td>{{ item.name || "-" }}</td>
         <td>{{ item.cpf || "-" | mask: "000.000.000-00" }}</td>
-        <td>{{ timelineStatusToString(item.typeSubject) }}</td>
+        <td>{{ timelineStatusToString(item.typeScheduleStatus) }}</td>
+        <td>{{ timelineTypeSubjectToString(item.typeSubject) }}</td>
       </tr>
     </tbody>
   </table>
