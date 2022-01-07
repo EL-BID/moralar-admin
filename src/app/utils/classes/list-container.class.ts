@@ -184,6 +184,7 @@ export abstract class ListContainerClass
       .post(
         `${this.uriCustomExampleFile || this.uri + '/ExampleFileImport'}`,
         {},
+        true,
         {
           responseType: 'blob',
         }

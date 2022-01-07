@@ -1,3 +1,4 @@
+import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -36,7 +37,10 @@ export class HttpService {
 
   private url: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private megaleiosAlertService: MegaleiosAlertService
+  ) {}
 
   get(route: string, options?: any): Observable<any> {
     return options
@@ -44,12 +48,23 @@ export class HttpService {
       : this.http.get(`${this.url}/api/v1/${route}`).pipe(take(1), tap());
   }
 
-  post(route: string, value: any, options?: any): Observable<any> {
+  post(
+    route: string,
+    value: any,
+    showMessage = false,
+    options?: any
+  ): Observable<any> {
     return options
       ? this.http.post(`${this.url}/api/v1/${route}`, value, options)
-      : this.http
-          .post(`${this.url}/api/v1/${route}`, value)
-          .pipe(take(1), tap());
+      : this.http.post(`${this.url}/api/v1/${route}`, value).pipe(
+          take(1),
+          tap(
+            ({ message }: any) => {
+              if (showMessage) this.megaleiosAlertService.success(message);
+            },
+            ({ message }) => this.megaleiosAlertService.error(message)
+          )
+        );
   }
 
   export(route: string, value: any): Observable<any> {
