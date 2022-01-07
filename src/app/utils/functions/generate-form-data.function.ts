@@ -59,9 +59,10 @@ export function generateFormData(formDataModel: FormDataModel): FormData {
   if (formDataModel.search) {
     for (const prop in formDataModel.search) {
       if (formDataModel.search.hasOwnProperty(prop)) {
+        const value = formDataModel.search[prop] || '';
         prop === 'search'
-          ? formData.set('search[value]', formDataModel.search[prop])
-          : formData.set(prop, formDataModel.search[prop]);
+          ? formData.set('search[value]', value)
+          : formData.set(prop, value);
       }
     }
   }

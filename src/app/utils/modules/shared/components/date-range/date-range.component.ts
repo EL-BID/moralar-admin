@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -13,7 +13,8 @@ export class DateRangeComponent implements OnInit {
   ngOnInit(): void {}
 
   reset(): void {
-    this.form.controls.startDate.setValue('');
-    this.form.controls.endDate.setValue('');
+    this.form.reset();
+    this.form.get('startDate').reset('');
+    this.form.get('endDate').reset('');
   }
 }
