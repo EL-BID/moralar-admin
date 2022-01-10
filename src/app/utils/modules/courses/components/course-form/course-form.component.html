@@ -166,16 +166,8 @@
     </div>
     <div class="col-lg-6">
       <app-control-field>
-        <label for="numberOfVacancies">Quantidade de Vagas</label>
-        <select id="numberOfVacancies" formControlName="numberOfVacancies">
-          <option [ngValue]="null">Selecione uma opção</option>
-          <option
-            *ngFor="let numberOfVac of numberOfVacanciesList; let i = index"
-            [ngValue]="i"
-          >
-            {{ i }}
-          </option>
-        </select>
+        <label for="title">Quantidade de Vagas</label>
+        <input type="number" id="title" formControlName="numberOfVacancies" />
         <app-control-error
           [control]="form.controls.numberOfVacancies"
         ></app-control-error>
