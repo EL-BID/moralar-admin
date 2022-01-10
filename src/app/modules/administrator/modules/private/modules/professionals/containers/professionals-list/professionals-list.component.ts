@@ -80,7 +80,7 @@ export class ProfessionalsListComponent extends ListContainerClass {
       .then((result: any) => {
         if (result) {
           this._httpService
-            .post('Profile/BlockUnblock', value)
+            .post(`${this.uri}/BlockUnblock`, value)
             .pipe(takeUntil(this.onDestroy))
             .subscribe(
               (response: any) => {
