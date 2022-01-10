@@ -1,6 +1,22 @@
 <app-card>
-  <h2 class="h5">Morador</h2>
-  <h1>{{ release[0]?.familyHolderName }}</h1> </app-card
+  <div class="row">
+    <div class="col-md-3">
+      <h2 class="h5">Morador</h2>
+      <h1>{{ release[0]?.familyHolderName }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">N° cadastro</h2>
+      <h1>{{ release[0]?.familyNumber }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">CPF</h2>
+      <h1>{{ release[0]?.familyHolderCpf | mask: "000.000.000-00" }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">Data de recebimento</h2>
+      <h1>{{ release[0]?.date * 1000 | date: "dd/MM/yyyy h:mm" }}</h1>
+    </div>
+  </div> </app-card
 ><br />
 
 <div class="row">
