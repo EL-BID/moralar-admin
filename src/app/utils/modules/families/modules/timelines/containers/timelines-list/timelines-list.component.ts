@@ -28,6 +28,8 @@ export class TimelinesListComponent extends ListContainerClass {
     },
   };
 
+  listName = 'linhas do tempo';
+
   uri = 'Family/TimeLine';
 
   constructor(
