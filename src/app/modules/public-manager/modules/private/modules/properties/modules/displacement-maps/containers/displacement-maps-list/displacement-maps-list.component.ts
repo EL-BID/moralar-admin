@@ -7,10 +7,9 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 @Component({
   selector: 'app-displacement-maps-list',
   templateUrl: './displacement-maps-list.component.html',
-  styleUrls: ['./displacement-maps-list.component.sass']
+  styleUrls: ['./displacement-maps-list.component.sass'],
 })
 export class DisplacementMapsListComponent extends ListContainerClass {
-
   formDataModel: FormDataModel = {
     columns: [
       { data: 'number', name: 'Number', searchable: false },
@@ -25,15 +24,15 @@ export class DisplacementMapsListComponent extends ListContainerClass {
       number: '',
       holderName: '',
       holderCpf: '',
-      status: ''
+      status: '',
     },
     order: {
       column: '0',
-      direction: 'asc'
-    }
+      direction: 'asc',
+    },
   };
 
-  uriCustom = 'Family/GetAll';
+  uriCustom = 'Family/DisplacementMapAllFamilies';
   method = 'get';
 
   constructor(
@@ -45,7 +44,8 @@ export class DisplacementMapsListComponent extends ListContainerClass {
   }
 
   handleDetails(): void {
-    this.router.navigate([this.listSelected[0].id], { relativeTo: this._activatedRoute });
+    this.router.navigate([this.listSelected[0].id], {
+      relativeTo: this._activatedRoute,
+    });
   }
-
 }

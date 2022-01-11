@@ -84,7 +84,7 @@ export abstract class ListContainerClass
   }
 
   handleListSearchChange(value: Params): void {
-    this.formDataModel.search = value;
+    this.formDataModel.search = { ...this.formDataModel.search, ...value };
     this.listSelected = [];
     this.updateQueryParams(value);
   }
