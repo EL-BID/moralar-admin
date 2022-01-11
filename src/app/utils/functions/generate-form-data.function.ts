@@ -59,7 +59,8 @@ export function generateFormData(formDataModel: FormDataModel): FormData {
   if (formDataModel.search) {
     for (const prop in formDataModel.search) {
       if (formDataModel.search.hasOwnProperty(prop)) {
-        const value = formDataModel.search[prop] || '';
+        const value =
+          formDataModel.search[prop] === null ? '' : formDataModel.search[prop];
         prop === 'search'
           ? formData.set('search[value]', value)
           : formData.set(prop, value);
