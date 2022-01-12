@@ -18,7 +18,7 @@ import { PollsComponent } from './polls.component';
     // components
     PollListComponent,
   ],
-  exports: [PollsListComponent],
+  exports: [PollListComponent],
   imports: [PollsRoutingModule, SharedModule],
 })
 export class PollsModule {}

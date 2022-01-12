@@ -25,7 +25,7 @@ import Timeline = gsap.core.Timeline;
     // components
     CourseListComponent,
   ],
-  exports: [CoursesListComponent],
+  exports: [CourseListComponent],
   imports: [
     CoursesRoutingModule,
     // modules
