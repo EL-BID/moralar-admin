@@ -1,4 +1,14 @@
 <div class="table-responsive">
+  <button
+    class="btn btn-info"
+    [routerLink]="[
+      '/gestor-publico/app/questionarios/disponiveis',
+      '61a0f38e890072a65f1f0b1f',
+      '615f278d88100afb401aa7e3'
+    ]"
+  >
+    Ver detalhes
+  </button>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -6,6 +16,7 @@
         <th>Título do questionário</th>
         <th>Data da disponibilização</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -13,12 +24,20 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || '-' }}</td>
-        <td>{{ item.date || '-' }}</td>
-        <td>{{ item.hasAnswered || '-' }}</td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.date || "-" }}</td>
+        <td>{{ item.hasAnswered || "-" }}</td>
+        <td>
+          <button
+            [routerLink]="['app/questionarios', '61c2060ef827cee0f43e0b6a']"
+          >
+            Ver detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
