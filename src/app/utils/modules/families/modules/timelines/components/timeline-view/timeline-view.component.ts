@@ -229,11 +229,11 @@ export class TimelineViewComponent
     let post;
     post = {
       familyId: this.activatedRoute.snapshot.paramMap.get('familyId'),
-      id: value.scheduleId,
+      id: value?.scheduleId,
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
-      date: value.date,
+      date: value?.date,
     };
     let modalConfirmData: ModalConfirmData;
 

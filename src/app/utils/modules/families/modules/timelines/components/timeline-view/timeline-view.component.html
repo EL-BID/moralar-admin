@@ -40,8 +40,8 @@
       *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
     >
       <button
+        class="btn btn-info mr-2"
         *ngIf="etapa.disponivel"
-        class="btn btn-outline btn-info mr-2"
         (click)="selecionarEtapa(i)"
       >
         {{ etapa.label }}
@@ -50,7 +50,31 @@
   </app-card>
 </ng-container>
 
-<app-card class="mb-3">{{ etapaSelecionada?.label }}</app-card>
+<app-card class="mb-3">
+  <h3>{{ etapaSelecionada?.label }}</h3>
+  <button
+    *ngIf="etapaSelecionada?.label == 'Mudança'"
+    class="btn btn-primary"
+    (click)="confirmChange({})"
+  >
+    Confirmar mudança
+  </button>
+  <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
+    <h4>Lista de imóveis</h4>
+  </div>
+
+  <div class="mb-2">
+    <h4>Lista de questionários</h4>
+  </div>
+
+  <div *ngIf="etapaSelecionada?.cursos" class="mb-2">
+    <h4>Cursos</h4>
+  </div>
+
+  <div *ngIf="etapaSelecionada?.enquetes" class="mb-2">
+    <h4>Enquetes</h4>
+  </div>
+</app-card>
 
 <ng-template #semProcessoAcessentamento>
   <h2 class="text-danger font-italic">
