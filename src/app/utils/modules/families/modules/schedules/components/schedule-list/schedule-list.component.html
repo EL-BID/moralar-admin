@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div *ngIf="list.length" class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -6,19 +6,24 @@
         <th>Data e Hora</th>
         <th>Assunto</th>
         <th>Status</th>
+      </tr>
     </thead>
+
     <tbody>
       <tr *ngFor="let item of list">
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.date | date: 'dd/MM/yyy HH:mm' || '-' }}</td>
-        <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || '-' }}</td>
-        <td>{{ scheduleTypeList[item.typeSubject]?.name || '-' }}</td>
+        <td>{{ item.date | date: "dd/MM/yyy HH:mm" || "-" }}</td>
+        <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || "-" }}</td>
+        <td>{{ scheduleTypeList[item.typeSubject]?.name || "-" }}</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<h5 *ngIf="!list.length">Nenhum agendamento encontrado</h5>

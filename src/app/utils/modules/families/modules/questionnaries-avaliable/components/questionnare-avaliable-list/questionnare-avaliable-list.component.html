@@ -1,14 +1,4 @@
-<div class="table-responsive">
-  <button
-    class="btn btn-info"
-    [routerLink]="[
-      '/gestor-publico/app/questionarios/disponiveis',
-      '61a0f38e890072a65f1f0b1f',
-      '615f278d88100afb401aa7e3'
-    ]"
-  >
-    Ver detalhes
-  </button>
+<div *ngIf="list.length" class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -33,7 +23,19 @@
         <td>{{ item.hasAnswered || "-" }}</td>
         <td>
           <button
-            [routerLink]="['app/questionarios', '61c2060ef827cee0f43e0b6a']"
+            *ngIf="item.status === 0"
+            [routerLink]="['app/questionarios', item.id]"
+          >
+            Ver detalhes
+          </button>
+          <button
+            *ngIf="item.status === 1"
+            class="btn btn-info"
+            [routerLink]="[
+              '/gestor-publico/app/questionarios/disponiveis',
+              item.quizId,
+              item.familyId
+            ]"
           >
             Ver detalhes
           </button>
@@ -42,3 +44,5 @@
     </tbody>
   </table>
 </div>
+
+<h5 *ngIf="!list.length">Nenhum questionário encontrado</h5>

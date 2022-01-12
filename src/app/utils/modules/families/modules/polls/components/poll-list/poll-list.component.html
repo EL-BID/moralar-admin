@@ -1,9 +1,9 @@
-<div class="table-responsive">
+<div *ngIf="list?.length" class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
         <th></th>
-        <th>Título da Enquete</th>
+        <th>Título da enquete</th>
         <th>Data da disponibilização</th>
         <th>Status</th>
       </tr>
@@ -13,13 +13,16 @@
         <td>
           <app-control-checkbox
             [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)">
+            (changed)="listItemSelected.emit(item)"
+          >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || '-' }}</td>
-        <td>{{ item.date || '-' }}</td>
-        <td>{{ item.hasAnswered || '-' }}</td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.date || "-" }}</td>
+        <td>{{ item.hasAnswered || "-" }}</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<h5 *ngIf="!list?.length">Nenhuma enquete encontrada</h5>
