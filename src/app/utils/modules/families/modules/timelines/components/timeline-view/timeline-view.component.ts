@@ -49,6 +49,9 @@ export class TimelineViewComponent
   ) {
     // @ts-ignore
     super();
+  }
+
+  formarInformacoesIniciais(): void {
     this.httpService
       .get(
         `Family/TimeLineProcessMandatory/${this.activatedRoute.snapshot.paramMap.get(
@@ -137,7 +140,9 @@ export class TimelineViewComponent
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //this.formarInformacoesIniciais();
+  }
 
   getObjs(current) {
     let link;
