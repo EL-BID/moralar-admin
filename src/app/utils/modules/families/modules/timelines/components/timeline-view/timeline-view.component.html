@@ -1,40 +1,47 @@
-<div class="form-row my-3">
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="handleDetails()"
-    >
-      Detalhes
-    </button>
-  </div>
-</div>
+<h2>Dados do titular</h2>
+
 <app-card class="mb-3">
   <div class="row">
-    <div class="col-lg-3">
-      <p class="mb-lg-0">
-        <span class="view-label">Cadastro</span>
-        <span class="d-block">{{ family.holder?.number || "-" }}</span>
-      </p>
+    <div class="col-md-3">
+      <div class="font-weight-bold">Número do cadastro</div>
+      <div class="font-italic">{{ family.holder?.number || "-" }}</div>
     </div>
-    <div class="col-lg-3">
-      <p class="mb-lg-0">
-        <span class="view-label">Titular</span>
-        <span class="d-block">{{ family.holder?.name || "-" }}</span>
-      </p>
+
+    <div class="col-md-3">
+      <div class="font-weight-bold">Nome do morador titular</div>
+      <div class="font-italic">{{ family.holder?.name || "-" }}</div>
     </div>
-    <div class="col-lg-3">
-      <p class="mb-lg-0">
-        <span class="view-label">Cpf</span>
-        <span class="d-block">{{
-          family.holder?.cpf || "-" | mask: "000.000.000-99"
-        }}</span>
-      </p>
+
+    <div class="col-md-3">
+      <div class="font-weight-bold">CPF do morador titular</div>
+      <div class="font-italic">
+        {{ family?.holder?.cpf | mask: "999.999.999-99" }}
+      </div>
+    </div>
+
+    <div class="col-md-3 text-right">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="handleDetails()"
+      >
+        Detalhes
+      </button>
     </div>
   </div>
 </app-card>
 
-<h2 class="h5">Situação</h2>
+<ng-container
+  *ngIf="processoReassentamentoAtivo; else semProcessoAcessentamento"
+></ng-container>
+
+<ng-template #semProcessoAcessentamento>
+  <h2 class="text-danger font-italic">
+    Essa família não possui processo de reassentamento aberto
+  </h2>
+</ng-template>
+
+<!-- <h2 class="h5">Situação</h2>
 <ul class="nav nav-tabs justify-content-center">
   <li class="nav-item" *ngFor="let item of stage; let i = index">
     <a
@@ -123,4 +130,4 @@
 
 <app-card class="mb-3">
   <app-polls-list [list]="listPollsByFamily"></app-polls-list>
-</app-card>
+</app-card> -->
