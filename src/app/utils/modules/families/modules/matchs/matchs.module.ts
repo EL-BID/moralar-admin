@@ -24,7 +24,7 @@ import Timeline = gsap.core.Timeline;
     // components
     MatchListComponent,
   ],
-  exports: [MatchsListComponent],
+  exports: [MatchListComponent],
   imports: [
     MatchsRoutingModule,
     NgbDropdownModule,
