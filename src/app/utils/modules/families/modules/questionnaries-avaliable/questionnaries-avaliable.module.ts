@@ -16,7 +16,7 @@ import { QuestionnariesAvaliableComponent } from './questionnaries-avaliable.com
     QuestionnariesAvaliableListComponent,
     QuestionnareAvaliableListComponent,
   ],
-  exports: [QuestionnariesAvaliableListComponent],
+  exports: [QuestionnareAvaliableListComponent],
   imports: [QuestionnariesAvaliableRoutingModule, SharedModule],
 })
 export class QuestionnariesAvaliableModule {}

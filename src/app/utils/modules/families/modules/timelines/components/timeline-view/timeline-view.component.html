@@ -33,7 +33,62 @@
 
 <ng-container
   *ngIf="processoReassentamentoAtivo; else semProcessoAcessentamento"
-></ng-container>
+>
+  <h2>Passos</h2>
+  <app-card class="mb-3">
+    <ng-container
+      *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
+    >
+      <button
+        class="btn btn-info mr-2"
+        *ngIf="etapa.disponivel"
+        (click)="selecionarEtapa(i)"
+      >
+        {{ etapa.label }}
+      </button>
+    </ng-container>
+  </app-card>
+
+  <ng-container *ngIf="etapaSelecionada">
+    <app-card class="mb-3">
+      <h2>{{ etapaSelecionada?.label }}</h2>
+      <button
+        *ngIf="etapaSelecionada?.label == 'Mudança'"
+        class="btn btn-primary"
+        (click)="confirmChange({})"
+      >
+        Confirmar mudança
+      </button>
+
+      <div class="mb-2">
+        <h3>Lista de agendamentos</h3>
+        <app-schedule-list [list]="[]"></app-schedule-list>
+      </div>
+
+      <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
+        <h3>Lista de imóveis</h3>
+        <app-match-list [list]="[]"></app-match-list>
+      </div>
+
+      <div class="mb-2">
+        <h3>lista de questionários</h3>
+        <app-questionnare-avaliable-list
+          [list]="[]"
+        ></app-questionnare-avaliable-list>
+      </div>
+
+      <div *ngIf="etapaSelecionada?.cursos" class="mb-2">
+        <h3>Cursos</h3>
+        <app-course-list [list]="[]"></app-course-list>
+      </div>
+
+      <div *ngIf="etapaSelecionada?.enquetes" class="mb-2">
+        <h3>Enquetes</h3>
+        <app-poll-list [list]="listPollsByFamily"></app-poll-list>
+      </div>
+    </app-card>
+  </ng-container>
+</ng-container>
 
 <ng-template #semProcessoAcessentamento>
   <h2 class="text-danger font-italic">

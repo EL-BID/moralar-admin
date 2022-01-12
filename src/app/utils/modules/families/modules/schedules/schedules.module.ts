@@ -25,7 +25,7 @@ import Timeline = gsap.core.Timeline;
     // components
     ScheduleListComponent,
   ],
-  exports: [SchedulesListComponent],
+  exports: [ScheduleListComponent],
   imports: [
     SchedulesRoutingModule,
     // modules
