@@ -59,20 +59,30 @@
       >
         Confirmar mudança
       </button>
+
+      <div class="mb-2">
+        <app-schedule-list [list]="[]"></app-schedule-list>
+      </div>
+
       <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
         <h4>Lista de imóveis</h4>
+        <app-matchs-list [list]="[]"></app-matchs-list>
       </div>
 
       <div class="mb-2">
-        <h4>Lista de questionários</h4>
+        <app-questionnaries-avaliable-list
+          [list]="[]"
+        ></app-questionnaries-avaliable-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.cursos" class="mb-2">
         <h4>Cursos</h4>
+        <app-courses-list [list]="[]"></app-courses-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.enquetes" class="mb-2">
         <h4>Enquetes</h4>
+        <app-polls-list [list]="listPollsByFamily"></app-polls-list>
       </div>
     </app-card>
   </ng-container>
