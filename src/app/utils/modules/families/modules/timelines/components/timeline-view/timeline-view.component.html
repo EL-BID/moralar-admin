@@ -33,7 +33,24 @@
 
 <ng-container
   *ngIf="processoReassentamentoAtivo; else semProcessoAcessentamento"
-></ng-container>
+>
+  <h2>Passos</h2>
+  <app-card class="mb-3">
+    <ng-container
+      *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
+    >
+      <button
+        *ngIf="etapa.disponivel"
+        class="btn btn-outline btn-info mr-2"
+        (click)="selecionarEtapa(i)"
+      >
+        {{ etapa.label }}
+      </button>
+    </ng-container>
+  </app-card>
+</ng-container>
+
+<app-card class="mb-3">{{ etapaSelecionada?.label }}</app-card>
 
 <ng-template #semProcessoAcessentamento>
   <h2 class="text-danger font-italic">

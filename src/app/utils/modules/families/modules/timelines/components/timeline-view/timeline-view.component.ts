@@ -1,18 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpService } from '../../../../../../services/http/http.service';
-import { takeUntil } from 'rxjs/operators';
-import {
-  dateAndTimeToString,
-  dateToString,
-} from '../../../../../../functions/date.function';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
+
+import { ListContainerClass } from '../../../../../../classes/list-container.class';
+import { dateAndTimeToString } from '../../../../../../functions/date.function';
 import { SCHEDULE_TYPE_LIST } from '../../../../../../interfaces/schedules.interface';
 import { TIMELINE_STATUS_LIST } from '../../../../../../interfaces/timelines.interface';
-import { ModalConfirmData } from '../../../../../shared/components/modal-confirm/modal-confirm.interface';
-import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
-import { ListContainerClass } from '../../../../../../classes/list-container.class';
+import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
+import { ModalConfirmData } from '../../../../../shared/components/modal-confirm/modal-confirm.interface';
 
 @Component({
   selector: 'app-timeline-view',
@@ -38,7 +36,9 @@ export class TimelineViewComponent
   family: any;
 
   // novos atributos
-  processoReassentamentoAtivo = false;
+  etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
+  processoReassentamentoAtivo = true;
+  etapaSelecionada!: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -50,6 +50,14 @@ export class TimelineViewComponent
     // @ts-ignore
     super();
   }
+
+  // novos códigos
+
+  selecionarEtapa(index: number): void {
+    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo[index];
+    this.etapaSelecionada.visivel = true;
+  }
+  // Fim dos novos códigos
 
   formarInformacoesIniciais(): void {
     this.httpService
