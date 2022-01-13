@@ -1,7 +1,7 @@
 <h1>Minhas notificações</h1>
 
 <ng-container *ngIf="abstract; else all">
-  <ng-container *ngIf="!loading && !list.length; else miniList">
+  <ng-container *ngIf="!loading && !list?.length; else miniList">
     <h5 class="text-secondary">Nenhuma notificação encontrada</h5>
   </ng-container>
 
@@ -37,7 +37,7 @@
   >
   </app-notification-list-search>
 
-  <ng-container *ngIf="!loading && !list.length; else items">
+  <ng-container *ngIf="!loading && !list?.length; else items">
     <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
   </ng-container>
 

@@ -23,15 +23,15 @@ export class TimelineViewComponent
 {
   timeLineStatusList: any[] = TIMELINE_STATUS_LIST;
   scheduleTypeList: any[] = SCHEDULE_TYPE_LIST;
-  listQuizByFamily: any[];
-  listPropertiesInterest: any[];
-  listCourseByFamily: any[];
-  listPollsByFamily: any[];
-  listSchedulesByFamily: any[];
+  listQuizByFamily = [];
+  listPropertiesInterest = [];
+  listCourseByFamily = [];
+  listPollsByFamily = [];
+  listSchedulesByFamily = [];
   typeSubjectCurrent: any;
   tabSelected: any;
-  stage: any[];
-  listSchedulesHistory: any[];
+  stage = [];
+  listSchedulesHistory = [];
   @Input()
   family: any;
   idFamilia!: string;
@@ -120,11 +120,13 @@ export class TimelineViewComponent
     }
 
     if (link)
-      this.httpService.get(link).subscribe((response: any) => {
-        this.listQuizByFamily = response.data.detailQuiz;
-        this.listPropertiesInterest = response.data.interestResidencialProperty;
-        this.listCourseByFamily = response.data.courses;
-        for (let i = 0; response.data.courses.length > i; i++) {
+      this.httpService.get(link).subscribe(({ data }) => {
+        this.listSchedulesByFamily = data?.schedules;
+        this.listQuizByFamily = data.detailQuiz;
+        this.listPropertiesInterest = data.interestResidencialProperty;
+        this.listCourseByFamily = data.courses;
+        this.listPollsByFamily = data.detailEnquete;
+        for (let i = 0; data.courses.length > i; i++) {
           this.listCourseByFamily[i].startDate = dateAndTimeToString(
             this.listCourseByFamily[i].startDate
           );
@@ -138,12 +140,12 @@ export class TimelineViewComponent
   confirmChange(value: any): void {
     let post;
     post = {
-      familyId: this.activatedRoute.snapshot.paramMap.get('familyId'),
-      id: value?.scheduleId,
+      familyId: this.idFamilia,
+      id: this.listSchedulesByFamily,
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
-      date: value?.date,
+      date: new Date().getTime(),
     };
     let modalConfirmData: ModalConfirmData;
 

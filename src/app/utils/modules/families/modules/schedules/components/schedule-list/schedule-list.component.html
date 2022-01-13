@@ -1,4 +1,4 @@
-<div *ngIf="list.length" class="table-responsive">
+<div *ngIf="list?.length" class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,7 +18,7 @@
           >
           </app-control-checkbox>
         </td>
-        <td>{{ item.date | date: "dd/MM/yyy HH:mm" || "-" }}</td>
+        <td>{{ item.date * 1000 | date: "dd/MM/yyy HH:mm" || "-" }}</td>
         <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || "-" }}</td>
         <td>{{ scheduleTypeList[item.typeSubject]?.name || "-" }}</td>
       </tr>
@@ -26,4 +26,4 @@
   </table>
 </div>
 
-<h5 *ngIf="!list.length" class="text-info">Nenhum agendamento encontrado</h5>
+<h5 *ngIf="!list?.length" class="text-info">Nenhum agendamento encontrado</h5>

@@ -64,29 +64,29 @@
 
       <div class="mb-2">
         <h3>Lista de agendamentos</h3>
-        <app-schedule-list [list]="[]"></app-schedule-list>
+        <app-schedule-list [list]="listSchedulesByFamily"></app-schedule-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
         <h3>Lista de imóveis</h3>
-        <app-match-list [list]="[]"></app-match-list>
+        <app-match-list [list]="listPropertiesInterest"></app-match-list>
       </div>
 
       <div class="mb-2">
         <h3>Lista de questionários</h3>
         <app-questionnare-avaliable-list
-          [list]="[]"
+          [list]="listQuizByFamily"
         ></app-questionnare-avaliable-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.cursos" class="mb-2">
         <h3>Cursos</h3>
-        <app-course-list [list]="[]"></app-course-list>
+        <app-course-list [list]="listCourseByFamily"></app-course-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.enquetes" class="mb-2">
         <h3>Enquetes</h3>
-        <app-poll-list [list]="[]"></app-poll-list>
+        <app-poll-list [list]="listPollsByFamily"></app-poll-list>
       </div>
     </app-card>
   </ng-container>

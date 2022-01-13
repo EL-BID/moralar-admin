@@ -1,4 +1,4 @@
-<div *ngIf="list.length" class="table-responsive">
+<div *ngIf="list?.length" class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -26,4 +26,4 @@
   </table>
 </div>
 
-<h5 *ngIf="!list.length" class="text-info">Nenhum curso encontrado</h5>
+<h5 *ngIf="!list?.length" class="text-info">Nenhum curso encontrado</h5>
