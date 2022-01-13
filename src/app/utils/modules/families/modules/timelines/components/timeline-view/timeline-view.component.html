@@ -54,6 +54,7 @@
   <ng-container *ngIf="etapaSelecionada">
     <app-card class="mb-3">
       <h2>{{ etapaSelecionada?.label }}</h2>
+      <pre>{{ agendamentoSelecionado | json }}</pre>
       <button
         [disabled]="!agendamentoSelecionado"
         *ngIf="etapaSelecionada?.label == 'Mudança'"

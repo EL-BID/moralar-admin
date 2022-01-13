@@ -4,7 +4,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
-import { dateAndTimeToString } from '../../../../../../functions/date.function';
+import {
+  dateAndTimeToSeconds,
+  dateAndTimeToString,
+} from '../../../../../../functions/date.function';
 import { TIMELINE_STATUS_LIST } from '../../../../../../interfaces/timelines.interface';
 import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
@@ -20,16 +23,11 @@ export class TimelineViewComponent
   extends ListContainerClass
   implements OnInit
 {
-  timeLineStatusList: any[] = TIMELINE_STATUS_LIST;
-  scheduleTypeList = [];
   listQuizByFamily = [];
   listPropertiesInterest = [];
   listCourseByFamily = [];
   listPollsByFamily = [];
   listSchedulesByFamily = [];
-  typeSubjectCurrent: any;
-  tabSelected: any;
-  stage = [];
   listSchedulesHistory = [];
   @Input()
   family: any;
@@ -37,7 +35,7 @@ export class TimelineViewComponent
 
   // novos atributos
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
-  processoReassentamentoAtivo = true;
+  processoReassentamentoAtivo = false;
   etapaSelecionada!: any;
   typeSubject!: any;
   historicoFamilia = [];
@@ -54,17 +52,17 @@ export class TimelineViewComponent
     super();
   }
 
-  // novos códigos
-
   selecionarEtapa(index: number): void {
     this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo[index];
     this.etapaSelecionada.visivel = true;
   }
-  // Fim dos novos códigos
 
   selecionarAgendamento(agendamentos: any[]): void {
-    if (agendamentos.length > 1) this.agendamentoSelecionado = null;
-    if (agendamentos.length == 1) this.agendamentoSelecionado = agendamentos[0];
+    this.handleListItemSelected(agendamentos);
+    if (this.listSelected.length > 1 || !this.listSelected.length)
+      this.agendamentoSelecionado = null;
+    if (this.listSelected.length == 1)
+      this.agendamentoSelecionado = agendamentos;
   }
 
   ngOnInit() {
@@ -72,6 +70,8 @@ export class TimelineViewComponent
     this.typeSubject = Number(
       this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
     );
+    const tipoSituacoes = [2, 4, 7, 8];
+    this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
     this.getObjs();
     this.buscarHistorico();
   }
@@ -150,7 +150,7 @@ export class TimelineViewComponent
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
-      date: this.agendamentoSelecionado.date,
+      date: +new Date() / 1000,
     };
     let modalConfirmData: ModalConfirmData;
 
@@ -168,17 +168,12 @@ export class TimelineViewComponent
       .then((result: any) => {
         if (result) {
           this.httpService.post('Schedule/ChangeSubject', post).subscribe(
-            (response: any) => {
-              this.megaleiosAlertService.success(response.message);
-              setTimeout(() => {
-                location.reload();
-              }, 1000);
+            ({ message }) => {
+              this.megaleiosAlertService.success(message);
+              this.typeSubject = 8;
             },
-            (response: any) => {
-              this.megaleiosAlertService.error(response.message);
-              setTimeout(() => {
-                location.reload();
-              }, 1000);
+            ({ message }) => {
+              this.megaleiosAlertService.error(message);
             }
           );
         }
