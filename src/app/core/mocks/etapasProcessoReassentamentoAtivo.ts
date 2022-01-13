@@ -5,6 +5,7 @@ export const etapasProcessoReassentamentoAtivo = [
     visivel: false,
     cursos: true,
     enquetes: true,
+    typeSubject: 2,
   },
   {
     label: 'Escolha do imóvel',
@@ -12,6 +13,7 @@ export const etapasProcessoReassentamentoAtivo = [
     visivel: false,
     cursos: true,
     enquetes: true,
+    typeSubject: 4,
   },
   {
     label: 'Mudança',
@@ -19,6 +21,7 @@ export const etapasProcessoReassentamentoAtivo = [
     visivel: false,
     cursos: true,
     enquetes: true,
+    typeSubject: 7,
   },
   {
     label: 'Acompanhamento pós-mudanca',
@@ -26,5 +29,6 @@ export const etapasProcessoReassentamentoAtivo = [
     visivel: false,
     cursos: true,
     enquetes: true,
+    typeSubject: 8,
   },
 ];

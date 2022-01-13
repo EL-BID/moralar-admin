@@ -48,6 +48,17 @@ export class TimelineViewComponent
     super();
   }
 
+  ngOnInit() {
+    this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
+    this.typeSubject = Number(
+      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
+    );
+    const tipoSituacoes = [2, 4, 7, 8];
+    this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
+    this.buscarInformacoesSegmentadas();
+    this.buscarHistorico();
+  }
+
   selecionarEtapa(index: number): void {
     this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo[index];
     this.etapaSelecionada.visivel = true;
@@ -59,17 +70,6 @@ export class TimelineViewComponent
       this.agendamentoSelecionado = null;
     if (this.listSelected.length == 1)
       this.agendamentoSelecionado = agendamentos;
-  }
-
-  ngOnInit() {
-    this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
-    this.typeSubject = Number(
-      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
-    );
-    const tipoSituacoes = [2, 4, 7, 8];
-    this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
-    this.buscarInformacoesSegmentadas();
-    this.buscarHistorico();
   }
 
   validarEtapas(): void {
@@ -97,17 +97,17 @@ export class TimelineViewComponent
         this.historicoFamilia = response.data;
         this.listSchedulesHistory = response.data;
         this.validarEtapas();
-        for (let i = 0; response.data.length > i; i++) {
-          this.listSchedulesHistory[i].date = dateAndTimeToString(
-            this.listSchedulesHistory[i].date
-          );
-        }
+        this.selecionarEtapa(
+          this.etapasProcessoReassentamentoAtivo.findIndex(
+            (e) => e.typeSubject == this.typeSubject
+          )
+        );
       });
   }
 
-  buscarInformacoesSegmentadas() {
+  buscarInformacoesSegmentadas(typeSubject = this.typeSubject) {
     let link;
-    switch (this.typeSubject) {
+    switch (typeSubject) {
       case 2:
         link = `Schedule/DetailTimeLineProcessReunionPGM/${this.idFamilia}`;
         break;
@@ -121,13 +121,24 @@ export class TimelineViewComponent
     }
 
     if (link)
-      this.httpService.get(link).subscribe(({ data }) => {
-        this.listSchedulesByFamily = data?.schedules;
-        this.listQuizByFamily = data.detailQuiz;
-        this.listPropertiesInterest = data.interestResidencialProperty;
-        this.listCourseByFamily = data.courses;
-        this.listPollsByFamily = data.detailEnquete;
-      });
+      this.httpService.get(link, true).subscribe(
+        ({ data }) => {
+          this.listSchedulesByFamily = data?.schedules;
+          this.listQuizByFamily = data.detailQuiz;
+          this.listPropertiesInterest = data.interestResidencialProperty;
+          this.listCourseByFamily = data.courses;
+          this.listPollsByFamily = data.detailEnquete;
+        },
+        ({ message }) => {
+          this.megaleiosAlertService.error(message);
+          this.listSchedulesByFamily =
+            this.listQuizByFamily =
+            this.listPropertiesInterest =
+            this.listCourseByFamily =
+            this.listPollsByFamily =
+              [];
+        }
+      );
   }
 
   confirmChange(): void {
