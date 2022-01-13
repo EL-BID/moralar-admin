@@ -1,5 +1,7 @@
 <h2>Dados do titular</h2>
 
+<!-- <pre>{{ listSchedulesHistory | json }}</pre> -->
+
 <app-card class="mb-3">
   <div class="row">
     <div class="col-md-3">
@@ -95,94 +97,3 @@
     Essa família não possui processo de reassentamento aberto
   </h2>
 </ng-template>
-
-<!-- <h2 class="h5">Situação</h2>
-<ul class="nav nav-tabs justify-content-center">
-  <li class="nav-item" *ngFor="let item of stage; let i = index">
-    <a
-      class="nav-link stage{{ i }} {{ item.stageSituation }} "
-      (click)="loadInfoStage(i); activateClass($event)"
-    >
-      {{ scheduleTypeList[item?.typeSubject]?.name | uppercase }}
-    </a>
-  </li>
-</ul>
-<div class="progress" style="height: 20px">
-  <div
-    class="progress-bar"
-    role="progressbar"
-    id="progBar"
-    aria-valuenow="25"
-    aria-valuemin="0"
-    aria-valuemax="0"
-  ></div>
-</div>
-<app-card class="mb-3">
-  <div class="row">
-    <div class="col-lg-auto">
-      <p class="mb-lg-0">
-        <span class="view-label">Data e Hora</span>
-        <span class="d-block">{{
-          tabSelected?.date | date: "dd/MM/yyyy HH:mm"
-        }}</span>
-      </p>
-    </div>
-    <div class="col-lg-auto">
-      <p class="mb-lg-0">
-        <span class="view-label">Assunto</span>
-        <span class="d-block">{{
-          scheduleTypeList[tabSelected?.typeSubject]?.name
-        }}</span>
-      </p>
-    </div>
-    <div class="col-lg-auto">
-      <p class="mb-0">
-        <span class="view-label">Status</span>
-        <span class="d-block">{{
-          timeLineStatusList[tabSelected?.typeScheduleStatus]?.name
-        }}</span>
-      </p>
-    </div>
-    <div
-      class="col-lg-auto"
-      *ngIf="
-        tabSelected?.typeSubject == 7 && tabSelected?.stageSituation == 'active'
-      "
-    >
-      <button
-        type="button"
-        class="btn btn-outline-success"
-        (click)="confirmChange(tabSelected)"
-      >
-        Confirmar mudança
-      </button>
-    </div>
-  </div>
-</app-card>
-<app-card
-  class="mb-3"
-  *ngIf="tabSelected?.typeSubject == 7 || tabSelected?.typeSubject == 8"
->
-  <app-schedules-list [list]="listSchedulesHistory"></app-schedules-list>
-</app-card>
-
-<app-card
-  class="mb-3"
-  *ngIf="tabSelected?.typeSubject == 2 || tabSelected?.typeSubject == 8"
->
-  <app-questionnaries-avaliable-list
-    [list]="listQuizByFamily"
-  ></app-questionnaries-avaliable-list>
-</app-card>
-
-<app-card class="mb-3" *ngIf="tabSelected?.typeSubject == 4">
-  <app-matchs-list [list]="listPropertiesInterest"></app-matchs-list>
-</app-card>
-
-<app-card class="mb-3">
-  <app-courses-list [list]="listCourseByFamily"></app-courses-list>
-</app-card>
-
-<app-card class="mb-3">
-  <app-polls-list [list]="listPollsByFamily"></app-polls-list>
-</app-card> -->

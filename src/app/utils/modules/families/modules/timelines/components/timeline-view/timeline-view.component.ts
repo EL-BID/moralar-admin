@@ -34,11 +34,13 @@ export class TimelineViewComponent
   listSchedulesHistory: any[];
   @Input()
   family: any;
+  idFamilia!: string;
 
   // novos atributos
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
   processoReassentamentoAtivo = true;
   etapaSelecionada!: any;
+  typeSubject!: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,117 +61,25 @@ export class TimelineViewComponent
   }
   // Fim dos novos códigos
 
-  formarInformacoesIniciais(): void {
-    this.httpService
-      .get(
-        `Family/TimeLineProcessMandatory/${this.activatedRoute.snapshot.paramMap.get(
-          'familyId'
-        )}`
-      )
-      .subscribe((response: any) => {
-        let indexCurrent = 1;
-        this.typeSubjectCurrent = response.data.schedule.typeSubject;
-        this.stage = response.data.data;
-        for (let i = 0; this.stage.length > i; i++) {
-          if (this.stage[i].children.length > 0) {
-            let size;
-            size = this.stage[i].children.length - 1;
-            this.stage[i].children[size].date = dateAndTimeToString(
-              this.stage[i].children[size].date
-            );
-            // checking stages
-            switch (this.stage[i].children[size].typeScheduleStatus) {
-              case 0:
-                if (
-                  this.stage[i].children[size].typeSubject ===
-                  this.typeSubjectCurrent
-                ) {
-                  // current
-                  indexCurrent = i;
-                  this.tabSelected = this.stage[i].children[size];
-                  this.stage[i].stageSituation = 'active';
-                } else {
-                  // pending
-                  this.stage[i].stageSituation = 'disabled';
-                }
-                break;
-              case 4:
-                if (
-                  this.stage[i].children[size].typeSubject ===
-                  this.typeSubjectCurrent
-                ) {
-                  // current
-                  indexCurrent = i;
-                  this.tabSelected = this.stage[i].children[size];
-                  this.stage[i].stageSituation = 'active';
-                } else {
-                  this.stage[i].stageSituation = '';
-                }
-                break;
-            }
-          } else {
-            this.stage[i].date = dateAndTimeToString(this.stage[i].date);
-            // checking stages
-            switch (this.stage[i].typeScheduleStatus) {
-              case 0:
-                if (this.stage[i].typeSubject === this.typeSubjectCurrent) {
-                  // current
-                  indexCurrent = i;
-                  this.tabSelected = this.stage[i];
-                  this.stage[i].stageSituation = 'active';
-                } else {
-                  // pending
-                  this.stage[i].stageSituation = 'disabled';
-                }
-                break;
-              case 4:
-                // completed
-                if (this.stage[i].typeSubject === this.typeSubjectCurrent) {
-                  // current
-                  indexCurrent = i;
-                  this.tabSelected = this.stage[i];
-                  this.stage[i].stageSituation = 'active';
-                } else {
-                  // pending
-                  this.stage[i].stageSituation = '';
-                }
-                break;
-            }
-          }
-        }
-
-        if (response.data.data.length) {
-          let porc;
-          porc = ((indexCurrent + 1) / response.data.data.length) * 100;
-          document.getElementById('progBar').style.width = `${porc}%`;
-          // document.getElementById('progBar').innerHTML = `${porc}%`;
-        }
-        this.getObjs(this.typeSubjectCurrent);
-      });
-  }
-
   ngOnInit() {
-    //this.formarInformacoesIniciais();
+    this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
+    this.typeSubject = this.activatedRoute.snapshot.paramMap.get('typeSubject');
+    this.getObjs();
   }
 
-  getObjs(current) {
+  getObjs() {
+    const typeSubject = Number(this.typeSubject);
     let link;
-    switch (current) {
+    switch (typeSubject) {
       case 2:
-        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.activatedRoute.snapshot.paramMap.get(
-          'familyId'
-        )}`;
+        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.idFamilia}`;
         break;
       case 4:
-        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.activatedRoute.snapshot.paramMap.get(
-          'familyId'
-        )}`;
+        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.idFamilia}`;
         break;
       case 7:
       case 8:
-        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.activatedRoute.snapshot.paramMap.get(
-          'familyId'
-        )}/${current}`;
+        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.idFamilia}/${typeSubject}`;
         this.httpService
           .get(
             `Schedule/GetHistoryByFamily/${this.activatedRoute.snapshot.paramMap.get(
@@ -199,30 +109,6 @@ export class TimelineViewComponent
         );
       }
     });
-  }
-
-  activateClass(item) {
-    let i: number;
-    for (
-      i = 0;
-      i < document.getElementsByClassName('nav-link active').length;
-      i++
-    ) {
-      document.getElementsByClassName('nav-link active')[i].className =
-        'nav-link';
-    }
-    item.target.className = 'nav-link active';
-  }
-
-  loadInfoStage(i) {
-    if (this.stage[i].children.length > 0) {
-      this.tabSelected = this.stage[i].children;
-      let size;
-      size = this.stage[i].children.length - 1;
-      this.tabSelected = this.stage[i].children[size];
-    } else {
-      this.tabSelected = this.stage[i];
-    }
   }
 
   confirmChange(value: any): void {

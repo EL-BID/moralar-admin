@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // containers
 import { TimelinesComponent } from './timelines.component';
 import { TimelinesListComponent } from './containers/timelines-list/timelines-list.component';
-import {TimelinesDetailsComponent} from './containers/timelines-details/timelines-details.component';
+import { TimelinesDetailsComponent } from './containers/timelines-details/timelines-details.component';
 
 const routes: Routes = [
   {
@@ -12,14 +12,14 @@ const routes: Routes = [
     component: TimelinesComponent,
     children: [
       { path: '', component: TimelinesListComponent },
-      { path: ':familyId', component: TimelinesDetailsComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full' }
-    ]
-  }
+      { path: ':familyId/:typeSubject', component: TimelinesDetailsComponent },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TimelinesRoutingModule { }
+export class TimelinesRoutingModule {}
