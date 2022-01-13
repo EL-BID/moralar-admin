@@ -24,7 +24,7 @@
         <td>
           <button
             *ngIf="item.status === 0"
-            [routerLink]="['app/questionarios', item.id]"
+            [routerLink]="['app/questionarios', item.quizId]"
           >
             Ver detalhes
           </button>
@@ -34,7 +34,7 @@
             [routerLink]="[
               '/gestor-publico/app/questionarios/disponiveis',
               item.quizId,
-              item.familyId
+              item.quizFamilyId
             ]"
           >
             Ver detalhes

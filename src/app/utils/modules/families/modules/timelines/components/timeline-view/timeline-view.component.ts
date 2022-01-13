@@ -5,7 +5,6 @@ import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProc
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
 import { dateAndTimeToString } from '../../../../../../functions/date.function';
-import { SCHEDULE_TYPE_LIST } from '../../../../../../interfaces/schedules.interface';
 import { TIMELINE_STATUS_LIST } from '../../../../../../interfaces/timelines.interface';
 import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
@@ -22,7 +21,7 @@ export class TimelineViewComponent
   implements OnInit
 {
   timeLineStatusList: any[] = TIMELINE_STATUS_LIST;
-  scheduleTypeList: any[] = SCHEDULE_TYPE_LIST;
+  scheduleTypeList = [];
   listQuizByFamily = [];
   listPropertiesInterest = [];
   listCourseByFamily = [];
@@ -42,6 +41,7 @@ export class TimelineViewComponent
   etapaSelecionada!: any;
   typeSubject!: any;
   historicoFamilia = [];
+  agendamentoSelecionado!: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -61,6 +61,11 @@ export class TimelineViewComponent
     this.etapaSelecionada.visivel = true;
   }
   // Fim dos novos códigos
+
+  selecionarAgendamento(agendamentos: any[]): void {
+    if (agendamentos.length > 1) this.agendamentoSelecionado = null;
+    if (agendamentos.length == 1) this.agendamentoSelecionado = agendamentos[0];
+  }
 
   ngOnInit() {
     this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
@@ -137,15 +142,15 @@ export class TimelineViewComponent
       });
   }
 
-  confirmChange(value: any): void {
+  confirmChange(): void {
     let post;
     post = {
       familyId: this.idFamilia,
-      id: this.listSchedulesByFamily,
+      id: this.agendamentoSelecionado.id,
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
-      date: new Date().getTime(),
+      date: this.agendamentoSelecionado.date,
     };
     let modalConfirmData: ModalConfirmData;
 

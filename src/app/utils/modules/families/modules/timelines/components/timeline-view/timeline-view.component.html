@@ -55,16 +55,20 @@
     <app-card class="mb-3">
       <h2>{{ etapaSelecionada?.label }}</h2>
       <button
+        [disabled]="!agendamentoSelecionado"
         *ngIf="etapaSelecionada?.label == 'Mudança'"
         class="btn btn-primary"
-        (click)="confirmChange({})"
+        (click)="confirmChange()"
       >
         Confirmar mudança
       </button>
 
       <div class="mb-2">
         <h3>Lista de agendamentos</h3>
-        <app-schedule-list [list]="listSchedulesByFamily"></app-schedule-list>
+        <app-schedule-list
+          (listItemSelected)="selecionarAgendamento($event)"
+          [list]="listSchedulesByFamily"
+        ></app-schedule-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
