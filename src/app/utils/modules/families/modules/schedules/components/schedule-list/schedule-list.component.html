@@ -12,11 +12,13 @@
     <tbody>
       <tr *ngFor="let item of list">
         <td>
-          <app-control-checkbox
-            [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)"
-          >
-          </app-control-checkbox>
+          <ng-container *ngIf="item?.typeScheduleStatus === 0">
+            <app-control-checkbox
+              [value]="isChecked(item)"
+              (changed)="listItemSelected.emit(item)"
+            >
+            </app-control-checkbox>
+          </ng-container>
         </td>
         <td>{{ item.date * 1000 | date: "dd/MM/yyy HH:mm" || "-" }}</td>
         <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || "-" }}</td>

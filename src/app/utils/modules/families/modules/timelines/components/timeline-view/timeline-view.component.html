@@ -76,29 +76,40 @@
         <app-schedule-list
           (listItemSelected)="selecionarAgendamento($event)"
           [list]="listSchedulesByFamily"
+          [hideTableItems]="ocultarCheckbox"
         ></app-schedule-list>
       </div>
 
       <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
         <h3>Lista de imóveis</h3>
-        <app-match-list [list]="listPropertiesInterest"></app-match-list>
+        <app-match-list
+          [list]="listPropertiesInterest"
+          [hideTableItems]="ocultarCheckbox"
+        ></app-match-list>
       </div>
 
       <div class="mb-2">
         <h3>Lista de questionários</h3>
         <app-questionnare-avaliable-list
+          [hideTableItems]="ocultarCheckbox"
           [list]="listQuizByFamily"
         ></app-questionnare-avaliable-list>
       </div>
 
       <div class="mb-2">
         <h3>Cursos</h3>
-        <app-course-list [list]="listCourseByFamily"></app-course-list>
+        <app-course-list
+          [hideTableItems]="ocultarCheckbox"
+          [list]="listCourseByFamily"
+        ></app-course-list>
       </div>
 
       <div class="mb-2">
         <h3>Enquetes</h3>
-        <app-poll-list [list]="listPollsByFamily"></app-poll-list>
+        <app-poll-list
+          [list]="listPollsByFamily"
+          [hideTableItems]="ocultarCheckbox"
+        ></app-poll-list>
       </div>
     </app-card>
   </ng-container>

@@ -4,7 +4,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
-import { dateAndTimeToString } from '../../../../../../functions/date.function';
 import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
 import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
@@ -36,6 +35,11 @@ export class TimelineViewComponent
   typeSubject!: any;
   historicoFamilia = [];
   agendamentoSelecionado!: any;
+  ocultarCheckbox = {
+    selectItem: true,
+    details: false,
+    lockUnlock: false,
+  };
 
   constructor(
     private activatedRoute: ActivatedRoute,
