@@ -1,7 +1,5 @@
 <h2>Dados do titular</h2>
 
-<!-- <pre>{{ listSchedulesHistory | json }}</pre> -->
-
 <app-card class="mb-3">
   <div class="row">
     <div class="col-md-3">
@@ -54,14 +52,17 @@
   <ng-container *ngIf="etapaSelecionada">
     <app-card class="mb-3">
       <h2>{{ etapaSelecionada?.label }}</h2>
-      <pre>{{ agendamentoSelecionado | json }}</pre>
       <button
         [disabled]="!agendamentoSelecionado"
         *ngIf="etapaSelecionada?.label == 'Mudança'"
         class="btn btn-primary"
         (click)="confirmChange()"
       >
-        Confirmar mudança
+        {{
+          agendamentoSelecionado
+            ? "Confirmar mudança"
+            : "Selecione um agendamento"
+        }}
       </button>
 
       <div class="mb-2">

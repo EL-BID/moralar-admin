@@ -4,11 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
-import {
-  dateAndTimeToSeconds,
-  dateAndTimeToString,
-} from '../../../../../../functions/date.function';
-import { TIMELINE_STATUS_LIST } from '../../../../../../interfaces/timelines.interface';
+import { dateAndTimeToString } from '../../../../../../functions/date.function';
 import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
 import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
@@ -72,7 +68,7 @@ export class TimelineViewComponent
     );
     const tipoSituacoes = [2, 4, 7, 8];
     this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
-    this.getObjs();
+    this.buscarInformacoesSegmentadas();
     this.buscarHistorico();
   }
 
@@ -109,7 +105,7 @@ export class TimelineViewComponent
       });
   }
 
-  getObjs() {
+  buscarInformacoesSegmentadas() {
     let link;
     switch (this.typeSubject) {
       case 2:
@@ -131,14 +127,6 @@ export class TimelineViewComponent
         this.listPropertiesInterest = data.interestResidencialProperty;
         this.listCourseByFamily = data.courses;
         this.listPollsByFamily = data.detailEnquete;
-        for (let i = 0; data.courses.length > i; i++) {
-          this.listCourseByFamily[i].startDate = dateAndTimeToString(
-            this.listCourseByFamily[i].startDate
-          );
-          this.listCourseByFamily[i].endDate = dateAndTimeToString(
-            this.listCourseByFamily[i].endDate
-          );
-        }
       });
   }
 
@@ -150,7 +138,7 @@ export class TimelineViewComponent
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
-      date: +new Date() / 1000,
+      date: Number(+new Date() / 1000).toFixed(0),
     };
     let modalConfirmData: ModalConfirmData;
 
