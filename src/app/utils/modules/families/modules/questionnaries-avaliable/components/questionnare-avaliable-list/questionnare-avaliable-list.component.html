@@ -25,13 +25,14 @@
         <td>{{ item.hasAnswered || "-" }}</td>
         <td>
           <button
-            *ngIf="item.status === 0"
-            [routerLink]="['app/questionarios', item.quizId]"
+            class="btn btn-info"
+            *ngIf="item.hasAnswered == 'Não respondido'"
+            [routerLink]="['/gestor-publico/app/questionarios', item.quizId]"
           >
             Ver detalhes
           </button>
           <button
-            *ngIf="item.status === 1"
+            *ngIf="item.hasAnswered != 'Não respondido'"
             class="btn btn-info"
             [routerLink]="[
               '/gestor-publico/app/questionarios/disponiveis',
