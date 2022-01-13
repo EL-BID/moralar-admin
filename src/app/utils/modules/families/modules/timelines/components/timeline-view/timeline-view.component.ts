@@ -166,6 +166,7 @@ export class TimelineViewComponent
             ({ message }) => {
               this.megaleiosAlertService.success(message);
               this.typeSubject = 8;
+              this.buscarInformacoesSegmentadas();
             },
             ({ message }) => {
               this.megaleiosAlertService.error(message);
