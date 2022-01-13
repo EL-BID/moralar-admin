@@ -91,12 +91,12 @@
         ></app-questionnare-avaliable-list>
       </div>
 
-      <div *ngIf="etapaSelecionada?.cursos" class="mb-2">
+      <div class="mb-2">
         <h3>Cursos</h3>
         <app-course-list [list]="listCourseByFamily"></app-course-list>
       </div>
 
-      <div *ngIf="etapaSelecionada?.enquetes" class="mb-2">
+      <div class="mb-2">
         <h3>Enquetes</h3>
         <app-poll-list [list]="listPollsByFamily"></app-poll-list>
       </div>
