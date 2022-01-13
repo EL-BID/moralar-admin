@@ -41,6 +41,7 @@ export class TimelineViewComponent
   processoReassentamentoAtivo = true;
   etapaSelecionada!: any;
   typeSubject!: any;
+  historicoFamilia = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -63,14 +64,49 @@ export class TimelineViewComponent
 
   ngOnInit() {
     this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
-    this.typeSubject = this.activatedRoute.snapshot.paramMap.get('typeSubject');
+    this.typeSubject = Number(
+      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
+    );
     this.getObjs();
+    this.buscarHistorico();
+  }
+
+  validarEtapas(): void {
+    this.etapasProcessoReassentamentoAtivo[0].disponivel =
+      this.historicoFamilia.some((e) => e.typeSubject == 2);
+
+    this.etapasProcessoReassentamentoAtivo[1].disponivel =
+      this.historicoFamilia.some((e) => e.typeSubject == 4);
+
+    this.etapasProcessoReassentamentoAtivo[2].disponivel =
+      this.historicoFamilia.some((e) => e.typeSubject == 7);
+
+    this.etapasProcessoReassentamentoAtivo[3].disponivel =
+      this.historicoFamilia.some((e) => e.typeSubject == 8);
+  }
+
+  buscarHistorico(): void {
+    this.httpService
+      .get(
+        `Schedule/GetHistoryByFamily/${this.activatedRoute.snapshot.paramMap.get(
+          'familyId'
+        )}`
+      )
+      .subscribe((response: any) => {
+        this.historicoFamilia = response.data;
+        this.listSchedulesHistory = response.data;
+        this.validarEtapas();
+        for (let i = 0; response.data.length > i; i++) {
+          this.listSchedulesHistory[i].date = dateAndTimeToString(
+            this.listSchedulesHistory[i].date
+          );
+        }
+      });
   }
 
   getObjs() {
-    const typeSubject = Number(this.typeSubject);
     let link;
-    switch (typeSubject) {
+    switch (this.typeSubject) {
       case 2:
         link = `Schedule/DetailTimeLineProcessReunionPGM/${this.idFamilia}`;
         break;
@@ -79,36 +115,24 @@ export class TimelineViewComponent
         break;
       case 7:
       case 8:
-        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.idFamilia}/${typeSubject}`;
-        this.httpService
-          .get(
-            `Schedule/GetHistoryByFamily/${this.activatedRoute.snapshot.paramMap.get(
-              'familyId'
-            )}`
-          )
-          .subscribe((response: any) => {
-            this.listSchedulesHistory = response.data;
-            for (let i = 0; response.data.length > i; i++) {
-              this.listSchedulesHistory[i].date = dateAndTimeToString(
-                this.listSchedulesHistory[i].date
-              );
-            }
-          });
+        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.idFamilia}/${this.typeSubject}`;
         break;
     }
-    this.httpService.get(link).subscribe((response: any) => {
-      this.listQuizByFamily = response.data.detailQuiz;
-      this.listPropertiesInterest = response.data.interestResidencialProperty;
-      this.listCourseByFamily = response.data.courses;
-      for (let i = 0; response.data.courses.length > i; i++) {
-        this.listCourseByFamily[i].startDate = dateAndTimeToString(
-          this.listCourseByFamily[i].startDate
-        );
-        this.listCourseByFamily[i].endDate = dateAndTimeToString(
-          this.listCourseByFamily[i].endDate
-        );
-      }
-    });
+
+    if (link)
+      this.httpService.get(link).subscribe((response: any) => {
+        this.listQuizByFamily = response.data.detailQuiz;
+        this.listPropertiesInterest = response.data.interestResidencialProperty;
+        this.listCourseByFamily = response.data.courses;
+        for (let i = 0; response.data.courses.length > i; i++) {
+          this.listCourseByFamily[i].startDate = dateAndTimeToString(
+            this.listCourseByFamily[i].startDate
+          );
+          this.listCourseByFamily[i].endDate = dateAndTimeToString(
+            this.listCourseByFamily[i].endDate
+          );
+        }
+      });
   }
 
   confirmChange(value: any): void {
