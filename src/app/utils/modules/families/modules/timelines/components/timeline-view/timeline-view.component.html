@@ -40,7 +40,11 @@
       *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
     >
       <button
-        class="btn btn-info mr-2"
+        class="btn btn-secondary mr-2"
+        [ngClass]="{
+          'btn-info': etapa.typeSubject == etapaSelecionada?.typeSubject
+        }"
+        [disabled]="etapa.typeSubject == etapaSelecionada?.typeSubject"
         *ngIf="etapa.disponivel"
         (click)="
           selecionarEtapa(i); buscarInformacoesSegmentadas(etapa.typeSubject)

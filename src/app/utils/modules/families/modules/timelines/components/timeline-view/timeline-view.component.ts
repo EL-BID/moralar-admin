@@ -88,11 +88,7 @@ export class TimelineViewComponent
 
   buscarHistorico(): void {
     this.httpService
-      .get(
-        `Schedule/GetHistoryByFamily/${this.activatedRoute.snapshot.paramMap.get(
-          'familyId'
-        )}`
-      )
+      .get(`Schedule/GetHistoryByFamily/${this.idFamilia}`)
       .subscribe((response: any) => {
         this.historicoFamilia = response.data;
         this.listSchedulesHistory = response.data;
