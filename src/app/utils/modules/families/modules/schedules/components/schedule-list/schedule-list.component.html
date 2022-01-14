@@ -23,6 +23,17 @@
         <td>{{ item.date * 1000 | date: "dd/MM/yyy HH:mm" || "-" }}</td>
         <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || "-" }}</td>
         <td>{{ scheduleTypeList[item.typeSubject]?.name || "-" }}</td>
+        <td>
+          <button
+            [routerLink]="[
+              '/gestor-publico/app/agendamentos',
+              item?.scheduleId
+            ]"
+            class="btn btn-info"
+          >
+            Ver detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
