@@ -145,7 +145,7 @@ export class TimelineViewComponent
     let post;
     post = {
       familyId: this.idFamilia,
-      id: this.agendamentoSelecionado.id,
+      id: this.agendamentoSelecionado.scheduleId,
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
