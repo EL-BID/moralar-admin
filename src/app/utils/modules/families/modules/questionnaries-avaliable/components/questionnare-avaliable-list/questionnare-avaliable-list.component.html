@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <th *ngIf="!hideTableItems.selectItem"></th>
         <th>Título do questionário</th>
         <th>Data da disponibilização</th>
         <th>Status</th>
@@ -11,14 +11,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
-          <ng-container *ngIf="item?.typeScheduleStatus === 0">
-            <app-control-checkbox
-              [value]="isChecked(item)"
-              (changed)="listItemSelected.emit(item)"
-            >
-            </app-control-checkbox>
-          </ng-container>
+        <td *ngIf="!hideTableItems.selectItem">
+          <app-control-checkbox
+            [value]="isChecked(item)"
+            (changed)="listItemSelected.emit(item)"
+          >
+          </app-control-checkbox>
         </td>
         <td>{{ item.title || "-" }}</td>
         <td>{{ item.date || "-" }}</td>
