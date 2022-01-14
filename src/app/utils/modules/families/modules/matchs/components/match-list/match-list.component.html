@@ -3,10 +3,9 @@
     <thead>
       <tr>
         <th></th>
-        <th>Código do imóvel</th>
-        <th>Tipo de imóvel</th>
-        <th>Metragem quadrada</th>
-        <th>Endereço</th>
+        <th></th>
+        <th>Código | Tipo</th>
+        <th>Caracteristicas</th>
       </tr>
     </thead>
 
@@ -21,24 +20,32 @@
             </app-control-checkbox>
           </ng-container>
         </td>
-        <td>{{ item.code || "-" }}</td>
         <td>
-          {{
-            propertytypelist[item.residencialPropertyFeatures.typeProperty]
-              ?.name || "-"
-          }}
+          <app-image [imagePath]="item?.photo"></app-image>
         </td>
-        <td>{{ item.residencialPropertyFeatures.squareFootage || "-" }}</td>
         <td>
-          {{
-            item.residencialPropertyAdress.streetAddress +
-              " " +
-              item.residencialPropertyAdress.number +
-              ", " +
-              item.residencialPropertyAdress.cityName +
-              " " +
-              item.residencialPropertyAdress.stateUf
-          }}
+          <div>
+            <small>Código</small>
+            <div>{{ item?.residencialCode || "-" }}</div>
+          </div>
+          <div>
+            <small>Tipo</small>
+            <div>{{ item.typeProperty | typeProperty }}</div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <small>Metragem quadrada</small>
+            <div>
+              {{ item?.residencialPropertyFeatures?.squareFootage || "-" }}
+            </div>
+          </div>
+          <div>
+            <small>Bairro de localização</small>
+            <div>
+              {{ item?.residencialPropertyAdress?.neighborhood || "-" }}
+            </div>
+          </div>
         </td>
       </tr>
     </tbody>
