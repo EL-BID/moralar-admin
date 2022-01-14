@@ -21,16 +21,20 @@
           </ng-container>
         </td>
         <td>
-          <app-image [imagePath]="item?.photo"></app-image>
+          <app-image [imagePath]="item?.photo[0]"></app-image>
         </td>
         <td>
           <div>
             <small>Código</small>
-            <div>{{ item?.residencialCode || "-" }}</div>
+            <div>{{ item?.code || "-" }}</div>
           </div>
           <div>
             <small>Tipo</small>
-            <div>{{ item.typeProperty | typeProperty }}</div>
+            <div>
+              {{
+                item?.residencialPropertyFeatures?.typeProperty | typeProperty
+              }}
+            </div>
           </div>
         </td>
         <td>

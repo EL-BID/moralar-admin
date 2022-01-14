@@ -60,7 +60,7 @@
       <h2>{{ etapaSelecionada?.label }}</h2>
       <button
         [disabled]="!agendamentoSelecionado"
-        *ngIf="etapaSelecionada?.label == 'Mudança'"
+        *ngIf="etapaSelecionada?.typeSubject == 7"
         class="btn btn-primary"
         (click)="confirmChange()"
       >
@@ -88,7 +88,7 @@
         ></app-match-list>
       </div>
 
-      <div class="mb-2">
+      <div *ngIf="etapaSelecionada?.typeSubject != 7" class="mb-2">
         <h3>Lista de questionários</h3>
         <app-questionnare-avaliable-list
           [hideTableItems]="ocultarCheckbox"

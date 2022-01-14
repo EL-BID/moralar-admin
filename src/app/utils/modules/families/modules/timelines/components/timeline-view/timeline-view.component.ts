@@ -169,6 +169,7 @@ export class TimelineViewComponent
           this.httpService.post('Schedule/ChangeSubject', post).subscribe(
             ({ message }) => {
               this.megaleiosAlertService.success(message);
+              this.etapasProcessoReassentamentoAtivo[3].disponivel = true;
               this.typeSubject = 8;
               this.buscarInformacoesSegmentadas();
             },
