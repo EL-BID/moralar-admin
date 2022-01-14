@@ -52,7 +52,7 @@ export class AddressFormComponent implements OnChanges, OnInit {
     this.form.controls.cityName.disable();
   }
 
-  ngOnChanges({ form }: SimpleChanges): void {
+  ngOnChanges({ form, showMap }: SimpleChanges): void {
     if (form.currentValue && form.isFirstChange()) {
       const stateId = form.currentValue.controls.stateId.value;
       if (stateId) {
@@ -66,10 +66,10 @@ export class AddressFormComponent implements OnChanges, OnInit {
         );
       }
     }
+    if (showMap?.isFirstChange() && showMap?.currentValue) this.loadGoogleMap();
   }
 
   ngOnInit(): void {
-    this.loadGoogleMap();
     this.megaleiosService.get('City/ListState').subscribe(
       (response: any) => {
         this.stateList = response.data;
