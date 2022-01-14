@@ -1,15 +1,21 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
-import {GENDER_LIST} from '../../../../interfaces/courses.interface';
-import {sortBy} from 'lodash';
-import {DateTime} from 'luxon';
-import {MegaleiosAlertService} from '../../../megaleios-alert/megaleios-alert.service';
+import { GENDER_LIST } from '../../../../interfaces/courses.interface';
+import { sortBy } from 'lodash';
+import { DateTime } from 'luxon';
+import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
-  styleUrls: ['./course-form.component.sass']
+  styleUrls: ['./course-form.component.sass'],
 })
 export class CourseFormComponent extends FormComponentClass {
   genderList: any[] = sortBy(GENDER_LIST, 'name');
@@ -35,7 +41,7 @@ export class CourseFormComponent extends FormComponentClass {
       description: [null, Validators.required],
       startTargetAudienceAge: [15, Validators.required],
       endTargetAudienceAge: [80, Validators.required],
-      typeGenre: [null, Validators.required],
+      typeGenre: [null],
       numberOfVacancies: [null, Validators.required],
     });
     for (let i = 15; i <= 80; i++) {
@@ -43,7 +49,7 @@ export class CourseFormComponent extends FormComponentClass {
     }
   }
 
-  checkDate(value){
+  checkDate(value) {
     this.checkDateValidator = false;
     if (value < this.dayMin || value > '3000-01-01') {
       this.megaleiosAlertService.error('Data com formato inválido');
@@ -52,8 +58,9 @@ export class CourseFormComponent extends FormComponentClass {
     }
   }
 
-  checkIntervalPublicTarget(){
-    this.checkIntervalValidator = this.form.value.endTargetAudienceAge >= this.form.value.startTargetAudienceAge;
+  checkIntervalPublicTarget() {
+    this.checkIntervalValidator =
+      this.form.value.endTargetAudienceAge >=
+      this.form.value.startTargetAudienceAge;
   }
-
 }

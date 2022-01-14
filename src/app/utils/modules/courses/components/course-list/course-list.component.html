@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th></th>
+        <th>Data de cadastro</th>
         <th sortable="title" (sort)="handleSort($event)">Título</th>
         <th sortable="startDate" (sort)="handleSort($event)">Data de início</th>
         <th sortable="endDate" (sort)="handleSort($event)">Data de término</th>
@@ -11,7 +12,7 @@
           Total de inscritos
         </th>
         <th class="text-center" sortable="workLoad" (sort)="handleSort($event)">
-          Total de aguardando na lista de espera
+          Lista de espera
         </th>
         <!-- <th>Situação</th> -->
       </tr>
@@ -25,7 +26,12 @@
           >
           </app-control-checkbox>
         </td>
-        <td>{{ item.title || "-" }}</td>
+        <td>
+          {{ item?.created | date: "dd/MM/yyyy" }}
+        </td>
+        <td>
+          {{ item.title || "-" }}
+        </td>
         <td>{{ item.startDate || "-" | date: "dd/MM/yyyy" }}</td>
         <td>{{ item.endDate || "-" | date: "dd/MM/yyyy" }}</td>
         <td>{{ item.numberOfVacancies || "-" }}</td>

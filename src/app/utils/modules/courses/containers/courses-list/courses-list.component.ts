@@ -17,6 +17,7 @@ import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.
 export class CoursesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'title', name: 'Title', searchable: true },
       { data: 'startDate', name: 'StartDate', searchable: true },
       { data: 'endDate', name: 'EndDate', searchable: true },
@@ -35,7 +36,7 @@ export class CoursesListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
