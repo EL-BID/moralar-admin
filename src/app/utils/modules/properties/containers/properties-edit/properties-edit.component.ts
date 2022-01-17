@@ -31,7 +31,7 @@ export class PropertiesEditComponent extends OnDestroyClass implements OnInit {
   }
 
   editProperty(payload: any): void {
-    this.loading = false;
+    this.loading = true;
     this.httpService.patch('ResidencialProperty', payload, true).subscribe(
       (_) => this.location.back(),
       (_) => (this.loading = false)
