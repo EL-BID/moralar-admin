@@ -25,12 +25,12 @@
   </div>
 </div>
 <app-card class="mb-3">
-  <div class="row" *ngFor="let quest of release">
-    <div class="col-lg-12">
-      <h2 class="h5">{{ quest.question }}</h2>
+  <div *ngFor="let quest of release">
+    <div>
+      <strong> {{ quest.question }}</strong>
     </div>
-    <div class="col-lg-12">
-      <span class="h5 text-danger">R: </span>
+    <div class="mb-3">
+      <span class="text-danger">R: </span>
       <span>{{ quest?.answers }}</span>
     </div>
   </div>
