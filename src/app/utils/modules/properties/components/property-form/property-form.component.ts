@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, SimpleChanges } from '@angular/core';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import {
   FormArray,
@@ -90,6 +90,20 @@ export class PropertyFormComponent extends FormComponentClass {
       residencialPropertyAdress: this.residencialPropertyAdressForm,
       residencialPropertyFeatures: this.residencialPropertyFeaturesForm,
     });
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    if (
+      simpleChanges &&
+      simpleChanges.formData &&
+      simpleChanges.formData.firstChange
+    ) {
+      const photos = simpleChanges?.formData?.currentValue?.photo as string[];
+      if (photos?.length) {
+        photos.forEach((_) => this.addPhotoFormControl());
+      }
+      this.form.patchValue(simpleChanges.formData.currentValue);
+    }
   }
 
   private createPhotoFormControl(): FormControl {

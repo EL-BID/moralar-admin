@@ -59,12 +59,6 @@ export class PropertiesListComponent extends ListContainerClass {
     super(activatedRoute, router, httpService);
   }
 
-  handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], {
-      relativeTo: this._activatedRoute.parent,
-    });
-  }
-
   handleBlockUnblock(value: any): void {
     let modalConfirmData: ModalConfirmData;
     if (value.block) {

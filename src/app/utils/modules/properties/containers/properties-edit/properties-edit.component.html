@@ -1,0 +1,8 @@
+<h1 class="h4 mb-3">Editar imóvel</h1>
+<app-property-form
+  *ngIf="property"
+  [formLoading]="loading"
+  [formData]="property"
+  (formSubmit)="editProperty($event)"
+>
+</app-property-form>

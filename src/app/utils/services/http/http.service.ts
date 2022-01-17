@@ -80,12 +80,23 @@ export class HttpService {
       );
   }
 
-  patch(route: string, value: any, options?: any): Observable<any> {
+  patch(
+    route: string,
+    value: any,
+    showMessage = false,
+    options?: any
+  ): Observable<any> {
     return options
       ? this.http.patch(`${this.url}/api/v1/${route}`, value, options)
-      : this.http
-          .patch(`${this.url}/api/v1/${route}`, value)
-          .pipe(take(1), tap());
+      : this.http.patch(`${this.url}/api/v1/${route}`, value).pipe(
+          take(1),
+          tap(
+            ({ message }: any) => {
+              if (showMessage) this.megaleiosAlertService.success(message);
+            },
+            ({ message }) => this.megaleiosAlertService.error(message)
+          )
+        );
   }
 
   delete(route: string, options?: any): Observable<any> {
