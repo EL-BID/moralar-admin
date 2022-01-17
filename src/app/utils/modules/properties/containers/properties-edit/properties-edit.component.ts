@@ -36,6 +36,5 @@ export class PropertiesEditComponent extends OnDestroyClass implements OnInit {
       (_) => this.location.back(),
       (_) => (this.loading = false)
     );
-    debugger;
   }
 }
