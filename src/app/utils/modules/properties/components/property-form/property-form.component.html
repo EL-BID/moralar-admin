@@ -387,10 +387,10 @@
   </form>
   <app-button
     buttonType="submit"
-    buttonClass="btn-dark"
+    buttonClass="btn-dark btn-block"
     [buttonDisabled]="form.valid === false || formLoading === true"
     [buttonLoading]="formLoading"
   >
-    Adicionar
+    {{ formData ? "Alterar" : "Adicionar" }}
   </app-button>
 </form>
