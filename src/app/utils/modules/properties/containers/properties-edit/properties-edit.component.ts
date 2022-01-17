@@ -23,9 +23,9 @@ export class PropertiesEditComponent extends OnDestroyClass implements OnInit {
   }
 
   ngOnInit(): void {
-    const propertId = this.activatedRoute.snapshot.paramMap.get('id');
+    const propertyId = this.activatedRoute.snapshot.paramMap.get('id');
     this.httpService
-      .get(`ResidencialProperty/Detail/${propertId}`)
+      .get(`ResidencialProperty/Detail/${propertyId}`)
       .pipe(takeUntil(this.onDestroy))
       .subscribe(({ data }) => (this.property = data));
   }
