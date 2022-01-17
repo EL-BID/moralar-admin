@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +16,8 @@ export class PropertiesEditComponent extends OnDestroyClass implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private location: Location
   ) {
     super();
   }
@@ -30,6 +32,9 @@ export class PropertiesEditComponent extends OnDestroyClass implements OnInit {
 
   editProperty(payload: any): void {
     this.loading = false;
-    this.httpService.patch('ResidencialProperty', payload, true).subscribe();
+    this.httpService.patch('ResidencialProperty', payload, true).subscribe(
+      (_) => this.location.back(),
+      (_) => (this.loading = false)
+    );
   }
 }
