@@ -18,6 +18,7 @@ import { ModalConfirmData } from '../../../shared/components/modal-confirm/modal
 export class PropertiesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'code', name: 'Code', searchable: true },
       {
         data: 'residencialPropertyFeatures.typeProperty',
@@ -42,12 +43,13 @@ export class PropertiesListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
   uri = 'ResidencialProperty';
   listName = 'imóveis';
+  loggedUser!: any;
 
   constructor(
     activatedRoute: ActivatedRoute,
