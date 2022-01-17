@@ -36,9 +36,9 @@ export class TimelineViewComponent
   historicoFamilia = [];
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
-    selectItem: true,
+    selectItem: false,
     details: false,
-    lockUnlock: false,
+    lockUnlock: true,
   };
 
   constructor(

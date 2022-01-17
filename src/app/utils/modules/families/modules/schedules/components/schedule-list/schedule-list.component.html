@@ -6,6 +6,7 @@
         <th>Data e Hora</th>
         <th>Assunto</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -24,15 +25,17 @@
         <td>{{ scheduleStatusList[item.typeScheduleStatus]?.name || "-" }}</td>
         <td>{{ scheduleTypeList[item.typeSubject]?.name || "-" }}</td>
         <td>
-          <button
-            [routerLink]="[
-              '/gestor-publico/app/agendamentos',
-              item?.scheduleId
-            ]"
-            class="btn btn-info"
-          >
-            Ver detalhes
-          </button>
+          <ng-container *ngIf="!hideTableItems.details">
+            <button
+              [routerLink]="[
+                '/gestor-publico/app/agendamentos',
+                item?.scheduleId
+              ]"
+              class="btn btn-info"
+            >
+              Ver detalhes
+            </button>
+          </ng-container>
         </td>
       </tr>
     </tbody>
