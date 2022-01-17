@@ -6,7 +6,8 @@ import { PropertiesComponent } from './properties.component';
 import { PropertiesListComponent } from './containers/properties-list/properties-list.component';
 import { PropertiesAddComponent } from './containers/properties-add/properties-add.component';
 import { PropertiesDetailsComponent } from './containers/properties-details/properties-details.component';
-
+import { PropertiesEditComponent } from './containers/properties-edit/properties-edit.component';
+//PropertiesEditComponent
 const routes: Routes = [
   {
     path: '',
@@ -15,13 +16,14 @@ const routes: Routes = [
       { path: '', component: PropertiesListComponent },
       { path: 'adicionar', component: PropertiesAddComponent },
       { path: ':propertyId', component: PropertiesDetailsComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full' }
-    ]
-  }
+      { path: ':id/editar', component: PropertiesEditComponent },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PropertiesRoutingModule { }
+export class PropertiesRoutingModule {}

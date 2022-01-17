@@ -7,6 +7,7 @@ import { PropertyListComponent } from './components/property-list/property-list.
 import { PropertyViewComponent } from './components/property-view/property-view.component';
 import { PropertiesAddComponent } from './containers/properties-add/properties-add.component';
 import { PropertiesDetailsComponent } from './containers/properties-details/properties-details.component';
+import { PropertiesEditComponent } from './containers/properties-edit/properties-edit.component';
 import { PropertiesListComponent } from './containers/properties-list/properties-list.component';
 import { PropertiesRoutingModule } from './properties-routing.module';
 import { PropertiesComponent } from './properties.component';
@@ -21,6 +22,7 @@ import { PropertiesComponent } from './properties.component';
     PropertiesListComponent,
     PropertiesAddComponent,
     PropertiesDetailsComponent,
+    PropertiesEditComponent,
     // components
     PropertyListComponent,
     PropertyListSearchComponent,
