@@ -14,7 +14,7 @@
           <div>Disponibilidade</div>
           <div>para venda</div>
         </th>
-        <th></th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -61,10 +61,18 @@
         </td>
         <td>
           <button
-            [routerLink]="['/gestor-publico/app/imoveis/', item?.id, 'editar']"
-            class="btn btn-info"
+            title="Ver detalhes"
+            [routerLink]="[item?.id]"
+            class="btn btn-small btn-secondary mr-2"
           >
             Detalhes
+          </button>
+          <button
+            title="Editar imóvel"
+            [routerLink]="[item?.id, 'editar']"
+            class="btn btn-small btn-warning"
+          >
+            Editar
           </button>
         </td>
       </tr>
