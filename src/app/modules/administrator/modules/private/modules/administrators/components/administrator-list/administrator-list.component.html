@@ -4,7 +4,7 @@
       <tr>
         <th sortable="name" (sort)="handleSort($event)">Nome</th>
         <th sortable="email" (sort)="handleSort($event)">E-mail</th>
-        <th>Ações</th>
+        <th>Situação</th>
       </tr>
     </thead>
     <tbody>
@@ -12,22 +12,20 @@
         <td>{{ item.name || "-" }}</td>
         <td>{{ item.email || "-" }}</td>
         <td>
-          <div class="d-flex" *ngIf="item?.email != 'megaleios@megaleios.com'">
-            <div class="custom-control custom-switch">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                [id]="'blocked-' + item.id"
-                [value]="item.id"
-                [checked]="item.blocked === false"
-                (click)="handleBlockUnblock($event)"
-              />
-              <label [for]="'blocked-' + item.id" class="custom-control-label">
-              </label>
-            </div>
-            <button [routerLink]="[item.id]" class="btn btn-primary ml-2">
-              Detalhes
-            </button>
+          <div
+            *ngIf="item?.email != 'megaleios@megaleios.com'"
+            class="custom-control custom-switch"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
           </div>
         </td>
       </tr>
