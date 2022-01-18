@@ -84,7 +84,7 @@ export class PropertyFormComponent extends FormComponentClass {
       typeGasInstallation: ['', Validators.required],
     });
     this.form = this.formBuilder.group({
-      id: [''],
+      id: [null],
       code: ['', Validators.compose([trimWhiteSpace, Validators.required])],
       photo: this.formBuilder.array([]),
       project: [null, Validators.required],
