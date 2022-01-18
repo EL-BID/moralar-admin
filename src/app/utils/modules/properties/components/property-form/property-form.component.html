@@ -347,7 +347,7 @@
             <option value="">Selecione uma opção</option>
             <option
               *ngFor="let propertyRegularization of propertyRegularizationList"
-              [ngValue]="true"
+              [ngValue]="propertyRegularization.id"
             >
               {{ propertyRegularization.name }}
             </option>
@@ -371,7 +371,7 @@
               *ngFor="
                 let propertyGasInstallation of propertyGasInstallationList
               "
-              [ngValue]="true"
+              [ngValue]="propertyGasInstallation.id"
             >
               {{ propertyGasInstallation.name }}
             </option>
