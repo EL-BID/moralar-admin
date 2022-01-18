@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
 import { HttpService } from 'src/app/utils/services/http/http.service';
+import { UserService } from 'src/app/utils/services/user/user.service';
 
 import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
 import { ModalConfirmComponent } from '../../../shared/components/modal-confirm/modal-confirm.component';
@@ -16,6 +17,10 @@ import { ModalConfirmData } from '../../../shared/components/modal-confirm/modal
   styleUrls: ['./properties-list.component.sass'],
 })
 export class PropertiesListComponent extends ListContainerClass {
+  loggedUser!: any;
+  uri = 'ResidencialProperty';
+  listName = 'imóveis';
+
   formDataModel: FormDataModel = {
     columns: [
       { data: 'created', name: 'Created', searchable: false },
@@ -47,18 +52,16 @@ export class PropertiesListComponent extends ListContainerClass {
     },
   };
 
-  uri = 'ResidencialProperty';
-  listName = 'imóveis';
-  loggedUser!: any;
-
   constructor(
     activatedRoute: ActivatedRoute,
     router: Router,
     httpService: HttpService,
     private ngbModal: NgbModal,
-    private megaleiosAlertService: MegaleiosAlertService
+    private megaleiosAlertService: MegaleiosAlertService,
+    private userService: UserService
   ) {
     super(activatedRoute, router, httpService);
+    this.userService.user.subscribe((user) => (this.loggedUser = user));
   }
 
   handleBlockUnblock(value: any): void {
