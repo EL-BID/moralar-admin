@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Título</span> {{ course?.title }}</p>
+    <p><span class="font-weight-bold">Título</span> {{ course?.title }}</p>
   </div>
 </div>
 <ng-container *ngIf="course?.img">
@@ -11,57 +11,66 @@
 <div class="row">
   <div class="col-lg-6">
     <p>
-      <span class="view-label">Data de Início</span>
+      <span class="font-weight-bold">Data de Início</span>
       {{ course?.startDate | date: "dd/MM/yyyy" }}
     </p>
   </div>
   <div class="col-lg-6">
     <p>
-      <span class="view-label">Data de Término</span>
+      <span class="font-weight-bold">Data de Término</span>
       {{ course?.endDate | date: "dd/MM/yyyy" }}
     </p>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Hora de Início</span> {{ course?.schedule }}</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <p><span class="view-label">Carga Horária</span> {{ course?.workLoad }}</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <p><span class="view-label">Local</span> {{ course?.place }}</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-    <p><span class="view-label">Descrição</span> {{ course?.description }}</p>
-  </div>
-</div>
-<h2 class="h5">Público Alvo (faixa de valores)</h2>
-<div class="row">
-  <div class="col-lg-6">
     <p>
-      <span class="view-label">De</span> {{ course?.startTargetAudienceAge }}
-    </p>
-  </div>
-  <div class="col-lg-6">
-    <p>
-      <span class="view-label">Até</span> {{ course?.endTargetAudienceAge }}
+      <span class="font-weight-bold">Hora de Início</span>
+      {{ course?.schedule }}
     </p>
   </div>
 </div>
 <div class="row">
+  <div class="col-lg-12">
+    <p>
+      <span class="font-weight-bold">Carga Horária</span> {{ course?.workLoad }}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p><span class="font-weight-bold">Local</span> {{ course?.place }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 mb-2">
+    <div class="font-weight-bold">Descrição</div>
+    <i> {{ course?.description }}</i>
+  </div>
+</div>
+<h2>Público Alvo (faixa de valores)</h2>
+<div class="row">
   <div class="col-lg-6">
-    <p><span class="view-label">Gênero</span> {{ course?.typeGenre }}</p>
+    <p>
+      <span class="font-weight-bold">De</span>
+      {{ course?.startTargetAudienceAge }} anos
+    </p>
+  </div>
+
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">Até</span>
+      {{ course?.endTargetAudienceAge }} anos
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <p><span class="font-weight-bold">Gênero</span> {{ course?.typeGenre }}</p>
   </div>
   <div class="col-lg-6">
     <p>
-      <span class="view-label">Quantidade de vagas</span>
+      <span class="font-weight-bold">Quantidade de vagas</span>
       {{ course?.numberOfVacancies }}
     </p>
   </div>
