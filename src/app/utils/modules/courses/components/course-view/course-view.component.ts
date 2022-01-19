@@ -12,9 +12,17 @@ export class CourseViewComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.course) {
       this.course.enrolled = [
-        { fullName: 'Joel dos Santos Silva', cpf: '04967048188', status: 0 },
-        { fullName: 'Ana dos Santos Silva', cpf: '01067048188', status: 0 },
-        { fullName: 'Neiely Sara', cpf: '04417048188', status: 0 },
+        {
+          fullName: 'Joel dos Santos Silva',
+          cpf: '04967048188',
+          waiting: true,
+        },
+        {
+          fullName: 'Ana dos Santos Silva',
+          cpf: '01067048188',
+          waiting: false,
+        },
+        { fullName: 'Neiely Sara', cpf: '04417048188', waiting: true },
       ];
     }
   }
