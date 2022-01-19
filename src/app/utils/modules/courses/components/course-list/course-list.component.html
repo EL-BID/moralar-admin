@@ -14,7 +14,7 @@
         <th class="text-center" sortable="workLoad" (sort)="handleSort($event)">
           Lista de espera
         </th>
-        <!-- <th>Situação</th> -->
+        <th>Situação</th>
       </tr>
     </thead>
     <tbody>
@@ -37,7 +37,7 @@
         <td>{{ item.numberOfVacancies || "-" }}</td>
         <td class="text-center">{{ item?.totalInscriptions }}</td>
         <td class="text-center">{{ item?.totalWaitingList }}</td>
-        <!-- <td>
+        <td>
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -45,13 +45,12 @@
               [id]="'blocked-' + item.id"
               [value]="item.id"
               [checked]="item.blocked === false"
-              (click)="handleBlockUnblock($event)">
-            <label
-              [for]="'blocked-' + item.id"
-              class="custom-control-label">
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
             </label>
           </div>
-        </td> -->
+        </td>
       </tr>
     </tbody>
   </table>
