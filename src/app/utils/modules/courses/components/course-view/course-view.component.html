@@ -81,27 +81,31 @@
 </div>
 
 <ng-container *ngIf="course?.enrolled?.length; else noBody">
-  <h3>Inscritos</h3>
-  <table class="table table-striped">
-    <thead>
-      <th>Nome do morador titular</th>
-      <th class="text-center">CPF do morador titular</th>
-      <th class="text-right">Aguardando na lista de espera</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let person of course?.enrolled">
-        <td>{{ person?.fullName }}</td>
-        <td class="text-center">{{ person?.cpf | mask: "999.999.999-99" }}</td>
-        <td class="text-center">
-          <span
-            class="badge badge-info"
-            [ngClass]="{ 'badge-danger': !person?.status }"
-            >{{ person?.status ? "Sim" : "Não" }}</span
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <h2>Inscritos</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <th>Nome do morador titular</th>
+        <th class="text-center">CPF do morador titular</th>
+        <th class="text-right">Aguardando na lista de espera</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of course?.enrolled">
+          <td>{{ person?.fullName }}</td>
+          <td class="text-center">
+            {{ person?.cpf | mask: "999.999.999-99" }}
+          </td>
+          <td class="text-right">
+            <span
+              class="badge badge-info"
+              [ngClass]="{ 'badge-danger': !person?.status }"
+              >{{ person?.status ? "Sim" : "Não" }}</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </ng-container>
 
 <ng-template #noBody>
