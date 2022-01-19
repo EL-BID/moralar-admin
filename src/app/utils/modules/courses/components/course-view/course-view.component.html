@@ -68,3 +68,44 @@
     </p>
   </div>
 </div>
+
+<div class="mb-3">
+  <div>
+    <span class="font-weight-bold">Total de usuário inscritos: </span>
+    {{ course?.totalInscriptions || 0 }}
+  </div>
+  <div>
+    <span class="font-weight-bold"
+      >Total de usuários aguardando na lista de espera:
+    </span>
+    {{ course?.totalWaitingList || 0 }}
+  </div>
+</div>
+
+<ng-container *ngIf="course?.enrolled?.length; else noBody">
+  <h4>Inscritos</h4>
+  <table class="table table-striped-dark">
+    <thead>
+      <th>Nome do morador titular</th>
+      <th>CPF do morador titular</th>
+      <th>Aguardando na lista de espera</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of course?.enrolled">
+        <td>{{ person?.fullName }}</td>
+        <td>{{ person?.cpf | mask:'999.999.999-99' }}</td>
+        <td>
+          <span
+            class="badge badge-info"
+            [ngClass]="{ 'badge-danger': !person?.status }"
+            >{{ person?.status ? "Sim" : "Não" }}</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-template #noBody>
+  <h4 class="text-info">Sem inscritos no momento</h4>
+</ng-template>
