@@ -17,6 +17,7 @@ export class AvailableListSearchComponent extends ListSearchComponentClass {
       number: [''],
       holderName: [''],
       holderCpf: [''],
+      title: [''],
       status: [''],
     });
   }
