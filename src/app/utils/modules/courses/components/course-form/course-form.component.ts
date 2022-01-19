@@ -32,7 +32,7 @@ export class CourseFormComponent extends FormComponentClass {
     super();
     this.form = this.formBuilder.group({
       title: [null, Validators.compose([trimWhiteSpace, Validators.required])],
-      img: [null, Validators.required],
+      img: [null],
       startDate: [this.dayMin, Validators.required],
       endDate: [this.dayMin, Validators.required],
       place: [null, Validators.required],
