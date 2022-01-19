@@ -82,6 +82,8 @@
   </div>
 </div>
 
+<pre>{{ course | json }}</pre>
+
 <ng-container *ngIf="course?.enrolled?.length; else noBody">
   <h4>Inscritos</h4>
   <table class="table table-striped-dark">
@@ -93,8 +95,8 @@
     <tbody>
       <tr *ngFor="let person of course?.enrolled">
         <td>{{ person?.fullName }}</td>
-        <td>{{ person?.cpf | mask:'999.999.999-99' }}</td>
-        <td>
+        <td>{{ person?.cpf | mask: "999.999.999-99" }}</td>
+        <td class="text-center">
           <span
             class="badge badge-info"
             [ngClass]="{ 'badge-danger': !person?.status }"
