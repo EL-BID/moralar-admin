@@ -1,14 +1,12 @@
 <div class="row">
   <div class="col-lg-12">
-    <p><span class="view-label">Título</span> {{ course.title }}</p>
+    <p><span class="view-label">Título</span> {{ course?.title }}</p>
   </div>
 </div>
-<h2 class="h5">Imagem do Curso</h2>
-<div class="row">
-  <div class="col-lg-6 text-center">
-    <img [src]="course?.img" alt="Imagem do Curso" title="Imagem do Curso" />
-  </div>
-</div>
+<ng-container *ngIf="course?.img">
+  <h2 class="h5">Imagem do Curso</h2>
+  <app-image label="Imagem do Curso" [imagePath]="course?.img"></app-image>
+</ng-container>
 <br />
 <div class="row">
   <div class="col-lg-6">
@@ -83,17 +81,17 @@
 </div>
 
 <ng-container *ngIf="course?.enrolled?.length; else noBody">
-  <h4>Inscritos</h4>
-  <table class="table table-striped-dark">
+  <h3>Inscritos</h3>
+  <table class="table table-striped">
     <thead>
       <th>Nome do morador titular</th>
-      <th>CPF do morador titular</th>
-      <th>Aguardando na lista de espera</th>
+      <th class="text-center">CPF do morador titular</th>
+      <th class="text-right">Aguardando na lista de espera</th>
     </thead>
     <tbody>
       <tr *ngFor="let person of course?.enrolled">
         <td>{{ person?.fullName }}</td>
-        <td>{{ person?.cpf | mask: "999.999.999-99" }}</td>
+        <td class="text-center">{{ person?.cpf | mask: "999.999.999-99" }}</td>
         <td class="text-center">
           <span
             class="badge badge-info"

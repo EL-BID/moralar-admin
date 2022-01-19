@@ -1,8 +1,8 @@
 <img
-  [src]="imagePath || 'https://picsum.photos/200'"
+  title="Abrir imagem"
+  class="mini-img"
+  [src]="imagePath || 'https://picsum.photos/100'"
   (click)="openModal(imageModal)"
-  width="100px"
-  height="100px"
 />
 
 <ng-template #imageModal let-modal>
