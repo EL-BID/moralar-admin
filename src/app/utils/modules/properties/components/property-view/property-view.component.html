@@ -15,11 +15,14 @@
   </app-card>
   <div *ngSwitchCase="false" class="row">
     <div
-      *ngFor="let photo of getUrlImage(property.photo); let i = index"
+      *ngFor="let photo of property.photo; let i = index"
       class="col-lg-3 mb-3"
     >
       <app-card>
-        <img [src]="photo" alt="Foto {{ i + 1 }}" title="Foto {{ i + 1 }}" />
+        <app-image
+          [imagePath]="getUrlImage(photo)"
+          label="Foto {{ i + 1 }}"
+        ></app-image>
       </app-card>
     </div>
   </div>
@@ -27,7 +30,10 @@
 <h2 class="h5">Planta</h2>
 <div class="row">
   <div class="col-lg-6">
-    <img [src]="getUrlImage(property.project)" alt="Planta" title="Planta" />
+    <app-image
+      [imagePath]="getUrlImage(property.project)"
+      label="Planta do imóvel"
+    ></app-image>
   </div>
 </div>
 <h2 class="h5">Características</h2>

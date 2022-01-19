@@ -1,4 +1,3 @@
-<span class="view-label">{{ label }}</span>
 <img
   [src]="imagePath || 'https://picsum.photos/200'"
   (click)="openModal(imageModal)"
@@ -8,6 +7,7 @@
 
 <ng-template #imageModal let-modal>
   <div class="modal-header">
+    <span class="view-label">{{ label }}</span>
     <button
       type="button"
       class="close"
