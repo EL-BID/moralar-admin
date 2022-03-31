@@ -8,6 +8,7 @@ import {
   dateToSeconds,
   dateToString,
 } from 'src/app/utils/functions/date.function';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-families-details',
   templateUrl: './families-details.component.html',
@@ -21,7 +22,8 @@ export class FamiliesDetailsComponent extends OnDestroyClass implements OnInit {
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService,
     private megaleiosAlertService: MegaleiosAlertService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     super();
   }
@@ -66,7 +68,7 @@ export class FamiliesDetailsComponent extends OnDestroyClass implements OnInit {
         .subscribe(
           (response: any) => {
             this.megaleiosAlertService.success(response.success);
-            this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+            this.location.back();
           },
           (response: any) => {
             this.megaleiosAlertService.error(response.message);

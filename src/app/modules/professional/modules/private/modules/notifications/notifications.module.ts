@@ -23,7 +23,6 @@ import { NotificationsComponent } from './notifications.component';
     // components
     NotificationListComponent,
     NotificationListSearchComponent,
-    NotificationListSearchComponent,
     NotificationViewComponent,
     NotificationFormComponent,
   ],

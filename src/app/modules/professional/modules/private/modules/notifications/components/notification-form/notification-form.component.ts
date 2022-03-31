@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -124,5 +125,14 @@ export class NotificationFormComponent
       .subscribe((response: any) => {
         this.list = response.data;
       });
+  }
+
+  handleSubmit(): void {
+    if (this.formLoading === false) {
+      this.formLoading = true;
+      this.formSubmit.emit(cloneDeep(this.form.value));
+      this.form.reset();
+      this.router.dispose();
+    }
   }
 }

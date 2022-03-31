@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { sortBy } from 'lodash';
+import { sortBy, cloneDeep } from 'lodash';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import {
   isCpfValid,
@@ -13,7 +14,7 @@ import {
 } from 'src/app/utils/interfaces/families.interface';
 import { DateTime } from 'luxon';
 import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-family-form',
   templateUrl: './family-form.component.html',
@@ -52,7 +53,9 @@ export class FamilyFormComponent extends FormComponentClass implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private megaleiosAlertService: MegaleiosAlertService
+    private megaleiosAlertService: MegaleiosAlertService,
+    private router: Router,
+    private _location: Location
   ) {
     super();
     // FORM FILHOS

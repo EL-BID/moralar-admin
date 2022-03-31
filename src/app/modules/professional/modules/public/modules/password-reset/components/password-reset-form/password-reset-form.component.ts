@@ -6,17 +6,13 @@ import { isCpfValid } from 'src/app/utils/functions/validators.function';
 @Component({
   selector: 'app-password-reset-form',
   templateUrl: './password-reset-form.component.html',
-  styleUrls: ['./password-reset-form.component.sass']
+  styleUrls: ['./password-reset-form.component.sass'],
 })
 export class PasswordResetFormComponent extends FormComponentClass {
-
-  constructor(
-    formBuilder: FormBuilder
-  ) {
+  constructor(formBuilder: FormBuilder) {
     super();
     this.form = formBuilder.group({
-      cpf: [null, Validators.compose([Validators.required, isCpfValid])]
+      cpf: [null, Validators.compose([Validators.required, isCpfValid])],
     });
   }
-
 }
