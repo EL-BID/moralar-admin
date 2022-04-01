@@ -16,7 +16,8 @@
     (click)="exportToExcel()"
     class="btn btn-dark"
   >
-    Exportar para Excel
+  {{ exportingFile ? "Exportando..." : "Exportar para Excel" }}
+  {{ listSelected?.length ? listSelected?.length : "" }}
   </button>
 </div>
 

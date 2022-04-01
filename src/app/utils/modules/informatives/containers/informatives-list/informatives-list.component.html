@@ -6,22 +6,16 @@
     </button>
   </div>
   <button (click)="exportToExcel()" class="btn btn-dark">
-    Exportar para Excel
+    {{ exportingFile ? "Exportando..." : "Exportar para Excel" }}
+    {{ listSelected?.length ? listSelected?.length : "" }}
   </button>
 </div>
-<app-informative-list
-  [list]="list"
-  (listSearchChange)="handleListSearchChange($event)"
-  (blockUnblock)="handleBlockUnblock($event)"
-  (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)"
->
+
+<app-informative-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
+  (blockUnblock)="handleBlockUnblock($event)" (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)">
 </app-informative-list>
-<app-list-pagination
-  [page]="formDataModel.page"
-  [pageSize]="formDataModel.pageSize"
-  [listSize]="listSize"
-  [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)"
->
+
+<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
 </app-list-pagination>

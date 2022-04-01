@@ -34,6 +34,7 @@ export class InformativesListComponent extends ListContainerClass {
   };
 
   uri = 'Informative';
+  listName = 'informativos';
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -93,20 +94,20 @@ export class InformativesListComponent extends ListContainerClass {
       .catch(() => {});
   }
 
-  exportToExcel() {
-    this.httpService.download('Informative/Export').subscribe(
-      (response: any) => {
-        const blob = new Blob([response], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
-        });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'Lista de informativos.xls';
-        a.click();
-      },
-      ({ message }) => {
-        this.megaleiosAlertService.error(message);
-      }
-    );
-  }
+  // exportToExcel() {
+  //   this.httpService.download('Informative/Export').subscribe(
+  //     (response: any) => {
+  //       const blob = new Blob([response], {
+  //         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,',
+  //       });
+  //       const a = document.createElement('a');
+  //       a.href = URL.createObjectURL(blob);
+  //       a.download = 'Lista de informativos.xls';
+  //       a.click();
+  //     },
+  //     ({ message }) => {
+  //       this.megaleiosAlertService.error(message);
+  //     }
+  //   );
+  // }
 }
