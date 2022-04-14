@@ -11,8 +11,7 @@ import { QUESTIONANSWER_TYPES_LIST } from 'src/app/utils/interfaces/questionnair
 })
 export class QuestionnaireFormComponent
   extends FormComponentClass
-  implements OnInit
-{
+  implements OnInit {
   questionAnswerTypesList: any[] = QUESTIONANSWER_TYPES_LIST;
   questReg: FormGroup;
   desc: FormGroup;
@@ -105,20 +104,33 @@ export class QuestionnaireFormComponent
 
   verifyQuestionsWithDescriptions() {
     this.validador = true;
-    let i;
-    let j;
-    for (i = 0; i < this.questionsForm.value.length; i++) {
-      if (this.questionsForm.value[i].typeResponse > 0) {
-        if (this.questionsForm.value[i].description.length > 0) {
-          for (j = 0; j < this.questionsForm.value[i].description.length; j++) {
-            if (!this.questionsForm.value[i].description[j].description) {
+
+    this.questionsForm.value.forEach((question) => {
+      if (question.typeResponse > 0) {
+        if (question.description.length > 0) {
+          question.description.forEach((desc) => {
+            if (!desc.description) {
               this.validador = false;
             }
-          }
+          })
         } else {
           this.validador = false;
         }
       }
+    })
+  }
+
+  handleChangeTypeResponse(questionForm: any): void {
+    if (questionForm.value.typeResponse > 0) {
+      if (questionForm.value.description.length === 0) {
+        this.validador = false;
+      } else {
+        this.validador = true;
+      }
+    } else {
+      const index = this.questionsForm.controls.findIndex((question) => question.value.id === questionForm.value.id);
+      this.questionsForm.controls[index].value.description = [];
+      this.validador = true;
     }
   }
 }
