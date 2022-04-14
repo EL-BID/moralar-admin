@@ -4,7 +4,6 @@ import {
   propertyRegularizationToString,
   propertyGasInstallationToString,
 } from 'src/app/utils/functions/properties.function';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-property-view',
@@ -18,8 +17,4 @@ export class PropertyViewComponent {
   propertyTypeToString = propertyTypeToString;
   propertyRegularizationToString = propertyRegularizationToString;
   propertyGasInstallationToString = propertyGasInstallationToString;
-
-  getUrlImage(name: string): string {
-    return `${environment.baseUrl}/content/upload/${name}`;
-  }
 }

@@ -13,10 +13,10 @@ export class MatchsListComponent extends ListContainerClass {
 
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'holderNumber', name: 'HolderNumber', searchable: false },
-      { data: 'holderName', name: 'HolderName', searchable: false },
-      { data: 'holderCpf', name: 'HolderCpf', searchable: false },
-      { data: 'residencialCode', name: 'ResidencialCode', searchable: false },
+      { data: 'holderNumber', name: 'HolderNumber', searchable: true },
+      { data: 'holderName', name: 'HolderName', searchable: true },
+      { data: 'holderCpf', name: 'HolderCpf', searchable: true },
+      { data: 'residencialCode', name: 'ResidencialCode', searchable: true },
     ],
     page: 1,
     pageSize: 10,
@@ -28,7 +28,7 @@ export class MatchsListComponent extends ListContainerClass {
       residencialCode: '',
     },
     order: {
-      column: '0',
+      column: 'holderName',
       direction: 'asc'
     }
   };

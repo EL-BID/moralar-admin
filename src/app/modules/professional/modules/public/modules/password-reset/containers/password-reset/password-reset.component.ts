@@ -25,7 +25,7 @@ export class PasswordResetComponent extends OnDestroyClass {
   handleFormSubmit(value: any): void {
     if (this.formLoading === false) {
       this.formLoading = true;
-      this.httpService.post('UserAdministrator/ForgotPassword', value)
+      this.httpService.post('Profile/ForgotPassword', value)
         .pipe(takeUntil(this.onDestroy))
         .subscribe((response: any) => {
           this.megaleiosAlertService.success(response.message);
