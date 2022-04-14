@@ -10,13 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td *ngIf="!hideTableItems.selectItem">
-          <app-control-checkbox
-            [value]="isChecked(item)"
-            (changed)="listItemSelected.emit(item)"
-          >
-          </app-control-checkbox>
-        </td>
+        <td *ngIf="!hideTableItems.selectItem"></td>
         <td>{{ item.title || "-" }}</td>
         <td>{{ item.date || "-" }}</td>
         <td>{{ item.hasAnswered || "-" }}</td>

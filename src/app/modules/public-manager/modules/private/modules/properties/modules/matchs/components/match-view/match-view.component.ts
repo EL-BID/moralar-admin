@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {HttpService} from '../../../../../../../../../../utils/services/http/http.service';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MegaleiosAlertService} from '../../../../../../../../../../utils/modules/megaleios-alert/megaleios-alert.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ModalComponent} from '../../../../../../../../../../utils/modules/shared/components/modal/modal.component';
-import {ModalConfirmData} from '../../../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.interface';
-import {ModalConfirmComponent} from '../../../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.component';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { HttpService } from '../../../../../../../../../../utils/services/http/http.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { MegaleiosAlertService } from '../../../../../../../../../../utils/modules/megaleios-alert/megaleios-alert.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalComponent } from '../../../../../../../../../../utils/modules/shared/components/modal/modal.component';
+import { ModalConfirmData } from '../../../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.interface';
+import { ModalConfirmComponent } from '../../../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.component';
 
 
 @Component({
@@ -13,11 +13,12 @@ import {ModalConfirmComponent} from '../../../../../../../../../../utils/modules
   templateUrl: './match-view.component.html',
   styleUrls: ['./match-view.component.sass']
 })
-export class MatchViewComponent implements OnInit{
+export class MatchViewComponent implements OnInit {
   @ViewChild('detailsFamily')
   detailsFamilyTemplateRef: TemplateRef<any>;
   detailsFamilyNgbModalRef: NgbModalRef;
   genderList: any[]; // = GENDER_LIST;
+  openForSale: boolean = true;
 
   family: any;
   lista: any[];
@@ -35,6 +36,7 @@ export class MatchViewComponent implements OnInit{
     this.httpService.get(`PropertiesInterest/DetailFamiliesMatch/${this.activatedRoute.snapshot.paramMap.get('residencialPropertyId')}`)
       .subscribe((response: any) => {
         this.lista = response.data;
+        this.openForSale = this.lista.find(el => el.typeStatusResidencial === 1) ? false : true;
       });
   }
 
@@ -52,11 +54,11 @@ export class MatchViewComponent implements OnInit{
     };
     let modalConfirmData: ModalConfirmData;
 
-      modalConfirmData = {
-        title: 'Vender imóvel',
-        content: 'Deseja realmente vender?',
-        action: 'vender',
-      };
+    modalConfirmData = {
+      title: 'Vender imóvel',
+      content: 'Deseja realmente vender?',
+      action: 'vender',
+    };
 
     const modalRef = this.ngbModal.open(ModalConfirmComponent, { centered: true });
     modalRef.componentInstance.modalConfirmData = modalConfirmData;

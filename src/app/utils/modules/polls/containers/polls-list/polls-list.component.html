@@ -5,23 +5,33 @@
       Adicionar
     </button>
   </div>
-  <!-- <div class="col-auto">
-    <button type="button" class="btn btn-outline-dark" [disabled]="listSelected.length !== 1" (click)="handleDetails()">
-      Detalhes
-    </button>
-  </div> -->
   <div class="col-auto">
-    <button [disabled]="exportingFile" (click)="exportToExcel()" class="btn btn-dark">
+    <button
+      [disabled]="exportingFile"
+      (click)="exportToExcel()"
+      class="btn btn-dark"
+    >
       {{ exportingFile ? "Exportando..." : "Exportar para Excel" }}
-      {{ listSelected?.length ? listSelected?.length : "" }}
     </button>
   </div>
 </div>
-<app-poll-list-search [listSearchData]="formDataModel.search" (listSearchChange)="handleListSearchChange($event)">
+<app-poll-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-poll-list-search>
-<app-poll-list [list]="list" (listSearchChange)="handleListSearchChange($event)"
-  (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)">
+<app-poll-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+>
 </app-poll-list>
-<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize"
-  [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

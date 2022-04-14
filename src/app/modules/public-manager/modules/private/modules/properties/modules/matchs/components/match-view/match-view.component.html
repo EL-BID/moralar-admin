@@ -28,15 +28,17 @@
                   Detalhes
                 </button>
               </div>
-              <div class="col-auto" *ngIf="item.typeStatusResidencial == 0">
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  (click)="sellProperty(item.id)"
-                >
-                  Vender
-                </button>
-              </div>
+              <ng-container *ngIf="openForSale === true">
+                <div class="col-auto" *ngIf="item.typeStatusResidencial == 0">
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    (click)="sellProperty(item.id)"
+                  >
+                    Vender
+                  </button>
+                </div>
+              </ng-container>
 
               <div class="col-auto" *ngIf="item.typeStatusResidencial == 1">
                 <button
