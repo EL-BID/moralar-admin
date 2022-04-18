@@ -32,6 +32,7 @@ export class PollsListComponent extends ListContainerClass {
   };
 
   uri = 'Quiz';
+  listName = 'enquetes';
 
   constructor(
     private activatedRoute: ActivatedRoute,

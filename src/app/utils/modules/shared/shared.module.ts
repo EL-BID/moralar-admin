@@ -89,7 +89,9 @@ const pipes = [
   imports: [
     ...modules,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
+      // apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
+      apiKey: 'AIzaSyCs5B3gcxrv_b5jDy142tmvEaOTNK5YotM',
+      // apiKey: 'AIzaSyD-bAs1YznRn81Ya5yhZQjL2c4FHRNI85I',
       libraries: ['places'],
     }),
   ],
@@ -99,4 +101,4 @@ const pipes = [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
 })
-export class SharedModule {}
+export class SharedModule { }
