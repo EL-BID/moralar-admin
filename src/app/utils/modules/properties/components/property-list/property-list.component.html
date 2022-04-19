@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th sortable="code" (sort)="handleSort($event)">Código do imóvel</th>
         <th sortable="type" (sort)="handleSort($event)">Tipo do imóvel</th>
         <th sortable="value" (sort)="handleSort($event)">Valor do imóvel</th>
@@ -19,13 +19,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <!-- <td>
           <app-control-checkbox
             [value]="isChecked(item)"
             (changed)="listItemSelected.emit(item)"
           >
           </app-control-checkbox>
-        </td>
+        </td> -->
         <td>{{ item.code || "-" }}</td>
         <td>
           {{ item.residencialPropertyFeatures.typeProperty | typeProperty }}

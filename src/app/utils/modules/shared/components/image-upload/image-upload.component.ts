@@ -1,4 +1,10 @@
-import { Component, Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from 'src/app/utils/services/http/http.service';
@@ -12,10 +18,9 @@ import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.sass']
+  styleUrls: ['./image-upload.component.sass'],
 })
 export class ImageUploadComponent extends OnDestroyClass {
-
   imageUploadBaseUrl: string = environment.baseUrl;
   imageUploadIsUploading = false;
 
@@ -46,46 +51,57 @@ export class ImageUploadComponent extends OnDestroyClass {
   handleInputFileChanged(files: FileList): void {
     const formData = new FormData();
     if (this.imageUploadCropper === true) {
-      const modalReference = this.ngbModal.open(ModalImageCropperComponent, { size: 'lg', centered: true });
+      const modalReference = this.ngbModal.open(ModalImageCropperComponent, {
+        size: 'lg',
+        centered: true,
+      });
       modalReference.componentInstance.modalImageCropperFile = files[0];
-      modalReference.componentInstance.modalImageCropperAspectRatio = this.imageUploadCropperAspectRatio;
-      modalReference
-        .result
-          .then((result: any) => {
-            if (result) {
-              this.compressorService.compressFile(result, { maxWidth: 250, maxHeight: 250 })
-                .pipe(takeUntil(this.onDestroy))
-                .subscribe((file: Blob) => {
-                  formData.append('file', file);
-                  this.imageUploadIsUploading = true;
-                  this.httpService.post('File/Upload', formData)
-                    .subscribe((response: any) => {
-                      this.imageUploadAbstractControl.setValue(response.data.fileName);
-                      this.imageUploadIsUploading = false;
-                      this.changeDetectorRef.detectChanges();
-                    }, (response: any) => {
-                      this.megaleiosAlertService.error(response.message);
-                      this.imageUploadIsUploading = false;
-                    });
-                });
-            }
-          })
-          .catch(() => { });
+      modalReference.componentInstance.modalImageCropperAspectRatio =
+        this.imageUploadCropperAspectRatio;
+      modalReference.result
+        .then((result: any) => {
+          if (result) {
+            this.compressorService
+              .compressFile(result, { maxWidth: 250, maxHeight: 250 })
+              .pipe(takeUntil(this.onDestroy))
+              .subscribe((file: Blob) => {
+                formData.append('file', file);
+                this.imageUploadIsUploading = true;
+                this.httpService.post('File/Upload', formData).subscribe(
+                  ({ data }) => {
+                    const newImage = `${this.imageUploadBaseUrl}/content/upload/${data?.fileName}`;
+                    this.imageUploadAbstractControl.setValue(newImage);
+                    this.imageUploadIsUploading = false;
+                    this.changeDetectorRef.detectChanges();
+                  },
+                  (response: any) => {
+                    this.megaleiosAlertService.error(response.message);
+                    this.imageUploadIsUploading = false;
+                  }
+                );
+              });
+          }
+        })
+        .catch(() => {});
     } else {
-      this.compressorService.compressFile(files[0], { maxWidth: 250, maxHeight: 250 })
+      this.compressorService
+        .compressFile(files[0], { maxWidth: 250, maxHeight: 250 })
         .pipe(takeUntil(this.onDestroy))
         .subscribe((file: Blob) => {
           formData.append('file', file);
           this.imageUploadIsUploading = true;
-          this.httpService.post('File/Upload', formData)
-            .subscribe((response: any) => {
-              this.imageUploadAbstractControl.setValue(response.data.fileName);
+          this.httpService.post('File/Upload', formData).subscribe(
+            ({ data }) => {
+              const newImage = `${this.imageUploadBaseUrl}/content/upload/${data?.fileName}`;
+              this.imageUploadAbstractControl.setValue(newImage);
               this.imageUploadIsUploading = false;
               this.changeDetectorRef.detectChanges();
-            }, (response: any) => {
+            },
+            (response: any) => {
               this.megaleiosAlertService.error(response.message);
               this.imageUploadIsUploading = false;
-            });
+            }
+          );
         });
     }
   }
@@ -94,5 +110,4 @@ export class ImageUploadComponent extends OnDestroyClass {
     this.imageUploadFile.nativeElement.value = '';
     this.imageUploadAbstractControl.setValue(null);
   }
-
 }
