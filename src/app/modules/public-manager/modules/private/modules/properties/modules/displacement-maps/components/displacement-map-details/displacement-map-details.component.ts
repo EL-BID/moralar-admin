@@ -11,6 +11,7 @@ import { HttpService } from './../../../../../../../../../../utils/services/http
 })
 export class DisplacementMapDetailsComponent implements OnInit {
   family!: any;
+  noDisplacementMap = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ export class DisplacementMapDetailsComponent implements OnInit {
     this.httpService.get(`Family/DisplacementMap/${id}`).subscribe(
       ({ data }) => (this.family = data),
       ({ message }) => {
+        this.noDisplacementMap = true;
         Swal.fire(message);
       }
     );
