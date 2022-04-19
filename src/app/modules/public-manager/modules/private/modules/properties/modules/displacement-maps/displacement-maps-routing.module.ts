@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+import { DisplacementMapDetailsComponent } from './components/displacement-map-details/displacement-map-details.component';
+import { DisplacementMapsListComponent } from './containers/displacement-maps-list/displacement-maps-list.component';
+import { DisplacementMapsComponent } from './displacement-maps.component';
 
 // containers
-import { DisplacementMapsComponent } from './displacement-maps.component';
-import { DisplacementMapsListComponent } from './containers/displacement-maps-list/displacement-maps-list.component';
-
 const routes: Routes = [
   {
     path: '',
     component: DisplacementMapsComponent,
     children: [
       { path: '', component: DisplacementMapsListComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full' }
-    ]
-  }
+      { path: 'family/:id', component: DisplacementMapDetailsComponent },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DisplacementMapsRoutingModule { }
+export class DisplacementMapsRoutingModule {}

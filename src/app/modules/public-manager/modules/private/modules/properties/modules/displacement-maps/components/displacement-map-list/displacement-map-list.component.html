@@ -2,19 +2,18 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th sortable="number" (sort)="handleSort($event)">
           Número do cadastro
         </th>
         <th sortable="holderName" (sort)="handleSort($event)">Titular</th>
         <th sortable="holderCpf" (sort)="handleSort($event)">CPF</th>
-        <th sortable="number" (sort)="handleSort($event)">Origem</th>
-        <th sortable="holderName" (sort)="handleSort($event)">Novo Endereço</th>
+        <th>Ver detalhes</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <!-- <td>
           <div class="custom-control custom-checkbox">
             <input
               type="checkbox"
@@ -26,12 +25,21 @@
             <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
-        </td>
+        </td> -->
         <td>{{ item.number || "-" }}</td>
         <td>{{ item.name || "-" }}</td>
         <td>{{ item.cpf || "-" | mask: "000.000.000-00" }}</td>
-        <td>{{ item.number || "-" }}</td>
-        <td>{{ item.name || "-" }}</td>
+        <td>
+          <button
+            [routerLink]="[
+              '/gestor-publico/app/displacement-maps/family',
+              item.id
+            ]"
+            class="btn btn-primary"
+          >
+            Detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

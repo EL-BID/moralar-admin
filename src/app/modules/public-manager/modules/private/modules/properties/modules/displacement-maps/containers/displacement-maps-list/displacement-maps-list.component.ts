@@ -32,8 +32,9 @@ export class DisplacementMapsListComponent extends ListContainerClass {
     },
   };
 
-  uriCustom = 'Family/DisplacementMapAllFamilies';
-  method = 'get';
+  // uriCustom = 'Family/DisplacementMapAllFamilies';
+  uri = 'Family';
+  //method = 'get';
 
   constructor(
     activatedRoute: ActivatedRoute,

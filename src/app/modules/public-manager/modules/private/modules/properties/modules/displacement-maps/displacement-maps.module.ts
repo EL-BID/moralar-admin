@@ -6,6 +6,7 @@ import { DisplacementMapListComponent } from './components/displacement-map-list
 import { DisplacementMapsListComponent } from './containers/displacement-maps-list/displacement-maps-list.component';
 import { DisplacementMapsRoutingModule } from './displacement-maps-routing.module';
 import { DisplacementMapsComponent } from './displacement-maps.component';
+import { DisplacementMapDetailsComponent } from './components/displacement-map-details/displacement-map-details.component';
 
 // containers
 // components
@@ -18,6 +19,7 @@ import Timeline = gsap.core.Timeline;
     // components
     DisplacementMapListComponent,
     DisplacementMapListSearchComponent,
+    DisplacementMapDetailsComponent,
   ],
   imports: [DisplacementMapsRoutingModule, SharedModule],
 })
