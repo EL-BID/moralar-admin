@@ -1,0 +1,40 @@
+<ng-container *ngIf="noDisplacementMap; else displacementMap">
+  <h2 class="text-secondary">Nenhum mapa de deslocamento encontrado!</h2>
+</ng-container>
+<ng-template #displacementMap>
+  <h1 class="mb-3">Mapa de deslocamento</h1>
+  <div class="box-map mt-5">
+    <table class="table table-light table-striped">
+      <thead>
+        <th>Proprietário</th>
+        <th>Endereços</th>
+        <th>Distância</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            <div>{{ family?.name }}</div>
+            <div><b>Número: </b>{{ family?.number }}</div>
+            <div><b>CPF: </b>{{ family?.cpf | mask: "999.999.999-99" }}</div>
+          </th>
+          <th>
+            <div>
+              <dt>Origem</dt>
+              <div>{{ family.addressPropertyOrigin }}</div>
+            </div>
+            <div>
+              <dt>Destino</dt>
+              <div>{{ family.addressPropertyDestination }}</div>
+            </div>
+          </th>
+          <th>
+            <div>
+              <div>{{ family?.addressPropertyDistanceMeters }} metros</div>
+              <div>{{ family?.addressPropertyDistanceKilometers }} km</div>
+            </div>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
