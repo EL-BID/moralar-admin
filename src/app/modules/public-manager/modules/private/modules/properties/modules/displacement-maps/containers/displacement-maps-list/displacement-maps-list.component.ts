@@ -9,7 +9,11 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 })
 export class DisplacementMapsListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
-    columns: [{ data: 'created', name: 'Created', searchable: false }],
+    columns: [
+      { data: 'created', name: 'Created', searchable: false },
+      { data: 'name', name: 'Name', searchable: false },
+      { data: 'cpf', name: 'Cpf', searchable: false },
+    ],
     page: 1,
     pageSize: 10,
     search: {
