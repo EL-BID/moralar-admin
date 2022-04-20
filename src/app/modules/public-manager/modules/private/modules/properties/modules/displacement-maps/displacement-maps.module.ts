@@ -22,5 +22,6 @@ import Timeline = gsap.core.Timeline;
     DisplacementMapDetailsComponent,
   ],
   imports: [DisplacementMapsRoutingModule, SharedModule],
+  exports: [],
 })
 export class DisplacementMapsModule {}

@@ -15,10 +15,7 @@
         <td>{{ item.holderCpf || "-" | mask: "000.000.000-00" }}</td>
         <td>
           <button
-            [routerLink]="[
-              '/gestor-publico/app/displacement-maps/family',
-              item.familyId
-            ]"
+            [routerLink]="['family', item.familyId]"
             class="btn btn-primary"
           >
             Detalhes

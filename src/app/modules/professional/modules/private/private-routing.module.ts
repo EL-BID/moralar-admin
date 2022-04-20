@@ -49,7 +49,7 @@ const routes: Routes = [
         path: 'displacement-maps',
         loadChildren: () =>
           import(
-            'src/app/modules/professional/modules/private/modules/properties/modules/displacement-maps/displacement-maps.module'
+            'src/app/modules/public-manager/modules/private/modules/properties/modules/displacement-maps/displacement-maps.module'
           ).then((m) => m.DisplacementMapsModule),
       },
       {
