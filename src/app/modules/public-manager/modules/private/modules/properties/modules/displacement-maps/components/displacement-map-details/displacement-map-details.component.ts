@@ -12,7 +12,7 @@ import { HttpService } from './../../../../../../../../../../utils/services/http
 export class DisplacementMapDetailsComponent implements OnInit {
   family!: any;
   noDisplacementMap = false;
-  adresses: marker[] = [];
+  addresses: marker[] = [];
 
   lat = -23.5557714;
   lng = -46.6395571;
@@ -54,8 +54,8 @@ export class DisplacementMapDetailsComponent implements OnInit {
           },
           draggable: false,
         };
-        this.adresses.push(oldAddress);
-        this.adresses.push(newAddress);
+        this.addresses.push(oldAddress);
+        this.addresses.push(newAddress);
       },
       ({ message }) => {
         this.noDisplacementMap = true;

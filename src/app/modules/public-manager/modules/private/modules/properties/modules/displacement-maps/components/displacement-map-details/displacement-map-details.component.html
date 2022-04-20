@@ -48,7 +48,7 @@
       [disableDefaultUI]="false"
     >
       <agm-marker
-        *ngFor="let m of adresses; let i = index"
+        *ngFor="let m of addresses; let i = index"
         [latitude]="m.lat"
         [longitude]="m.lng"
         [openInfoWindow]="true"
@@ -63,7 +63,7 @@
       <agm-circle
         [latitude]="lat"
         [longitude]="lng"
-        [radius]="5000"
+        [radius]="4000"
         [fillColor]="'lightgreen'"
         [circleDraggable]="false"
         [editable]="false"

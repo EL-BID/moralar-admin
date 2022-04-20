@@ -2,32 +2,22 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <!-- <th></th> -->
-        <th sortable="number" (sort)="handleSort($event)">
-          <div>Data de cadastro</div>
-          Número do cadastro
-        </th>
-        <th sortable="name" (sort)="handleSort($event)">Titular</th>
-        <th sortable="cpf" (sort)="handleSort($event)">CPF</th>
+        <th sortable="date" (sort)="handleSort($event)">Número do cadastro</th>
+        <th sortable="holderName" (sort)="handleSort($event)">Titular</th>
+        <th sortable="holderCpf" (sort)="handleSort($event)">CPF</th>
         <th>Ver detalhes</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
-          <div><b>N°</b> {{ item.number || "-" }}</div>
-          <div>
-            <b>Cadastrado em:</b>
-            {{ item?.created | date: "dd/MM/yyyy,  HH:mm" }}
-          </div>
-        </td>
-        <td>{{ item.name || "-" }}</td>
-        <td>{{ item.cpf || "-" | mask: "000.000.000-00" }}</td>
+        <td><b>N°</b> {{ item.holderNumber || "-" }}</td>
+        <td>{{ item.holderName || "-" }}</td>
+        <td>{{ item.holderCpf || "-" | mask: "000.000.000-00" }}</td>
         <td>
           <button
             [routerLink]="[
               '/gestor-publico/app/displacement-maps/family',
-              item.id
+              item.familyId
             ]"
             class="btn btn-primary"
           >
