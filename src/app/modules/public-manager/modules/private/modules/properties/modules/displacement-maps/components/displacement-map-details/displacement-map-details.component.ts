@@ -63,6 +63,10 @@ export class DisplacementMapDetailsComponent implements OnInit {
       }
     );
   }
+
+  printScreen(): void {
+    window.print();
+  }
 }
 
 interface marker {
