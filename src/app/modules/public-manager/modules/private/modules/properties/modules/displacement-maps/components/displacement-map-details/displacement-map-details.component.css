@@ -2,3 +2,8 @@ agm-map {
   height: 350px !important;
   width: 100%!important;
 }
+
+@media print {
+  .btn {display: none;}
+  #printarea { display:block; }
+}

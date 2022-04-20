@@ -10,18 +10,16 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 export class DisplacementMapsListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
-      { data: 'created', name: 'Created', searchable: false },
-      { data: 'name', name: 'Name', searchable: false },
-      { data: 'cpf', name: 'Cpf', searchable: false },
+      { data: 'date', name: 'Date', searchable: false },
+      { data: 'holderName', name: 'HolderName', searchable: false },
+      { data: 'holderCpf', name: 'HolderCpf', searchable: false },
     ],
     page: 1,
     pageSize: 10,
     search: {
       search: '',
       number: '',
-      holderName: '',
-      holderCpf: '',
-      status: '',
+      type: 7,
     },
     order: {
       column: '0',
@@ -29,5 +27,6 @@ export class DisplacementMapsListComponent extends ListContainerClass {
     },
   };
 
-  uri = 'Family';
+  // uri = 'Family';
+  uri = 'Schedule';
 }
