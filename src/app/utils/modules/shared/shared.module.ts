@@ -95,7 +95,7 @@ const pipes = [
       libraries: ['places'],
     }),
   ],
-  exports: [...modules, ...components, ...directives, ...pipes],
+  exports: [...modules, AgmCoreModule, ...components, ...directives, ...pipes],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
