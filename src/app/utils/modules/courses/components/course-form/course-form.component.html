@@ -154,7 +154,6 @@
       <app-control-field>
         <label>Gênero</label>
         <select id="typeGenre" formControlName="typeGenre">
-          <option [ngValue]="null">Todos</option>
           <option *ngFor="let gender of genderList" [ngValue]="gender.id">
             {{ gender.name }}
           </option>
