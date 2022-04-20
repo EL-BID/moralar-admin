@@ -6,23 +6,19 @@ import { TIMELINE_STATUS_LIST } from 'src/app/utils/interfaces/timelines.interfa
 @Component({
   selector: 'app-displacement-map-list-search',
   templateUrl: './displacement-map-list-search.component.html',
-  styleUrls: ['./displacement-map-list-search.component.sass']
+  styleUrls: ['./displacement-map-list-search.component.sass'],
 })
 export class DisplacementMapListSearchComponent extends ListSearchComponentClass {
-
   timelineStatusList: any[] = TIMELINE_STATUS_LIST;
 
-  constructor(
-    formBuilder: FormBuilder
-  ) {
+  constructor(formBuilder: FormBuilder) {
     super();
     this.listSearchForm = formBuilder.group({
       search: [''],
       number: [''],
       holderName: [''],
       holderCpf: [''],
-      status: ['']
+      status: [''],
     });
   }
-
 }
