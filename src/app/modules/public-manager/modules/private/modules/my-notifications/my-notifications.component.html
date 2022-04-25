@@ -1,10 +1,10 @@
 <h1>Minhas notificações</h1>
 
-<ng-container *ngIf="abstract; else all">
-  <ng-container *ngIf="!loading && !list?.length; else miniList">
-    <h5 class="text-secondary">Nenhuma notificação encontrada</h5>
-  </ng-container>
+<ng-container *ngIf="!loading && !list?.length">
+  <h5 class="text-secondary">Nenhuma notificação encontrada</h5>
+</ng-container>
 
+<ng-container *ngIf="abstract; else all">
   <ng-template #miniList>
     <div class="notifications">
       <div *ngFor="let notification of list">
