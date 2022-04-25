@@ -1,41 +1,44 @@
 <h1>Minhas notificações</h1>
 
-<ng-container *ngIf="!loading && !list?.length; else showNotifications">
-  <h5 class="text-secondary">Nenhuma notificação encontrada</h5>
-</ng-container>
-
-<ng-template #showNotifications>
-  <ng-container *ngIf="abstract; else all">
-    <div class="notifications">
-      <div *ngFor="let notification of list">
-        <img [src]="urlImage(notification?.image)" />
-        <div class="body">
-          <div>
-            <div class="title">{{ notification?.title | slice: 0:25 }}...</div>
-            <div class="description">
-              {{ notification?.description | slice: 0:25 }}...
-            </div>
+<ng-container *ngIf="abstract; else all">
+  <h5 *ngIf="!loading && !list?.length" class="text-secondary">
+    Nenhuma notificação encontrada
+  </h5>
+  <div class="notifications">
+    <div *ngFor="let notification of list">
+      <img [src]="urlImage(notification?.image)" />
+      <div class="body">
+        <div>
+          <div class="title">{{ notification?.title | slice: 0:25 }}...</div>
+          <div class="description">
+            {{ notification?.description | slice: 0:25 }}...
           </div>
-          <div>
-            <small class="badge badge-secondary">
-              {{ notification.created | date: "dd/MM/yyyy HH:mm" }}
-            </small>
-          </div>
+        </div>
+        <div>
+          <small class="badge badge-secondary">
+            {{ notification.created | date: "dd/MM/yyyy HH:mm" }}
+          </small>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-end">
-      <button [routerLink]="UrlSeelAll" class="btn btn-light">Ver todas</button>
-    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button [routerLink]="UrlSeelAll" class="btn btn-light">Ver todas</button>
+  </div>
+</ng-container>
+
+<ng-template #all>
+  <app-notification-list-search
+    [listSearchData]="formDataModel.search"
+    (listSearchChange)="handleListSearchChange($event)"
+  >
+  </app-notification-list-search>
+
+  <ng-container *ngIf="!loading && !list?.length; else listAndPagination">
+    <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
   </ng-container>
 
-  <ng-template #all>
-    <app-notification-list-search
-      [listSearchData]="formDataModel.search"
-      (listSearchChange)="handleListSearchChange($event)"
-    >
-    </app-notification-list-search>
-
+  <ng-template #listAndPagination>
     <app-notification-list
       [hideTableItems]="{ details: true }"
       [list]="list"
