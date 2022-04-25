@@ -1,5 +1,13 @@
-<h1 class="h4">Mapa de deslocamento</h1>
-
+<div class="box-header">
+  <h1 class="h4">Mapa de deslocamento</h1>
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    {{ exportingFile ? "Exportando..." : "Exportar para Excel" }}
+  </button>
+</div>
 <app-displacement-map-list-search
   class="mb-3"
   [listSearchData]="formDataModel.search"
