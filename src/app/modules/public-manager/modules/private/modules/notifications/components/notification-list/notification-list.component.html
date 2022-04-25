@@ -21,7 +21,7 @@
           </small>
         </th>
         <td class="text-center">
-          <span>{{ item.created | date: "dd/MM/yyyy, h:mm:ss" }}</span>
+          <span>{{ item.created | date: "dd/MM/yyyy, HH:mm" }}</span>
         </td>
         <td *ngIf="!hideTableItems.details" class="text-right">
           <button [routerLink]="[item.id]" class="btn btn-info">

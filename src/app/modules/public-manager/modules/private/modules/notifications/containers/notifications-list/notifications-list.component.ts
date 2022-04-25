@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
 import { HttpService } from 'src/app/utils/services/http/http.service';
-import { takeUntil } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { MegaleiosAlertService } from '../../../../../../../../utils/modules/megaleios-alert/megaleios-alert.service';
-import { ModalConfirmData } from '../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.interface';
-import { ModalConfirmComponent } from '../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-notifications-list',
@@ -17,6 +15,7 @@ import { ModalConfirmComponent } from '../../../../../../../../utils/modules/sha
 export class NotificationsListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'title', name: 'Title', searchable: true },
       { data: 'description', name: 'Description', searchable: true },
     ],
@@ -27,7 +26,7 @@ export class NotificationsListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
