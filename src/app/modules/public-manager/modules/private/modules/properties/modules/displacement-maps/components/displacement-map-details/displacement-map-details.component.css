@@ -3,6 +3,13 @@ agm-map {
   width: 100%!important;
 }
 
+.box-header{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
 @media print {
   .btn {display: none;}
   #printarea { display:block; }

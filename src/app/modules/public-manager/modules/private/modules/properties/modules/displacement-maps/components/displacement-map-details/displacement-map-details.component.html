@@ -1,11 +1,16 @@
-<button class="btn btn-secondary" (click)="printScreen()">Imprimir tela</button>
+<!-- <button class="btn btn-secondary" (click)="printScreen()">Imprimir tela</button> -->
 <ng-container *ngIf="noDisplacementMap; else displacementMap">
   <h2 class="text-secondary">Nenhum mapa de deslocamento encontrado!</h2>
 </ng-container>
 
 <ng-template #displacementMap>
   <div id="printarea">
-    <h1 class="mb-3">Mapa de deslocamento</h1>
+    <div class="box-header">
+      <h1 class="mb-3">Mapa de deslocamento</h1>
+      <button class="btn btn-secondary" (click)="printScreen()">
+        Imprimir tela
+      </button>
+    </div>
     <div *ngIf="family" class="box-map mt-5 mb-5">
       <table class="table table-light table-striped">
         <thead>
@@ -32,8 +37,15 @@
             </th>
             <th>
               <div>
-                <div>{{ family?.addressPropertyDistanceMeters }} metros</div>
-                <div>{{ family?.addressPropertyDistanceKilometers }} km</div>
+                <div>
+                  {{ family?.addressPropertyDistanceMeters | number }} metros
+                </div>
+                <div>
+                  {{
+                    family?.addressPropertyDistanceKilometers | number: "1.1-1"
+                  }}
+                  km
+                </div>
               </div>
             </th>
           </tr>
