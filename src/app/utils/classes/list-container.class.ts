@@ -121,7 +121,9 @@ export abstract class ListContainerClass
           let i;
           for (i = 0; response.data.length > i; i++) {
             if (response.data[i]?.date) {
-              response.data[i].date = dateToString(+response.data[i].date);
+              response.data[i].date = dateAndTimeToString(
+                +response.data[i].date
+              );
             }
             if (response.data[i]?.created) {
               response.data[i].created = dateAndTimeToString(

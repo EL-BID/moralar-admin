@@ -14,11 +14,6 @@ export class SchedulesListComponent
   formDataModel: FormDataModel = {
     columns: [
       { data: 'date', name: 'Date', searchable: true },
-      { data: 'typeSubject', name: 'TypeSubject', searchable: true },
-      { data: 'place', name: 'Place', searchable: true },
-      { data: 'holderNumber', name: 'HolderNumber', searchable: true },
-      { data: 'holderName', name: 'HolderName', searchable: true },
-      { data: 'holderCpf', name: 'HolderCpf', searchable: true },
       {
         data: 'typeScheduleStatus',
         name: 'TypeScheduleStatus',
