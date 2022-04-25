@@ -7,8 +7,10 @@ import {
 } from '@angular/core';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
-import { Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/utils/services/http/http.service';
+import { UserService } from 'src/app/utils/services/user/user.service';
 
 @Component({
   selector: 'app-my-notifications',
@@ -44,7 +46,21 @@ export class MyNotificationsComponent
 
   uri = 'Notification';
 
-  //ngOnInit(): void {}
+  constructor(
+    protected _activatedRoute: ActivatedRoute,
+    protected _router: Router,
+    protected _httpService: HttpService,
+    private userService: UserService
+  ) {
+    super(_activatedRoute, _router, _httpService);
+  }
+
+  ngOnInit(): void {
+    this._activatedRoute.queryParams.subscribe((params: Params) => {
+      this.setQueryParams(params);
+      this.getList();
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.forGestor.firstChange) {
