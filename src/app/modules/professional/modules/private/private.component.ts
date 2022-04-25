@@ -46,7 +46,6 @@ export class PrivateComponent
   faUser = faUserAlt;
 
   user: any;
-  forGestor!: boolean;
 
   constructor(
     private userService: UserService,
@@ -71,7 +70,6 @@ export class PrivateComponent
             .subscribe(({ data }: any) => {
               data.passwordCurrent = data.password;
               this.userService.user = data;
-              this.forGestor = data.typeProfile == 1 ? true : false;
             });
         }
       });

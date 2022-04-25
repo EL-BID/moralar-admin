@@ -11,6 +11,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/utils/services/http/http.service';
 import { UserService } from 'src/app/utils/services/user/user.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-notifications',
@@ -19,10 +20,9 @@ import { UserService } from 'src/app/utils/services/user/user.service';
 })
 export class MyNotificationsComponent
   extends ListContainerClass
-  implements OnInit, OnChanges
+  implements OnInit
 {
   @Input() abstract = false;
-  @Input() forGestor = true;
   UrlSeelAll = '/gestor-publico/app/my-notifications';
 
   formDataModel: FormDataModel = {
@@ -45,6 +45,7 @@ export class MyNotificationsComponent
   };
 
   uri = 'Notification';
+  loggedUser!: any;
 
   constructor(
     protected _activatedRoute: ActivatedRoute,
@@ -58,23 +59,25 @@ export class MyNotificationsComponent
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe((params: Params) => {
       this.setQueryParams(params);
-      this.getList();
+      this.onLoadFilter();
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.forGestor.firstChange) {
-      this.formDataModel.search.forGestor = this.forGestor;
-      this.formDataModel.search.forTTS = !this.forGestor;
-
-      this._activatedRoute.queryParams.subscribe((params: Params) => {
-        this.setQueryParams(params);
-        if (this.forGestor === false) {
-          this.UrlSeelAll = '/profissional/app/my-notifications';
+  onLoadFilter(): void {
+    this.userService.user
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((user: any) => {
+        if (user) {
+          this.loggedUser = user;
+          const forGestor = this.loggedUser.typeProfile == 0 ? true : false;
+          if (!forGestor) {
+            this.formDataModel.search.forGestor = false;
+            this.formDataModel.search.forTTS = true;
+            this.UrlSeelAll = '/profissional/app/my-notifications';
+          }
+          this.getList();
         }
-        this.getList();
       });
-    }
   }
 
   urlImage(name: string): string {
