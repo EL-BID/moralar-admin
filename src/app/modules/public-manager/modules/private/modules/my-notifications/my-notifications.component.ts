@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { ListContainerClass } from 'src/app/utils/classes/list-container.class';
 import { FormDataModel } from 'src/app/utils/functions/generate-form-data.function';
 import { Params } from '@angular/router';
@@ -11,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MyNotificationsComponent
   extends ListContainerClass
-  implements OnInit
+  implements OnInit, OnChanges
 {
   @Input() abstract = false;
   @Input() forGestor = true;
@@ -38,16 +44,21 @@ export class MyNotificationsComponent
 
   uri = 'Notification';
 
-  ngOnInit(): void {
-    this._activatedRoute.queryParams.subscribe((params: Params) => {
-      this.setQueryParams(params);
-      if (this.forGestor === false) {
-        this.formDataModel.search.forGestor = false;
-        this.formDataModel.search.forTTS = true;
-        this.UrlSeelAll = '/profissional/app/my-notifications';
-      }
-      this.getList();
-    });
+  //ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.forGestor.firstChange) {
+      this.formDataModel.search.forGestor = this.forGestor;
+      this.formDataModel.search.forTTS = !this.forGestor;
+
+      this._activatedRoute.queryParams.subscribe((params: Params) => {
+        this.setQueryParams(params);
+        if (this.forGestor === false) {
+          this.UrlSeelAll = '/profissional/app/my-notifications';
+        }
+        this.getList();
+      });
+    }
   }
 
   urlImage(name: string): string {

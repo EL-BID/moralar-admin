@@ -1,11 +1,11 @@
 <h1>Minhas notificações</h1>
 
-<ng-container *ngIf="!loading && !list?.length">
+<ng-container *ngIf="!loading && !list?.length; else showNotifications">
   <h5 class="text-secondary">Nenhuma notificação encontrada</h5>
 </ng-container>
 
-<ng-container *ngIf="abstract; else all">
-  <ng-template #miniList>
+<ng-template #showNotifications>
+  <ng-container *ngIf="abstract; else all">
     <div class="notifications">
       <div *ngFor="let notification of list">
         <img [src]="urlImage(notification?.image)" />
@@ -27,21 +27,15 @@
     <div class="d-flex justify-content-end">
       <button [routerLink]="UrlSeelAll" class="btn btn-light">Ver todas</button>
     </div>
-  </ng-template>
-</ng-container>
-
-<ng-template #all>
-  <app-notification-list-search
-    [listSearchData]="formDataModel.search"
-    (listSearchChange)="handleListSearchChange($event)"
-  >
-  </app-notification-list-search>
-
-  <ng-container *ngIf="!loading && !list?.length; else items">
-    <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
   </ng-container>
 
-  <ng-template #items>
+  <ng-template #all>
+    <app-notification-list-search
+      [listSearchData]="formDataModel.search"
+      (listSearchChange)="handleListSearchChange($event)"
+    >
+    </app-notification-list-search>
+
     <app-notification-list
       [hideTableItems]="{ details: true }"
       [list]="list"
