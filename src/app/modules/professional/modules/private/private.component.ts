@@ -13,7 +13,7 @@ import {
   faQuestionCircle,
   faBook,
   faBellSlash,
-  faUserAlt
+  faUserAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/utils/services/user/user.service';
 import { HttpService } from 'src/app/utils/services/http/http.service';
@@ -25,10 +25,12 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-private',
   templateUrl: './private.component.html',
-  styleUrls: ['./private.component.sass']
+  styleUrls: ['./private.component.sass'],
 })
-export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestroy {
-
+export class PrivateComponent
+  extends OnDestroyClass
+  implements OnInit, OnDestroy
+{
   faTachometerAlt = faTachometerAlt;
   faHouseUser = faHouseUser;
   faCalendarAlt = faCalendarAlt;
@@ -41,7 +43,7 @@ export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestro
   faQuestionCircle = faQuestionCircle;
   faBook = faBook;
   faBellSlash = faBellSlash;
-  faUser = faUserAlt ;
+  faUser = faUserAlt;
 
   user: any;
 
@@ -62,11 +64,12 @@ export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestro
         if (user) {
           this.user = user;
         } else {
-          this.httpService.get('Profile/GetInfo')
+          this.httpService
+            .get('Profile/GetInfo')
             .pipe(takeUntil(this.onDestroy))
-            .subscribe((response: any) => {
-              response.data.passwordCurrent = response.data.password;
-              this.userService.user = response.data;
+            .subscribe(({ data }: any) => {
+              data.passwordCurrent = data.password;
+              this.userService.user = data;
             });
         }
       });
@@ -82,5 +85,4 @@ export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestro
   logOut(): void {
     this.router.navigate(['/profissional']);
   }
-
 }

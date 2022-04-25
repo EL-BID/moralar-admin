@@ -29,4 +29,5 @@ export class DisplacementMapsListComponent extends ListContainerClass {
 
   // uri = 'Family';
   uri = 'Schedule';
+  listName = 'mapa de deslocamento';
 }
