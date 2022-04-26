@@ -24,9 +24,17 @@
     <tbody>
       <tr *ngFor="let item of list">
         <td>
-          <div *ngIf="item?.typeStatus == 1" class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" [id]="'select-' + item.id" [checked]="isChecked(item)"
-              (change)="listItemSelected.emit(item)" />
+          <div
+            *ngIf="item?.typeStatus == 1"
+            class="custom-control custom-checkbox"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'select-' + item.id"
+              [checked]="isChecked(item)"
+              (change)="listItemSelected.emit(item)"
+            />
             <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
@@ -38,10 +46,12 @@
         <td>{{ item.holderCpf || "-" | mask: "000.000.000-99" }}</td>
         <td>
           <ng-container *ngIf="item?.typeStatus == '1'">
-            <a (click)="handleDetails(item)" class="link">{{ item.typeStatus | quizTypeStatus }} </a>
+            <a (click)="handleDetails(item)" class="link"
+              >{{ item.typeStatus | quizTypeStatus }}
+            </a>
           </ng-container>
           <ng-container *ngIf="item?.typeStatus == '0'">
-            <a class="link">{{ item.typeStatus | quizTypeStatus }} </a>
+            {{ item.typeStatus | quizTypeStatus }}
           </ng-container>
         </td>
       </tr>
