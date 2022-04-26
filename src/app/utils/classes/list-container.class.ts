@@ -34,6 +34,7 @@ export abstract class ListContainerClass
   listName = 'Relatório';
   uriCustomExampleFile!: string;
   uriCustomFileImport!: string;
+  uriCustomFileExport!: string;
 
   constructor(
     protected _activatedRoute: ActivatedRoute,
@@ -162,8 +163,9 @@ export abstract class ListContainerClass
   exportToExcel() {
     this.exportingFile = true;
     this.formDataModel.id = this.listSelected.map((el: any) => el.id);
+    const uriFileExport = this.uriCustomFileExport || `${this.uri}/Export`;
     this._httpService
-      .export(`${this.uri}/Export`, generateFormData(this.formDataModel))
+      .export(uriFileExport, generateFormData(this.formDataModel))
       .pipe(take(1))
       .subscribe(
         (response: any) => {
