@@ -4,14 +4,6 @@
     Adicionar
   </button>
   <button
-    type="button"
-    class="btn btn-outline-dark"
-    [disabled]="listSelected.length !== 1"
-    (click)="handleDetails()"
-  >
-    Detalhes
-  </button>
-  <button
     [disabled]="exportingFile"
     (click)="exportToExcel()"
     class="btn btn-dark"

@@ -1,13 +1,5 @@
-<h1 class="h4">Linhas do tempo</h1>
-<div class="options-container">
-  <button
-    type="button"
-    class="btn btn-outline-dark"
-    [disabled]="listSelected.length !== 1"
-    (click)="handleDetails()"
-  >
-    Detalhes
-  </button>
+<div class="header-box">
+  <h1 class="h4">Linhas do tempo</h1>
   <button
     [disabled]="exportingFile"
     (click)="exportToExcel()"

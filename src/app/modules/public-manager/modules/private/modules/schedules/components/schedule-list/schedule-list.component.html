@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th sortable="startDate" (sort)="handleSort($event)">Data</th>
         <th sortable="subject" (sort)="handleSort($event)">Assunto</th>
         <th sortable="place" (sort)="handleSort($event)">Local</th>
@@ -16,11 +16,12 @@
           CPF do morador titular
         </th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <!-- <td>
           <div class="custom-control custom-checkbox">
             <input
               type="checkbox"
@@ -32,7 +33,7 @@
             <label class="custom-control-label" [for]="'select-' + item.id">
             </label>
           </div>
-        </td>
+        </td> -->
         <td>{{ item.date | date: "dd/MM/yyyy, HH:mm" || "-" }}</td>
         <td>{{ scheduleTypeList[item.typeSubject].name || "-" }}</td>
         <td>{{ item.place || "-" }}</td>
@@ -40,6 +41,11 @@
         <td>{{ item.holderName || "-" }}</td>
         <td>{{ item.holderCpf || "-" | mask: "000.000.000-00" }}</td>
         <td>{{ scheduleStatusList[item.typeScheduleStatus].name || "-" }}</td>
+        <td>
+          <button [routerLink]="[item?.id]" class="btn btn-info">
+            Detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

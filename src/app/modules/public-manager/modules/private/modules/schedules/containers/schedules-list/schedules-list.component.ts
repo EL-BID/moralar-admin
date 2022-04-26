@@ -40,10 +40,4 @@ export class SchedulesListComponent
 
   uri = 'Schedule';
   listName = 'agendamentos';
-
-  handleDetails(): void {
-    this._router.navigate([this.listSelected[0].id], {
-      relativeTo: this._activatedRoute.parent,
-    });
-  }
 }

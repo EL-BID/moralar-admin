@@ -12,6 +12,7 @@ import { FormDataModel } from 'src/app/utils/functions/generate-form-data.functi
 export class TimelinesListComponent extends ListContainerClass {
   formDataModel: FormDataModel = {
     columns: [
+      { data: 'created', name: 'Created', searchable: false },
       { data: 'number', name: 'Number', searchable: true },
       { data: 'name', name: 'Name', searchable: true },
       { data: 'cpf', name: 'Cpf', searchable: true },
@@ -24,7 +25,7 @@ export class TimelinesListComponent extends ListContainerClass {
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
@@ -38,14 +39,5 @@ export class TimelinesListComponent extends ListContainerClass {
     httpService: HttpService
   ) {
     super(activatedRoute, router, httpService);
-  }
-
-  handleDetails(): void {
-    this.router.navigate(
-      [this.listSelected[0].id, this.listSelected[0].typeSubject],
-      {
-        relativeTo: this._activatedRoute,
-      }
-    );
   }
 }

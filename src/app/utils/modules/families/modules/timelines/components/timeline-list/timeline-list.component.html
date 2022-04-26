@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th sortable="number" (sort)="handleSort($event)">
           Número do cadastro
         </th>
@@ -18,18 +18,26 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <!-- <td>
           <app-control-checkbox
             [value]="isChecked(item)"
             (changed)="listItemSelected.emit(item)"
           >
           </app-control-checkbox>
-        </td>
+        </td> -->
         <td>{{ item.number || "-" }}</td>
         <td>{{ item.name || "-" }}</td>
         <td>{{ item.cpf || "-" | mask: "000.000.000-00" }}</td>
         <td>{{ timelineStatusToString(item.typeScheduleStatus) }}</td>
         <td>{{ timelineTypeSubjectToString(item.typeSubject) }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            [routerLink]="[item?.id, item?.typeSubject]"
+          >
+            Detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
