@@ -39,13 +39,4 @@ export class TimelinesListComponent extends ListContainerClass {
   ) {
     super(activatedRoute, router, httpService);
   }
-
-  handleDetails(): void {
-    this.router.navigate(
-      [this.listSelected[0].id, this.listSelected[0].typeSubject],
-      {
-        relativeTo: this._activatedRoute,
-      }
-    );
-  }
 }
