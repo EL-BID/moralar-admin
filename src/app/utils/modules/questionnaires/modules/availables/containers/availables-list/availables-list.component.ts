@@ -36,6 +36,7 @@ export class AvailablesListComponent extends ListContainerClass {
   };
 
   uri = 'QuizFamily/Available';
+  uriCustomFileExport = 'Quiz/Export';
   listName = 'questionários disponíveis';
 
   constructor(
