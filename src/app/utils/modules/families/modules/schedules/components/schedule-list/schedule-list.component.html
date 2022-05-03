@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let item of list">
         <td>
-          <ng-container *ngIf="item?.typeScheduleStatus === 0">
+          <ng-container *ngIf="item?.typeScheduleStatus === 1">
             <app-control-checkbox
               [value]="isChecked(item)"
               (changed)="listItemSelected.emit(item)"
@@ -27,10 +27,7 @@
         <td>
           <ng-container *ngIf="!hideTableItems.details">
             <button
-              [routerLink]="[
-                '/gestor-publico/app/agendamentos',
-                item?.scheduleId
-              ]"
+              [routerLink]="['/gestor-publico/app/agendamentos', item?.id]"
               class="btn btn-info"
             >
               Ver detalhes

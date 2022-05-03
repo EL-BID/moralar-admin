@@ -124,6 +124,7 @@ export class TimelineViewComponent
       this.httpService.get(link, true).subscribe(
         ({ data }) => {
           this.listSchedulesByFamily = data?.schedules;
+          if (this.typeSubject == 2) this.listSchedulesByFamily = [data];
           this.listQuizByFamily = data.detailQuiz;
           this.listPropertiesInterest = data.interestResidencialProperty;
           this.listCourseByFamily = data.courses;
@@ -143,9 +144,12 @@ export class TimelineViewComponent
 
   confirmChange(): void {
     let post;
+    console.log(this.agendamentoSelecionado);
+
     post = {
       familyId: this.idFamilia,
-      id: this.agendamentoSelecionado.scheduleId,
+      id: this.agendamentoSelecionado?.scheduleId,
+      // id: '123',
       typeSubject: 8,
       place: 'Mudança',
       description: 'Mudança',
