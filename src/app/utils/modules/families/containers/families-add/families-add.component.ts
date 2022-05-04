@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { OnDestroyClass } from 'src/app/utils/classes/on-destroy.class';
+import { formartDateToMillisecondsBRL } from 'src/app/utils/functions/date.function';
 import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
 import { HttpService } from 'src/app/utils/services/http/http.service';
 
@@ -28,14 +29,14 @@ export class FamiliesAddComponent extends OnDestroyClass {
       if (value.holder.email === '') {
         value.holder.email = null;
       }
-      value.holder.birthday = this.formartDateToMilliseconds(
+      value.holder.birthday = formartDateToMillisecondsBRL(
         value.holder.birthday
       );
-      value.spouse.birthday = this.formartDateToMilliseconds(
+      value.spouse.birthday = formartDateToMillisecondsBRL(
         value.spouse.birthday
       );
       for (let i = 0; value.members.length > i; i++) {
-        value.members[i].birthday = this.formartDateToMilliseconds(
+        value.members[i].birthday = formartDateToMillisecondsBRL(
           value.members[i].birthday
         );
       }
@@ -55,11 +56,5 @@ export class FamiliesAddComponent extends OnDestroyClass {
           }
         );
     }
-  }
-
-  formartDateToMilliseconds(dateString: string): number {
-    const date = new Date(`${dateString}T00:00:00.000-03:00`);
-    const dateMilliseconds = date.getTime();
-    return dateMilliseconds / 1000;
   }
 }
