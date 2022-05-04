@@ -1,20 +1,22 @@
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { sortBy, cloneDeep } from 'lodash';
+import { Router } from '@angular/router';
+import { sortBy } from 'lodash';
+import { DateTime } from 'luxon';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import {
   isCpfValid,
   trimWhiteSpace,
 } from 'src/app/utils/functions/validators.function';
 import {
+  DEGREE_OF_KINSHIP_LIST,
   GENDER_LIST,
   SCHOOLING_LIST,
-  DEGREE_OF_KINSHIP_LIST,
 } from 'src/app/utils/interfaces/families.interface';
-import { DateTime } from 'luxon';
+
 import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
-import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-family-form',
   templateUrl: './family-form.component.html',
