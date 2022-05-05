@@ -24,20 +24,17 @@
         <td>
           <ng-container *ngIf="!hideTableItems.details">
             <button
-              class="btn btn-info"
               *ngIf="item.hasAnswered == 'Não respondido'"
+              (click)="handleDetails(item.quizId)"
+              class="btn btn-info"
               [routerLink]="['/gestor-publico/app/questionarios', item.quizId]"
             >
               Ver detalhes
             </button>
             <button
               *ngIf="item.hasAnswered != 'Não respondido'"
+              (click)="handleDetailsAvaliable(item.quizId, item.quizFamilyId)"
               class="btn btn-info"
-              [routerLink]="[
-                '/gestor-publico/app/questionarios/disponiveis',
-                item.quizId,
-                item.quizFamilyId
-              ]"
             >
               Ver detalhes
             </button>
