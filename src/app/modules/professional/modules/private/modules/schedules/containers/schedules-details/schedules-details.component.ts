@@ -6,15 +6,20 @@ import { OnDestroyClass } from 'src/app/utils/classes/on-destroy.class';
 import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
 import { ModalComponent } from 'src/app/utils/modules/shared/components/modal/modal.component';
 import { HttpService } from 'src/app/utils/services/http/http.service';
-import {dateAndTimeToSeconds, dateToString} from '../../../../../../../../utils/functions/date.function';
+import {
+  dateAndTimeToSeconds,
+  dateToString,
+} from '../../../../../../../../utils/functions/date.function';
 
 @Component({
   selector: 'app-schedules-details',
   templateUrl: './schedules-details.component.html',
-  styleUrls: ['./schedules-details.component.sass']
+  styleUrls: ['./schedules-details.component.sass'],
 })
-export class SchedulesDetailsComponent extends OnDestroyClass implements OnInit {
-
+export class SchedulesDetailsComponent
+  extends OnDestroyClass
+  implements OnInit
+{
   @ViewChild('reschedule')
   rescheduleTemplateRef: TemplateRef<any>;
   rescheduleNgbModalRef: NgbModalRef;
@@ -32,34 +37,50 @@ export class SchedulesDetailsComponent extends OnDestroyClass implements OnInit 
   }
 
   ngOnInit(): void {
-    this.httpService.get(`Schedule/Detail/${this.activatedRoute.snapshot.paramMap.get('scheduleId')}`)
+    this.httpService
+      .get(
+        `Schedule/Detail/${this.activatedRoute.snapshot.paramMap.get(
+          'scheduleId'
+        )}`
+      )
       .pipe(takeUntil(this.onDestroy))
-      .subscribe((response: any) => this.schedule = response.data);
+      .subscribe((response: any) => (this.schedule = response.data));
   }
 
   handleReschedule(): void {
-    this.rescheduleNgbModalRef = this.ngbModal.open(ModalComponent, { size: 'lg', centered: true });
-    this.rescheduleNgbModalRef.componentInstance.templateRef = this.rescheduleTemplateRef;
+    this.rescheduleNgbModalRef = this.ngbModal.open(ModalComponent, {
+      size: 'lg',
+      centered: true,
+    });
+    this.rescheduleNgbModalRef.componentInstance.templateRef =
+      this.rescheduleTemplateRef;
   }
 
-  handleRescheduleFormSubmit(value: any): void {
+  handleRescheduleFormSubmit(value: any, finish = false): void {
     if (this.rescheduleFormLoading === false) {
       this.rescheduleFormLoading = true;
       value.date = dateToString(value.date) + ' ' + value.time;
       value.date = dateAndTimeToSeconds(value.date);
       value.id = this.schedule.id;
-      this.httpService.post('Schedule/ChangeStatus', value)
+      if (finish) {
+        value.typeScheduleStatus = 4;
+        value.date = new Date().getTime() / 1000;
+      }
+      this.httpService
+        .post('Schedule/ChangeStatus', value)
         .pipe(takeUntil(this.onDestroy))
-        .subscribe((response: any) => {
-          this.megaleiosAlertService.success(response.message);
-          this.rescheduleNgbModalRef.close();
-          location.reload();
-          this.rescheduleFormLoading = false;
-        }, (response: any) => {
-          this.megaleiosAlertService.error(response.message);
-          this.rescheduleFormLoading = false;
-        });
+        .subscribe(
+          (response: any) => {
+            this.megaleiosAlertService.success(response.message);
+            this.rescheduleNgbModalRef.close();
+            location.reload();
+            this.rescheduleFormLoading = false;
+          },
+          (response: any) => {
+            this.megaleiosAlertService.error(response.message);
+            this.rescheduleFormLoading = false;
+          }
+        );
     }
   }
-
 }

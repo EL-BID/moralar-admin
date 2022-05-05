@@ -25,6 +25,8 @@ export class ScheduleViewComponent implements OnInit {
 
   @Output()
   reschedule: EventEmitter<void> = new EventEmitter();
+  @Output()
+  finish: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private httpService: HttpService,
