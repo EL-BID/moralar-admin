@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
@@ -24,9 +24,8 @@ export class TimelineViewComponent
   listPollsByFamily = [];
   listSchedulesByFamily = [];
   listSchedulesHistory = [];
-  @Input()
-  family: any;
-  idFamilia!: string;
+  familyId!: string;
+  family!: any;
 
   // novos atributos
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
@@ -50,17 +49,19 @@ export class TimelineViewComponent
   ) {
     // @ts-ignore
     super();
+    this.familyId = activatedRoute.snapshot.paramMap.get('familyId');
+    this.typeSubject =
+      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0;
   }
 
   ngOnInit() {
-    this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
-    this.typeSubject = Number(
-      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
-    );
-    const tipoSituacoes = [2, 4, 7, 8];
-    this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
-    this.buscarInformacoesSegmentadas();
-    this.buscarHistorico();
+    // const tipoSituacoes = [2, 4, 7, 8];
+    // this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
+    // this.buscarInformacoesSegmentadas();
+    // this.buscarHistorico();
+
+    // Novo
+    this.getDetailTimeLineByTypeSubject();
   }
 
   selecionarEtapa(index: number): void {
@@ -92,7 +93,7 @@ export class TimelineViewComponent
 
   buscarHistorico(): void {
     this.httpService
-      .get(`Schedule/GetHistoryByFamily/${this.idFamilia}`)
+      .get(`Schedule/GetHistoryByFamily/${this.familyId}`)
       .subscribe((response: any) => {
         this.historicoFamilia = response.data;
         this.listSchedulesHistory = response.data;
@@ -105,18 +106,31 @@ export class TimelineViewComponent
       });
   }
 
+  getDetailTimeLineByTypeSubject(): void {
+    this.httpService
+      .get(`Schedule/DetailTimeLine/${this.familyId}/${this.typeSubject}`)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+        },
+        ({ message }: any) => {
+          this.megaleiosAlertService.error(message);
+        }
+      );
+  }
+
   buscarInformacoesSegmentadas(typeSubject = this.typeSubject) {
     let link;
     switch (typeSubject) {
       case 2:
-        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.idFamilia}`;
+        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.familyId}`;
         break;
       case 4:
-        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.idFamilia}`;
+        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.familyId}`;
         break;
       case 7:
       case 8:
-        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.idFamilia}/${this.typeSubject}`;
+        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.familyId}/${this.typeSubject}`;
         break;
     }
 
@@ -147,7 +161,7 @@ export class TimelineViewComponent
     console.log(this.agendamentoSelecionado);
 
     post = {
-      familyId: this.idFamilia,
+      familyId: this.familyId,
       id: this.agendamentoSelecionado?.scheduleId,
       // id: '123',
       typeSubject: 8,
@@ -189,7 +203,7 @@ export class TimelineViewComponent
   handleDetails(): void {
     this.router.navigate([
       `/${this.activatedRoute.parent.root.children[0].snapshot.url[0].path}/app/familias/`,
-      this.family.id,
+      this.familyId,
     ]);
   }
 }
