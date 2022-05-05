@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
@@ -8,6 +8,16 @@ import { HttpService } from '../../../../../../services/http/http.service';
 import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-alert.service';
 import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
 import { ModalConfirmData } from '../../../../../shared/components/modal-confirm/modal-confirm.interface';
+
+type TypeSubject = 2 | 4 | 7 | 8;
+interface FamilyDTO {
+  id?: string;
+  holder?: {
+    number?: string;
+    cpf?: string;
+    name?: string;
+  };
+}
 
 @Component({
   selector: 'app-timeline-view',
@@ -24,15 +34,21 @@ export class TimelineViewComponent
   listPollsByFamily = [];
   listSchedulesByFamily = [];
   listSchedulesHistory = [];
-  @Input()
-  family: any;
-  idFamilia!: string;
+  familyId!: string;
+  family = {
+    id: '',
+    holder: {
+      name: '',
+      number: '',
+      cpf: '',
+    },
+  };
 
   // novos atributos
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
   processoReassentamentoAtivo = false;
   etapaSelecionada!: any;
-  typeSubject!: any;
+  typeSubject: TypeSubject = 2;
   historicoFamilia = [];
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
@@ -50,21 +66,47 @@ export class TimelineViewComponent
   ) {
     // @ts-ignore
     super();
+    this.familyId = activatedRoute.snapshot.paramMap.get('familyId');
+    this.typeSubject = Number(
+      this.activatedRoute.snapshot.paramMap.get('typeSubject')
+    ) as TypeSubject;
   }
 
   ngOnInit() {
-    this.idFamilia = this.activatedRoute.snapshot.paramMap.get('familyId');
-    this.typeSubject = Number(
-      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0
-    );
-    const tipoSituacoes = [2, 4, 7, 8];
-    this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
-    this.buscarInformacoesSegmentadas();
-    this.buscarHistorico();
+    // const tipoSituacoes = [2, 4, 7, 8];
+    // this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
+    // this.buscarInformacoesSegmentadas();
+    // this.buscarHistorico();
+
+    // Novo
+    const stages = {
+      2: [this.etapasProcessoReassentamentoAtivo[0]],
+      4: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+      ],
+      7: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+        this.etapasProcessoReassentamentoAtivo[2],
+      ],
+      8: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+        this.etapasProcessoReassentamentoAtivo[2],
+        this.etapasProcessoReassentamentoAtivo[3],
+      ],
+    };
+
+    this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
+    this.selecionarEtapa(this.typeSubject);
+    this.getDetailTimeLineByTypeSubject();
   }
 
-  selecionarEtapa(index: number): void {
-    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo[index];
+  selecionarEtapa(typeSubject: number): void {
+    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo.find(
+      (e: any) => (e.typeSubject = typeSubject)
+    );
     this.etapaSelecionada.visivel = true;
   }
 
@@ -92,7 +134,7 @@ export class TimelineViewComponent
 
   buscarHistorico(): void {
     this.httpService
-      .get(`Schedule/GetHistoryByFamily/${this.idFamilia}`)
+      .get(`Schedule/GetHistoryByFamily/${this.familyId}`)
       .subscribe((response: any) => {
         this.historicoFamilia = response.data;
         this.listSchedulesHistory = response.data;
@@ -105,18 +147,39 @@ export class TimelineViewComponent
       });
   }
 
+  getDetailTimeLineByTypeSubject(typeSubject = this.typeSubject): void {
+    this.httpService
+      .get(`Schedule/DetailTimeLine/${this.familyId}/${typeSubject}`)
+      .subscribe(
+        ({ data }: any) => {
+          this.listSchedulesByFamily = data?.schedules;
+          this.listQuizByFamily = data.detailQuiz;
+          this.listPropertiesInterest = data.interestResidencialProperty;
+          this.listCourseByFamily = data.courses;
+          this.listPollsByFamily = data.detailEnquete;
+          this.family.id = data?.familyId;
+          this.family.holder.name = data?.holderName;
+          this.family.holder.number = data?.holderNumber;
+          this.family.holder.cpf = data?.holderCpf;
+        },
+        ({ message }: any) => {
+          this.megaleiosAlertService.error(message);
+        }
+      );
+  }
+
   buscarInformacoesSegmentadas(typeSubject = this.typeSubject) {
     let link;
     switch (typeSubject) {
       case 2:
-        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.idFamilia}`;
+        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.familyId}`;
         break;
       case 4:
-        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.idFamilia}`;
+        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.familyId}`;
         break;
       case 7:
       case 8:
-        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.idFamilia}/${this.typeSubject}`;
+        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.familyId}/${this.typeSubject}`;
         break;
     }
 
@@ -144,10 +207,9 @@ export class TimelineViewComponent
 
   confirmChange(): void {
     let post;
-    console.log(this.agendamentoSelecionado);
 
     post = {
-      familyId: this.idFamilia,
+      familyId: this.familyId,
       id: this.agendamentoSelecionado?.scheduleId,
       // id: '123',
       typeSubject: 8,
@@ -189,7 +251,7 @@ export class TimelineViewComponent
   handleDetails(): void {
     this.router.navigate([
       `/${this.activatedRoute.parent.root.children[0].snapshot.url[0].path}/app/familias/`,
-      this.family.id,
+      this.familyId,
     ]);
   }
 }

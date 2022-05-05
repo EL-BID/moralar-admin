@@ -4,12 +4,12 @@
   <div class="row">
     <div class="col-md-3">
       <div class="font-weight-bold">Número do cadastro</div>
-      <div class="font-italic">{{ family.holder?.number || "-" }}</div>
+      <div class="font-italic">{{ family?.holder?.number || "-" }}</div>
     </div>
 
     <div class="col-md-3">
       <div class="font-weight-bold">Nome do morador titular</div>
-      <div class="font-italic">{{ family.holder?.name || "-" }}</div>
+      <div class="font-italic">{{ family?.holder?.name || "-" }}</div>
     </div>
 
     <div class="col-md-3">
@@ -31,92 +31,88 @@
   </div>
 </app-card>
 
-<ng-container
-  *ngIf="processoReassentamentoAtivo; else semProcessoAcessentamento"
->
-  <h2>Passos</h2>
-  <app-card class="mb-3">
-    <ng-container
-      *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
+<h2>Passos</h2>
+<app-card class="mb-3">
+  <ng-container
+    *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
+  >
+    <button
+      class="btn btn-secondary mr-2"
+      [ngClass]="{
+        'btn-info': etapa.typeSubject == etapaSelecionada?.typeSubject
+      }"
+      [disabled]="etapa.typeSubject == etapaSelecionada?.typeSubject"
+      (click)="
+        selecionarEtapa(typeSubject);
+        getDetailTimeLineByTypeSubject(etapa.typeSubject)
+      "
     >
-      <button
-        class="btn btn-secondary mr-2"
-        [ngClass]="{
-          'btn-info': etapa.typeSubject == etapaSelecionada?.typeSubject
-        }"
-        [disabled]="etapa.typeSubject == etapaSelecionada?.typeSubject"
-        *ngIf="etapa.disponivel"
-        (click)="
-          selecionarEtapa(i); buscarInformacoesSegmentadas(etapa.typeSubject)
-        "
-      >
-        {{ etapa.label }}
-      </button>
-    </ng-container>
-  </app-card>
-
-  <ng-container *ngIf="etapaSelecionada">
-    <app-card class="mb-3">
-      <h2>{{ etapaSelecionada?.label }}</h2>
-      <button
-        [disabled]="!agendamentoSelecionado"
-        *ngIf="etapaSelecionada?.typeSubject == 7"
-        class="btn btn-primary"
-        (click)="confirmChange()"
-      >
-        {{
-          agendamentoSelecionado
-            ? "Confirmar mudança"
-            : "Selecione um agendamento"
-        }}
-      </button>
-
-      <div class="mb-2">
-        <h3>Lista de agendamentos</h3>
-        <app-schedule-list
-          (listItemSelected)="selecionarAgendamento($event)"
-          [list]="listSchedulesByFamily"
-          [hideTableItems]="ocultarCheckbox"
-        ></app-schedule-list>
-      </div>
-
-      <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
-        <h3>Lista de imóveis</h3>
-        <app-match-list
-          [list]="listPropertiesInterest"
-          [hideTableItems]="ocultarCheckbox"
-        ></app-match-list>
-      </div>
-
-      <div *ngIf="etapaSelecionada?.typeSubject != 7" class="mb-2">
-        <h3>Lista de questionários</h3>
-        <app-questionnare-avaliable-list
-          [hideTableItems]="ocultarCheckbox"
-          [list]="listQuizByFamily"
-        ></app-questionnare-avaliable-list>
-      </div>
-
-      <div class="mb-2">
-        <h3>Cursos</h3>
-        <app-course-list
-          [hideTableItems]="ocultarCheckbox"
-          [list]="listCourseByFamily"
-        ></app-course-list>
-      </div>
-
-      <div class="mb-2">
-        <h3>Enquetes</h3>
-        <app-poll-list
-          [list]="listPollsByFamily"
-          [hideTableItems]="ocultarCheckbox"
-        ></app-poll-list>
-      </div>
-    </app-card>
+      {{ etapa.label }}
+    </button>
   </ng-container>
+</app-card>
+
+<ng-container *ngIf="etapaSelecionada">
+  <app-card class="mb-3">
+    <h2>{{ etapaSelecionada?.label }}</h2>
+    <button
+      [disabled]="!agendamentoSelecionado"
+      *ngIf="etapaSelecionada?.typeSubject == 7"
+      class="btn btn-primary"
+      (click)="confirmChange()"
+    >
+      {{
+        agendamentoSelecionado
+          ? "Confirmar mudança"
+          : "Selecione um agendamento"
+      }}
+    </button>
+
+    <div class="mb-2">
+      <h3>Lista de agendamentos</h3>
+      <app-schedule-list
+        (listItemSelected)="selecionarAgendamento($event)"
+        [list]="listSchedulesByFamily"
+        [hideTableItems]="ocultarCheckbox"
+      ></app-schedule-list>
+    </div>
+
+    <div *ngIf="etapaSelecionada?.label == 'Escolha do imóvel'" class="mb-2">
+      <h3>Lista de imóveis</h3>
+      <app-match-list
+        [list]="listPropertiesInterest"
+        [hideTableItems]="ocultarCheckbox"
+      ></app-match-list>
+    </div>
+
+    <div *ngIf="etapaSelecionada?.typeSubject != 7" class="mb-2">
+      <h3>Lista de questionários</h3>
+      <app-questionnare-avaliable-list
+        [hideTableItems]="ocultarCheckbox"
+        [list]="listQuizByFamily"
+      ></app-questionnare-avaliable-list>
+    </div>
+
+    <div class="mb-2">
+      <h3>Cursos</h3>
+      <app-course-list
+        [hideTableItems]="ocultarCheckbox"
+        [list]="listCourseByFamily"
+      ></app-course-list>
+    </div>
+
+    <div class="mb-2">
+      <h3>Enquetes</h3>
+      <app-poll-list
+        [list]="listPollsByFamily"
+        [hideTableItems]="ocultarCheckbox"
+      ></app-poll-list>
+    </div>
+  </app-card>
 </ng-container>
 
-<ng-template #semProcessoAcessentamento>
+<!-- <ng-template #semProcessoAcessentamento>
   <h2 class="text-danger font-italic">
     Essa família não possui processo de reassentamento aberto
   </h2>
-</ng-template>
+</ng-template> -->
