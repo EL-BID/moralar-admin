@@ -9,6 +9,16 @@ import { MegaleiosAlertService } from '../../../../../megaleios-alert/megaleios-
 import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm/modal-confirm.component';
 import { ModalConfirmData } from '../../../../../shared/components/modal-confirm/modal-confirm.interface';
 
+type TypeSubject = 2 | 4 | 7 | 8;
+interface FamilyDTO {
+  id?: string;
+  holder?: {
+    number?: string;
+    cpf?: string;
+    name?: string;
+  };
+}
+
 @Component({
   selector: 'app-timeline-view',
   templateUrl: './timeline-view.component.html',
@@ -25,13 +35,20 @@ export class TimelineViewComponent
   listSchedulesByFamily = [];
   listSchedulesHistory = [];
   familyId!: string;
-  family!: any;
+  family = {
+    id: '',
+    holder: {
+      name: '',
+      number: '',
+      cpf: '',
+    },
+  };
 
   // novos atributos
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
   processoReassentamentoAtivo = false;
   etapaSelecionada!: any;
-  typeSubject!: any;
+  typeSubject: TypeSubject = 2;
   historicoFamilia = [];
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
@@ -50,8 +67,9 @@ export class TimelineViewComponent
     // @ts-ignore
     super();
     this.familyId = activatedRoute.snapshot.paramMap.get('familyId');
-    this.typeSubject =
-      this.activatedRoute.snapshot.paramMap.get('typeSubject') || 0;
+    this.typeSubject = Number(
+      this.activatedRoute.snapshot.paramMap.get('typeSubject')
+    ) as TypeSubject;
   }
 
   ngOnInit() {
@@ -61,11 +79,34 @@ export class TimelineViewComponent
     // this.buscarHistorico();
 
     // Novo
+    const stages = {
+      2: [this.etapasProcessoReassentamentoAtivo[0]],
+      4: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+      ],
+      7: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+        this.etapasProcessoReassentamentoAtivo[2],
+      ],
+      8: [
+        this.etapasProcessoReassentamentoAtivo[0],
+        this.etapasProcessoReassentamentoAtivo[1],
+        this.etapasProcessoReassentamentoAtivo[2],
+        this.etapasProcessoReassentamentoAtivo[3],
+      ],
+    };
+
+    this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
+    this.selecionarEtapa(this.typeSubject);
     this.getDetailTimeLineByTypeSubject();
   }
 
-  selecionarEtapa(index: number): void {
-    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo[index];
+  selecionarEtapa(typeSubject: number): void {
+    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo.find(
+      (e: any) => (e.typeSubject = typeSubject)
+    );
     this.etapaSelecionada.visivel = true;
   }
 
@@ -106,12 +147,20 @@ export class TimelineViewComponent
       });
   }
 
-  getDetailTimeLineByTypeSubject(): void {
+  getDetailTimeLineByTypeSubject(typeSubject = this.typeSubject): void {
     this.httpService
-      .get(`Schedule/DetailTimeLine/${this.familyId}/${this.typeSubject}`)
+      .get(`Schedule/DetailTimeLine/${this.familyId}/${typeSubject}`)
       .subscribe(
-        (data: any) => {
-          console.log(data);
+        ({ data }: any) => {
+          this.listSchedulesByFamily = data?.schedules;
+          this.listQuizByFamily = data.detailQuiz;
+          this.listPropertiesInterest = data.interestResidencialProperty;
+          this.listCourseByFamily = data.courses;
+          this.listPollsByFamily = data.detailEnquete;
+          this.family.id = data?.familyId;
+          this.family.holder.name = data?.holderName;
+          this.family.holder.number = data?.holderNumber;
+          this.family.holder.cpf = data?.holderCpf;
         },
         ({ message }: any) => {
           this.megaleiosAlertService.error(message);
@@ -158,7 +207,6 @@ export class TimelineViewComponent
 
   confirmChange(): void {
     let post;
-    console.log(this.agendamentoSelecionado);
 
     post = {
       familyId: this.familyId,
