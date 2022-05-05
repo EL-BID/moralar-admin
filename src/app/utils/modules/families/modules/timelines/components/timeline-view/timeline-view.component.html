@@ -42,7 +42,7 @@
     <button
       class="btn btn-secondary mr-2"
       [ngClass]="{
-        'btn-info': etapa.typeSubject === typeSubject
+        'btn-info': etapa.typeSubject === etapaSelecionada.typeSubject
       }"
       (click)="
         selecionarEtapa(etapa.typeSubject);
