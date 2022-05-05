@@ -1,5 +1,7 @@
 <h2>Dados do titular</h2>
 
+<pre>{{ etapasProcessoReassentamentoAtivo | json }}</pre>
+
 <app-card class="mb-3">
   <div class="row">
     <div class="col-md-3">
@@ -36,14 +38,14 @@
   <ng-container
     *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
   >
+    <!-- [disabled]="etapa.typeSubject == etapaSelecionada?.typeSubject" -->
     <button
       class="btn btn-secondary mr-2"
       [ngClass]="{
-        'btn-info': etapa.typeSubject == etapaSelecionada?.typeSubject
+        'btn-info': etapa.typeSubject === typeSubject
       }"
-      [disabled]="etapa.typeSubject == etapaSelecionada?.typeSubject"
       (click)="
-        selecionarEtapa(typeSubject);
+        selecionarEtapa(etapa.typeSubject);
         getDetailTimeLineByTypeSubject(etapa.typeSubject)
       "
     >

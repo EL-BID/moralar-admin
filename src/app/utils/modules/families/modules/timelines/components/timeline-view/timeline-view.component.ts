@@ -48,7 +48,7 @@ export class TimelineViewComponent
   etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
   processoReassentamentoAtivo = false;
   etapaSelecionada!: any;
-  typeSubject: TypeSubject = 2;
+  typeSubject!: TypeSubject;
   historicoFamilia = [];
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
@@ -97,15 +97,14 @@ export class TimelineViewComponent
         this.etapasProcessoReassentamentoAtivo[3],
       ],
     };
-
     this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
     this.selecionarEtapa(this.typeSubject);
-    this.getDetailTimeLineByTypeSubject();
+    this.getDetailTimeLineByTypeSubject(this.typeSubject);
   }
 
   selecionarEtapa(typeSubject: number): void {
     this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo.find(
-      (e: any) => (e.typeSubject = typeSubject)
+      (e: any) => e.typeSubject == typeSubject
     );
     this.etapaSelecionada.visivel = true;
   }
@@ -147,7 +146,7 @@ export class TimelineViewComponent
       });
   }
 
-  getDetailTimeLineByTypeSubject(typeSubject = this.typeSubject): void {
+  getDetailTimeLineByTypeSubject(typeSubject): void {
     this.httpService
       .get(`Schedule/DetailTimeLine/${this.familyId}/${typeSubject}`)
       .subscribe(
