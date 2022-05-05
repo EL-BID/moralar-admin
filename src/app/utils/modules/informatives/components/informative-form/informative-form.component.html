@@ -1,12 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-
-  <h2 class="h5">Imagem do Informativo </h2>
+  <h2 class="h5">Imagem do Informativo</h2>
   <div class="row">
     <div class="col-lg-6 text-center">
       <app-control-field>
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
-          [imageUploadAbstractControl]="form.controls.image">
+          [imageUploadAbstractControl]="form.controls.image"
+        >
         </app-image-upload>
         <app-control-error [control]="form.controls.image"></app-control-error>
       </app-control-field>
@@ -16,12 +16,14 @@
     <div class="col-lg-12">
       <app-control-field>
         <label for="description">Descrição</label>
-        <input type="text" id="description" formControlName="description">
-        <app-control-error [control]="form.controls.description"></app-control-error>
+        <input type="text" id="description" formControlName="description" />
+        <app-control-error
+          [control]="form.controls.description"
+        ></app-control-error>
       </app-control-field>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-lg-6">
       <app-control-field>
         <label for="datePublish">Data da Publicação</label>
@@ -32,13 +34,14 @@
         <app-control-error [control]="form.controls.datePublish"></app-control-error>
       </app-control-field>
     </div>
-  </div>
+  </div> -->
 
   <app-button
     buttonType="submit"
     buttonClass="btn-dark"
     [buttonDisabled]="form.valid === false || formLoading === true"
-    [buttonLoading]="formLoading">
+    [buttonLoading]="formLoading"
+  >
     Adicionar
   </app-button>
 </form>

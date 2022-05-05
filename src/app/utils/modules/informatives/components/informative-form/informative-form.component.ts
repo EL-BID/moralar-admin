@@ -25,7 +25,7 @@ export class InformativeFormComponent extends FormComponentClass {
     super();
     this.form = this.formBuilder.group({
       image: [null, Validators.required],
-      datePublish: [null, Validators.required],
+      // datePublish: [null, Validators.required],
       description: [
         null,
         Validators.compose([trimWhiteSpace, Validators.required]),

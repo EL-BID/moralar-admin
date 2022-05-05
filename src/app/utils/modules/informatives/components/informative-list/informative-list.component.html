@@ -2,9 +2,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th sortable="createdDate" (sort)="handleSort($event)">
+        <!-- <th sortable="createdDate" (sort)="handleSort($event)">
           Data da Publicação
-        </th>
+        </th> -->
         <th sortable="image" (sort)="handleSort($event)">Imagem</th>
         <th sortable="description" (sort)="handleSort($event)">Descrição</th>
         <th sortable="date" (sort)="handleSort($event)">Data</th>
@@ -13,11 +13,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of list">
-        <td>
+        <!-- <td>
           <div class="container-check">
             {{ item?.datePublish || "-" }}
           </div>
-        </td>
+        </td> -->
         <td>
           <div>
             <app-image [imagePath]="item.image"></app-image>
