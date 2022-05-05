@@ -27,7 +27,8 @@
         <td>
           <ng-container *ngIf="!hideTableItems.details">
             <button
-              [routerLink]="['/gestor-publico/app/agendamentos', item?.id]"
+              (click)="handleDetails(this.item.id)"
+              [routerLink]="['app/agendamentos', item?.id]"
               class="btn btn-info"
             >
               Ver detalhes
