@@ -23,8 +23,8 @@ export class VideoFormComponent extends FormComponentClass implements OnInit {
   ) {
     super();
     this.form = this.formBuilder.group({
-      Title: [null, Validators.compose([trimWhiteSpace, Validators.required])],
-      Thumbnail: [null, Validators.required],
+      title: [null, Validators.compose([trimWhiteSpace, Validators.required])],
+      thumbnail: [null, Validators.required],
       url: [null, Validators.compose([trimWhiteSpace, Validators.required])],
       id: [],
     });
@@ -37,11 +37,8 @@ export class VideoFormComponent extends FormComponentClass implements OnInit {
           `Video/Detail/${this.activatedRoute.snapshot.paramMap.get('videoId')}`
         )
         .pipe(takeUntil(this.onDestroy))
-        .subscribe((response: any) => {
-          this.form.controls.Title.setValue(response.data.title);
-          this.form.controls.Thumbnail.setValue(response.data.name);
-          this.form.controls.url.setValue(response.data.url);
-          this.form.controls.id.setValue(response.data.id);
+        .subscribe(({ data }: any) => {
+          this.form.patchValue(data);
         });
     }
   }

@@ -3,8 +3,8 @@
     <div class="col-lg-6">
       <app-control-field>
         <label for="Title">Título do Vídeo</label>
-        <input type="text" id="Title" formControlName="Title" />
-        <app-control-error [control]="form.controls.Title"></app-control-error>
+        <input type="text" id="title" formControlName="title" />
+        <app-control-error [control]="form.controls.title"></app-control-error>
       </app-control-field>
     </div>
   </div>
@@ -14,11 +14,11 @@
       <app-control-field>
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
-          [imageUploadAbstractControl]="form.controls.Thumbnail"
+          [imageUploadAbstractControl]="form.controls.thumbnail"
         >
         </app-image-upload>
         <app-control-error
-          [control]="form.controls.Thumbnail"
+          [control]="form.controls.thumbnail"
         ></app-control-error>
       </app-control-field>
     </div>
