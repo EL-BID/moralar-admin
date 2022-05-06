@@ -41,6 +41,7 @@
       [ngClass]="{
         'btn-info': etapa.typeSubject === etapaSelecionada.typeSubject
       }"
+      [disabled]="etapa.typeSubject === etapaSelecionada.typeSubject"
       (click)="
         selecionarEtapa(etapa.typeSubject);
         getDetailTimeLineByTypeSubject(etapa.typeSubject)
@@ -71,6 +72,7 @@
       <h3>Lista de agendamentos</h3>
       <app-schedule-list
         (listItemSelected)="selecionarAgendamento($event)"
+        (finish)="handleFinalizeSchedule($event)"
         [list]="listSchedulesByFamily"
         [hideTableItems]="ocultarCheckbox"
       ></app-schedule-list>
