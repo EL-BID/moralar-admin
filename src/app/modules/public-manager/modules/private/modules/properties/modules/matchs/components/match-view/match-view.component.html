@@ -17,39 +17,29 @@
           <td>{{ item.holder.name || "-" }}</td>
           <td>{{ item.holder.cpf || "-" | mask: "000.000.000-00" }}</td>
           <td>
-            <div class="form-row">
-              <div class="col-auto">
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  *ngIf="item.typeStatusResidencial == 0"
-                  (click)="handleDatailsFamily(item)"
-                >
-                  Detalhes
-                </button>
-              </div>
-              <ng-container *ngIf="openForSale === true">
-                <div class="col-auto" *ngIf="item.typeStatusResidencial == 0">
-                  <button
-                    type="button"
-                    class="btn btn-outline-success"
-                    (click)="sellProperty(item.id)"
-                  >
-                    Vender
-                  </button>
-                </div>
-              </ng-container>
+            <button
+              class="btn btn-info"
+              *ngIf="item.typeStatusResidencial == 0"
+              (click)="handleDatailsFamily(item)"
+            >
+              Detalhes
+            </button>
+            <button
+              *ngIf="item.typeStatusResidencial == 0 && openForSale === true"
+              class="btn btn-outline-success"
+              (click)="sellProperty(item.id)"
+            >
+              Vender
+            </button>
 
-              <div class="col-auto" *ngIf="item.typeStatusResidencial == 1">
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  (click)="handleDatailsFamily(item)"
-                >
-                  Contemplado
-                </button>
-              </div>
-            </div>
+            <button
+              *ngIf="item.typeStatusResidencial == 1"
+              type="button"
+              class="btn btn-success"
+              (click)="handleDatailsFamily(item)"
+            >
+              Contemplado
+            </button>
           </td>
         </tr>
       </tbody>
