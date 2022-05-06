@@ -43,14 +43,17 @@ export class MatchViewComponent implements OnInit {
           'residencialPropertyId'
         )}`
       )
-      .subscribe((response: any) => {
-        this.lista = response.data;
-        this.openForSale = this.lista.find(
-          (el) => el.typeStatusResidencial === 1
-        )
-          ? false
-          : true;
-      });
+      .subscribe(
+        (response: any) => {
+          this.lista = response.data;
+          this.openForSale = this.lista.find(
+            (el) => el.typeStatusResidencial === 1
+          )
+            ? false
+            : true;
+        },
+        ({ message }: any) => this.megaleiosAlertService.error(message)
+      );
   }
 
   handleDatailsFamily(value): void {
