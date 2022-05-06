@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <!-- <pre>{{ form?.value | json }}</pre> -->
   <div class="row">
     <div class="col-12">
       <app-control-field>
@@ -38,6 +39,25 @@
       [control]="form.controls.typeSubject"
     ></app-control-error>
   </app-control-field>
+
+  <!-- Lista de questionários -->
+  <ng-container *ngIf="form.get('quiz').enabled">
+    <app-control-field>
+      <label for="quiz">Questionário</label>
+      <select id="quiz" formControlName="quiz">
+        <option [ngValue]="null">Selecione uma opção</option>
+        <option
+          *ngFor="let questionnaire of questionnaires"
+          [ngValue]="questionnaire"
+        >
+          {{ questionnaire.title }}
+        </option>
+      </select>
+      <app-control-error [control]="form.controls.quiz"></app-control-error>
+    </app-control-field>
+  </ng-container>
+  <!-- Fim da lista de questionários -->
+
   <app-control-field>
     <label for="place">Local</label>
     <input type="text" id="place" formControlName="place" />
