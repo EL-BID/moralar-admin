@@ -24,6 +24,7 @@ export class SchedulesDetailsComponent
   rescheduleTemplateRef: TemplateRef<any>;
   rescheduleNgbModalRef: NgbModalRef;
   rescheduleFormLoading = false;
+  finishLoading = false;
 
   schedule: any;
 
@@ -56,16 +57,12 @@ export class SchedulesDetailsComponent
       this.rescheduleTemplateRef;
   }
 
-  handleRescheduleFormSubmit(value: any, finish = false): void {
+  handleRescheduleFormSubmit(value: any): void {
     if (this.rescheduleFormLoading === false) {
       this.rescheduleFormLoading = true;
       value.date = dateToString(value.date) + ' ' + value.time;
       value.date = dateAndTimeToSeconds(value.date);
       value.id = this.schedule.id;
-      if (finish) {
-        value.typeScheduleStatus = 4;
-        value.date = new Date().getTime() / 1000;
-      }
       this.httpService
         .post('Schedule/ChangeStatus', value)
         .pipe(takeUntil(this.onDestroy))
@@ -79,6 +76,27 @@ export class SchedulesDetailsComponent
           (response: any) => {
             this.megaleiosAlertService.error(response.message);
             this.rescheduleFormLoading = false;
+          }
+        );
+    }
+  }
+
+  handleFinalizeSchedule(): void {
+    if (this.finishLoading === false) {
+      this.finishLoading = true;
+      const payload = { ...this.schedule, typeScheduleStatus: 4 };
+      this.httpService
+        .post('Schedule/ChangeStatus', payload)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(
+          (response: any) => {
+            this.megaleiosAlertService.success(response.message);
+            this.schedule.typeScheduleStatus = 4;
+            this.finishLoading = false;
+          },
+          (response: any) => {
+            this.megaleiosAlertService.error(response.message);
+            this.finishLoading = false;
           }
         );
     }
