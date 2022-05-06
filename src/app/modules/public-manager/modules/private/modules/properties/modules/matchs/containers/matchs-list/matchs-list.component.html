@@ -1,5 +1,5 @@
-<h1 class="h4">Análise de matchs dos imóveis </h1>
-<div class="form-row my-3">
+<h1 class="h4">Análise de matchs dos imóveis</h1>
+<!-- <div class="form-row my-3">
   <div class="col-auto">
     <button
       type="button"
@@ -9,21 +9,24 @@
       Detalhes
     </button>
   </div>
-</div>
+</div> -->
 <app-match-list-search
   [listSearchData]="formDataModel.search"
-  (listSearchChange)="handleListSearchChange($event)">
+  (listSearchChange)="handleListSearchChange($event)"
+>
 </app-match-list-search>
 <app-match-list
   [list]="list"
   (listSearchChange)="handleListSearchChange($event)"
   (listOrderChange)="handleListOrderChange($event)"
-  (listItemSelected)="handleListItemSelected($event)">
+  (listItemSelected)="handleListItemSelected($event)"
+>
 </app-match-list>
 <app-list-pagination
   [page]="formDataModel.page"
   [pageSize]="formDataModel.pageSize"
   [listSize]="listSize"
   [listSizeFiltered]="listSizeFiltered"
-  (pageChange)="handleListPageChange($event)">
+  (pageChange)="handleListPageChange($event)"
+>
 </app-list-pagination>

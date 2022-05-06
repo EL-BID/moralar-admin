@@ -17,29 +17,31 @@
           <td>{{ item.holder.name || "-" }}</td>
           <td>{{ item.holder.cpf || "-" | mask: "000.000.000-00" }}</td>
           <td>
-            <button
-              class="btn btn-info"
-              *ngIf="item.typeStatusResidencial == 0"
-              (click)="handleDatailsFamily(item)"
-            >
-              Detalhes
-            </button>
-            <button
-              *ngIf="item.typeStatusResidencial == 0 && openForSale === true"
-              class="btn btn-outline-success"
-              (click)="sellProperty(item.id)"
-            >
-              Vender
-            </button>
+            <div class="box-options">
+              <button
+                *ngIf="item.typeStatusResidencial == 0"
+                class="btn btn-info"
+                (click)="handleDatailsFamily(item)"
+              >
+                Detalhes
+              </button>
+              <button
+                *ngIf="item.typeStatusResidencial == 0 && openForSale === true"
+                class="btn btn-outline-success"
+                (click)="sellProperty(item.id)"
+              >
+                Vender
+              </button>
 
-            <button
-              *ngIf="item.typeStatusResidencial == 1"
-              type="button"
-              class="btn btn-success"
-              (click)="handleDatailsFamily(item)"
-            >
-              Contemplado
-            </button>
+              <button
+                *ngIf="item?.familiIdResidencialChosen === item?.id"
+                type="button"
+                class="btn btn-success"
+                (click)="handleDatailsFamily(item)"
+              >
+                Contemplado
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

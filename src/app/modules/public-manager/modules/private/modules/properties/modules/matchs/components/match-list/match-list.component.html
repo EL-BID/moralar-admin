@@ -13,6 +13,7 @@
         </th>
         <th sortable="address" (sort)="handleSort($event)">Endereço</th>
         <th sortable="interest" (sort)="handleSort($event)">Interessados</th>
+        <th>Detalhes</th>
       </tr>
     </thead>
     <tbody>
@@ -46,6 +47,11 @@
           }}
         </td>
         <td>{{ item.interest || "-" }}</td>
+        <td>
+          <button [routerLink]="[item.id]" class="btn btn-info">
+            Detalhes
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
