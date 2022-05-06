@@ -88,7 +88,7 @@ export class FamilyFormComponent extends FormComponentClass implements OnInit {
       name: [null, trimWhiteSpace],
       birthday: [null],
       genre: [null],
-      scholarity: [null],
+      spouseScholarity: [null],
     });
     this.financialForm = this.formBuilder.group({
       familyIncome: [null, Validators.required],

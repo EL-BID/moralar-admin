@@ -147,8 +147,8 @@
           ></app-control-error>
         </app-control-field>
         <app-control-field>
-          <label for="spouseSchooling">Escolaridade</label>
-          <select id="spouseSchooling" formControlName="scholarity">
+          <label for="spouseScholarity">Escolaridade</label>
+          <select id="spouseScholarity" formControlName="spouseScholarity">
             <option [ngValue]="null">Selecione uma opção</option>
             <option
               *ngFor="let schooling of schoolingList"
@@ -158,7 +158,7 @@
             </option>
           </select>
           <app-control-error
-            [control]="spouseForm.controls.scholarity"
+            [control]="spouseForm.controls.spouseScholarity"
           ></app-control-error>
         </app-control-field>
       </div>
