@@ -10,6 +10,7 @@ import { ModalConfirmComponent } from '../../../../../../../../utils/modules/sha
 import { HttpService } from '../../../../../../../../utils/services/http/http.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MegaleiosAlertService } from '../../../../../../../../utils/modules/megaleios-alert/megaleios-alert.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-schedule-view',
   templateUrl: './schedule-view.component.html',
@@ -67,5 +68,17 @@ export class ScheduleViewComponent implements OnInit {
         }
       })
       .catch(() => {});
+  }
+
+  confirmEnd(): void {
+    Swal.fire({
+      text: `Deseja finalizar esse agendamento?`,
+      cancelButtonText: 'Não, cancelar',
+      confirmButtonText: 'Sim, finalizar',
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then(({ isConfirmed }: any) => {
+      if (isConfirmed) this.finish.emit();
+    });
   }
 }

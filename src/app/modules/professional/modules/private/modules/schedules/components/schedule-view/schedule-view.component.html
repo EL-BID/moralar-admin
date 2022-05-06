@@ -59,9 +59,10 @@
         Reagendar
       </button>
       <button
+        *ngIf="schedule.typeScheduleStatus === 1"
         type="button"
         class="btn btn-success ml-2"
-        (click)="finish.emit()"
+        (click)="confirmEnd()"
       >
         Finalizar
       </button>

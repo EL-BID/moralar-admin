@@ -3,7 +3,7 @@
   *ngIf="schedule"
   [schedule]="schedule"
   (reschedule)="handleReschedule()"
-  (finish)="handleRescheduleFormSubmit(schedule, true)"
+  (finish)="handleFinalizeSchedule()"
 >
 </app-schedule-view>
 

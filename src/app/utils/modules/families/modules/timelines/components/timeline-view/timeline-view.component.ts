@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { takeUntil } from 'rxjs/operators';
 import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
@@ -35,6 +36,7 @@ export class TimelineViewComponent
   listSchedulesByFamily = [];
   listSchedulesHistory = [];
   familyId!: string;
+  finishLoading = false;
   family = {
     id: '',
     holder: {
@@ -252,5 +254,28 @@ export class TimelineViewComponent
       `/${this.activatedRoute.parent.root.children[0].snapshot.url[0].path}/app/familias/`,
       this.familyId,
     ]);
+  }
+
+  handleFinalizeSchedule(schedule): void {
+    if (this.finishLoading === false) {
+      this.finishLoading = true;
+      const index = schedule.index;
+      delete schedule.index;
+      const payload = { ...schedule, typeScheduleStatus: 4 };
+      this.httpService
+        .post('Schedule/ChangeStatus', payload)
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(
+          (response: any) => {
+            this.megaleiosAlertService.success(response.message);
+            this.listSchedulesByFamily[index].typeScheduleStatus = 4;
+            this.finishLoading = false;
+          },
+          (response: any) => {
+            this.megaleiosAlertService.error(response.message);
+            this.finishLoading = false;
+          }
+        );
+    }
   }
 }

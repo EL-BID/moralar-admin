@@ -58,9 +58,17 @@
       <button type="button" class="btn btn-dark" (click)="reschedule.emit()">
         Reagendar
       </button>
+      <button
+        *ngIf="schedule.typeScheduleStatus === 1"
+        type="button"
+        class="btn btn-success ml-2"
+        (click)="confirmEnd()"
+      >
+        Finalizar
+      </button>
     </div>
 
-    <div *ngSwitchCase="false">
+    <!-- <div *ngSwitchCase="false">
       <div class="row">
         <div class="col-lg-4">
           <button
@@ -81,6 +89,6 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </app-card>
