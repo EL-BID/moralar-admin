@@ -72,7 +72,7 @@ export class SchedulesDetailsComponent
         .subscribe(
           (response: any) => {
             this.megaleiosAlertService.success(response.message);
-            this.rescheduleNgbModalRef.close();
+            this.rescheduleNgbModalRef?.close();
             location.reload();
             this.rescheduleFormLoading = false;
           },
