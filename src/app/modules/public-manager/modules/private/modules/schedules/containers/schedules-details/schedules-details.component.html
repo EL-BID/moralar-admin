@@ -1,7 +1,10 @@
 <h1 class="h4">Detalhes do agendamento</h1>
-<app-schedule-view *ngIf="schedule"
+<app-schedule-view
+  *ngIf="schedule"
   [schedule]="schedule"
-  (reschedule)="handleReschedule()">
+  (reschedule)="handleReschedule()"
+  (finish)="handleFinalizeSchedule()"
+>
 </app-schedule-view>
 
 <ng-template #reschedule>
@@ -9,6 +12,7 @@
   <app-reschedule-form
     [formData]="schedule"
     [formLoading]="rescheduleFormLoading"
-    (formSubmit)="handleRescheduleFormSubmit($event)">
+    (formSubmit)="handleRescheduleFormSubmit($event)"
+  >
   </app-reschedule-form>
 </ng-template>
