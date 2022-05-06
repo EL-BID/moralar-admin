@@ -28,9 +28,9 @@
               <button
                 *ngIf="item.typeStatusResidencial == 0 && openForSale === true"
                 class="btn btn-outline-success"
-                (click)="sellProperty(item.id)"
+                (click)="sellProperty(item.id, item.holder.name)"
               >
-                Vender
+                Contemplar
               </button>
 
               <button
@@ -39,7 +39,7 @@
                 class="btn btn-success"
                 (click)="handleDatailsFamily(item)"
               >
-                Contemplado
+                contemplado
               </button>
             </div>
           </td>
