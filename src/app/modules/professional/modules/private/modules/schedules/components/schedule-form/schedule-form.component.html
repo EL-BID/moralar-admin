@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <!-- <pre>{{ form?.value | json }}</pre> -->
   <app-card>
     <h2 class="h5">Morador</h2>
     <app-family-list-search
@@ -64,6 +65,25 @@
           ></app-control-error>
         </app-control-field>
       </div>
+
+      <!-- Lista de questionários -->
+      <div *ngIf="form.get('quiz').enabled" class="col-lg-6">
+        <app-control-field>
+          <label for="quiz">Questionário</label>
+          <select id="quiz" formControlName="quiz">
+            <option [ngValue]="null">Selecione uma opção</option>
+            <option
+              *ngFor="let questionnaire of questionnaires"
+              [ngValue]="questionnaire"
+            >
+              {{ questionnaire.title }}
+            </option>
+          </select>
+          <app-control-error [control]="form.controls.quiz"></app-control-error>
+        </app-control-field>
+      </div>
+      <!-- Fim da lista de questionários -->
+
       <div class="col-lg-6">
         <app-control-field>
           <label for="place">Local</label>
