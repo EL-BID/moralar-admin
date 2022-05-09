@@ -30,10 +30,17 @@ const routes: Routes = [
             (m) => m.FamiliesModule
           ),
       },
+      // {
+      //   path: 'agendamentos',
+      //   loadChildren: () =>
+      //     import('./modules/schedules/schedules.module').then(
+      //       (m) => m.SchedulesModule
+      //     ),
+      // },
       {
         path: 'agendamentos',
         loadChildren: () =>
-          import('./modules/schedules/schedules.module').then(
+          import('src/app/utils/modules/schedules/schedules.module').then(
             (m) => m.SchedulesModule
           ),
       },

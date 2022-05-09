@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-// containers
+import { PrivateGuard } from './modules/private/guards/private/private.guard';
 import { PublicManagerComponent } from './public-manager.component';
 
+// containers
 // guards
-import { PrivateGuard } from './modules/private/guards/private/private.guard';
-
 const routes: Routes = [
   {
     path: '',
@@ -14,19 +13,23 @@ const routes: Routes = [
     children: [
       {
         path: 'app',
-        loadChildren: () => import('./modules/private/private.module').then(m => m.PrivateModule),
-        canActivate: [PrivateGuard]
+        loadChildren: () =>
+          import('./modules/private/private.module').then(
+            (m) => m.PrivateModule
+          ),
+        canActivate: [PrivateGuard],
       },
       {
         path: '',
-        loadChildren: () => import('./modules/public/public.module').then(m => m.PublicModule)
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./modules/public/public.module').then((m) => m.PublicModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PublicManagerRoutingModule { }
+export class PublicManagerRoutingModule {}

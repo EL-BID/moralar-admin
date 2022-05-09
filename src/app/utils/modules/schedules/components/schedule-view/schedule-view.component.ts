@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { sortBy } from 'lodash';
+import { dateAndTimeToString } from 'src/app/utils/functions/date.function';
 import {
   SCHEDULE_STATUS_LIST,
   SCHEDULE_TYPE_LIST,
-} from '../../../../../../../../utils/interfaces/schedules.interface';
-import { sortBy } from 'lodash';
-import { dateAndTimeToString } from '../../../../../../../../utils/functions/date.function';
-import { ModalConfirmData } from '../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.interface';
-import { ModalConfirmComponent } from '../../../../../../../../utils/modules/shared/components/modal-confirm/modal-confirm.component';
-import { HttpService } from '../../../../../../../../utils/services/http/http.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MegaleiosAlertService } from '../../../../../../../../utils/modules/megaleios-alert/megaleios-alert.service';
+} from 'src/app/utils/interfaces/schedules.interface';
+import { HttpService } from 'src/app/utils/services/http/http.service';
 import Swal from 'sweetalert2';
+import { MegaleiosAlertService } from '../../../megaleios-alert/megaleios-alert.service';
+import { ModalConfirmComponent } from '../../../shared/components/modal-confirm/modal-confirm.component';
+import { ModalConfirmData } from '../../../shared/components/modal-confirm/modal-confirm.interface';
+
 @Component({
   selector: 'app-schedule-view',
   templateUrl: './schedule-view.component.html',

@@ -1,9 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../user/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
+  profileRouter = '';
+  constructor(userService: UserService, private router: Router) {
+    const typeProfile = ['gestor-publico', 'profissional', 'administrador'];
+    userService.user.subscribe((user) => {
+      if (user) {
+        this.profileRouter = typeProfile[user.typeProfile];
+      }
+      console.log(user);
+    });
+  }
 
   setAuthentication(authentication: any, rememberMe: boolean): void {
     authentication = JSON.stringify(authentication);
@@ -14,19 +26,27 @@ export class AuthenticationService {
 
   getAuthentication(): any {
     const localStorageAuthentication = localStorage.getItem('authentication');
-    const sessionStorageAuthentication = sessionStorage.getItem('authentication');
-    return JSON.parse(localStorageAuthentication) || JSON.parse(sessionStorageAuthentication) || null;
+    const sessionStorageAuthentication =
+      sessionStorage.getItem('authentication');
+    return (
+      JSON.parse(localStorageAuthentication) ||
+      JSON.parse(sessionStorageAuthentication) ||
+      null
+    );
   }
 
   unsetAuthentication(): void {
     localStorage.removeItem('authentication');
     sessionStorage.removeItem('authentication');
+    this.router.navigate([`/${this.profileRouter}`]);
   }
 
   isLoggedIn(): boolean {
     const localStorageAuthentication = localStorage.getItem('authentication');
-    const sessionStorageAuthentication = sessionStorage.getItem('authentication');
-    return localStorageAuthentication || sessionStorageAuthentication ? true : false;
+    const sessionStorageAuthentication =
+      sessionStorage.getItem('authentication');
+    return localStorageAuthentication || sessionStorageAuthentication
+      ? true
+      : false;
   }
-
 }

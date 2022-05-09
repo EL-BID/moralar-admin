@@ -1,6 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OnDestroyClass } from 'src/app/utils/classes/on-destroy.class';
-import { faTachometerAlt, faHouseUser, faUserTie, faIdCard, faHome, faQuestionCircle, faUsers, faBell } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTachometerAlt,
+  faHouseUser,
+  faUserTie,
+  faIdCard,
+  faHome,
+  faQuestionCircle,
+  faUsers,
+  faBell,
+} from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/utils/services/user/user.service';
 import { HttpService } from 'src/app/utils/services/http/http.service';
 import { AuthenticationService } from 'src/app/utils/services/authentication/authentication.service';
@@ -11,10 +20,12 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-private',
   templateUrl: './private.component.html',
-  styleUrls: ['./private.component.sass']
+  styleUrls: ['./private.component.sass'],
 })
-export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestroy {
-
+export class PrivateComponent
+  extends OnDestroyClass
+  implements OnInit, OnDestroy
+{
   faTachometerAlt = faTachometerAlt;
   faHouseUser = faHouseUser;
   faUserTie = faUserTie;
@@ -43,7 +54,8 @@ export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestro
         if (user) {
           this.user = user;
         } else {
-          this.httpService.get('UserAdministrator/GetInfo')
+          this.httpService
+            .get('UserAdministrator/GetInfo')
             .pipe(takeUntil(this.onDestroy))
             .subscribe((response: any) => {
               response.data.passwordCurrent = response.data.password;
@@ -62,7 +74,6 @@ export class PrivateComponent extends OnDestroyClass implements OnInit, OnDestro
   }
 
   logOut(): void {
-    this.router.navigate(['/administrador']);
+    this.authenticationService.unsetAuthentication();
   }
-
 }
