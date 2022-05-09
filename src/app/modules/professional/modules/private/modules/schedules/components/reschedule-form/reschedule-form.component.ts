@@ -15,7 +15,7 @@ import {
 } from 'src/app/utils/functions/generate-form-data.function';
 import { HttpService } from 'src/app/utils/services/http/http.service';
 import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-reschedule-form',
   templateUrl: './reschedule-form.component.html',
@@ -36,7 +36,7 @@ export class RescheduleFormComponent
       { data: 'title', name: 'Title', searchable: true },
     ],
     page: 1,
-    pageSize: 10,
+    pageSize: 1000,
     search: {
       search: '',
     },
