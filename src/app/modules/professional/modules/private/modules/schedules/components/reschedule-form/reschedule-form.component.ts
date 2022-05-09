@@ -31,15 +31,14 @@ export class RescheduleFormComponent
     .toSeconds();
 
   formDataModelQuiz: FormDataModel = {
-    columns: [{ data: 'created', name: 'Created', searchable: false }],
+    columns: [
+      { data: 'created', name: 'Created', searchable: false },
+      { data: 'title', name: 'Title', searchable: true },
+    ],
     page: 1,
     pageSize: 10,
     search: {
       search: '',
-      number: '',
-      holderName: '',
-      holderCpf: '',
-      status: '',
     },
     order: {
       column: '0',
