@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntil } from 'rxjs/operators';
 import { OnDestroyClass } from 'src/app/utils/classes/on-destroy.class';
-import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
-import { ModalComponent } from 'src/app/utils/modules/shared/components/modal/modal.component';
-import { HttpService } from 'src/app/utils/services/http/http.service';
 import {
   dateAndTimeToSeconds,
   dateToString,
-} from '../../../../../../../../utils/functions/date.function';
+} from 'src/app/utils/functions/date.function';
+import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
+import { ModalComponent } from 'src/app/utils/modules/shared/components/modal/modal.component';
+import { HttpService } from 'src/app/utils/services/http/http.service';
 
 @Component({
   selector: 'app-schedules-details',
@@ -69,7 +69,7 @@ export class SchedulesDetailsComponent
         .subscribe(
           (response: any) => {
             this.megaleiosAlertService.success(response.message);
-            this.rescheduleNgbModalRef.close();
+            this.rescheduleNgbModalRef?.close();
             location.reload();
             this.rescheduleFormLoading = false;
           },

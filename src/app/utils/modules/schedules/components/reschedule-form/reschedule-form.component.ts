@@ -3,19 +3,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { FormComponentClass } from 'src/app/utils/classes/form-component.class';
 import { SCHEDULE_TYPE_LIST } from 'src/app/utils/interfaces/schedules.interface';
-import { trimWhiteSpace } from '../../../../../../../../utils/functions/validators.function';
-import {
-  dateAndTimeToString,
-  dateToSeconds,
-  dateToString,
-} from '../../../../../../../../utils/functions/date.function';
+
+import { HttpService } from 'src/app/utils/services/http/http.service';
+import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
+import { takeUntil, debounceTime } from 'rxjs/operators';
 import {
   FormDataModel,
   generateFormData,
 } from 'src/app/utils/functions/generate-form-data.function';
-import { HttpService } from 'src/app/utils/services/http/http.service';
-import { MegaleiosAlertService } from 'src/app/utils/modules/megaleios-alert/megaleios-alert.service';
-import { takeUntil, debounceTime } from 'rxjs/operators';
+import { trimWhiteSpace } from 'src/app/utils/functions/validators.function';
+import {
+  dateAndTimeToString,
+  dateToSeconds,
+  dateToString,
+} from 'src/app/utils/functions/date.function';
 @Component({
   selector: 'app-reschedule-form',
   templateUrl: './reschedule-form.component.html',

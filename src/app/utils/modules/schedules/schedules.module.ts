@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/utils/modules/shared/shared.module';
 
-import { FamiliesModule } from '../../../../../../utils/modules/families/families.module';
+import { FamiliesModule } from '../families/families.module';
 import { RescheduleFormComponent } from './components/reschedule-form/reschedule-form.component';
 import { ScheduleFormComponent } from './components/schedule-form/schedule-form.component';
 import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
