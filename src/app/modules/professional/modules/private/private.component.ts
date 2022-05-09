@@ -83,6 +83,6 @@ export class PrivateComponent
   }
 
   logOut(): void {
-    this.router.navigate(['/profissional']);
+    this.authenticationService.unsetAuthentication();
   }
 }
