@@ -10,10 +10,7 @@ export class AuthenticationService {
   constructor(userService: UserService, private router: Router) {
     const typeProfile = ['gestor-publico', 'profissional', 'administrador'];
     userService.user.subscribe((user) => {
-      if (user) {
-        this.profileRouter = typeProfile[user.typeProfile];
-      }
-      console.log(user);
+      if (user) this.profileRouter = typeProfile[user.typeProfile];
     });
   }
 
