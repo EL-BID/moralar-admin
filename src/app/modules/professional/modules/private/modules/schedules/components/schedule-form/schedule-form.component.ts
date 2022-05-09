@@ -88,8 +88,10 @@ export class ScheduleFormComponent
     this.form
       .get('typeSubject')
       .valueChanges.subscribe((typeSubject: number) => {
-        if (typeSubject == 7) this.form.get('quiz').enable();
-        else this.form.get('quiz').enable();
+        if (typeSubject == 7) {
+          this.getQuestionnaires();
+          this.form.get('quiz').enable();
+        } else this.form.get('quiz').disable();
       });
   }
   ngOnInit(): void {
@@ -132,8 +134,6 @@ export class ScheduleFormComponent
           : this.formDataModel.pageSize;
       this.getList();
     });
-
-    this.getQuestionnaires();
   }
 
   getFamily(e) {
@@ -158,14 +158,15 @@ export class ScheduleFormComponent
   }
 
   getQuestionnaires(): void {
-    this.httpService
-      .post(`Quiz/LoadData`, generateFormData(this.formDataModelQuiz))
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(
-        ({ data }: any) => {
-          this.questionnaires = data;
-        },
-        ({ message }: any) => this.megaleiosAlertService.error(message)
-      );
+    if (!this.questionnaires.length)
+      this.httpService
+        .post(`Quiz/LoadData`, generateFormData(this.formDataModelQuiz))
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(
+          ({ data }: any) => {
+            this.questionnaires = data;
+          },
+          ({ message }: any) => this.megaleiosAlertService.error(message)
+        );
   }
 }

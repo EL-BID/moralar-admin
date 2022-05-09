@@ -31,7 +31,7 @@ export class RescheduleFormComponent
     .toSeconds();
 
   formDataModelQuiz: FormDataModel = {
-    columns: [{ data: 'number', name: 'Number', searchable: false }],
+    columns: [{ data: 'created', name: 'Created', searchable: false }],
     page: 1,
     pageSize: 10,
     search: {
@@ -43,7 +43,7 @@ export class RescheduleFormComponent
     },
     order: {
       column: '0',
-      direction: 'asc',
+      direction: 'desc',
     },
   };
 
@@ -58,7 +58,7 @@ export class RescheduleFormComponent
     this.form = formBuilder.group({
       date: [null, Validators.required],
       familyId: [null],
-      typeSubject: [null, Validators.required],
+      typeSubject: [{ disabled: true, value: null }, Validators.required],
       place: [null, Validators.compose([trimWhiteSpace, Validators.required])],
       description: [null, Validators.required],
       time: [null, Validators.required],
@@ -67,8 +67,10 @@ export class RescheduleFormComponent
     this.form
       .get('typeSubject')
       .valueChanges.subscribe((typeSubject: number) => {
-        if (typeSubject == 7) this.form.get('quiz').enable();
-        else this.form.get('quiz').enable();
+        if (typeSubject == 7) {
+          this.form.get('quiz').enable();
+          this.getQuestionnaires();
+        } else this.form.get('quiz').disable();
       });
   }
 
@@ -79,18 +81,18 @@ export class RescheduleFormComponent
     this.form.controls.date.setValue(
       dateToSeconds(dateToString(+this.form.controls.date.value))
     );
-    this.getQuestionnaires();
   }
 
   getQuestionnaires(): void {
-    this.httpService
-      .post(`Quiz/LoadData`, generateFormData(this.formDataModelQuiz))
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe(
-        ({ data }: any) => {
-          this.questionnaires = data;
-        },
-        ({ message }: any) => this.megaleiosAlertService.error(message)
-      );
+    if (!this.questionnaires.length)
+      this.httpService
+        .post(`Quiz/LoadData`, generateFormData(this.formDataModelQuiz))
+        .pipe(takeUntil(this.onDestroy))
+        .subscribe(
+          ({ data }: any) => {
+            this.questionnaires = data;
+          },
+          ({ message }: any) => this.megaleiosAlertService.error(message)
+        );
   }
 }
