@@ -89,7 +89,7 @@ export class TimelineViewComponent
     }
   }
 
-  selectStage(typeSubject: number): void {
+  selectStage(typeSubject: TypeSubject): void {
     this.selectedStep = this.resettlementProcessSteps.find(
       (e: any) => e.typeSubject == typeSubject
     );
@@ -154,6 +154,7 @@ export class TimelineViewComponent
             ({ message }) => {
               this.megaleiosAlertService.success(message);
               this.typeSubject = 8;
+              this.selectStage(8);
             },
             ({ message }) => {
               this.megaleiosAlertService.error(message);
