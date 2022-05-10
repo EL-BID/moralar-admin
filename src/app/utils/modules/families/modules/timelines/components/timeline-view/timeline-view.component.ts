@@ -85,11 +85,11 @@ export class TimelineViewComponent
         ],
       };
       this.resettlementProcessSteps = stages[this.typeSubject];
-      this.selecionarEtapa(this.typeSubject);
+      this.selectStage(this.typeSubject);
     }
   }
 
-  selecionarEtapa(typeSubject: number): void {
+  selectStage(typeSubject: number): void {
     this.selectedStep = this.resettlementProcessSteps.find(
       (e: any) => e.typeSubject == typeSubject
     );
@@ -97,7 +97,7 @@ export class TimelineViewComponent
     this.getDetailTimeLineByTypeSubject(typeSubject);
   }
 
-  selecionarAgendamento(agendamentos: any[]): void {
+  selectSchedule(agendamentos: any[]): void {
     this.handleListItemSelected(agendamentos);
     if (this.listSelected.length > 1 || !this.listSelected.length)
       this.selectedSchedule = null;

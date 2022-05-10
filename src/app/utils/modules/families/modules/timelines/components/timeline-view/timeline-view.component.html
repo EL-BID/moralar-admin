@@ -41,7 +41,7 @@
           'btn-info': etapa.typeSubject === selectedStep.typeSubject
         }"
         [disabled]="etapa.typeSubject === selectedStep.typeSubject"
-        (click)="selecionarEtapa(etapa.typeSubject)"
+        (click)="selectStage(etapa.typeSubject)"
       >
         {{ etapa.label }}
       </button>
@@ -67,7 +67,7 @@
       <div class="mb-2">
         <h3>Lista de agendamentos</h3>
         <app-schedule-list
-          (listItemSelected)="selecionarAgendamento($event)"
+          (listItemSelected)="selectSchedule($event)"
           (finish)="handleFinalizeSchedule($event)"
           [list]="listSchedulesByFamily"
           [hideTableItems]="hideCheckbox"
