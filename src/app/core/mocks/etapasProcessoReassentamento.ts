@@ -1,4 +1,4 @@
-export const etapasProcessoReassentamentoAtivo = [
+export const etapasProcessoReassentamento = [
   {
     label: 'Reunião PGM',
     disponivel: false,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntil } from 'rxjs/operators';
-import { etapasProcessoReassentamentoAtivo } from 'src/app/core/mocks/etapasProcessoReassentamentoAtivo';
+import { etapasProcessoReassentamento } from 'src/app/core/mocks/etapasProcessoReassentamento';
 
 import { ListContainerClass } from '../../../../../../classes/list-container.class';
 import { HttpService } from '../../../../../../services/http/http.service';
@@ -11,14 +11,6 @@ import { ModalConfirmComponent } from '../../../../../shared/components/modal-co
 import { ModalConfirmData } from '../../../../../shared/components/modal-confirm/modal-confirm.interface';
 
 type TypeSubject = 2 | 4 | 7 | 8;
-interface FamilyDTO {
-  id?: string;
-  holder?: {
-    number?: string;
-    cpf?: string;
-    name?: string;
-  };
-}
 
 @Component({
   selector: 'app-timeline-view',
@@ -47,7 +39,7 @@ export class TimelineViewComponent
   };
 
   // novos atributos
-  etapasProcessoReassentamentoAtivo = etapasProcessoReassentamentoAtivo;
+  etapasProcessoReassentamento = etapasProcessoReassentamento;
   processoReassentamentoAtivo = false;
   etapaSelecionada!: any;
   typeSubject!: TypeSubject;
@@ -77,41 +69,35 @@ export class TimelineViewComponent
   }
 
   ngOnInit() {
-    // const tipoSituacoes = [2, 4, 7, 8];
-    // this.processoReassentamentoAtivo = tipoSituacoes.includes(this.typeSubject);
-    // this.buscarInformacoesSegmentadas();
-    // this.buscarHistorico();
-
-    // Novo
-    const resettlementSteps = [2, 4, 7, 8];
+    const resettlementSteps: TypeSubject[] = [2, 4, 7, 8];
     this.itIsResettlementStage = resettlementSteps.includes(this.typeSubject);
     if (this.itIsResettlementStage) {
       const stages = {
-        2: [this.etapasProcessoReassentamentoAtivo[0]],
+        2: [this.etapasProcessoReassentamento[0]],
         4: [
-          this.etapasProcessoReassentamentoAtivo[0],
-          this.etapasProcessoReassentamentoAtivo[1],
+          this.etapasProcessoReassentamento[0],
+          this.etapasProcessoReassentamento[1],
         ],
         7: [
-          this.etapasProcessoReassentamentoAtivo[0],
-          this.etapasProcessoReassentamentoAtivo[1],
-          this.etapasProcessoReassentamentoAtivo[2],
+          this.etapasProcessoReassentamento[0],
+          this.etapasProcessoReassentamento[1],
+          this.etapasProcessoReassentamento[2],
         ],
         8: [
-          this.etapasProcessoReassentamentoAtivo[0],
-          this.etapasProcessoReassentamentoAtivo[1],
-          this.etapasProcessoReassentamentoAtivo[2],
-          this.etapasProcessoReassentamentoAtivo[3],
+          this.etapasProcessoReassentamento[0],
+          this.etapasProcessoReassentamento[1],
+          this.etapasProcessoReassentamento[2],
+          this.etapasProcessoReassentamento[3],
         ],
       };
-      this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
+      this.etapasProcessoReassentamento = stages[this.typeSubject];
       this.selecionarEtapa(this.typeSubject);
       this.getDetailTimeLineByTypeSubject(this.typeSubject);
     }
   }
 
   selecionarEtapa(typeSubject: number): void {
-    this.etapaSelecionada = this.etapasProcessoReassentamentoAtivo.find(
+    this.etapaSelecionada = this.etapasProcessoReassentamento.find(
       (e: any) => e.typeSubject == typeSubject
     );
     this.etapaSelecionada.visivel = true;
@@ -123,35 +109,6 @@ export class TimelineViewComponent
       this.agendamentoSelecionado = null;
     if (this.listSelected.length == 1)
       this.agendamentoSelecionado = agendamentos;
-  }
-
-  validarEtapas(): void {
-    this.etapasProcessoReassentamentoAtivo[0].disponivel =
-      this.historicoFamilia.some((e) => e.typeSubject == 2);
-
-    this.etapasProcessoReassentamentoAtivo[1].disponivel =
-      this.historicoFamilia.some((e) => e.typeSubject == 4);
-
-    this.etapasProcessoReassentamentoAtivo[2].disponivel =
-      this.historicoFamilia.some((e) => e.typeSubject == 7);
-
-    this.etapasProcessoReassentamentoAtivo[3].disponivel =
-      this.historicoFamilia.some((e) => e.typeSubject == 8);
-  }
-
-  buscarHistorico(): void {
-    this.httpService
-      .get(`Schedule/GetHistoryByFamily/${this.familyId}`)
-      .subscribe((response: any) => {
-        this.historicoFamilia = response.data;
-        this.listSchedulesHistory = response.data;
-        this.validarEtapas();
-        this.selecionarEtapa(
-          this.etapasProcessoReassentamentoAtivo.findIndex(
-            (e) => e.typeSubject == this.typeSubject
-          )
-        );
-      });
   }
 
   getDetailTimeLineByTypeSubject(typeSubject): void {
@@ -175,47 +132,8 @@ export class TimelineViewComponent
       );
   }
 
-  buscarInformacoesSegmentadas(typeSubject = this.typeSubject) {
-    let link;
-    switch (typeSubject) {
-      case 2:
-        link = `Schedule/DetailTimeLineProcessReunionPGM/${this.familyId}`;
-        break;
-      case 4:
-        link = `Schedule/DetailTimeLineProcessChooseProperty/${this.familyId}`;
-        break;
-      case 7:
-      case 8:
-        link = `Schedule/DetailTimeLineProcessChoosePropertyOneAndTwo/${this.familyId}/${this.typeSubject}`;
-        break;
-    }
-
-    if (link)
-      this.httpService.get(link, true).subscribe(
-        ({ data }) => {
-          this.listSchedulesByFamily = data?.schedules;
-          if (this.typeSubject == 2) this.listSchedulesByFamily = [data];
-          this.listQuizByFamily = data.detailQuiz;
-          this.listPropertiesInterest = data.interestResidencialProperty;
-          this.listCourseByFamily = data.courses;
-          this.listPollsByFamily = data.detailEnquete;
-        },
-        ({ message }) => {
-          this.megaleiosAlertService.error(message);
-          this.listSchedulesByFamily =
-            this.listQuizByFamily =
-            this.listPropertiesInterest =
-            this.listCourseByFamily =
-            this.listPollsByFamily =
-              [];
-        }
-      );
-  }
-
   confirmChange(): void {
-    let post;
-
-    post = {
+    const body = {
       familyId: this.familyId,
       id: this.agendamentoSelecionado?.scheduleId,
       // id: '123',
@@ -239,12 +157,11 @@ export class TimelineViewComponent
     modalRef.result
       .then((result: any) => {
         if (result) {
-          this.httpService.post('Schedule/ChangeSubject', post).subscribe(
+          this.httpService.post('Schedule/ChangeSubject', body).subscribe(
             ({ message }) => {
               this.megaleiosAlertService.success(message);
-              this.etapasProcessoReassentamentoAtivo[3].disponivel = true;
+              this.etapasProcessoReassentamento[3].disponivel = true;
               this.typeSubject = 8;
-              this.buscarInformacoesSegmentadas();
             },
             ({ message }) => {
               this.megaleiosAlertService.error(message);

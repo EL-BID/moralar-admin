@@ -35,7 +35,7 @@
   <h2>Passos</h2>
   <app-card class="mb-3">
     <ng-container
-      *ngFor="let etapa of etapasProcessoReassentamentoAtivo; let i = index"
+      *ngFor="let etapa of etapasProcessoReassentamento; let i = index"
     >
       <button
         class="btn btn-secondary mr-2"
@@ -115,6 +115,6 @@
 </ng-container>
 <ng-template #itIsNotAResettlementStage>
   <h2 class="text-danger font-italic">
-    Essa etapa não faz parte do processo de reassentamento.
+    Esta etapa não faz parte do processo de reassentamento.
   </h2>
 </ng-template>
