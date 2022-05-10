@@ -9,10 +9,11 @@
       <img [src]="urlImage(notification?.image)" />
       <div class="body">
         <div>
-          <div class="title">{{ notification?.title | slice: 0:25 }}...</div>
-          <div class="description">
-            {{ notification?.description | slice: 0:25 }}...
-          </div>
+          <div class="title">{{ notification?.title }}</div>
+          <div
+            class="description"
+            [innerHTML]="notification?.description"
+          ></div>
         </div>
         <div>
           <small class="badge badge-secondary">

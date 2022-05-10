@@ -63,6 +63,7 @@ export class SchedulesDetailsComponent
       value.date = dateToString(value.date) + ' ' + value.time;
       value.date = dateAndTimeToSeconds(value.date);
       value.id = this.schedule.id;
+      value.typeScheduleStatus = 3;
       this.httpService
         .post('Schedule/ChangeStatus', value)
         .pipe(takeUntil(this.onDestroy))
@@ -70,7 +71,7 @@ export class SchedulesDetailsComponent
           (response: any) => {
             this.megaleiosAlertService.success(response.message);
             this.rescheduleNgbModalRef?.close();
-            location.reload();
+            this.schedule.typeScheduleStatus = 3;
             this.rescheduleFormLoading = false;
           },
           (response: any) => {
