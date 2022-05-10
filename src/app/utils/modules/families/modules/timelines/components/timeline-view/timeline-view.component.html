@@ -43,10 +43,7 @@
           'btn-info': etapa.typeSubject === etapaSelecionada.typeSubject
         }"
         [disabled]="etapa.typeSubject === etapaSelecionada.typeSubject"
-        (click)="
-          selecionarEtapa(etapa.typeSubject);
-          getDetailTimeLineByTypeSubject(etapa.typeSubject)
-        "
+        (click)="selecionarEtapa(etapa.typeSubject)"
       >
         {{ etapa.label }}
       </button>

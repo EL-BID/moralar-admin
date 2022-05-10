@@ -92,7 +92,7 @@ export class TimelineViewComponent
       };
       this.etapasProcessoReassentamento = stages[this.typeSubject];
       this.selecionarEtapa(this.typeSubject);
-      this.getDetailTimeLineByTypeSubject(this.typeSubject);
+      // this.getDetailTimeLineByTypeSubject(this.typeSubject);
     }
   }
 
@@ -101,6 +101,7 @@ export class TimelineViewComponent
       (e: any) => e.typeSubject == typeSubject
     );
     this.etapaSelecionada.visivel = true;
+    this.getDetailTimeLineByTypeSubject(typeSubject);
   }
 
   selecionarAgendamento(agendamentos: any[]): void {
