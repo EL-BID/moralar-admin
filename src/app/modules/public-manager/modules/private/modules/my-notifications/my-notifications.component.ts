@@ -40,7 +40,7 @@ export class MyNotificationsComponent
     },
     order: {
       column: '0',
-      direction: 'desc',
+      direction: 'asc',
     },
   };
 
