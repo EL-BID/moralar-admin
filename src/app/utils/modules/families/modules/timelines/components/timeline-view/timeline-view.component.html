@@ -34,9 +34,7 @@
 
   <h2>Passos</h2>
   <app-card class="mb-3">
-    <ng-container
-      *ngFor="let etapa of etapasProcessoReassentamento; let i = index"
-    >
+    <ng-container *ngFor="let etapa of resettlementProcessSteps; let i = index">
       <button
         class="btn btn-secondary mr-2"
         [ngClass]="{
@@ -62,7 +60,7 @@
         {{
           agendamentoSelecionado
             ? "Confirmar mudança"
-            : "Selecione um agendamento"
+            : "Selecione um agendamento de mudança 'confirmado'."
         }}
       </button>
 

@@ -38,12 +38,9 @@ export class TimelineViewComponent
     },
   };
 
-  // novos atributos
-  etapasProcessoReassentamento = etapasProcessoReassentamento;
-  processoReassentamentoAtivo = false;
+  resettlementProcessSteps = etapasProcessoReassentamento;
   etapaSelecionada!: any;
   typeSubject!: TypeSubject;
-  historicoFamilia = [];
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
     selectItem: false,
@@ -73,31 +70,27 @@ export class TimelineViewComponent
     this.itIsResettlementStage = resettlementSteps.includes(this.typeSubject);
     if (this.itIsResettlementStage) {
       const stages = {
-        2: [this.etapasProcessoReassentamento[0]],
-        4: [
-          this.etapasProcessoReassentamento[0],
-          this.etapasProcessoReassentamento[1],
-        ],
+        2: [this.resettlementProcessSteps[0]],
+        4: [this.resettlementProcessSteps[0], this.resettlementProcessSteps[1]],
         7: [
-          this.etapasProcessoReassentamento[0],
-          this.etapasProcessoReassentamento[1],
-          this.etapasProcessoReassentamento[2],
+          this.resettlementProcessSteps[0],
+          this.resettlementProcessSteps[1],
+          this.resettlementProcessSteps[2],
         ],
         8: [
-          this.etapasProcessoReassentamento[0],
-          this.etapasProcessoReassentamento[1],
-          this.etapasProcessoReassentamento[2],
-          this.etapasProcessoReassentamento[3],
+          this.resettlementProcessSteps[0],
+          this.resettlementProcessSteps[1],
+          this.resettlementProcessSteps[2],
+          this.resettlementProcessSteps[3],
         ],
       };
-      this.etapasProcessoReassentamento = stages[this.typeSubject];
+      this.resettlementProcessSteps = stages[this.typeSubject];
       this.selecionarEtapa(this.typeSubject);
-      // this.getDetailTimeLineByTypeSubject(this.typeSubject);
     }
   }
 
   selecionarEtapa(typeSubject: number): void {
-    this.etapaSelecionada = this.etapasProcessoReassentamento.find(
+    this.etapaSelecionada = this.resettlementProcessSteps.find(
       (e: any) => e.typeSubject == typeSubject
     );
     this.etapaSelecionada.visivel = true;
@@ -161,7 +154,6 @@ export class TimelineViewComponent
           this.httpService.post('Schedule/ChangeSubject', body).subscribe(
             ({ message }) => {
               this.megaleiosAlertService.success(message);
-              this.etapasProcessoReassentamento[3].disponivel = true;
               this.typeSubject = 8;
             },
             ({ message }) => {
