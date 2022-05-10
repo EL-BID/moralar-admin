@@ -71,7 +71,7 @@ export class SchedulesDetailsComponent
           (response: any) => {
             this.megaleiosAlertService.success(response.message);
             this.rescheduleNgbModalRef?.close();
-            this.schedule.typeScheduleStatus = 3;
+            this.schedule.typeScheduleStatus = 0;
             this.rescheduleFormLoading = false;
           },
           (response: any) => {
