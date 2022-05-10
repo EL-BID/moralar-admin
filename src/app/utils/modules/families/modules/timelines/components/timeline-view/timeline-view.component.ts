@@ -39,7 +39,7 @@ export class TimelineViewComponent
   };
 
   resettlementProcessSteps = etapasProcessoReassentamento;
-  etapaSelecionada!: any;
+  selectedStep!: any;
   typeSubject!: TypeSubject;
   agendamentoSelecionado!: any;
   ocultarCheckbox = {
@@ -90,10 +90,10 @@ export class TimelineViewComponent
   }
 
   selecionarEtapa(typeSubject: number): void {
-    this.etapaSelecionada = this.resettlementProcessSteps.find(
+    this.selectedStep = this.resettlementProcessSteps.find(
       (e: any) => e.typeSubject == typeSubject
     );
-    this.etapaSelecionada.visivel = true;
+    this.selectedStep.visivel = true;
     this.getDetailTimeLineByTypeSubject(typeSubject);
   }
 
