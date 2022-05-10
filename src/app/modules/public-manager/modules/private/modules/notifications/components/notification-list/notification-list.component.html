@@ -9,6 +9,7 @@
         <th class="text-center" sortable="date" (sort)="handleSort($event)">
           Data de envio
         </th>
+        <th>Status</th>
         <th *ngIf="!hideTableItems.details" class="text-right">Detalhes</th>
       </tr>
     </thead>
@@ -22,6 +23,14 @@
         </th>
         <td class="text-center">
           <span>{{ item.created | date: "dd/MM/yyyy, HH:mm" }}</span>
+        </td>
+        <td>
+          <span
+            [class]="
+              item?.dateViewed ? 'badge badge-success' : 'badge badge-danger'
+            "
+            >{{ item?.dateViewed ? "Lida" : "Não lida" }}</span
+          >
         </td>
         <td *ngIf="!hideTableItems.details" class="text-right">
           <button [routerLink]="[item.id]" class="btn btn-info">
