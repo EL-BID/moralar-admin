@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="abstract; else all">
   <h5 *ngIf="!loading && !list?.length" class="text-secondary">
-    Nenhuma notificação encontrada
+    Todas as notificações foram lidas!
   </h5>
   <div class="notifications">
     <div *ngFor="let notification of list">

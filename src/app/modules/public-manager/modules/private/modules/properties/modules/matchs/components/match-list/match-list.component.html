@@ -48,7 +48,10 @@
         </td>
         <td>{{ item.interest || "-" }}</td>
         <td>
-          <button [routerLink]="[item.id]" class="btn btn-info">
+          <button
+            [routerLink]="[item?.residencialPropertyId]"
+            class="btn btn-info"
+          >
             Detalhes
           </button>
         </td>
