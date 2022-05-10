@@ -41,8 +41,8 @@ export class TimelineViewComponent
   resettlementProcessSteps = etapasProcessoReassentamento;
   selectedStep!: any;
   typeSubject!: TypeSubject;
-  agendamentoSelecionado!: any;
-  ocultarCheckbox = {
+  selectedSchedule!: any;
+  hideCheckbox = {
     selectItem: false,
     details: false,
     lockUnlock: true,
@@ -100,9 +100,8 @@ export class TimelineViewComponent
   selecionarAgendamento(agendamentos: any[]): void {
     this.handleListItemSelected(agendamentos);
     if (this.listSelected.length > 1 || !this.listSelected.length)
-      this.agendamentoSelecionado = null;
-    if (this.listSelected.length == 1)
-      this.agendamentoSelecionado = agendamentos;
+      this.selectedSchedule = null;
+    if (this.listSelected.length == 1) this.selectedSchedule = agendamentos;
   }
 
   getDetailTimeLineByTypeSubject(typeSubject): void {
@@ -129,7 +128,7 @@ export class TimelineViewComponent
   confirmChange(): void {
     const body = {
       familyId: this.familyId,
-      id: this.agendamentoSelecionado?.scheduleId,
+      id: this.selectedSchedule?.scheduleId,
       // id: '123',
       typeSubject: 8,
       place: 'Mudança',

@@ -52,13 +52,13 @@
     <app-card class="mb-3">
       <h2>{{ selectedStep?.label }}</h2>
       <button
-        [disabled]="!agendamentoSelecionado"
+        [disabled]="!selectedSchedule"
         *ngIf="selectedStep?.typeSubject == 7"
         class="btn btn-primary"
         (click)="confirmChange()"
       >
         {{
-          agendamentoSelecionado
+          selectedSchedule
             ? "Confirmar mudança"
             : "Selecione um agendamento de mudança 'confirmado'."
         }}
@@ -70,7 +70,7 @@
           (listItemSelected)="selecionarAgendamento($event)"
           (finish)="handleFinalizeSchedule($event)"
           [list]="listSchedulesByFamily"
-          [hideTableItems]="ocultarCheckbox"
+          [hideTableItems]="hideCheckbox"
         ></app-schedule-list>
       </div>
 
@@ -78,14 +78,14 @@
         <h3>Lista de imóveis</h3>
         <app-match-list
           [list]="listPropertiesInterest"
-          [hideTableItems]="ocultarCheckbox"
+          [hideTableItems]="hideCheckbox"
         ></app-match-list>
       </div>
 
       <div *ngIf="selectedStep?.typeSubject != 7" class="mb-2">
         <h3>Lista de questionários</h3>
         <app-questionnare-avaliable-list
-          [hideTableItems]="ocultarCheckbox"
+          [hideTableItems]="hideCheckbox"
           [list]="listQuizByFamily"
         ></app-questionnare-avaliable-list>
       </div>
@@ -93,7 +93,7 @@
       <div class="mb-2">
         <h3>Cursos</h3>
         <app-course-list
-          [hideTableItems]="ocultarCheckbox"
+          [hideTableItems]="hideCheckbox"
           [list]="listCourseByFamily"
         ></app-course-list>
       </div>
@@ -102,7 +102,7 @@
         <h3>Enquetes</h3>
         <app-poll-list
           [list]="listPollsByFamily"
-          [hideTableItems]="ocultarCheckbox"
+          [hideTableItems]="hideCheckbox"
         ></app-poll-list>
       </div>
     </app-card>
