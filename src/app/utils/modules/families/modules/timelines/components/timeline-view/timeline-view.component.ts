@@ -59,6 +59,8 @@ export class TimelineViewComponent
     lockUnlock: true,
   };
 
+  itIsResettlementStage = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService,
@@ -81,27 +83,31 @@ export class TimelineViewComponent
     // this.buscarHistorico();
 
     // Novo
-    const stages = {
-      2: [this.etapasProcessoReassentamentoAtivo[0]],
-      4: [
-        this.etapasProcessoReassentamentoAtivo[0],
-        this.etapasProcessoReassentamentoAtivo[1],
-      ],
-      7: [
-        this.etapasProcessoReassentamentoAtivo[0],
-        this.etapasProcessoReassentamentoAtivo[1],
-        this.etapasProcessoReassentamentoAtivo[2],
-      ],
-      8: [
-        this.etapasProcessoReassentamentoAtivo[0],
-        this.etapasProcessoReassentamentoAtivo[1],
-        this.etapasProcessoReassentamentoAtivo[2],
-        this.etapasProcessoReassentamentoAtivo[3],
-      ],
-    };
-    this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
-    this.selecionarEtapa(this.typeSubject);
-    this.getDetailTimeLineByTypeSubject(this.typeSubject);
+    const resettlementSteps = [2, 4, 7, 8];
+    this.itIsResettlementStage = resettlementSteps.includes(this.typeSubject);
+    if (this.itIsResettlementStage) {
+      const stages = {
+        2: [this.etapasProcessoReassentamentoAtivo[0]],
+        4: [
+          this.etapasProcessoReassentamentoAtivo[0],
+          this.etapasProcessoReassentamentoAtivo[1],
+        ],
+        7: [
+          this.etapasProcessoReassentamentoAtivo[0],
+          this.etapasProcessoReassentamentoAtivo[1],
+          this.etapasProcessoReassentamentoAtivo[2],
+        ],
+        8: [
+          this.etapasProcessoReassentamentoAtivo[0],
+          this.etapasProcessoReassentamentoAtivo[1],
+          this.etapasProcessoReassentamentoAtivo[2],
+          this.etapasProcessoReassentamentoAtivo[3],
+        ],
+      };
+      this.etapasProcessoReassentamentoAtivo = stages[this.typeSubject];
+      this.selecionarEtapa(this.typeSubject);
+      this.getDetailTimeLineByTypeSubject(this.typeSubject);
+    }
   }
 
   selecionarEtapa(typeSubject: number): void {
