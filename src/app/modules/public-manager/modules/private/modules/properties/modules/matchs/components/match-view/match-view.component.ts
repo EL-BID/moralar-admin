@@ -37,6 +37,10 @@ export class MatchViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getProperty();
+  }
+
+  getProperty(): void {
     this.httpService
       .get(
         `PropertiesInterest/DetailFamiliesMatch/${this.activatedRoute.snapshot.paramMap.get(
@@ -94,13 +98,13 @@ export class MatchViewComponent implements OnInit {
             .subscribe(
               (response: any) => {
                 this.megaleiosAlertService.success(response.message);
+                this.getProperty();
                 // this.router.navigate(['../'], { relativeTo: this.activatedRoute });
               },
               (response: any) => {
                 this.megaleiosAlertService.error(response.message);
               }
             );
-          this.ngOnInit();
         }
       })
       .catch(() => {});
