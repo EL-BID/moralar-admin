@@ -74,8 +74,9 @@ export class HttpService {
       })
       .pipe(
         take(1),
-        catchError(({ error }) => {
-          return of();
+        catchError(({ message }) => {
+          this.megaleiosAlertService.error(message);
+          return of(message);
         })
       );
   }
