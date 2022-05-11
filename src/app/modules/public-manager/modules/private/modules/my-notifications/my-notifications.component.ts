@@ -37,8 +37,8 @@ export class MyNotificationsComponent
       search: '',
       forGestor: true,
       forTTS: false,
-      setRead: true,
-      onlyNoRead: false,
+      setRead: null,
+      onlyNoRead: null,
       // dateViewed: 'null',
     },
     order: {
@@ -79,6 +79,7 @@ export class MyNotificationsComponent
             this.UrlSeelAll = '/profissional/app/my-notifications';
           }
           if (this.abstract) this.formDataModel.search.onlyNoRead = true;
+          if (!this.abstract) this.formDataModel.search.setRead = true;
           this.getList();
         }
       });
