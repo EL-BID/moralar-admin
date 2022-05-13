@@ -32,6 +32,7 @@
         <td>{{ timelineTypeSubjectToString(item.typeSubject) }}</td>
         <td>
           <button
+            *ngIf="itIsResettlementStage(item?.typeSubject)"
             class="btn btn-info"
             [routerLink]="[item?.id, item?.typeSubject]"
           >

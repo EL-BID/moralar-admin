@@ -13,4 +13,9 @@ import {
 export class TimelineListComponent extends ListComponentClass {
   timelineStatusToString = timelineStatusToString;
   timelineTypeSubjectToString = timelineTypeSubjectToString;
+
+  itIsResettlementStage(typeSubject: number): boolean {
+    const resettlementSteps = [2, 4, 7, 8];
+    return resettlementSteps.includes(typeSubject);
+  }
 }
