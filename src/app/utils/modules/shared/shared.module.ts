@@ -89,7 +89,7 @@ const pipes = [
   imports: [
     ...modules,
     AgmCoreModule.forRoot({
-      apiKey: process.env.GOOGLE_MAPS_API_KEY,
+      apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
       libraries: ['places'],
     }),
   ],
