@@ -36,6 +36,12 @@ export class ImageUploadComponent extends OnDestroyClass {
   @Input()
   changeDetectorRef: ChangeDetectorRef;
 
+  @Input()
+  maxWidth: 250;
+
+  @Input()
+  maxHeight: 250;
+
   @ViewChild('imageUploadFile', { static: false })
   imageUploadFile: ElementRef<HTMLInputElement>;
 
@@ -62,7 +68,10 @@ export class ImageUploadComponent extends OnDestroyClass {
         .then((result: any) => {
           if (result) {
             this.compressorService
-              .compressFile(result, { maxWidth: 1000, maxHeight: 1000 })
+              .compressFile(result, {
+                maxWidth: this.maxWidth,
+                maxHeight: this.maxHeight,
+              })
               .pipe(takeUntil(this.onDestroy))
               .subscribe((file: Blob) => {
                 formData.append('file', file);

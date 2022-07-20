@@ -25,6 +25,8 @@
           <app-image-upload
             [changeDetectorRef]="changeDetectorRef"
             [imageUploadAbstractControl]="photoFormControl"
+            [maxWidth]="1000"
+            [maxHeight]="1000"
           >
           </app-image-upload>
           <button
@@ -53,6 +55,8 @@
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
           [imageUploadAbstractControl]="form.controls.project"
+          [maxWidth]="1000"
+          [maxHeight]="1000"
         >
         </app-image-upload>
         <app-control-error
