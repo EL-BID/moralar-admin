@@ -290,13 +290,13 @@
           ></app-control-error>
         </app-control-field>
         <app-control-field>
-          <label for="propertyCurrentValue"
+          <label for="propertyValueForDemolished"
             >Valor da avaliação do imóvel a ser demolido</label
           >
           <input
             currencyMask
-            type="tel"
-            id="propertyCurrentValue"
+            type="text"
+            id="propertyValueForDemolished"
             formControlName="propertyValueForDemolished"
             [readOnly]="formData?.financial.propertyValueForDemolished"
           />
@@ -339,8 +339,8 @@
       <p class="mb-0">
         <span class="view-label">Faixa de liberação do imóvel</span>
         {{
-          (financialForm.controls.maximumPurchase.value || 0) +
-            financialForm.controls.incrementValue.value || 0 | currency: "BRL"
+          (financialForm.value.propertyValueForDemolished || 0) +
+            financialForm.value.incrementValue || 0 | currency: "BRL"
         }}
       </p>
     </app-card>
