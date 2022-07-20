@@ -38,10 +38,10 @@
         <select id="typeSubject" formControlName="typeSubject">
           <option value="">Todos</option>
           <option
-            *ngFor="let timelineType of timelineTypeList"
-            [value]="timelineType.id"
+            *ngFor="let etapaProcesso of etapasProcessoReassentamento"
+            [value]="etapaProcesso.typeSubject"
           >
-            {{ timelineType.name }}
+            {{ etapaProcesso.label }}
           </option>
         </select>
         <app-control-error
