@@ -62,7 +62,7 @@ export class ImageUploadComponent extends OnDestroyClass {
         .then((result: any) => {
           if (result) {
             this.compressorService
-              .compressFile(result, { maxWidth: 250, maxHeight: 250 })
+              .compressFile(result, { maxWidth: 1000, maxHeight: 1000 })
               .pipe(takeUntil(this.onDestroy))
               .subscribe((file: Blob) => {
                 formData.append('file', file);
@@ -85,7 +85,7 @@ export class ImageUploadComponent extends OnDestroyClass {
         .catch(() => {});
     } else {
       this.compressorService
-        .compressFile(files[0], { maxWidth: 250, maxHeight: 250 })
+        .compressFile(files[0], { maxWidth: 1000, maxHeight: 1000 })
         .pipe(takeUntil(this.onDestroy))
         .subscribe((file: Blob) => {
           formData.append('file', file);
