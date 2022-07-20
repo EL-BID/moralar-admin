@@ -3,7 +3,8 @@
   <button type="button" class="btn btn-dark" routerLink="adicionar">
     Adicionar
   </button>
-  <ng-container *ngIf="loggedUser?.level === 0">
+
+  <ng-container>
     <div>
       <label for="fileRegistration">
         {{ !sendingRegistrationFile ? "Cadastro em lote" : "Importanto..." }}

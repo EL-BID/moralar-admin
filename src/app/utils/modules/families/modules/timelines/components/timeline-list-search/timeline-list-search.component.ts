@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ListSearchComponentClass } from 'src/app/utils/classes/list-search-component.class';
 import { FormBuilder } from '@angular/forms';
-import { TIMELINE_TYPE_LIST } from 'src/app/utils/interfaces/timelines.interface';
+import { etapasProcessoReassentamento } from 'src/app/core/mocks/etapasProcessoReassentamento';
+import { ListSearchComponentClass } from 'src/app/utils/classes/list-search-component.class';
 
 @Component({
   selector: 'app-timeline-list-search',
@@ -9,7 +9,7 @@ import { TIMELINE_TYPE_LIST } from 'src/app/utils/interfaces/timelines.interface
   styleUrls: ['./timeline-list-search.component.sass'],
 })
 export class TimelineListSearchComponent extends ListSearchComponentClass {
-  timelineTypeList: any[] = TIMELINE_TYPE_LIST;
+  etapasProcessoReassentamento = etapasProcessoReassentamento;
 
   constructor(formBuilder: FormBuilder) {
     super();

@@ -25,6 +25,8 @@
           <app-image-upload
             [changeDetectorRef]="changeDetectorRef"
             [imageUploadAbstractControl]="photoFormControl"
+            [maxWidth]="1000"
+            [maxHeight]="1000"
           >
           </app-image-upload>
           <button
@@ -53,6 +55,8 @@
         <app-image-upload
           [changeDetectorRef]="changeDetectorRef"
           [imageUploadAbstractControl]="form.controls.project"
+          [maxWidth]="1000"
+          [maxHeight]="1000"
         >
         </app-image-upload>
         <app-control-error
@@ -139,7 +143,7 @@
           ></app-control-error>
         </app-control-field>
       </div>
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <app-control-field>
           <label for="neighborhood">Bairro de localização</label>
           <input type="text" id="neighborhood" formControlName="neighborhood" />
@@ -147,7 +151,7 @@
             [control]="residencialPropertyFeaturesForm.controls.neighborhood"
           ></app-control-error>
         </app-control-field>
-      </div>
+      </div> -->
       <div class="col-lg-6">
         <app-control-field>
           <label for="numberFloors">Número de pavimentos</label>

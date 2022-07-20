@@ -90,8 +90,6 @@ const pipes = [
     ...modules,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAgTHSKwA4tLRf5C3581utRefU0Botycgo',
-      //apiKey: 'AIzaSyCs5B3gcxrv_b5jDy142tmvEaOTNK5YotM',
-      // apiKey: 'AIzaSyD-bAs1YznRn81Ya5yhZQjL2c4FHRNI85I',
       libraries: ['places'],
     }),
   ],

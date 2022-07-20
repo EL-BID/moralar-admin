@@ -18,7 +18,7 @@ export const etapasProcessoReassentamento = [
     typeSubject: 7,
   },
   {
-    label: 'Acompanhamento pós-mudanca',
+    label: 'Acompanhamento pós-mudança',
     disponivel: false,
     visivel: false,
     typeSubject: 8,
