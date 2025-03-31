@@ -1,0 +1,35 @@
+<h1 class="h4">Informativo</h1>
+<div class="form-row my-3">
+  <div class="col-auto">
+    <button type="button" class="btn btn-dark" routerLink="adicionar">
+      Adicionar
+    </button>
+  </div>
+  <button (click)="exportToExcel()" class="btn btn-dark">
+    {{ exportingFile ? "Exportando..." : "Exportar para Excel" }}
+  </button>
+</div>
+
+
+
+<app-informative-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (blockUnblock)="handleBlockUnblock($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+>
+</app-informative-list>
+
+<ng-container *ngIf="!list?.length">
+  <h2 class="text-secondary">nenhum registro encontrado</h2>
+</ng-container>
+
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
+</app-list-pagination>

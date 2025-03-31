@@ -1,0 +1,14 @@
+<input #uploadFile type="file" accept=".xlsx" (change)="handleInputFileChanged($event.target.files)">
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-success"  (click)="uploadFile.click()">
+      Importar Cadastro
+    </button>
+  </div>
+  <div *ngIf="uploadIsUploading" class="image-upload-loading-container">
+    <div class="d-flex h-100 align-items-center">
+      <div class="spinner-grow m-auto"></div>
+    </div>
+  </div>
+

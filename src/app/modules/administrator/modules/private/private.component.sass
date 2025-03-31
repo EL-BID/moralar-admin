@@ -1,0 +1,120 @@
+
+@import 'src/sass/imports/variables'
+@import 'src/sass/imports/media-queries'
+
+#header
+  background-color: $COLOR
+  padding: 16px
+
+#logo
+  max-height: 31px
+
+#administrator-menu
+  button
+    border-radius: 0
+  .name, .administrator
+    display: block
+  .administrator
+    font-size: 12px
+    font-weight: bold
+    text-transform: uppercase
+
+.col-full-height
+  background-color: #EEE
+  overflow: auto
+  @include MQ(LG)
+    height: calc(100vh - 63px)
+
+.link-section
+  display: block
+  font-size: 12px
+  text-transform: uppercase
+  font-weight: 500
+  margin: 16px 0 4px 0
+  &:first-child
+    margin-top: 0
+
+#content
+  background-color: #FFF
+  padding: 16px * 2
+
+ul[appNav]
+  display: block
+  padding: 32px 0
+  margin: 0 -15px
+  @include MQ(LG)
+    height: 100%
+  ul, li
+    display: block
+    padding: 0
+    margin: 0
+  li
+    cursor: pointer
+    transition: background-color 0.25s
+    &:hover, &.active
+      > button
+        background-color: #DDD
+  button
+    display: block
+    width: 100%
+    background-color: transparent
+    text-align: left
+    padding: 8px 32px
+    border-width: 0
+    transition: color 0.25s
+  > li
+    > ul
+      height: 0
+      overflow: hidden
+      > li
+        button
+          padding-left: 60px
+
+
+.notifications
+  color: #fff
+  cursor: pointer
+  position: relative
+  display: inline-block
+.icone
+  padding: 5px
+.content
+  right: 0
+  color: #000
+  border-radius: 9px
+  display: none
+  position: absolute
+  background-color: #f9f9f9
+  min-width: 160px
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+  z-index: 2
+  max-height: 70vh
+  max-width: calc( 100vw - 170px )
+  width: 400px
+  padding: 10px
+  overflow-y: auto
+  overflow-x: hidden
+  cursor: default
+.notifications:hover .content
+  display: block
+
+@media print
+  #items-menu
+    display: none
+
+.icone 
+  position: relative
+  display: inline-block
+   
+.notification-count 
+  position: absolute
+  top: -5px
+  right: -10px
+  background-color: gray
+  color: white
+  border-radius: 50%
+  padding: 0px 5px
+  font-size: 12px
+
+.notification-count.new-notifications
+  background-color: red !important

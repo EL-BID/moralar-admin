@@ -1,0 +1,19 @@
+<button
+  [type]="buttonType"
+  class="btn"
+  [ngClass]="[
+    buttonClass !== undefined ? buttonClass : '',
+    buttonLoading === true ? 'btn-loading' : ''
+  ]"
+  [disabled]="buttonDisabled === true ? true : false">
+  <div class="spinner-container">
+    <div
+      class="spinner-border spinner-border-sm"
+      role="status">
+    </div>
+  </div>
+  <div>
+    <ng-content>
+    </ng-content>
+  </div>
+</button>

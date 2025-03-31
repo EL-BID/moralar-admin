@@ -1,0 +1,26 @@
+<input #imageUploadFile  class="file-input" type="file" multiple accept="image/*" (change)="handleInputFileChanged($event.target.files)" />
+<div class="image-upload-image-container">
+    <div class="d-flex justify-content-center align-items-center">
+        <img (click)="triggerLightbox(index)" class="img-fluid rounded shadow-sm element-image-multiple"
+            *ngIf="imageUploadAbstractControl.value === null" alt="Imagem padrão"
+            [src]="imageUploadBaseUrl + '/content/images/default.png'" />
+        <img (click)="triggerLightbox(index)" class="img-fluid rounded shadow-sm element-image-multiple"
+            *ngIf="imageUploadAbstractControl.value !== null" alt="Imagem nova"
+            [src]="chooseImage(imageUploadAbstractControl.value)" />
+    </div>
+
+    <div *ngIf="imageUploadIsUploading" class="image-upload-loading-container">
+        <div class="d-flex h-100 align-items-center justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-column mt-3">
+    <label for="description">Descrição:</label>
+    <textarea class="form-control" *ngIf="imageUploadAbstractControl.value !== null"
+        [formControl]="imageUploadAbstractControl.value.description"
+        value="imageUploadAbstractControl.value.description.value" name="description" id="description"
+        rows="4"></textarea>

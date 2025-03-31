@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="email">E-mail</label>
+    <input type="text" id="email" formControlName="email">
+    <app-control-error [control]="form.controls.email"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="password">Senha</label>
+    <input type="password" id="password" formControlName="password">
+    <app-control-error [control]="form.controls.password"></app-control-error>
+  </app-control-field>
+  <div class="form-row align-items-center mb-3">
+    <div class="col-auto">
+      <app-control-checkbox formControlName="rememberMe"></app-control-checkbox>
+    </div>
+    <div class="col-auto">
+      <label class="mb-0">Mantenha-me conectado.</label>
+    </div>
+  </div>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-block btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading">
+    Entrar
+  </app-button>
+</form>

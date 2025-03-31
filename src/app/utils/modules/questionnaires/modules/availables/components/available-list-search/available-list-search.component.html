@@ -1,0 +1,62 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-md-3 col-lg-2">
+      <app-control-field>
+        <label for="number">Título</label>
+        <input type="search" id="title" formControlName="title" />
+        <app-control-error
+          [control]="listSearchForm.controls.title"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-md-3 col-lg-2">
+      <app-control-field>
+        <label for="number">Número do cadastro</label>
+        <input type="search" id="number" formControlName="number" />
+        <app-control-error
+          [control]="listSearchForm.controls.number"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-md-3">
+      <app-control-field>
+        <label for="holderName">Nome do morador titular</label>
+        <input type="text" id="holderName" formControlName="holderName" />
+        <app-control-error
+          [control]="listSearchForm.controls.holderName"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-md-3">
+      <app-control-field>
+        <label for="holderCpf">CPF do morador titular</label>
+        <input
+          type="tel"
+          id="holderCpf"
+          formControlName="holderCpf"
+          mask="000.000.000-00"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.holderCpf"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-md-3 col-lg-2 status-filter-quest">
+      <app-control-field>
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="">Todos</option>
+          <option
+            *ngFor="let status of quizTypeStatus; let i = index"
+            [value]="i"
+          >
+            {{ status }}
+          </option>
+        </select>
+        <app-control-error
+          [control]="listSearchForm.controls.status"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+</form>

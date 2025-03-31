@@ -1,0 +1,62 @@
+<h1 class="h4">Questionários disponíveis</h1>
+<!-- <div class="form-row my-3">
+  <div class="col-auto">
+    <button type="button" class="btn btn-dark" routerLink="disponibilizar">
+      Disponibilizar
+    </button>
+  </div>
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      [disabled]="listSelected.length !== 1"
+      (click)="handleDetails()"
+    >
+      Detalhes
+    </button>
+  </div>
+</div> -->
+
+<div class="options-container">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    [disabled]="listSelected.length !== 1 ||
+     (listSelected.length == 1 && listSelected[0].typeStatus == 'Não Respondido' )"
+    [attr.title]="
+       (listSelected.length == 1 &&
+        listSelected[0].typeStatus == 'Não Respondido' ) ?
+         'Questionário sem resposta' : 'Veja o questionário respondido'"
+    (click)="handleDetails()"
+  >
+    Detalhes
+  </button>
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    Exportar para Excel
+  </button>
+</div>
+
+<app-available-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
+</app-available-list-search>
+<app-available-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+>
+</app-available-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
+</app-list-pagination>

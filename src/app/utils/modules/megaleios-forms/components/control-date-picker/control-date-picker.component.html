@@ -1,0 +1,42 @@
+<div class="month-year-container">
+  <span class="month-year">
+    {{ dateTime | date: 'MMMM, yyyy' }}
+  </span>
+  <div class="month-button-container">
+    <button
+      type="button"
+      class="month-button"
+      (click)="previousMonth()">
+      <fa-icon
+        [icon]="faChevronLeft">
+      </fa-icon>
+    </button>
+    <button
+      type="button"
+      class="month-button"
+      (click)="nextMonth()">
+      <fa-icon
+        [icon]="faChevronRight">
+      </fa-icon>
+    </button>
+  </div>
+</div>
+<div class="week-days">
+  <span>dom.</span>
+  <span>seg.</span>
+  <span>ter.</span>
+  <span>qua.</span>
+  <span>qui.</span>
+  <span>sex.</span>
+  <span>sab.</span>
+</div>
+<div class="month-days">
+  <button *ngFor="let day of days; let i = index"
+    type="button"
+    class="day"
+    [ngClass]="getDaySelectedClass(day)"
+    [disabled]="isDisabled(day)"
+    (click)="writeValue(day)">
+    {{ day !== null ? (day * 1000 | date: 'dd') : '' }}
+  </button>
+</div>

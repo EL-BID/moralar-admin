@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="Title">Título do Vídeo</label>
+        <input type="text" id="title" formControlName="title" />
+        <app-control-error [control]="form.controls.title"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+  <h2 class="h5">Thumbnail</h2>
+  <div class="row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <app-image-upload
+          [changeDetectorRef]="changeDetectorRef"
+          [imageUploadAbstractControl]="form.controls.thumbnail"
+          (getFile)="getFileThumbnail($event)"
+        >
+        </app-image-upload>
+        <app-control-error
+          [control]="form.controls.thumbnail"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="Title">Url</label>
+        <input type="text" id="url" formControlName="url" />
+        <app-control-error [control]="form.controls.url"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+    >Salvar
+  </app-button>
+</form>

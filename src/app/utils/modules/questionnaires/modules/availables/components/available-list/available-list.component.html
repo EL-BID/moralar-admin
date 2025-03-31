@@ -1,0 +1,48 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th sortable="title" (sort)="handleSort($event)">
+          Título do questionário
+        </th>
+        <th sortable="created" (sort)="handleSort($event)">
+          Data da disponibilização
+        </th>
+        <th sortable="holderNumber" (sort)="handleSort($event)">
+          Número do cadastro
+        </th>
+        <th sortable="holderName" (sort)="handleSort($event)">
+          Nome do morador titular
+        </th>
+        <th sortable="holderCpf" (sort)="handleSort($event)">
+          CPF do morador titular
+        </th>
+        <th sortable="status" (sort)="handleSort($event)">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <app-control-checkbox [value]="isChecked(item)" (changed)="listItemSelected.emit(item)">
+          </app-control-checkbox>
+        </td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.created | date: "dd/MM/yyyy" || "-" }}</td>
+        <td>{{ item.holderNumber || "-" }}</td>
+        <td>{{ item.holderName || "-" }}</td>
+        <td>{{ item.holderCpf || "-" | mask: "000.000.000-99" }}</td>
+        <td>
+          <ng-container *ngIf="getTypeStatus(item?.typeStatus.toString()) == 1">
+            <a (click)="handleDetails(item)" class="link"
+              >{{ item.typeStatus }}
+            </a>
+          </ng-container>
+          <ng-container *ngIf="getTypeStatus(item?.typeStatus.toString()) == 0">
+            {{ item.typeStatus }}
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

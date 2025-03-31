@@ -1,0 +1,25 @@
+<h1 class="h4">Lista de imóveis confirmados</h1>
+<div class="form-row my-3">
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      [disabled]="listSelected.length !== 1"
+      (click)="handleDetails()">
+      Detalhes
+    </button>
+  </div>
+</div>
+<app-match-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)">
+</app-match-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)">
+</app-list-pagination>

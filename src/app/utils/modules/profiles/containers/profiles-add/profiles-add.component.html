@@ -1,0 +1,8 @@
+<h1 class="h4">Editar Perfil</h1>
+<app-profile-form
+  *ngIf="sessionUser"
+  [formLoading]="formLoading"
+  [formData]="sessionUser"
+  (formSubmit)="handleFormSubmit($event)"
+>
+</app-profile-form>

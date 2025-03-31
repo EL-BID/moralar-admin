@@ -1,0 +1,30 @@
+<div class="header-box">
+  <h1 class="h4">Matches dos imóveis</h1>
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    Exportar para Excel
+  </button>
+</div>
+<app-match-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
+</app-match-list-search>
+<app-match-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+>
+</app-match-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
+</app-list-pagination>

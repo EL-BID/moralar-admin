@@ -1,0 +1,115 @@
+<ng-container *ngIf="itIsResettlementStage; else itIsNotAResettlementStage">
+  <h2>Dados do titular</h2>
+
+  <app-card *ngIf="family" class="mb-3">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="font-weight-bold">Número do cadastro</div>
+        <div class="font-italic">{{ family?.holder?.number || "-" }}</div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="font-weight-bold">Nome do morador titular</div>
+        <div class="font-italic">{{ family?.holder?.name || "-" }}</div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="font-weight-bold">CPF do morador titular</div>
+        <div class="font-italic">
+          {{ family?.holder?.cpf | mask: "999.999.999-99" }}
+        </div>
+      </div>
+
+      <div class="col-md-3 text-right">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="handleDetails()"
+        >
+          Detalhes
+        </button>
+      </div>
+    </div>
+  </app-card>
+
+  <h2>Passos</h2>
+  <app-card class="mb-3">
+    <ng-container *ngFor="let etapa of resettlementProcessSteps; let i = index">
+      <button
+        class="btn btn-secondary mr-2"
+        [ngClass]="{
+          'btn-info': etapa.typeSubject === selectedStep.typeSubject
+        }"
+        [disabled]="etapa.typeSubject === selectedStep.typeSubject"
+        (click)="selectStage(etapa.typeSubject)"
+      >
+        {{ etapa.label }}
+      </button>
+    </ng-container>
+  </app-card>
+
+  <ng-container *ngIf="selectedStep">
+    <app-card class="mb-3">
+      <h2>{{ selectedStep?.label }}</h2>
+      <!-- <button
+        [disabled]="!selectedSchedule"
+        *ngIf="selectedStep?.typeSubject == 7"
+        class="btn btn-primary"
+        (click)="confirmChange()"
+      >
+        {{
+          selectedSchedule
+            ? "Confirmar mudança"
+            : "Selecione um agendamento de mudança 'confirmado'."
+        }}
+      </button> -->
+
+      <div class="mb-2">
+        <h3>Lista de agendamentos</h3>
+        <app-schedule-list
+          (listItemSelected)="selectSchedule($event)"
+          (finish)="handleFinalizeSchedule($event)"
+          [list]="listSchedulesByFamily"
+          [hideTableItems]="hideCheckbox"
+        ></app-schedule-list>
+      </div>
+
+      <div *ngIf="selectedStep?.label == 'Escolha do imóvel'" class="mb-2">
+        <h3>Lista de imóveis</h3>
+        <app-match-list
+          [list]="listPropertiesInterest"
+          [hideTableItems]="hideCheckbox"
+        ></app-match-list>
+      </div>
+
+      <div *ngIf="selectedStep?.typeSubject != 7" class="mb-2">
+        <h3>Lista de questionários</h3>
+        <app-questionnare-avaliable-list
+          [hideTableItems]="hideCheckbox"
+          [list]="listQuizByFamily"
+        ></app-questionnare-avaliable-list>
+      </div>
+
+      <div class="mb-2">
+        <h3>Cursos</h3>
+        <app-course-list
+          [hideTableItems]="hideCheckbox"
+          [list]="listCourseByFamily"
+        ></app-course-list>
+      </div>
+
+      <div class="mb-2">
+        <h3>Enquetes</h3>
+        <app-poll-list
+          [list]="listPollsByFamily"
+          [hideTableItems]="hideCheckbox"
+        ></app-poll-list>
+      </div>
+    </app-card>
+  </ng-container>
+</ng-container>
+<ng-template #itIsNotAResettlementStage>
+  <h2 class="text-danger font-italic">
+    Esta etapa não faz parte do processo de reassentamento.
+  </h2>
+</ng-template>

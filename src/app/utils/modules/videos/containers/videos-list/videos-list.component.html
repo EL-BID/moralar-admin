@@ -1,0 +1,38 @@
+<h1 class="h4">Vídeos</h1>
+<div class="form-row my-3">
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-dark"
+      routerLink="adicionar">
+      Adicionar
+    </button>
+  </div>
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      [disabled]="listSelected.length !== 1"
+      (click)="handleDetails()">
+      Detalhes
+    </button>
+  </div>
+</div>
+<app-video-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)">
+</app-video-list-search>
+<app-video-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+  (blockUnblock)="handleBlockUnblock($event)">
+</app-video-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)">
+</app-list-pagination>

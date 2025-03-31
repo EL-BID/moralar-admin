@@ -1,0 +1,42 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th sortable="name" (sort)="handleSort($event)">Nome do gestor</th>
+        <th sortable="jobPost" (sort)="handleSort($event)">Cargo</th>
+        <th sortable="cpf" (sort)="handleSort($event)">CPF do gestor</th>
+        <th sortable="email" (sort)="handleSort($event)">E-mail</th>
+        <th sortable="phone" (sort)="handleSort($event)">Telefone</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{ item.name || "-" }}</td>
+        <td>{{ item.jobPost || "-" }}</td>
+        <td>{{ item.cpf || "-" | mask: "000.000.000-99" }}</td>
+        <td>{{ item.email || "-" }}</td>
+        <td>
+          <span *ngIf="item.phone; else noPhone">
+            {{ item.phone | mask: "+00 (00) 0 0000-0000" }}</span
+          >
+          <ng-template #noPhone>-</ng-template>
+        </td>
+        <td>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

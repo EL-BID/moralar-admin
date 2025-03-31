@@ -1,0 +1,9 @@
+<div class="card shadow-sm content-image" [class]="{'image-rendered': small }" *ngIf="imagePath">
+  <img title="image" class="mini-img img-size"
+    [src]="(imagePath.imageUrl ? imagePath.imageUrl : imagePath) || 'https://picsum.photos/100'"
+    (click)="triggerLightbox(imagePath.index)" />
+  <div class="card-body" [hidden]="imagePath.description == null">
+    <!-- [ngClass]="{ 'text-truncated': !isExpanded }" -->
+    <p *ngIf="imagePath.description != null" class="card-text">{{imagePath.description}}</p>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<app-card class="mb-3">
+    <div [hidden]="residencialCode == '' && residencialCode == null" class="row-class">
+        <div class="font-weight-bold mr-2">Imóvel:</div>
+        <div class="font-italic">{{residencialCode}}</div>
+    </div>
+    <div class="table-responsive">
+        <table aria-describedby="Detalhes do match" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Priorização</th>
+                    <th>Número do cadastro</th>
+                    <th>Titular</th>
+                    <th>CPF</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-position-relative" *ngFor="let item of lista; let i = index"
+                    [ngClass]="{'table-info tr-contemplado': item?.familiIdResidencialContemplate === item?.id && openForSale}">
+                    <td>{{ i + 1 }} <span class="info-tag" *ngIf="item?.familiIdResidencialContemplate === item?.id && openForSale" data-toggle="tooltip" data-placement="top"
+                        title="contemplado para análise">
+                        <i class="fas fa-star"></i>
+                    </span></td>
+                    <td>{{ item.holder.number || "-" }}</td>
+                    <td>{{ item.holder.name || "-" }}</td>
+                    <td>{{ item.holder.cpf || "-" | mask: "000.000.000-00" }}</td>
+                    <td>
+                        <div class="form-row row">
+                            <div class="col-auto mb-3 mr-2">
+                                <button type="button" class="btn btn-secondary" (click)="handleDatailsFamily(item)">
+                                    Detalhes
+                                </button>
+                            </div>
+                            <button *ngIf="openForSale && item?.familiIdResidencialContemplate === item?.id" type="button" class="btn btn-success mn-wd-44" (click)="sellProperty(item.id)">
+                                Vender
+                            </button>
+                            <span *ngIf="!openForSale" class="ml-4 selled-text mn-wd-44">Vendido</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-card>
+
+<ng-template #detailsFamily>
+    <app-family-view [family]="family"></app-family-view>
+</ng-template>

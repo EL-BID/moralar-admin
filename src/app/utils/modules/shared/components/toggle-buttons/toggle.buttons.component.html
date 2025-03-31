@@ -1,0 +1,15 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <label class="mr-2 font-weight-bold required">{{title}}</label>
+    <div class="btn-group btn-toggle">
+      <button type="button" class="btn btn-sm" [ngClass]="{'btn-default': selected, 'btn-primary': (!selected && selected != null)}"
+        (click)="toggleActive(false)">Não</button>
+      <button type="button" class="btn btn-sm" [ngClass]="{'btn-default': !selected, 'btn-primary': (selected && selected != null)}"
+        (click)="toggleActive(true)">Sim</button>
+    </div>
+    <div *ngIf="selected == null && submited" class="d-block invalid-feedback">
+      {{ errorMessage }}
+    </div>
+    <hr>
+  </div>
+</div>

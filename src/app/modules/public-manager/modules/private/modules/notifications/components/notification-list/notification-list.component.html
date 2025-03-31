@@ -1,0 +1,46 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th sortable="title" (sort)="handleSort($event)">
+          Título da notificação
+        </th>
+        <th>Descrição</th>
+        <th class="text-center" sortable="date" (sort)="handleSort($event)">
+          Data de envio
+        </th>
+        <th>Status</th>
+        <th *ngIf="!hideTableItems.details" class="text-right">Detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list; let i = index"
+        [class]="{'not-read-cursor': notificationDontViewed(item?.seenBy, item?.module)}"
+        (click)="applyReadNotification(i, item?.module, item?.id, notificationDontViewed(item?.seenBy, item?.module))"
+      >
+        <td>{{ item?.title }}</td>
+        <th>
+          <small>
+            <i [innerHTML]="item?.description"></i>
+          </small>
+        </th>
+        <td class="text-center">
+          <span>{{ item.created | date: "dd/MM/yyyy, HH:mm" }}</span>
+        </td>
+        <td>
+          <span
+            [class]="
+              (!notificationDontViewed(item?.seenBy, item?.module)) || readable[i] ? 'badge badge-success' : 'badge badge-danger'
+            "
+            >{{ (!notificationDontViewed(item?.seenBy, item?.module)) || readable[i] ? "Lida" : "Não lida" }}</span
+          >
+        </td>
+        <td *ngIf="!hideTableItems.details" class="text-right">
+          <button [routerLink]="[item.id]" class="btn btn-info">
+            Ver detalhes
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="list?.length" class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Título do curso</th>
+        <th>Data de cadastro</th>
+        <th>Data de início</th>
+        <th>Data de término</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{ item.title || "-" }}</td>
+        <td>
+          {{ item?.created }}
+        </td>
+        <td>{{ item.startDate * 1000 | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.endDate * 1000 | date: "dd/MM/yyyy" }}</td>
+        <td>
+          {{
+            item.typeStatusCourse == 0
+              ? "Inscrito"
+              : "Aguardando na lista de espera" || "-"
+          }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h5 *ngIf="!list?.length" class="text-info">Nenhum curso encontrado</h5>

@@ -1,0 +1,57 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Data de cadastro</th>
+        <th sortable="title" (sort)="handleSort($event)">Título</th>
+        <th sortable="startDate" (sort)="handleSort($event)">Data de início</th>
+        <th sortable="endDate" (sort)="handleSort($event)">Data de término</th>
+        <th sortable="numberOfVacancies" (sort)="handleSort($event)">Vagas</th>
+        <th class="text-center" sortable="place" (sort)="handleSort($event)">
+          Total de inscritos
+        </th>
+        <th class="text-center" sortable="workLoad" (sort)="handleSort($event)">
+          Lista de espera
+        </th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <app-control-checkbox
+            [value]="isChecked(item)"
+            (changed)="listItemSelected.emit(item)"
+          >
+          </app-control-checkbox>
+        </td>
+        <td>
+          {{ item?.created | date: "dd/MM/yyyy" }}
+        </td>
+        <td>
+          {{ item.title || "-" }}
+        </td>
+        <td>{{ item.startDate || "-" | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.endDate || "-" | date: "dd/MM/yyyy" }}</td>
+        <td>{{ item.numberOfVacancies || "-" }}</td>
+        <td class="text-center">{{ item?.totalInscriptions }}</td>
+        <td class="text-center">{{ item?.totalWaitingList }}</td>
+        <td>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

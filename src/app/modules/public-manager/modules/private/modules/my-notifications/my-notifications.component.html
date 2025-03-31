@@ -1,0 +1,75 @@
+<h1>Minhas notificações</h1>
+<div *ngIf="!modeBell" class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+</div>
+<ng-container *ngIf="abstract; else all">
+  <h5 *ngIf="!loading && !list?.length" class="text-secondary">
+    Todas as notificações foram lidas!
+  </h5>
+  <div class="notifications">
+    <div *ngFor="let notification of list; let i = index" 
+      [class]="{'content-selled' : notification.typeModule == 'selled'}"
+      (click)="notification.readable = true; notificationRedirect(i, notification.module,
+       notification.id, notificationDontViewed(notification.seenBy));"
+    >
+      <div class="content-card-notification noti-active-cursor"
+       [ngClass]="{'not-read': (notification.readable != undefined) ? false : notificationDontViewed(notification.seenBy),
+        'cursor-open' : notification.module != null,
+        'noti-active-cursor' : notificationHaveRedirect(notification.module) || notificationDontViewed(notification.seenBy)}">
+       <!-- TODO: Its disabled because we dont know how complement
+         the functionality correclty -->
+        <!-- <img [src]="urlImage(notification?.image)" /> -->
+        <div class="body">
+          <div>
+            <div class="title" [class]="{'title-selled' : notification.typeModule == 'selled'}">{{ notification?.title }}</div>
+            <div
+              class="description"
+              [innerHTML]="notification?.description"
+            ></div>
+          </div>
+          <div>
+            <small class="badge badge-secondary">
+              {{ notification.created | date: "dd/MM/yyyy HH:mm" }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button (click)="cleanAllReadAndRedirect()" class="btn btn-light">Ver todas</button>
+  </div>
+</ng-container>
+
+<ng-template #all>
+  <app-notification-list-search
+    [listSearchData]="formDataModel.search"
+    (listSearchChange)="handleListSearchChange($event)"
+  >
+  </app-notification-list-search>
+
+  <ng-container *ngIf="!loading && !list?.length; else listAndPagination">
+    <h2 class="text-secondary">Nenhuma notificação encontrada</h2>
+  </ng-container>
+
+  <ng-template #listAndPagination>
+    <app-notification-list
+      [hideTableItems]="{ details: true }"
+      [list]="list"
+      (listSearchChange)="handleListSearchChange($event)"
+      (listOrderChange)="handleListOrderChange($event)"
+      (listItemSelected)="handleListItemSelected($event)"
+    >
+    </app-notification-list>
+    <app-list-pagination
+      [page]="formDataModel.page"
+      [pageSize]="formDataModel.pageSize"
+      [listSize]="listSize"
+      [listSizeFiltered]="listSizeFiltered"
+      (pageChange)="handleListPageChange($event)"
+    >
+    </app-list-pagination>
+  </ng-template>
+</ng-template>

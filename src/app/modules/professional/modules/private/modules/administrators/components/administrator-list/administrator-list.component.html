@@ -1,0 +1,49 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th sortable="name" (sort)="handleSort($event)">Nome</th>
+        <th sortable="login" (sort)="handleSort($event)">Login</th>
+        <th sortable="email" (sort)="handleSort($event)">E-mail</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <div class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'select-' + item.id"
+              [checked]="isChecked(item)"
+              (change)="listItemSelected.emit(item)">
+            <label
+              class="custom-control-label"
+              [for]="'select-' + item.id">
+            </label>
+          </div>
+        </td>
+        <td>{{ item.name || '-' }}</td>
+        <td>{{ item.login || '-' }}</td>
+        <td>{{ item.email || '-' }}</td>
+        <td>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)">
+            <label
+              [for]="'blocked-' + item.id"
+              class="custom-control-label">
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

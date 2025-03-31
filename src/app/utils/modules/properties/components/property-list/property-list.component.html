@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th *ngIf="!hideTableItems?.selectItem"></th>
+                <th sortable="code" (sort)="handleSort($event)">Código do imóvel</th>
+                <th sortable="type" (sort)="handleSort($event)">Tipo do imóvel</th>
+                <th sortable="value" (sort)="handleSort($event)">Valor do imóvel</th>
+                <th sortable="neighborhood" (sort)="handleSort($event)">
+                    Bairro
+                </th>
+                <th>Situação</th>
+                <th class="text-center">
+                    <div>Disponibilidade</div>
+                    <div>para venda</div>
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td *ngIf="!hideTableItems?.selectItem">
+                    <app-control-checkbox [value]="isChecked(item)" (changed)="listItemSelected.emit(item)">
+                    </app-control-checkbox>
+                </td>
+                <td>{{ item.code || "-" }}</td>
+                <td>
+                    {{ item.residencialPropertyFeatures.typeProperty }}
+                </td>
+                <td>
+                    {{ item.residencialPropertyFeatures.propertyValue || "-" | currency: "BRL":"symbol":"1.2-2" }}
+                </td>
+                <td>{{ item.residencialPropertyAdress.neighborhood || "-" }}</td>
+                <td class="text-center">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" [id]="'blocked-' + item.id" [value]="item.id" [checked]="item.blocked === false" (click)="handleBlockUnblock($event)" />
+                        <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span>
+            {{
+              item?.typeStatusResidencialProperty
+            }}
+          </span>
+                </td>
+                <td>
+                    <button title="Ver detalhes" [routerLink]="[item?.id]" class="btn btn-small btn-secondary mr-2">
+            Detalhes
+          </button>
+                    <button title="Editar imóvel" [routerLink]="[item?.id, 'editar']" class="btn btn-small btn-warning">
+            Editar
+          </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

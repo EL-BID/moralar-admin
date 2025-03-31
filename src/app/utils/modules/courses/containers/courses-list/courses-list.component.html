@@ -1,0 +1,45 @@
+<h1 class="h4">Cursos</h1>
+<div class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    [disabled]="listSelected.length !== 1"
+    (click)="handleDetails()"
+  >
+    Detalhes
+  </button>
+
+  <button
+    [disabled]="exportingFile"
+    (click)="exportToExcel()"
+    class="btn btn-dark"
+  >
+    Exportar para Excel
+  </button>
+</div>
+
+<app-course-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
+</app-course-list-search>
+<app-course-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+  (blockUnblock)="handleBlockUnblock($event)"
+>
+</app-course-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
+</app-list-pagination>

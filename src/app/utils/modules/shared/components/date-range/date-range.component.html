@@ -1,0 +1,30 @@
+<div class="filter">
+  <mat-form-field appearance="outline">
+    <mat-label>Escolha o intervalo de data</mat-label>
+    <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+      <input
+        disabled
+        matStartDate
+        formControlName="startDate"
+        placeholder="Data inicial"
+      />
+      <input
+        disabled
+        matEndDate
+        formControlName="endDate"
+        placeholder="Data final"
+      />
+    </mat-date-range-input>
+
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <button
+    [disabled]="!(form?.value?.startDate || form?.value?.endDate)"
+    class="btn btn-secondary"
+    (click)="reset()"
+  >
+    Limpar filtro por data
+  </button>
+</div>

@@ -1,0 +1,86 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="row">
+    <div class="col-lg-12">
+      <app-control-field>
+        <label for="name">Nome</label>
+        <input type="text" id="name" formControlName="name" />
+        <app-control-error [control]="form.controls.name"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-control-field>
+        <label for="jobPost">Cargo</label>
+        <input type="text" id="jobPost" formControlName="jobPost" />
+        <app-control-error
+          [control]="form.controls.jobPost"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-control-field>
+        <p>
+          <span class="view-label">Cpf</span>
+          {{ form.controls.cpf.value | mask: "000.000.000-99" }}
+        </p>
+      </app-control-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-control-field>
+        <label for="email">E-mail</label>
+        <input type="text" id="email" formControlName="email" />
+        <app-control-error [control]="form.controls.email"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <app-control-field>
+        <label for="phone">Telefone</label>
+        <input
+          type="text"
+          mask="+00 (00) 0 0000-0000"
+          id="phone"
+          formControlName="phone"
+          placeholder="+00 (00) 0 0000-0000"
+        />
+        <app-control-error [control]="form.controls.phone"></app-control-error>
+        <app-control-tip [control]="form.controls.phone">
+          Informe o código do país, DDD e número de telefone. Exemplo:
+          5511988294456
+        </app-control-tip>
+      </app-control-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-auto">
+      <button
+        type="button"
+        class="btn btn-dark"
+        (click)="handleChangePassword()"
+      >
+        Alterar senha
+      </button>
+    </div>
+    <div class="col-lg-auto">
+      <app-button
+        buttonType="submit"
+        buttonClass="btn-dark"
+        [buttonDisabled]="form.valid === false || formLoading === true"
+        [buttonLoading]="formLoading"
+      >
+        Salvar Alterações
+      </app-button>
+    </div>
+  </div>
+</form>
+<ng-template #changePassword>
+  <h2 class="h5">Mudar Senha</h2>
+  <app-change-password-form [formData]="form"></app-change-password-form>
+</ng-template>

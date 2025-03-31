@@ -1,0 +1,53 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-lg-2">
+      <app-control-field>
+        <label for="number">Número do cadastro</label>
+        <input type="text" id="number" formControlName="number" />
+        <app-control-error
+          [control]="listSearchForm.controls.number"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="holderName">Nome do morador titular</label>
+        <input type="text" id="holderName" formControlName="holderName" />
+        <app-control-error
+          [control]="listSearchForm.controls.holderName"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="holderCpf">CPF do morador titular</label>
+        <input
+          type="tel"
+          id="holderCpf"
+          formControlName="holderCpf"
+          mask="000.000.000-00"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.holderCpf"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-4">
+      <app-control-field>
+        <label for="typeSubject">Assunto</label>
+        <select id="typeSubject" formControlName="typeSubject">
+          <option value="">Todos</option>
+          <option
+            *ngFor="let etapaProcesso of etapasProcessoReassentamento"
+            [value]="etapaProcesso.typeSubject"
+          >
+            {{ etapaProcesso.label }}
+          </option>
+        </select>
+        <app-control-error
+          [control]="listSearchForm.controls.typeSubject"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+</form>

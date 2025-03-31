@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="name">Nome do profissional</label>
+    <input type="text" id="name" formControlName="name" />
+    <app-control-error [control]="form.controls.name"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="jobPost">Cargo</label>
+    <input type="text" id="jobPost" formControlName="jobPost" />
+    <app-control-error [control]="form.controls.jobPost"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="cpf">CPF do profissional</label>
+    <input type="tel" id="cpf" formControlName="cpf" mask="000.000.000-00" />
+    <app-control-error [control]="form.controls.cpf"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="email">E-mail</label>
+    <input type="text" id="email" formControlName="email" />
+    <app-control-error [control]="form.controls.email"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="phone">Telefone</label>
+    <input
+      type="tel"
+      id="phone"
+      formControlName="phone"
+      mask="+00 (00) 0 0000-0000"
+      placeholder="+00 (00) 0 0000-0000"
+    />
+    <app-control-error [control]="form.controls.phone"></app-control-error>
+  </app-control-field>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+  >
+    Adicionar
+  </app-button>
+</form>

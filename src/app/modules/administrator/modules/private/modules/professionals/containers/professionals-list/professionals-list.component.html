@@ -1,0 +1,61 @@
+<h1 class="h4">Profissionais de TTS</h1>
+
+<div class="options-container">
+  <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+
+  <div>
+    <label for="fileRegistration">
+      {{ !sendingRegistrationFile ? "Cadastro em lote" : "Importanto..." }}
+    </label>
+    <input
+      (change)="sendRegistration($event)"
+      hidden
+      [disabled]="sendingRegistrationFile"
+      type="file"
+      id="fileRegistration"
+      name="fileRegistration"
+      #fileRegistration
+      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    />
+  </div>
+
+  <button
+    class="btn btn-info"
+    [disabled]="downloadingRegistrationFile"
+    (click)="downloadRegistrationFile()"
+  >
+    <i class="far fa-file-excel" (click)="downloadRegistrationFile()"></i>
+    {{ !downloadingRegistrationFile ? "Arquivo modelo" : "Baixando..." }}
+  </button>
+</div>
+
+<div class="container-of-warnings">
+  <app-spinner [spinner]="spinner"></app-spinner>
+  <div *ngIf="warnings.open">
+    <app-warning-file [open]="warnings.open" [errorsList]="warnings.data"></app-warning-file>
+  </div>
+</div>
+
+<app-professional-list-search
+  [listSearchData]="formDataModel.search"
+  (listSearchChange)="handleListSearchChange($event)"
+>
+</app-professional-list-search>
+<app-professional-list
+  [list]="list"
+  (listSearchChange)="handleListSearchChange($event)"
+  (listOrderChange)="handleListOrderChange($event)"
+  (listItemSelected)="handleListItemSelected($event)"
+  (blockUnblock)="handleBlockUnblock($event)"
+>
+</app-professional-list>
+<app-list-pagination
+  [page]="formDataModel.page"
+  [pageSize]="formDataModel.pageSize"
+  [listSize]="listSize"
+  [listSizeFiltered]="listSizeFiltered"
+  (pageChange)="handleListPageChange($event)"
+>
+</app-list-pagination>

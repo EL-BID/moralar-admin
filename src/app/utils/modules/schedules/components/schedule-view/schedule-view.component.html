@@ -1,0 +1,110 @@
+<app-card>
+  <h2 class="h5">Morador</h2>
+  <div class="row">
+    <div class="col-lg-2">
+      <p>
+        <span class="view-label">Cadastro</span>
+        <span class="d-block">{{ schedule.holderNumber || "-" }}</span>
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <p>
+        <span class="view-label">Titular</span>
+        <span class="d-block">{{ schedule.holderName || "-" }}</span>
+      </p>
+    </div>
+    <div class="col-lg-2">
+      <p>
+        <span class="view-label">CPF</span>
+        <span class="d-block">{{
+          schedule.holderCpf || "-" | mask: "000.000.000-99"
+        }}</span>
+      </p>
+    </div>
+  </div> </app-card
+><br />
+<app-card>
+  <h2 class="h5">Agendamento</h2>
+  <p>
+    <span class="view-label">Data e horário</span>
+    <span class="d-block">{{ data | date: "dd/MM/yyyy H:mm" }}</span>
+  </p>
+  <p>
+    <span class="view-label">Assunto</span>
+    <span class="d-block">{{
+      schedule.typeSubject || "-"
+    }}</span>
+  </p>
+  <p>
+    <span class="view-label">Local</span>
+    <span class="d-block">{{ schedule.place || "-" }}</span>
+  </p>
+  <p>
+    <span class="view-label">Descrição</span>
+    <span class="d-block">{{ schedule.description || "-" }}</span>
+  </p>
+
+  <div>
+    <p>
+      <span class="view-label">Status</span>
+      <span class="d-block text-info">{{
+        schedule.typeScheduleStatus || "-"
+      }}</span>
+    </p>
+  </div>
+
+  <div>
+    <div>
+      <button *ngIf="(getTypeScheduleStatus(schedule.typeScheduleStatus) != 0 && 
+        getTypeScheduleStatus(schedule.typeScheduleStatus) < 4) ||
+       getTypeScheduleStatus(schedule.typeScheduleStatus) === 5"
+       type="button" class="btn btn-dark mr-3" (click)="reschedule.emit()">
+        Reagendar
+      </button>
+      <button *ngIf="getTypeScheduleStatus(schedule.typeScheduleStatus) < 4"
+       type="button" class="btn btn-danger mr-3" (click)="confirmCancel()">
+        Cancelar agendamento
+      </button>
+      <button
+        *ngIf="getTypeScheduleStatus(schedule.typeScheduleStatus) === 1"
+        type="button"
+        class="btn btn-success ml-2"
+        (click)="confirmEnd()"
+      >
+        Finalizar
+      </button>
+    </div>
+
+    <button
+        *ngIf="getTypeScheduleStatus(schedule.typeScheduleStatus) === 4"
+        type="button"
+        class="btn btn-dark mt-4"
+        (click)="confirmUndo()"
+      >
+        Desfazer etapa
+      </button>
+
+    <!-- <div *ngSwitchCase="false">
+      <div class="row">
+        <div class="col-lg-4">
+          <button
+            type="button"
+            class="btn btn-dark"
+            (click)="reschedule.emit()"
+          >
+            Agendar nova reunião
+          </button>
+        </div>
+        <div class="col-lg-4">
+          <button
+            type="button"
+            class="btn btn-dark"
+            (click)="chooseProperty(schedule)"
+          >
+            Liberar escolha de imóvel
+          </button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</app-card>

@@ -1,0 +1,100 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-card>
+    <div class="row">
+      <div class="col-lg-12">
+        <app-family-list-search
+          [listSearchData]="formDataModel.search"
+          (listSearchChange)="getFamily($event)"
+        >
+        </app-family-list-search>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-12">Enviar para todas as famílias</div>
+      <div class="col-auto">
+        <app-control-radio
+          formControlName="allFamily"
+          [value]="true"
+          id="allFamily-yes"
+        ></app-control-radio>
+      </div>
+      <div class="col-auto">
+        <label class="mb-0" for="allFamily-yes">SIM</label>
+      </div>
+      <div class="col-auto">
+        <app-control-radio
+          formControlName="allFamily"
+          [value]="false"
+          id="allFamily-no"
+        ></app-control-radio>
+      </div>
+      <div class="col-auto">
+        <label class="mb-0" for="allFamily-no">NÃO</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <mat-form-field class="mt-20" appearance="outline">
+          <mat-label>Selecionar as famílias</mat-label>
+          <mat-select [formControl]="familyId" multiple>
+            <mat-option *ngFor="let family of list" [value]="family.id">
+              Nº {{ family.number || "-" }} | {{ family.name || "-" }} |
+              {{ family.cpf || "-" | mask: "000.000.000-99" }} |
+              {{ family.blocked ? "Desativado" : "Ativo" }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <h2 class="h5">Imagem</h2>
+    <div class="row">
+      <div class="col-lg-6 text-center">
+        <app-control-field>
+          <app-image-upload
+            [changeDetectorRef]="changeDetectorRef"
+            [imageUploadAbstractControl]="form.controls.image"
+            (getFile)="getFileImage($event)"
+          >
+          </app-image-upload>
+          <app-control-error
+            [control]="form.controls.image"
+          ></app-control-error>
+        </app-control-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <app-control-field>
+          <label for="description">Título</label>
+          <input type="text" id="title" formControlName="title" />
+          <app-control-error
+            [control]="form.controls.title"
+          ></app-control-error>
+        </app-control-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <app-control-field>
+          <label for="description">Conteúdo</label>
+          <textarea id="description" formControlName="description"></textarea>
+          <app-control-error
+            [control]="form.controls.description"
+          ></app-control-error>
+        </app-control-field>
+      </div>
+    </div>
+  </app-card>
+  <br />
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+  >
+    Enviar
+  </app-button>
+</form>

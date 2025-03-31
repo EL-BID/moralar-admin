@@ -1,0 +1,42 @@
+<p>
+  <span class="view-label">CEP</span>
+  {{ (address?.cep | mask: "00000-000") || "-" }}
+</p>
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Estado</span>
+      {{ address?.stateName || "-" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Cidade</span>
+      {{ address?.cityName || "-" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Bairro</span>
+      {{ address?.neighborhood || "-" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Logradouro</span>
+      {{ address?.streetAddress || "-" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Número</span>
+      {{ address?.number || "-" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Complemento</span>
+      {{ address?.complement || "-" }}
+    </p>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+
+@import 'src/sass/imports/variables'
+
+:host
+  display: block
+  border-width: 0
+
+.month-year-container
+  display: flex
+  align-items: center
+  background-color: #FFF
+  padding: 8px 16px
+  border-radius: 8px
+  margin-bottom: 16px
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1)
+
+.month-year
+  flex: 1
+  font-weight: 600
+  color: $COLOR
+  text-transform: capitalize
+
+.month-button-container
+  background-color: #FFF
+  font-size: 0
+  border-radius: 4px
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15)
+
+.month-button
+  background-color: transparent
+  font-size: 0
+  line-height: 1
+  color: $COLOR
+  padding: 8px 8px
+  border-width: 0
+  > fa-icon
+    float: left
+    font-size: 12px
+
+.week-days,
+.month-days
+  display: grid
+  grid-template-columns: repeat(7, 1fr)
+  row-gap: 4px
+  column-gap: 4px
+  text-align: center
+  padding: 4px
+
+.week-days
+  font-weight: 600
+  > span
+    text-align: center
+    color: $COLOR
+
+.day
+  background-color: transparent
+  line-height: 36px
+  padding: 0
+  border-width: 0
+  border-radius: 4px
+  cursor: pointer
+  transition: background-color 0.25s, color 0.25s
+  &:disabled
+    opacity: 0.5
+    cursor: not-allowed
+
+.day-selected
+  background-color: $COLOR
+  color: #FFF

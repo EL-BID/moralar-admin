@@ -1,0 +1,169 @@
+<header id="header" class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <img
+        id="logo"
+        src="assets/images/logo-moralar-white-horizontal.svg"
+        alt="Moralar"
+        title="Moralar">
+    </div>
+
+    <div class="col-1">
+      <div class="notifications">
+        <div class="icone" *ngIf="loaded">
+          <fa-icon [icon]="faBell"></fa-icon>
+          <span class="notification-count" [ngClass]="{'new-notifications' :
+             sessionStorage.getItem('countNotifications.3') != null && 
+             sessionStorage.getItem('countNotifications.3') != '0'}">
+            {{ sessionStorage.getItem('countNotifications.3') != null ?
+                sessionStorage.getItem('countNotifications.3') : '0' }}</span>
+        </div>
+        <div class="content">
+          <app-my-notifications (loaded)="isLoaded()" [abstract]="true" [modeBell]="true" [for]="null"></app-my-notifications>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-auto">
+      <div ngbDropdown class="d-inline-block">
+        <button ngbDropdownToggle
+          type="button"
+          class="btn btn-sm btn-outline-light">
+          Menu
+        </button>
+        <div ngbDropdownMenu id="administrator-menu">          
+          <button ngbDropdownItem
+            type="button"
+            class="btn btn-link"
+            routerLink="administrador">
+            <span class="administrator">Administrador</span>
+            <span class="name">{{ user?.name }}</span>
+          </button>
+          <div class="dropdown-divider"></div>
+          <button ngbDropdownItem
+            type="button"
+            class="btn btn-link"
+            (click)="logOut()">
+            Sair
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-auto col-full-height">
+      <ul appNav>
+        <li routerLinkActive="active">
+          <button
+            type="button"
+            routerLink="dashboard">
+            <fa-icon
+              class="mr-2"
+              [icon]="faTachometerAlt">
+            </fa-icon>
+            Dashboard
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="familias">
+            <fa-icon
+              class="mr-2"
+              [icon]="faHouseUser">
+            </fa-icon>
+            Famílias
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="profissionais-tts">
+            <fa-icon
+              class="mr-2"
+              [icon]="faUserTie">
+            </fa-icon>
+            Profissionais de TTS
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="gestores-publicos">
+            <fa-icon
+              class="mr-2"
+              [icon]="faIdCard">
+            </fa-icon>
+            Gestores públicos
+          </button>
+        </li>
+        <li>
+          <button type="button" routerLink="agendamentos">
+            <fa-icon class="mr-2" [icon]="faCalendarAlt"> </fa-icon>
+            Agendamentos
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="imoveis">
+            <fa-icon
+              class="mr-2"
+              [icon]="faHome">
+            </fa-icon>
+            Imóveis
+          </button>
+        </li>
+        <li>
+          <button type="button" routerLink="matches">
+            <fa-icon class="mr-2" [icon]="faStar"> </fa-icon>
+            Matches
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="questionarios">
+            <fa-icon
+              class="mr-2"
+              [icon]="faQuestionCircle">
+            </fa-icon>
+            Questionários
+          </button>
+          <ul>
+            <li routerLinkActive="active">
+              <button
+                type="button"
+                routerLink="questionarios/disponiveis">
+                Disponíveis
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" routerLink="notificacoes">
+            <fa-icon class="mr-2" [icon]="faBell"> </fa-icon>
+            Notificações
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            routerLink="administradores">
+            <fa-icon
+              class="mr-2"
+              [icon]="faIdCard">
+            </fa-icon>
+            Administradores
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div id="content" class="col col-full-height">
+      <router-outlet>
+      </router-outlet>
+    </div>
+  </div>
+</div>

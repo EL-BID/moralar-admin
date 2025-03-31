@@ -1,0 +1,57 @@
+<h2 class="h5">Detalhes do Titular</h2>
+<app-card>
+  <div class="row">
+    <div class="col-lg-2">
+      <p>
+        <span class="view-label">Cadastro</span>
+        <span class="d-block">{{ family.holder.number || "-" }}</span>
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <p>
+        <span class="view-label">Titular</span>
+        <span class="d-block">{{ family.holder.name || "-" }}</span>
+      </p>
+    </div>
+    <div class="col-lg-2">
+      <p>
+        <span class="view-label">CPF</span>
+        <span class="d-block">{{
+          family.holder.cpf || "-" | mask: "000.000.000-00"
+        }}</span>
+      </p>
+    </div>
+  </div> </app-card
+><br />
+
+<h2 class="h5">Critérios de priorização</h2>
+<app-card>
+  <div class="form-row align-items-center mb-12">
+    <div class="col-6" *ngFor="let item of family.priorization; let i = index">
+      <b>{{ priorizations[i].name }}</b>
+      <div class="row">
+        <div class="col-1">
+          <fa-icon
+            [icon]="item.value == true ? faCheckCircle : faCircleNotch"
+          ></fa-icon>
+        </div>
+        <div class="col-1">
+          <label class="mb-0">SIM</label>
+        </div>
+        <div class="col-1">
+          <fa-icon
+            [icon]="item.value == false ? faCheckCircle : faCircleNotch"
+          ></fa-icon>
+        </div>
+        <div class="col-1">
+          <label class="mb-0">NÃO</label>
+        </div>
+      </div>
+    </div>
+  </div> </app-card
+><br />
+
+<h2 class="h5">Detalhes do Imóvel</h2>
+<app-card>
+  <app-property-view [property]="property"></app-property-view> </app-card
+><br />

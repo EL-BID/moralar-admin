@@ -1,0 +1,18 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="number">Número do cadastro</label>
+        <input
+          type="search"
+          id="number"
+          formControlName="number"
+          placeholder="Número do cadastro"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.number"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+</form>

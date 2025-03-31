@@ -1,0 +1,14 @@
+<h1 class="h4">Agendamentos</h1>
+
+<div class="options-container">
+    <button type="button" class="btn btn-dark" routerLink="adicionar">
+    Adicionar
+  </button>
+</div>
+
+<app-schedule-list-search [listSearchData]="formDataModel.search" (listSearchChange)="handleListSearchChange($event)">
+</app-schedule-list-search>
+<app-schedule-list [list]="list" (listSearchChange)="handleListSearchChange($event)" (listOrderChange)="handleListOrderChange($event)" (listItemSelected)="handleListItemSelected($event)">
+</app-schedule-list>
+<app-list-pagination [page]="formDataModel.page" [pageSize]="formDataModel.pageSize" [listSize]="listSize" [listSizeFiltered]="listSizeFiltered" (pageChange)="handleListPageChange($event)">
+</app-list-pagination>

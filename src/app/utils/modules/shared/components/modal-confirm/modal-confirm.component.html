@@ -1,0 +1,20 @@
+<h2 class="h5">{{ modalConfirmData.title }}</h2>
+<p>{{ modalConfirmData.content }}</p>
+<div class="form-row">
+  <div class="col-auto">
+    <app-button
+      buttonType="button"
+      buttonClass="{{modalConfirmData.cancelColor}} ?? btn-secondary"
+      (click)="ngbActiveModal.close(false)">
+      Não, voltar
+    </app-button>
+  </div>
+  <div class="col-auto">
+    <app-button
+      buttonType="button"
+      buttonClass="{{modalConfirmData.confirmColor}} ?? btn-success"
+      (click)="ngbActiveModal.close(true)">
+      Sim, {{ modalConfirmData.action }}
+    </app-button>
+  </div>
+</div>

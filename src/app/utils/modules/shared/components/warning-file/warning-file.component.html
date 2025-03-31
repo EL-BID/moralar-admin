@@ -1,0 +1,23 @@
+<div *ngIf="open" class="errors-excel">
+  <div class="row">
+      <div class="col-md-6">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          Faltam campos para preencher o arquivo que você enviou
+        </div>
+      </div>
+  </div>
+  <div class="row" *ngFor="let item of errorsList">
+    <div class="col-md-6">
+      <h4>Erro de linha <strong>{{item.row}}</strong></h4>
+      <div *ngIf="item.data.length > 0">
+        <div *ngFor="let subItem of item.data" class="alert alert-warning alert-dismissible fade show" role="alert">
+          Confira a coluna <strong>{{subItem.col}}</strong> {{subItem.typeError}}
+          <!-- TODO: verificar con mateo la X que falla -->
+          <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

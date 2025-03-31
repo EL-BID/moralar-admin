@@ -1,0 +1,149 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="title">Título do questionário</label>
+    <input type="text" id="title" formControlName="title" />
+    <app-control-error [control]="form.controls.title"></app-control-error>
+  </app-control-field>
+
+  <ng-container [ngSwitch]="questionsForm.controls.length === 0">
+    <form [formGroup]="questReg">
+      <app-card *ngSwitchCase="true" class="mb-3">
+        Nenhuma pegunta adicionada.
+      </app-card>
+      <div *ngSwitchCase="false" class="row">
+        <div
+          *ngFor="let questionForm of questionsForm.controls; let i = index"
+          formArrayName="question"
+          class="col-lg-12"
+        >
+          <app-card [formGroupName]="i" class="mb-3">
+            <div class="row">
+              <div class="col-lg-7">
+                <app-control-field>
+                  <label for="nameQuestion-{{ i }}">Pergunta</label>
+                  <input
+                    type="text"
+                    id="nameQuestion-{{ i }}"
+                    formControlName="nameQuestion"
+                  />
+                  <app-control-error
+                    [control]="questionForm.get('nameQuestion')"
+                  ></app-control-error>
+                </app-control-field>
+              </div>
+              <div class="col-lg-3">
+                <app-control-field>
+                  <label for="typeResponse-{{ i }}">Tipo de Resposta</label>
+                  <select
+                    id="typeResponse-{{ i }}"
+                    formControlName="typeResponse"
+                    (change)="handleChangeTypeResponse(questionForm)"
+                  >
+                    <option
+                      *ngFor="let typeList of questionAnswerTypesList"
+                      [ngValue]="typeList.id"
+                    >
+                      {{ typeList.name }}
+                    </option>
+                  </select>
+                  <app-control-error
+                    [control]="questionForm.get('typeResponse')"
+                  ></app-control-error>
+                </app-control-field>
+              </div>
+              <div class="col lg 2">
+                <br />
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeQuestionForm(i)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <ng-container [ngSwitch]="questionForm.value.typeResponse > 0">
+              <div *ngSwitchCase="true">
+                <div
+                  *ngFor="
+                    let a of questionsForm.value[i].description;
+                    let j = index
+                  "
+                  class="col-lg-12"
+                >
+                  <div class="row">
+                    <div class="col-lg-10">
+                      <app-control-field>
+                        <input
+                          id="description-{{ j }}"
+                          type="text"
+                          (change)="verifyQuestionsWithDescriptions()"
+                          [value]="
+                            questionForm.value.description[j].description
+                          "
+                          (keyup)="
+                            questionForm.value.description[j].description =
+                              $event.target.value
+                          "
+                        />
+                        <div
+                          class="d-block invalid-feedback"
+                          *ngIf="!questionForm.value.description[j].description"
+                        >
+                          Por favor, informe esse campo.
+                        </div>
+                      </app-control-field>
+                    </div>
+                    <div class="col-lg-2">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="
+                          removeDescForm(questionsForm.value[i].description, j)
+                        "
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark mb-3"
+                      (click)="addDescForm(i)"
+                    >
+                      Adicionar Opção
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </app-card>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <button
+    [hidden]="isEdit"
+    type="button"
+    class="btn btn-outline-dark mb-3"
+    (click)="addQuestionForm()"
+  >
+    Adicionar pergunta
+  </button>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="
+      form.invalid ||
+      questionsForm.controls.length === 0 ||
+      validador === false ||
+      formLoading === true
+    "
+    [buttonLoading]="formLoading"
+  >
+    {{ isEdit ? "Atualizar" : "Adicionar" }}
+  </app-button>
+</form>

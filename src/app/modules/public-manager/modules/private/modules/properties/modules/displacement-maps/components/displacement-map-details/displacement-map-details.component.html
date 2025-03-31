@@ -1,0 +1,89 @@
+<!-- <button class="btn btn-secondary" (click)="printScreen()">Imprimir tela</button> -->
+<ng-container *ngIf="noDisplacementMap; else displacementMap">
+  <div class="box-header mb-3">
+    <h1 class="mb-3">Mapa de deslocamento</h1>
+  </div>
+  <h2 class="text-secondary">Nenhum registro ainda.</h2>
+</ng-container>
+
+<ng-template #displacementMap>
+  <div id="printarea">
+    <div class="box-header mb-3">
+      <h1 class="mb-3">Mapa de deslocamento</h1>
+      <button class="btn btn-secondary" (click)="printScreen()">
+        Imprimir tela
+      </button>
+    </div>
+    <div *ngIf="family" class="box-map mt-5 mb-5">
+      <table class="table table-light table-striped">
+        <thead>
+          <th>Proprietário</th>
+          <th>Endereços</th>
+          <th>Distância</th>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              <div>{{ family?.name }}</div>
+              <div><b>Número: </b>{{ family?.number }}</div>
+              <div><b>CPF: </b>{{ family?.cpf | mask: "999.999.999-99" }}</div>
+            </th>
+            <th>
+              <div>
+                <dt>Origem</dt>
+                <div>{{ family.addressPropertyOrigin }}</div>
+              </div>
+              <div>
+                <dt>Destino</dt>
+                <div>{{ family.addressPropertyDestination }}</div>
+              </div>
+            </th>
+            <th>
+              <div>
+                <div>
+                  {{ family?.addressPropertyDistanceMeters | number }} metros
+                </div>
+                <div>
+                  {{
+                    family?.addressPropertyDistanceKilometers | number: "1.1-1"
+                  }}
+                  km
+                </div>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <agm-map
+      [zoom]="zoom"
+      [latitude]="lat"
+      [longitude]="lng"
+      [disableDefaultUI]="false"
+    >
+      <agm-marker
+        *ngFor="let m of addresses; let i = index"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [openInfoWindow]="true"
+        [iconUrl]="m.icon"
+        [markerDraggable]="m.draggable"
+      >
+        <agm-info-window [isOpen]="true">
+          <strong>{{ m.description }}</strong>
+        </agm-info-window>
+      </agm-marker>
+
+      <agm-circle
+        [latitude]="lat"
+        [longitude]="lng"
+        [radius]="4000"
+        [fillColor]="'lightgreen'"
+        [circleDraggable]="false"
+        [editable]="false"
+      >
+      </agm-circle>
+    </agm-map>
+  </div>
+</ng-template>

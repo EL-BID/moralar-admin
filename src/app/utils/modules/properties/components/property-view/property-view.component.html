@@ -1,0 +1,214 @@
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Código do imóvel</span>
+      {{ property?.code }}
+    </p>
+  </div>
+</div>
+<app-address-view [address]="property.residencialPropertyAdress">
+</app-address-view>
+<h2 class="h5 mt-5">Fotos</h2>
+<ng-container [ngSwitch]="property.photo?.length === 0">
+  <app-card *ngSwitchCase="true" class="mb-3">
+    Nenhuma foto adicionada.
+  </app-card>
+  <div *ngSwitchCase="false" class="row" style="margin-left: 0em;">
+    <div
+      *ngFor="let photo of property?.photo; let i = index"
+      class="mb-1 col-md-3"
+    >
+      <app-image class="max-card-img" [imagePath]="photo" label="Foto {{ i + 1 }}" (triggerChildLightbox)="triggerChildLightbox($event)"></app-image>
+    </div>
+    <div *ngIf="property?.photo">
+      <app-image-gallery [photos]="property.photo"></app-image-gallery>
+    </div>
+  </div>
+</ng-container>
+<h2 class="h5 mt-5">Planta</h2>
+
+<app-card *ngIf="property.project == null || property.project.length == 0" class="mb-3">
+  Nenhuma planta adicionada.
+</app-card>
+
+<div class="row"> 
+  <div class="col-lg-6" *ngIf="property.project && property.description">
+    <app-image
+      [imagePath]="{
+        imageUrl: getProjectPath(property.project.replace('default.jpg', '')),
+        description: property.description
+      }"
+      label="Planta do imóvel"
+    ></app-image>
+  </div>
+</div>
+<h2 class="h5 mt-5">Características</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Valor do imóvel</span>
+      {{
+        property.residencialPropertyFeatures?.propertyValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Tipo do imóvel</span>
+      {{ property?.residencialPropertyFeatures?.typeProperty }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Metragem quadrada</span>
+      {{ property.residencialPropertyFeatures?.squareFootage }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Valor do condomínio</span>
+      {{
+        property.residencialPropertyFeatures?.condominiumValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Valor do IPTU</span>
+      {{
+        property.residencialPropertyFeatures?.iptuValue
+          | currency: "BRL":"symbol":"1.2-2"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Bairro</span>
+      {{ property.residencialPropertyAdress?.neighborhood }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Número de pavimentos</span>
+      {{ property.residencialPropertyFeatures?.numberFloors }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Andar de localização</span>
+      {{ property.residencialPropertyFeatures?.floorLocation }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Elevador</span>
+      {{
+        property.residencialPropertyFeatures?.hasElavator == true
+          ? "Sim"
+          : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Número de quartos</span>
+      {{ property.residencialPropertyFeatures?.numberOfBedrooms }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Número de banheiros</span>
+      {{ property.residencialPropertyFeatures?.numberOfBathrooms }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Área de serviço</span>
+      {{
+        property.residencialPropertyFeatures?.hasServiceArea == true
+          ? "Sim"
+          : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Garagem</span>
+      {{
+        property.residencialPropertyFeatures?.hasGarage == true ? "Sim" : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Quintal</span>
+      {{
+        property.residencialPropertyFeatures?.hasYard == true ? "Sim" : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Cisterna</span>
+      {{
+        property.residencialPropertyFeatures?.hasCistern == true ? "Sim" : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Murada</span>
+      {{
+        property.residencialPropertyFeatures?.hasWall == true ? "Sim" : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Escada de acesso</span>
+      {{
+        property.residencialPropertyFeatures?.hasAccessLadder == true
+          ? "Sim"
+          : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Rampa de acesso</span>
+      {{
+        property.residencialPropertyFeatures?.hasAccessRamp == true
+          ? "Sim"
+          : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Adaptada ou permite adaptação para PCD</span>
+      {{
+        property.residencialPropertyFeatures?.hasAdaptedToPcd == true
+          ? "Sim"
+          : "Não"
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Regularização do imóvel</span>
+      {{
+        property.residencialPropertyFeatures?.propertyRegularization
+      }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="view-label">Tipo de instalação de gás</span>
+      {{
+        property.residencialPropertyFeatures?.typeGasInstallation
+      }}
+    </p>
+  </div>
+</div>

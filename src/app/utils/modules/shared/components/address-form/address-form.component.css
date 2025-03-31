@@ -1,0 +1,14 @@
+.map {
+  display: flex;
+  flex-direction: column;
+}
+
+agm-map {
+  height: 250px !important;
+  width: 70vw !important;
+}
+
+label.required:after {
+  content:" *";
+  color: red;
+}

@@ -1,0 +1,54 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th sortable="number" (sort)="handleSort($event)">
+          Nome do profissional
+        </th>
+        <th sortable="holderName" (sort)="handleSort($event)">Cargo</th>
+        <th sortable="holderCpf" (sort)="handleSort($event)">
+          CPF do profissional
+        </th>
+        <th sortable="email" (sort)="handleSort($event)">E-mail</th>
+        <th sortable="phone" (sort)="handleSort($event)">Telefone</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <app-control-checkbox
+            [value]="isChecked(item)"
+            (changed)="listItemSelected.emit(item)"
+          >
+          </app-control-checkbox>
+        </td>
+        <td>{{ item.name || "-" }}</td>
+        <td>{{ item.role || "-" }}</td>
+        <td>{{ item.cpf || "-" }}</td>
+        <td>{{ item.email || "-" }}</td>
+        <td>
+          <span *ngIf="item.phone; else noPhone">
+            {{ item.phone | mask: "+00 (00) 0 0000-0000" }}</span
+          >
+          <ng-template #noPhone>-</ng-template>
+        </td>
+        <td>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,48 @@
+<div *ngIf="list?.length" class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngIf="!hideTableItems.selectItem"></th>
+        <th>Título do questionário</th>
+        <th>Data da disponibilização</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td *ngIf="!hideTableItems.selectItem">
+          <app-control-checkbox
+            [value]="isChecked(item)"
+            (changed)="listItemSelected.emit(item)"
+          >
+          </app-control-checkbox>
+        </td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.date || "-" }}</td>
+        <td>{{ item.hasAnswered || "-" }}</td>
+        <td>
+          <ng-container *ngIf="!hideTableItems.details">
+            <button
+              *ngIf="item.hasAnswered == 'Não respondido'"
+              (click)="handleDetails(item.quizId)"
+              class="btn btn-info"
+              [routerLink]="['/gestor-publico/app/questionarios', item.quizId]"
+            >
+              Ver detalhes
+            </button>
+            <button
+              *ngIf="item.hasAnswered != 'Não respondido'"
+              (click)="handleDetailsAvaliable(item.quizId, item.familyId)"
+              class="btn btn-info"
+            >
+              Ver detalhes
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h5 *ngIf="!list?.length" class="text-info">Nenhum questionário encontrado</h5>

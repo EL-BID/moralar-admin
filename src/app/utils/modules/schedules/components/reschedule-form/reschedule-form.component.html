@@ -1,0 +1,80 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <!-- <pre>{{ form?.value | json }}</pre> -->
+  <div class="row">
+    <div class="col-12">
+      <app-control-field>
+        <label for="date">Data</label>
+        <app-control-date-picker
+          id="date"
+          [dayMin]="dayMin"
+          formControlName="date"
+        >
+        </app-control-date-picker>
+        <app-control-error [control]="form.controls.date"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="time">Horário</label>
+        <input type="time" id="time" formControlName="time" />
+        <app-control-error [control]="form.controls.time"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+
+  <app-control-field>
+    <label for="typeSubject">Assunto</label>
+    <select id="typeSubject" formControlName="typeSubject">
+      <option [ngValue]="null">Selecione uma opção</option>
+      <option
+        *ngFor="let scheduleType of scheduleTypeList"
+        [selected]="actualScheduleType === scheduleType.id"
+      >
+        {{ scheduleType.name }}
+      </option>
+    </select>
+  </app-control-field>
+
+  <!-- Lista de questionários -->
+  <ng-container *ngIf="showQuiz && actualQuiz.open">
+    <app-control-field>
+      <label for="quiz"
+        >Questionário que será disponibilizado 30 dias após a etapa de
+        mudança.</label
+      >
+      <select id="quiz" formControlName="quiz">
+        <option [ngValue]="null">Selecione uma opção</option>
+        <option
+          *ngFor="let questionnaire of questionnaires"
+          [selected]="actualQuiz.value === questionnaire.id"
+        >
+          {{ questionnaire.title }}
+        </option>
+      </select>
+    </app-control-field>
+  </ng-container>
+  <!-- Fim da lista de questionários -->
+
+  <app-control-field>
+    <label for="place">Local</label>
+    <input type="text" id="place" formControlName="place" />
+    <app-control-error [control]="form.controls.place"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="description">Descrição</label>
+    <textarea id="description" formControlName="description"></textarea>
+    <app-control-error
+      [control]="form.controls.description"
+    ></app-control-error>
+  </app-control-field>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+  >
+    Reagendamento
+  </app-button>
+</form>

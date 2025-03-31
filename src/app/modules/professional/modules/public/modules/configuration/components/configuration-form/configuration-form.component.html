@@ -1,0 +1,78 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="name">Nome do projeto</label>
+    <input type="text" id="name" formControlName="name" />
+    <app-control-error [control]="form.controls.name"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="logo">Logotipo do projeto</label>
+    <app-image-upload
+      [imageUploadAbstractControl]="form.controls.logo"
+      [changeDetectorRef]="changeDetectorRef"
+    >
+    </app-image-upload>
+    <app-control-error [control]="form.controls.logo"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="color">Cor do projeto</label>
+    <input type="color" id="color" formControlName="color" />
+    <app-control-error [control]="form.controls.color"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="institution">Instituição</label>
+    <input type="text" id="institution" formControlName="institution" />
+    <app-control-error
+      [control]="form.controls.institution"
+    ></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="city">Cidade do projeto</label>
+    <input type="text" id="city" formControlName="city" />
+    <app-control-error [control]="form.controls.city"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="country">País</label>
+    <input type="text" id="country" formControlName="country" />
+    <app-control-error [control]="form.controls.country"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="phone">Telefone de contato (suporte)</label>
+    <input type="tel" id="phone" formControlName="phone" />
+    <app-control-tip [control]="form.controls.phone">
+      Informe o código do país, DDD e número de telefone. Exemplo: 5511988294456
+    </app-control-tip>
+    <app-control-error [control]="form.controls.phone"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="phone">Dias da semana de atendimento</label>
+    <div class="text-danger">
+      [Aguardando a API para ver a melhor forma de construir]
+    </div>
+  </app-control-field>
+  <app-control-field>
+    <label for="phone">Horário de atendimento</label>
+    <div class="form-row">
+      <div class="col-6">
+        <input type="time" id="timeStart" formControlName="timeStart" />
+        <app-control-error
+          [control]="form.controls.timeStart"
+        ></app-control-error>
+      </div>
+      <div class="col-6">
+        <input type="time" id="timeEnd" formControlName="timeEnd" />
+        <app-control-error
+          [control]="form.controls.timeEnd"
+        ></app-control-error>
+      </div>
+    </div>
+  </app-control-field>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-block btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+  >
+    Salvar configurações
+  </app-button>
+</form>
+<br />

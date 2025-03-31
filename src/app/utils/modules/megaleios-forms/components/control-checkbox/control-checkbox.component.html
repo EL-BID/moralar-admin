@@ -1,0 +1,6 @@
+<fa-icon *ngIf="ngControl"
+  [icon]="ngControl.value !== true ? faSquare : faCheckSquare">
+</fa-icon>
+<fa-icon *ngIf="!ngControl"
+  [icon]="value !== true ? faSquare : faCheckSquare">
+</fa-icon>

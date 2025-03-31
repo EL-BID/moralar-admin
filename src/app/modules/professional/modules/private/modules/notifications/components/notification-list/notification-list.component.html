@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th sortable="title" (sort)="handleSort($event)">Título da notificação</th>
+        <th sortable="date" (sort)="handleSort($event)">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>
+          <app-control-checkbox
+            [value]="isChecked(item)"
+            (changed)="listItemSelected.emit(item)">
+          </app-control-checkbox>
+        </td>
+        <td>{{ item.title || '-' }}</td>
+        <td>{{ item.date || '-' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

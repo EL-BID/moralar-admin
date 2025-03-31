@@ -1,0 +1,21 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-lg-5">
+      <app-control-field>
+        <label for="search">Pesquisar</label>
+        <input
+          type="search"
+          id="search"
+          formControlName="search"
+          placeholder="Pesquisar pelo título ou conteúdo"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.search"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col">
+      <app-date-range [form]="listSearchForm"></app-date-range>
+    </div>
+  </div>
+</form>

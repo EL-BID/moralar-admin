@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="name">Nome</label>
+    <input type="text" id="name" formControlName="name" />
+    <app-control-error [control]="form.controls.name"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="email">E-mail</label>
+    <input type="text" id="email" formControlName="email" />
+    <app-control-error [control]="form.controls.email"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="login">Login</label>
+    <input type="text" id="login" formControlName="login" />
+    <app-control-error [control]="form.controls.login"></app-control-error>
+  </app-control-field>
+  <div class="form-row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="password">Senha</label>
+        <input type="password" id="password" formControlName="password" />
+        <app-control-error
+          [control]="form.controls.password"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="passwordConfirm">Confirmação da senha</label>
+        <input
+          type="password"
+          id="passwordConfirm"
+          formControlName="passwordConfirm"
+        />
+        <app-control-error
+          [control]="form.controls.passwordConfirm"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+  <app-button
+    buttonType="submit"
+    buttonClass="btn-dark"
+    [buttonDisabled]="form.valid === false || formLoading === true"
+    [buttonLoading]="formLoading"
+  >
+    {{ formData ? "Alterar" : "Adicionar" }}
+  </app-button>
+</form>

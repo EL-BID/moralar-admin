@@ -1,0 +1,27 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th sortable="date" (sort)="handleSort($event)">Número do cadastro</th>
+        <th sortable="holderName" (sort)="handleSort($event)">Titular</th>
+        <th sortable="holderCpf" (sort)="handleSort($event)">CPF</th>
+        <th class="text-right">Ver detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{ item.holderNumber || "-" }}</td>
+        <td>{{ item.holderName || "-" }}</td>
+        <td>{{ item.holderCpf || "-" | mask: "000.000.000-00" }}</td>
+        <td class="text-right">
+          <button
+            [routerLink]="['family', item.familyId]"
+            class="btn btn-primary"
+          >
+            Detalhes
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

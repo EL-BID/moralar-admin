@@ -1,0 +1,20 @@
+<h1 class="h4">Detalhes do agendamento</h1>
+<app-schedule-view
+  *ngIf="schedule"
+  [schedule]="schedule"
+  (reschedule)="handleReschedule()"
+  (finish)="handleChangeStatusSchedule(4)"
+  (cancel)="handleChangeStatusSchedule(5)"
+  (undo)="handleUndo()"
+>
+</app-schedule-view>
+
+<ng-template #reschedule>
+  <h2 class="h5">Reagendar</h2>
+  <app-reschedule-form
+    [formData]="schedule"
+    [formLoading]="rescheduleFormLoading"
+    (formSubmit)="handleRescheduleFormSubmit($event)"
+  >
+  </app-reschedule-form>
+</ng-template>

@@ -1,0 +1,82 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="number">Número do cadastro</label>
+        <input type="text" id="number" formControlName="number" />
+        <app-control-error
+          [control]="listSearchForm.controls.number"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-4">
+      <app-control-field>
+        <label for="holderName">Nome do morador titular</label>
+        <input type="text" id="holderName" formControlName="holderName" />
+        <app-control-error
+          [control]="listSearchForm.controls.holderName"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-4">
+      <app-control-field>
+        <label for="holderCpf">CPF do morador titular</label>
+        <input
+          type="tel"
+          id="holderCpf"
+          formControlName="holderCpf"
+          mask="000.000.000-00"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.holderCpf"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="">Todos</option>
+          <option
+            *ngFor="let scheduleStatus of scheduleStatusList"
+            [ngValue]="scheduleStatus.id"
+          >
+            {{ scheduleStatus.name }}
+          </option>
+        </select>
+        <app-control-error
+          [control]="listSearchForm.controls.status"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="type">Tipo</label>
+        <select id="type" formControlName="type">
+          <option value="">Todos</option>
+          <option
+            *ngFor="let scheduleType of scheduleTypeList"
+            [ngValue]="scheduleType.id"
+          >
+            {{ scheduleType.name }}
+          </option>
+        </select>
+        <app-control-error
+          [control]="listSearchForm.controls.type"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+
+    <div class="col-lg-6">
+      <app-date-range [form]="listSearchForm"></app-date-range>
+    </div>
+  </div>
+  <div class="row" *ngIf="anyControlHasValue()">
+    <div class="col-lg-6 mt-2 mb-3">
+        <button class="clean-filters" (click)="cleanFilters()">
+          Limpar filtros
+        </button>
+    </div>
+  </div>
+</form>

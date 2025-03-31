@@ -1,0 +1,17 @@
+
+
+.table-responsive
+  margin: 16px 0
+
+.table
+  margin: 0
+
+th
+  font-weight: 500
+  cursor: not-allowed
+  &[sortable]
+    cursor: pointer
+  &.asc:before
+    content: '↑ '
+  &.desc:before
+    content: '↓ '

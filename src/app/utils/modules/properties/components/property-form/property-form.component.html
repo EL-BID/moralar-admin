@@ -1,0 +1,296 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="row">
+        <div class="col-lg-6">
+            <app-control-field>
+                <label for="code">Código do imóvel</label>
+                <input type="text" id="code" formControlName="code" />
+                <app-control-error [control]="form.controls.code"></app-control-error>
+            </app-control-field>
+        </div>
+    </div>
+    <app-address-form [form]="residencialPropertyAdressForm" [showMap]="true">
+    </app-address-form>
+    <h2 class="h5 mt-3">Fotos</h2>
+    <ng-container [ngSwitch]="photosForm.controls.length === 0">
+        <app-card *ngSwitchCase="true" class="mb-3">
+            Nenhuma foto adicionada.
+        </app-card>
+        <div *ngSwitchCase="false" class="row">
+            <div *ngIf="!imageUploadIsUploading">
+              <app-image-gallery [photosFormControls]="photosForm.controls"></app-image-gallery>
+            </div>
+            <div *ngFor="let photoFormControl of photosForm.controls; let i = index" formArrayName="photo" class="col-lg-3 mb-3">
+                <app-card>
+                    <app-multiple-images-upload class="mb-2" [index]="i"  (triggerChildLightbox)="triggerChildLightbox($event)" [changeDetectorRef]="changeDetectorRef" [imageUploadAbstractControl]="photoFormControl" [maxWidth]="1000" [maxHeight]="1000">
+                    </app-multiple-images-upload>
+                    <button type="button" class="btn btn-block btn-danger" (click)="removePhotoFormControl(i)">
+                      Remover foto
+                    </button>
+                </app-card>
+            </div>
+        </div>
+    </ng-container>
+    <input #imageUploadFile multiple type="file" accept="image/*" (change)="handleInputFileChanged($event.target.files)" class="d-none" />
+    <button type="button" class="btn btn-outline-dark mb-3" [disabled]="canAddPhotoFormControl() === false" (click)="imageUploadFile.click()">
+    Adicionar fotos
+  </button>
+    <h2 class="h5">Planta</h2>
+    <div class="row">
+        <div class="col-lg-6">
+            <app-control-field>
+                <app-image-upload [changeDetectorRef]="changeDetectorRef" [imageUploadAbstractControl]="form.controls.project" [maxWidth]="1000" [maxHeight]="1000"
+                (getFile)="getFileProject($event)">
+                </app-image-upload>
+                <app-control-error [control]="form.controls.project"></app-control-error>
+            </app-control-field>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex flex-column mt-1 mb-3">
+          <label for="description" class="descrip-planta">Descrição da planta:</label>
+          
+          <textarea class="form-control" 
+            [formControl]="form.controls.description"  
+            value="'desc planta test'"
+            name="description" id="description" rows="4"
+            maxlength="400">
+            </textarea>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="residencialPropertyFeaturesForm">
+        <h2 class="h5">Características</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="propertyValue">Valor do imóvel</label>
+                    <input currencyMask type="text" id="propertyValue" formControlName="propertyValue" />
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.propertyValue"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="typeProperty">Tipo do imóvel</label>
+                    <select id="typeProperty" formControlName="typeProperty">
+            <option value="">Selecione uma opção</option>
+            <option
+              *ngFor="let propertyType of propertyTypeList"
+              [ngValue]="propertyType.id"
+            >
+              {{ propertyType.name }}
+            </option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.typeProperty"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="squareFootage">Metragem quadrada</label>
+                    <input type="number" min="0" id="squareFootage" formControlName="squareFootage" />
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.squareFootage"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="condominiumValue">Valor do condomínio</label>
+                    <input currencyMask type="text" id="condominiumValue" formControlName="condominiumValue" />
+                    <app-control-error [control]="
+              residencialPropertyFeaturesForm.controls.condominiumValue
+            "></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="iptuValue">Valor do IPTU</label>
+                    <input currencyMask type="text" id="iptuValue" formControlName="iptuValue" />
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.iptuValue"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="numberFloors">Número de pavimentos</label>
+                    <select id="numberFloors" formControlName="numberFloors">
+            <option value="">Selecione uma opção</option>
+            <option
+              *ngFor="
+                let numberOfFloor of propertyNumberOfFloorsList;
+                let i = index
+              "
+              [ngValue]="i"
+            >
+              {{ i }}
+            </option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.numberFloors"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="floorLocation">Andar de localização</label>
+                    <input type="text" id="code" formControlName="floorLocation" />
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.floorLocation"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasElavator">Elevador</label>
+                    <select id="hasElavator" formControlName="hasElavator">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasElavator"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="numberOfBedrooms">Número de quartos</label>
+                    <input type="number" id="numberOfBedrooms" formControlName="numberOfBedrooms" />
+                    <app-control-error [control]="
+              residencialPropertyFeaturesForm.controls.numberOfBedrooms
+            "></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="numberOfBathrooms">Número de banheiros</label>
+                    <input type="number" id="numberOfBathrooms" formControlName="numberOfBathrooms" />
+                    <app-control-error [control]="
+              residencialPropertyFeaturesForm.controls.numberOfBathrooms
+            "></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasServiceArea">Área de serviço</label>
+                    <select id="hasServiceArea" formControlName="hasServiceArea">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasServiceArea"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasGarage">Garagem</label>
+                    <select id="hasGarage" formControlName="hasGarage">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasGarage"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasYard">Quintal</label>
+                    <select id="hasYard" formControlName="hasYard">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasYard"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasCistern">Cisterna</label>
+                    <select id="hasCistern" formControlName="hasCistern">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasCistern"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasWall">Murada</label>
+                    <select id="hasWall" formControlName="hasWall">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasWall"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasAccessLadder">Escada de acesso</label>
+                    <select id="hasAccessLadder" formControlName="hasAccessLadder">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasAccessLadder"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasAccessRamp">Rampa de acesso</label>
+                    <select id="hasAccessRamp" formControlName="hasAccessRamp">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+                    <app-control-error [control]="residencialPropertyFeaturesForm.controls.hasAccessRamp"></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="hasAdaptedToPcd">Adaptada ou permite adaptação para PCD</label
+          >
+          <select id="hasAdaptedToPcd" formControlName="hasAdaptedToPcd">
+            <option value="">Selecione uma opção</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+          <app-control-error
+            [control]="residencialPropertyFeaturesForm.controls.hasAdaptedToPcd"
+          ></app-control-error>
+        </app-control-field>
+      </div>
+      <div class="col-lg-6">
+        <app-control-field>
+          <label for="propertyRegularization">Regularização do imóvel</label>
+                    <select id="propertyRegularization" formControlName="propertyRegularization">
+            <option value="">Selecione uma opção</option>
+            <option
+              *ngFor="let propertyRegularization of propertyRegularizationList"
+              [ngValue]="propertyRegularization.id"
+            >
+              {{ propertyRegularization.name }}
+            </option>
+          </select>
+                    <app-control-error [control]="
+              residencialPropertyFeaturesForm.controls.propertyRegularization
+            "></app-control-error>
+                </app-control-field>
+            </div>
+            <div class="col-lg-6">
+                <app-control-field>
+                    <label for="typeGasInstallation">Tipo de instalação de gás</label>
+                    <select id="typeGasInstallation" formControlName="typeGasInstallation">
+            <option value="">Selecione uma opção</option>
+            <option
+              *ngFor="
+                let propertyGasInstallation of propertyGasInstallationList
+              "
+              [ngValue]="propertyGasInstallation.id"
+            >
+              {{ propertyGasInstallation.name }}
+            </option>
+          </select>
+                    <app-control-error [control]="
+              residencialPropertyFeaturesForm.controls.typeGasInstallation
+            "></app-control-error>
+                </app-control-field>
+            </div>
+        </div>
+    </form>
+    <app-button buttonType="submit" buttonClass="btn-dark btn-block" [buttonDisabled]="form.valid === false || formLoading === true" [buttonLoading]="formLoading">
+        {{ formData ? "Alterar" : "Adicionar" }}
+    </app-button>
+</form>

@@ -1,0 +1,22 @@
+<div *ngIf="list?.length" class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngIf="!hideTableItems.selectItem"></th>
+        <th>Título da enquete</th>
+        <th>Data da disponibilização</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td *ngIf="!hideTableItems.selectItem"></td>
+        <td>{{ item.title || "-" }}</td>
+        <td>{{ item.date || "-" }}</td>
+        <td>{{ item.hasAnswered || "-" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h5 *ngIf="!list?.length" class="text-info">Nenhuma enquete encontrada</h5>

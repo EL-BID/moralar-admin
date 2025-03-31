@@ -1,0 +1,34 @@
+<div class="button-close-container">
+  <button
+    type="button"
+    (click)="ngbActiveModal.close()">
+    <fa-icon
+      [icon]="faTimes">
+    </fa-icon>
+  </button>
+</div>
+<image-cropper
+  [imageFile]="modalImageCropperFile"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="modalImageCropperAspectRatio"
+  format="png"
+  (imageCropped)="modalImageCropperImageCropped = $event.base64">
+</image-cropper>
+<div class="form-row justify-content-center mt-3">
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-light btn-sm"
+      (click)="ngbActiveModal.close()">
+      Voltar
+    </button>
+  </div>
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-secondary btn-sm"
+      (click)="ngbActiveModal.close(dataUriToBlob(modalImageCropperImageCropped))">
+      Recortar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div *ngIf="list?.length" class="table-responsive">
+    <table aria-describedby="lista de matches" class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Código | Tipo</th>
+                <th>Caracteristicas</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td>
+                    <ng-container *ngIf="!hideTableItems.selectItem">
+                        <app-control-checkbox [value]="isChecked(item)" (changed)="listItemSelected.emit(item)">
+                        </app-control-checkbox>
+                    </ng-container>
+                </td>
+                <td>
+                    <app-image [imagePath]="item?.photo[0]"></app-image>
+                </td>
+                <td>
+                    <div>
+                        <small>Código</small>
+                        <div>{{ item?.code || "-" }}</div>
+                    </div>
+                    <div>
+                        <small>Tipo</small>
+                        <div>
+                            {{ item?.residencialPropertyFeatures?.typeProperty | typeProperty }}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <small>Metragem quadrada</small>
+                        <div>
+                            {{ item?.residencialPropertyFeatures?.squareFootage || "-" }}
+                        </div>
+                    </div>
+                    <div>
+                        <small>Bairro</small>
+                        <div>
+                            {{ item?.residencialPropertyAdress?.neighborhood || "-" }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h5 class="text-info" *ngIf="!list?.length">Nenhum imóvel encontrado</h5>

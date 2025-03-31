@@ -1,0 +1,6 @@
+<h1 class="h4">Editar questionário</h1>
+<app-questionnaire-form *ngIf="questionnaire"
+  [formData]="questionnaire"
+  [formLoading]="formLoading"
+  (formSubmit)="handleFormSubmit($event)">
+</app-questionnaire-form>

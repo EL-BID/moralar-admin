@@ -1,0 +1,49 @@
+{
+
+  /*
+    
+    file variables
+    
+    web-moralar
+    WebMoralarDev
+    WebMoralarHml
+
+  */
+
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "deploy-dev",
+      "type": "shell",
+      "command": "ng build --prod --c=dev --baseHref /WebMoralarDev/; msdeploy -verb:sync -source:contentPath='${workspaceFolder}/dist/web-moralar' -dest:auto,ComputerName='https:\/\/apidev.megaleios.com:8172/msdeploy.axd?site=Apis',UserName='{{password}}',Password='{{password}}',AuthType='Basic' -setParam:value='Apis/WebMoralarDev',kind=ProviderPath,scope=contentPath -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -allowUntrusted",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy-hml",
+      "type": "shell",
+      "command": "ng build --prod --c=hml --baseHref /WebMoralarHml/; msdeploy -verb:sync -source:contentPath='${workspaceFolder}/dist/web-moralar' -dest:auto,ComputerName='https:\/\/apihom.megaleios.com:8172/msdeploy.axd?site=Apis',UserName='{{userName}}',Password='{{password}}',AuthType='Basic' -setParam:value='Apis/WebMoralarHml',kind=ProviderPath,scope=contentPath -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -allowUntrusted",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy-prod",
+      "type": "shell",
+      "command": "ng build --prod ; msdeploy -verb:sync -source:contentPath='${workspaceFolder}/dist/web-moralar' -dest:auto,ComputerName='https:\/\/apihom.megaleios.com:8172/msdeploy.axd?site=Apis',UserName='{{userName}}',Password='{{password}}',AuthType='Basic' -setParam:value='Apis/WebMoralarHml',kind=ProviderPath,scope=contentPath -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -allowUntrusted",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}

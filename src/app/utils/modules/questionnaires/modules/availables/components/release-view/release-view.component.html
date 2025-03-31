@@ -1,0 +1,51 @@
+<app-card>
+  <div class="row">
+    <div class="col-md-3">
+      <h2 class="h5">Morador</h2>
+      <h1>{{ release[0]?.familyHolderName }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">N° cadastro</h2>
+      <h1>{{ release[0]?.familyNumber }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">CPF</h2>
+      <h1>{{ release[0]?.familyHolderCpf | mask: "000.000.000-00" }}</h1>
+    </div>
+    <div class="col-md-3">
+      <h2 class="h5">Data de recebimento</h2>
+      <h1>{{ release[0]?.date * 1000 | date: "dd/MM/yyyy h:mm" }}</h1>
+    </div>
+  </div> </app-card
+><br />
+
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="h4">{{ release[0]?.title }}</h2>
+  </div>
+</div>
+<app-card class="mb-3">
+  <div *ngFor="let quest of release">
+    <div class="mb-3">
+      <strong> {{ quest.question }}</strong>
+    </div>
+    <div [ngSwitch]="itsMultipleAnswer(quest?.answers)">
+      <ng-container *ngSwitchCase="true">
+        <div class="text-danger">R: </div>
+        <div class="mb-2 list-checkbox-answer">
+          <span *ngFor="let answer of quest?.answers">
+            <ul *ngFor="let part of splitAnswers(answer)">
+              <li><span>{{ part }}</span></li>
+            </ul>
+          </span>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <div class="mb-3">
+          <span class="text-danger">R: </span>
+          <span>{{ quest?.answers }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</app-card>

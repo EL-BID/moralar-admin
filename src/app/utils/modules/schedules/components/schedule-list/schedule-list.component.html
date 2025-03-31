@@ -1,0 +1,39 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th sortable="startDate" (sort)="handleSort($event)">Data</th>
+                <th sortable="subject" (sort)="handleSort($event)">Assunto</th>
+                <th sortable="place" (sort)="handleSort($event)">Local</th>
+                <th sortable="number" (sort)="handleSort($event)">
+                    Número do cadastro
+                </th>
+                <th sortable="holderName" (sort)="handleSort($event)">
+                    Nome do morador titular
+                </th>
+                <th sortable="holderCpf" (sort)="handleSort($event)">
+                    CPF do morador titular
+                </th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+
+                <td>{{ item.date | date: "dd/MM/yyyy, HH:mm" || "-" }}</td>
+                <td>{{ item.typeSubject || "-" }}</td>
+                <td>{{ item.place || "-" }}</td>
+                <td>{{ item.holderNumber || "-" }}</td>
+                <td>{{ item.holderName || "-" }}</td>
+                <td>{{ item.holderCpf || "-" | mask: "000.000.000-00" }}</td>
+                <td>{{ item.typeScheduleStatus || "-" }}</td>
+                <td>
+                    <button [routerLink]="[item?.id]" class="btn btn-info">
+            Detalhes
+          </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

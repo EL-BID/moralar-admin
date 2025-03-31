@@ -1,0 +1,35 @@
+<form [formGroup]="listSearchForm">
+  <div class="row mb-5">
+    <div class="col">
+      <app-control-field>
+        <label for="search">Filtrar por</label>
+        <input
+          type="search"
+          id="search"
+          formControlName="search"
+          placeholder="N° do cadastro, nome ou CPF (apenas números) do titular da família ou código do imóvel"
+        />
+        <app-control-error
+          [control]="listSearchForm.controls.search"
+        ></app-control-error>
+      </app-control-field>
+      <small class="text-secondary">
+        Filtros: N° do cadastro, nome ou CPF (apenas números) do titular da
+        família ou código do imóvel
+      </small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <app-control-field>
+        <label for="TypeStatusResidencialProperty">Disponibilidade para venda</label>
+        <select id="TypeStatusResidencialProperty" formControlName="typeStatusResidencialProperty">
+          <option value="">Todos</option>
+          <option *ngFor="let status of typeStatusResidencialProperty; let i = index" [value]="i">
+            {{ status }}
+          </option>
+        </select>
+      </app-control-field>
+    </div>
+  </div>
+</form>

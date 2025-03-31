@@ -1,0 +1,11 @@
+<form [formGroup]="listSearchForm">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-control-field>
+        <label for="search">Título do questionário</label>
+        <input type="text" id="search" formControlName="search">
+        <app-control-error [control]="listSearchForm.controls.search"></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+</form>

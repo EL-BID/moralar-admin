@@ -1,0 +1,6 @@
+<h1 class="h4">Editar enquete</h1>
+<app-poll-form *ngIf="poll"
+  [formData]="poll"
+  [formLoading]="formLoading"
+  (formSubmit)="handleFormSubmit($event)">
+</app-poll-form>

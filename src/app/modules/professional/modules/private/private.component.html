@@ -1,0 +1,128 @@
+<header id="header" class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img id="logo" src="assets/images/logo-moralar-white-horizontal.svg" alt="Moralar" title="Moralar" />
+        </div>
+
+        <div class="col-1">
+            <div class="notifications">
+                <div class="icone" *ngIf="loaded">
+                    <fa-icon [icon]="faBell"></fa-icon>
+                    <span class="notification-count"
+                        [ngClass]="{'new-notifications' : sessionStorage.getItem('countNotifications.1') != null && sessionStorage.getItem('countNotifications.1') != '0'}">{{
+                        sessionStorage.getItem('countNotifications.1') != null ? sessionStorage.getItem('countNotifications.1') : '0'
+                        }}</span>
+                </div>
+                <div class="content">
+                    <app-my-notifications (loaded)="isLoaded()" [abstract]="true" [modeBell]="true" [for]="1"></app-my-notifications>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div ngbDropdown class="d-inline-block">
+                <button ngbDropdownToggle type="button" class="btn btn-sm btn-outline-light">
+                        Menu
+                    </button>
+                <div ngbDropdownMenu id="administrator-menu">
+                    <span class="administrator">Profissional TTS</span>
+                    <span class="name">{{ user?.name }}</span>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem type="button" class="btn btn-link" (click)="logOut()">
+                            Sair
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-auto col-full-height" id="items-menu">
+            <ul appNav>
+                <li routerLinkActive="active">
+                    <button type="button" routerLink="dashboard">
+                            <fa-icon class="mr-2" [icon]="faTachometerAlt"> </fa-icon>
+                            Dashboard
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="familias/linhas-do-tempo">
+                            <fa-icon class="mr-2" [icon]="faHouseUser"> </fa-icon>
+                            Linha do tempo das Famílias
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="agendamentos">
+                            <fa-icon class="mr-2" [icon]="faCalendarAlt"> </fa-icon>
+                            Agendamentos
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="imoveis">
+                            <fa-icon class="mr-2" [icon]="faHome"> </fa-icon>
+                            Imóveis
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="matches">
+                            <fa-icon class="mr-2" [icon]="faStar"> </fa-icon>
+                            Matches
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="displacement-maps">
+                            <fa-icon class="mr-2" [icon]="faMap"> </fa-icon>
+                            Mapas de deslocamento
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="videos">
+                            <fa-icon class="mr-2" [icon]="faVideo"> </fa-icon>
+                            Vídeos
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="informativos">
+                            <fa-icon class="mr-2" [icon]="faBell"> </fa-icon>
+                            Informativos
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="questionarios/disponiveis">
+                            <fa-icon class="mr-2" [icon]="faQuestionCircle"> </fa-icon>
+                            Questionários disponíveis
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="enquetes">
+                            <fa-icon class="mr-2" [icon]="faQuestionCircle"> </fa-icon>
+                            Enquetes
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="cursos">
+                            <fa-icon class="mr-2" [icon]="faBook"> </fa-icon>
+                            Cursos
+                        </button>
+                </li>
+
+                <li>
+                    <button type="button" routerLink="notificacoes">
+                            <fa-icon class="mr-2" [icon]="faBell"> </fa-icon>
+                            Notificações
+                        </button>
+                </li>
+                <li>
+                    <button type="button" routerLink="perfis">
+                            <fa-icon class="mr-2" [icon]="faUser"> </fa-icon>
+                            Perfil
+                        </button>
+                </li>
+            </ul>
+        </div>
+        <div id="content" class="col col-full-height">
+            <router-outlet> </router-outlet>
+        </div>
+    </div>
+</div>

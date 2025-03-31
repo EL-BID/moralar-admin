@@ -1,0 +1,13 @@
+<div *ngIf="alert"
+  class="megaleios-alert"
+  [ngClass]="cssClass(alert.type)">
+  <fa-icon *ngIf="alert.type === 0"
+    class="mr-1"
+    [icon]="faCheck">
+  </fa-icon>
+  <fa-icon *ngIf="alert.type === 1"
+    class="mr-1"
+    [icon]="faTimes">
+  </fa-icon>
+  {{ alert.message }}
+</div>

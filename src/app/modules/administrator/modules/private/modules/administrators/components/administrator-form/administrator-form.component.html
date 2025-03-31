@@ -1,0 +1,91 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <app-control-field>
+    <label for="name">Nome</label>
+    <input type="text" id="name" formControlName="name" />
+    <app-control-error [control]="form.controls.name"></app-control-error>
+  </app-control-field>
+  <app-control-field>
+    <label for="email">E-mail</label>
+    <input type="text" id="email" formControlName="email" />
+    <app-control-error [control]="form.controls.email"></app-control-error>
+  </app-control-field>
+  <div [ngSwitch]="form.value.id?.length > 0" class="form-row">
+    <div *ngSwitchCase="true" class="col-lg-6">
+      <app-control-field>
+        <label for="passwordCurrentWritten">Senha atual</label>
+        <input
+          type="password"
+          id="passwordCurrentWritten"
+          formControlName="passwordCurrentWritten"
+        />
+        <app-control-error
+          [control]="form.controls.passwordCurrentWritten"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="password">{{ formData ? "Nova " : "" }}Senha</label>
+        <input type="password" id="password" formControlName="password" />
+        <app-control-error
+          [control]="form.controls.password"
+        ></app-control-error>
+      </app-control-field>
+    </div>
+    <div class="col-lg-6">
+      <app-control-field>
+        <label for="passwordConfirm"
+          >Confirmação da {{ formData ? "nova " : "" }}senha</label
+        >
+        <input
+          type="password"
+          id="passwordConfirm"
+          formControlName="passwordConfirm"
+        />
+        <app-control-error
+          [control]="form.controls.passwordConfirm"
+        ></app-control-error>
+        <div
+          class="d-block invalid-feedback"
+          *ngIf="
+            form.value.passwordConfirm &&
+            form.value.password != form.value.passwordConfirm
+          "
+        >
+          Senha divergente
+        </div>
+      </app-control-field>
+    </div>
+  </div>
+  <div [ngSwitch]="!formData" class="form-row">
+    <app-button
+      *ngSwitchCase="true"
+      buttonType="submit"
+      buttonClass="btn-dark"
+      [buttonDisabled]="
+        form.valid === false ||
+        formLoading === true ||
+        form.value.password != form.value.passwordConfirm
+      "
+      [buttonLoading]="formLoading"
+      >Adicionar
+    </app-button>
+    <app-button
+      *ngSwitchCase="false"
+      buttonType="submit"
+      buttonClass="btn-dark"
+      [buttonDisabled]="
+        form.valid === false ||
+        formLoading === true ||
+        form.value.password != form.value.passwordConfirm ||
+        form.value.passwordCurrent === null ||
+        form.value.passwordCurrent != form.value.passwordCurrentWritten
+      "
+      [buttonLoading]="formLoading"
+      >Alterar
+    </app-button>
+  </div>
+</form>

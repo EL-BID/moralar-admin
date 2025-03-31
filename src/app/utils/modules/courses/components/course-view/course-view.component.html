@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-lg-12">
+    <p><span class="font-weight-bold">Título</span> {{ course?.title }}</p>
+  </div>
+</div>
+<ng-container *ngIf="course?.img">
+  <h2 class="h5">Imagem do Curso</h2>
+  <app-image [small]="true" label="Imagem do Curso" [imagePath]="course?.img"></app-image>
+</ng-container>
+<br />
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">Data de Início</span>
+      {{ course?.startDate | date: "dd/MM/yyyy" }}
+    </p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">Data de Término</span>
+      {{ course?.endDate | date: "dd/MM/yyyy" }}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p>
+      <span class="font-weight-bold">Hora de Início</span>
+      {{ course?.schedule }}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p>
+      <span class="font-weight-bold">Carga Horária</span> {{ course?.workLoad }}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p><span class="font-weight-bold">Local</span> {{ course?.place }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 mb-2">
+    <div class="font-weight-bold">Descrição</div>
+    <i> {{ course?.description }}</i>
+  </div>
+</div>
+<h2>Público Alvo (faixa de idade)</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">De</span>
+      {{ course?.startTargetAudienceAge }} anos
+    </p>
+  </div>
+
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">Até</span>
+      {{ course?.endTargetAudienceAge }} anos
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <p><span class="font-weight-bold">Gênero</span> {{ course?.typeGenre }}</p>
+  </div>
+  <div class="col-lg-6">
+    <p>
+      <span class="font-weight-bold">Quantidade de vagas</span>
+      {{ course?.numberOfVacancies }}
+    </p>
+  </div>
+</div>
+
+<div class="mb-3">
+  <div>
+    <span class="font-weight-bold">Total de usuário inscritos: </span>
+    {{ course?.totalSubscribers || 0 }}
+  </div>
+  <div>
+    <span class="font-weight-bold"
+      >Total de usuários aguardando na lista de espera:
+    </span>
+    {{ course?.totalWaitingList || 0 }}
+  </div>
+</div>
+
+<h2>Inscritos</h2>
+<ng-container *ngIf="course?.listSubscribers?.length">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <th>Nome do morador titular</th>
+        <th class="text-center">CPF do morador titular</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of course?.listSubscribers">
+          <td>{{ person?.name }}</td>
+          <td class="text-center">
+            {{ person?.cpf | mask: "999.999.999-99" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!course?.listSubscribers?.length">
+  <h4 class="text-info">Sem inscritos no momento</h4>
+</ng-container>
+
+<h2>Aguardando na lista de espera</h2>
+<ng-container *ngIf="course?.listWaitingList?.length">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <th>Nome do morador titular</th>
+        <th class="text-center">CPF do morador titular</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of course?.listWaitingList">
+          <td>{{ person?.name }}</td>
+          <td class="text-center">
+            {{ person?.cpf | mask: "999.999.999-99" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!course?.listWaitingList?.length">
+  <h4 class="text-info">
+    Sem inscritos aguardando na lista de espera no momento
+  </h4>
+</ng-container>

@@ -1,0 +1,52 @@
+<h1 class="h4">Dashboard</h1>
+<app-card class="mb-3">
+  <h2 class="h5">Famílias de moradores</h2>
+  <p>
+    <span class="view-label">Total</span>
+    <span class="d-block">{{dashboardManager?.amountFamilies}}</span>
+  </p>
+  <h3 class="h6">Etapas</h3>
+  <div class="row">
+    <div class="col-lg-2">
+      <p class="mb-lg-0">
+        <span class="view-label">Reunião PGM</span>
+        <span class="d-block">{{dashboardManager?.percentageAmoutReuniaoPgm.toFixed(2)}}%</span>
+      </p>
+    </div>
+    <div class="col-lg-3">
+      <p class="mb-lg-0">
+        <span class="view-label">Escolha do imóvel</span>
+        <span class="d-block">{{dashboardManager?.percentageAmoutChooseProperty.toFixed(2)}}%</span>
+      </p>
+    </div>
+    <div class="col-lg-2">
+      <p class="mb-lg-0">
+        <span class="view-label">Mudança</span>
+        <span class="d-block">{{dashboardManager?.percentageAmoutChangeProperty.toFixed(2)}}%</span>
+      </p>
+    </div>
+    <div class="col-lg-5">
+      <p class="mb-0">
+        <span class="view-label">Acompanhamento pós-mudança</span>
+        <span class="d-block">{{dashboardManager?.percentageAmoutPosMudanca.toFixed(2)}}%</span>
+      </p>
+    </div>
+  </div>
+</app-card>
+<app-card>
+  <h2 class="h5">Imóveis</h2>
+  <div class="row">
+    <div class="col-lg-3">
+      <p class="mb-lg-0">
+        <span class="view-label">Disponíveis para compra</span>
+        <span class="d-block">{{dashboardManager?.availableForSale}}</span>
+      </p>
+    </div>
+    <div class="col-lg-3">
+      <p class="mb-0">
+        <span class="view-label">Vendidos</span>
+        <span class="d-block">{{dashboardManager?.residencialPropertySaled}}</span>
+      </p>
+    </div>
+  </div>
+</app-card>

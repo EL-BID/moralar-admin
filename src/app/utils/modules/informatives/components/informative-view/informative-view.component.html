@@ -1,0 +1,22 @@
+<h2 class="h5">Imagem do Informativo </h2>
+<div class="row">
+  <div class="col-lg-6 text-center">
+    <img
+      [src]="informative.img"
+      alt="Imagem do informative"
+      title="Imagem do informative">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <p><span class="view-label">Descrição</span>
+      {{informative.description}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <p><span class="view-label">Data</span>
+    {{informative.startDate | date:'dd/MM/yyyy'}}</p>
+  </div>
+</div>

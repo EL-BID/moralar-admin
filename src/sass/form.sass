@@ -1,0 +1,49 @@
+
+@import 'src/sass/imports/variables'
+
+$TRANSITION_TIME: 0.5s
+
+app-control-field
+  display: block
+  margin-bottom: 16px
+  label
+    font-size: 14px
+    font-weight: 500
+    margin-bottom: 4px
+    cursor: pointer
+    transition: color 0.25s
+  input,
+  textarea,
+  select
+    display: block
+    width: 100%
+    background-color: #FFF
+    font-size: 18px
+    padding: 0 0 8px 0
+    border-width: 0 0 1px 0
+    border-style: solid
+    border-color: #000
+    border-radius: 0
+    outline: none
+    transition: color $TRANSITION_TIME, border-color $TRANSITION_TIME
+    &:focus
+      border-color: #000
+  input[type='color']
+    height: 35.4px
+    padding: 0
+    border-width: 1px
+    cursor: pointer
+
+  textarea
+    min-height: 124px
+    max-height: 210px
+
+.custom-control-input:checked ~ .custom-control-label::before
+  background-color: $COLOR
+  border-color: $COLOR
+
+.custom-control-input:disabled:checked~.custom-control-label::before
+  background-color: rgba($COLOR, 0.5) !important
+
+.custom-control-label
+  cursor: pointer

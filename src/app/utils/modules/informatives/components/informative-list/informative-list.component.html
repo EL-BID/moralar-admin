@@ -1,0 +1,45 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <!-- <th sortable="createdDate" (sort)="handleSort($event)">
+          Data da Publicação
+        </th> -->
+        <th class="simple-cursor">Imagem</th>
+        <th sortable="description" (sort)="handleSort($event)">Descrição</th>
+        <th sortable="datePublish" (sort)="handleSort($event)">Data</th>
+        <th sortable="status" (sort)="handleSort($event)">Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list">
+        <!-- <td>
+          <div class="container-check">
+            {{ item?.datePublish || "-" }}
+          </div>
+        </td> -->
+        <td>
+          <div class="m-w-80">
+            <app-image [imagePath]="item.image"></app-image>
+          </div>
+        </td>
+        <td>{{ item.description || "-" }}</td>
+        <td>{{ item.created | date: "dd/MM/yyyy" || "-" }}</td>
+        <td *ngIf="!hideTableItems?.lockUnlock">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              [id]="'blocked-' + item.id"
+              [value]="item.id"
+              [checked]="item.blocked === false"
+              (click)="handleBlockUnblock($event)"
+            />
+            <label [for]="'blocked-' + item.id" class="custom-control-label">
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
