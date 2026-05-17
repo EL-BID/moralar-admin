@@ -42,7 +42,7 @@
         "date-fns": "^4.1.0",
         "gsap": "^3.12.5",
         "hammerjs": "^2.0.8",
-        "lodash": "^4.17.21",
+        "lodash": "^4.17.23",
         "luxon": "^1.25.0",
         "ng-gallery": "^5.1.1",
         "ng2-currency-mask": "^9.0.2",
